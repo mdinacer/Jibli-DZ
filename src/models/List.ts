@@ -1,21 +1,18 @@
-import { ListItem, ListItemStatus } from '@/models/ListItem';
+import { ListItem, ListItemSchema } from '@/models/ListItem';
 import { Timestamp } from 'firebase/firestore';
 import { z } from 'zod';
-import { ProductUnit } from './ProductUnit';
 
-export const ListItemSchema = z.object({
-  id: z.string(),
+export const ListSchema = z.object({
   name: z.string(),
-  quantity: z.number(),
-  price: z.number().nullable(),
-  unit: z.nativeEnum(ProductUnit),
-  status: z.nativeEnum(ListItemStatus),
-  note: z.string().nullable(),
+  ownerId: z.string(),
+  items: z.array(ListItemSchema),
+  collaborators: z.array(z.string()),
+  modifiedBy: z.string().nullable(),
   createdAt: z.instanceof(Timestamp),
   updatedAt: z.instanceof(Timestamp)
 });
 
-export type List = z.infer<typeof ListItemSchema>;
+export type List = z.infer<typeof ListSchema>;
 
 export interface ListDisplay extends List {
   id: string;
