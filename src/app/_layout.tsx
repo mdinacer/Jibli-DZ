@@ -12,6 +12,7 @@ import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
 import { useTheme } from 'tamagui';
 import { StatusBar } from 'expo-status-bar';
+import useOnAuthStateChanged from '@/hooks/useOnAuthStateChanged';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -43,6 +44,8 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  useOnAuthStateChanged();
+
   if (!loaded) {
     return null;
   }
@@ -63,10 +66,11 @@ function RootLayoutNav() {
   const theme = useTheme();
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StatusBar style={colorScheme === 'dark' ? 'dark' : 'light'} />
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
 
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
