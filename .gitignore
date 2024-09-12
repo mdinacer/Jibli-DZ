@@ -45,3 +45,7 @@ expo-env.d.ts
 /ios/
 google-services.json
 GoogleService-Info.plist
+fire**.json
+.firebaserc
+*.rules
+database.rules.json
