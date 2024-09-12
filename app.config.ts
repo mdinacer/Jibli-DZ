@@ -51,6 +51,12 @@ const config: ExpoConfig = {
       {
         launchMode: 'most-recent'
       }
+    ],
+    [
+      'expo-font',
+      {
+        fonts: ['path/to/file.ttf']
+      }
     ]
   ],
   experiments: {

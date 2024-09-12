@@ -9,6 +9,8 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { TamaguiProvider, View } from '@tamagui/core';
+import config from '@/config/tamagui.config';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -46,7 +48,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <TamaguiProvider config={config}>
+      <RootLayoutNav />
+    </TamaguiProvider>
+  );
 }
 
 function RootLayoutNav() {
