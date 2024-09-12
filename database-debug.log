@@ -1,0 +1,4 @@
+19:40:57.862 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+19:40:58.044 [main] INFO com.firebase.server.forge.App$ - Listening at 172.20.10.4:9000
+19:41:05.092 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - jibli-dz-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 94ms, init: 0ms
+19:41:05.146 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace jibli-dz-default-rtdb status Active to Active

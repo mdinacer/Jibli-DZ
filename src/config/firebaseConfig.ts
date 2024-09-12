@@ -15,7 +15,7 @@ export const crashlyticsInstance = crashlytics();
 
 const hostIP = '172.20.10.4';
 
-if (false) {
+if (__DEV__) {
   authInstance.useEmulator(`http://${hostIP}:9099`);
   firestoreInstance.settings({
     persistence: false // disable offline persistence

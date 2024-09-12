@@ -1,4 +1,4 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Provider } from '@/components/Provider';
 import {
   DarkTheme,
   DefaultTheme,
@@ -8,11 +8,11 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
-import { TamaguiProvider, View } from '@tamagui/core';
-import config from '@/config/tamagui.config';
-
-import { useColorScheme } from '@/components/useColorScheme';
+import { useTheme } from 'tamagui';
+import { StatusBar } from 'expo-status-bar';
+import useOnAuthStateChanged from '@/hooks/useOnAuthStateChanged';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -21,7 +21,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)'
+  initialRouteName: '/'
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -44,25 +44,34 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  useOnAuthStateChanged();
+
   if (!loaded) {
     return null;
   }
 
   return (
-    <TamaguiProvider config={config}>
+    <Providers>
       <RootLayoutNav />
-    </TamaguiProvider>
+    </Providers>
   );
 }
 
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  return <Provider>{children}</Provider>;
+};
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
+  const theme = useTheme();
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+
       <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
   );

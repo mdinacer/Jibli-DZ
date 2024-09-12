@@ -1,0 +1,61 @@
+import firebaseServices from '@/config/firebaseConfig';
+import { Icons } from '@/constants';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { router } from 'expo-router';
+import React, { useCallback } from 'react';
+import { Button, Circle, Text } from 'tamagui';
+
+type ButtonProps = React.ComponentProps<typeof Button>;
+
+interface Props extends ButtonProps {
+  action: 'signUp' | 'signIn';
+  onAuthenticated?: (user: FirebaseAuthTypes.User) => void;
+}
+
+const GoogleAuthButton: React.FC<Props> = ({
+  action,
+  onAuthenticated,
+  ...props
+}) => {
+  const handleGoogleAuthentication = useCallback(async () => {
+    try {
+      // Initiate the Google sign-in process
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+
+      if (!userInfo.data) return;
+
+      // Create a Firebase credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(
+        userInfo.data.idToken
+      );
+
+      // Sign in to Firebase with the credential
+      const userCredentials =
+        await firebaseServices.auth.signInWithCredential(googleCredential);
+
+      const { user } = userCredentials;
+
+      onAuthenticated?.(user);
+
+      router.push('/home');
+
+      console.info('User signed in with Google');
+    } catch (error: any) {
+      console.error('Error during Google sign-in:', error);
+    }
+  }, [onAuthenticated]);
+
+  return (
+    <Button {...props} width={'100%'} onPress={handleGoogleAuthentication}>
+      <Circle size={32} backgroundColor="$red10Light">
+        <Icons.GoogleIcon color="white" />
+      </Circle>
+
+      <Text>{` ${action === 'signUp' ? 'Sign Up' : 'Sign In'} with Google`}</Text>
+    </Button>
+  );
+};
+
+export default GoogleAuthButton;
