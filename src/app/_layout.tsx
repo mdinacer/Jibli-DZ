@@ -1,18 +1,11 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider
-} from '@react-navigation/native';
+import { Provider } from '@/components/Provider';
+import config from '@/config/tamagui.config';
+import { TamaguiProvider } from '@tamagui/core';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { TamaguiProvider, View } from '@tamagui/core';
-import config from '@/config/tamagui.config';
-
-import { useColorScheme } from '@/components/useColorScheme';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -21,7 +14,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)'
+  initialRouteName: '/'
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -49,21 +42,21 @@ export default function RootLayout() {
   }
 
   return (
-    <TamaguiProvider config={config}>
+    <Providers>
       <RootLayoutNav />
-    </TamaguiProvider>
+    </Providers>
   );
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  return <Provider>{children}</Provider>;
+};
 
+function RootLayoutNav() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }

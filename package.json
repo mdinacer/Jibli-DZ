@@ -31,6 +31,7 @@
     "@react-navigation/native": "^6.0.2",
     "@tamagui/babel-plugin": "^1.110.3",
     "@tamagui/config": "^1.110.3",
+    "@tamagui/toast": "^1.110.3",
     "date-fns": "^3.6.0",
     "expo": "~51.0.28",
     "expo-build-properties": "~0.12.5",
