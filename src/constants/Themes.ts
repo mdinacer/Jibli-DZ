@@ -581,7 +581,7 @@ export function objectFromEntries<ARR_T extends EntriesType>(
 
 export type EntriesType =
   | [PropertyKey, unknown][]
-  | ReadonlyArray<readonly [PropertyKey, unknown]>;
+  | readonly (readonly [PropertyKey, unknown])[];
 
 export type DeepWritable<OBJ_T> = {
   -readonly [P in keyof OBJ_T]: DeepWritable<OBJ_T[P]>;
