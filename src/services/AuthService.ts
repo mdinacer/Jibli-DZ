@@ -19,10 +19,7 @@ async function signUpWithEmailPassword(
     } else {
       firebaseServices.crashlytics.recordError(error);
     }
-    throw new CustomError(
-      'Failed to sign up with email and password',
-      'SIGN_UP_FAILED'
-    );
+    throw error;
   }
 }
 
@@ -40,10 +37,7 @@ async function signInWithEmailPassword(
     } else {
       firebaseServices.crashlytics.recordError(error);
     }
-    throw new CustomError(
-      'Failed to sign in with email and password',
-      'SIGN_IN_FAILED'
-    );
+    throw error;
   }
 }
 
@@ -60,7 +54,7 @@ export async function signOut(clearPersistence = false): Promise<void> {
       console.error(error);
       firebaseServices.crashlytics.recordError(error);
     }
-    throw new CustomError('Failed to sign out', 'SIGN_OUT_FAILED');
+    throw error;
   }
 }
 
