@@ -117,14 +117,16 @@ const InitialProfileScreen = () => {
               name={'picture'}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <ImageUpload
-                  fileUri={
-                    (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
-                  }
-                  onUploadComplete={(asset: FileAsset) => {
-                    onChange(asset);
-                  }}
-                />
+                <Stack width={'80%'} aspectRatio={1}>
+                  <ImageUpload
+                    fileUri={
+                      (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
+                    }
+                    onUploadComplete={(asset: FileAsset) => {
+                      onChange(asset);
+                    }}
+                  />
+                </Stack>
               )}
             />
 

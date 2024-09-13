@@ -2,11 +2,11 @@ import { Collections } from '@/config/collections';
 import { FileAsset } from '@/models/FileAsset';
 import FileAssetService from '@/services/FileAssetService';
 import { resizeAndConvertToWebP } from '@/utils/ImageConverter';
-import { ImagePlus } from '@tamagui/lucide-icons';
+import { ImageMinus, ImagePlus } from '@tamagui/lucide-icons';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useCallback } from 'react';
-import { Alert, Image, TouchableOpacity } from 'react-native';
-import { Stack } from 'tamagui';
+import { Alert, TouchableOpacity } from 'react-native';
+import { Button, Stack, Image } from 'tamagui';
 
 interface Props {
   onUploadComplete: (asset: FileAsset) => void;
@@ -69,9 +69,8 @@ const ImageUpload: React.FC<Props> = ({
     <TouchableOpacity
       onPress={() => openFilePicker()}
       style={{
-        aspectRatio: 1,
-        width: '80%',
-        borderRadius: 36,
+        width: '100%',
+        height: '100%',
         marginHorizontal: 'auto'
       }}
     >
@@ -79,21 +78,24 @@ const ImageUpload: React.FC<Props> = ({
         <Stack position="relative" flex={1}>
           <Image
             source={{ uri: fileUri }}
-            style={{ borderRadius: 36, height: '100%', width: '100%' }}
-            resizeMode="cover"
+            style={{ height: '100%', width: '100%' }}
+            objectFit="cover"
           />
           {onDelete && (
-            <TouchableOpacity
-              style={{
-                position: 'absolute',
-                top: 10,
-                right: 10,
-                borderRadius: 999
-              }}
+            <Button
+              position="absolute"
+              bottom={10}
+              right={10}
+              borderRadius={999}
+              size={'$7'}
+              padding="$1"
+              aspectRatio={1}
               onPress={onDelete}
-            >
-              <ImagePlus height={'$10'} width={'$10'} />
-            </TouchableOpacity>
+              backgroundColor={'$red10'}
+              color="$white1"
+              icon={ImageMinus}
+              scaleIcon={1.4}
+            ></Button>
           )}
         </Stack>
       ) : (

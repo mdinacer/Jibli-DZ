@@ -87,10 +87,7 @@ async function update(
     } else {
       firebaseServices.crashlytics.recordError(error);
     }
-    throw new CustomError(
-      'Failed to update user profile',
-      'UPDATE_PROFILE_FAILED'
-    );
+    throw error;
   }
 }
 
