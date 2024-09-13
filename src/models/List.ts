@@ -3,21 +3,23 @@ import { Timestamp } from 'firebase/firestore';
 import { z } from 'zod';
 
 export const ListSchema = z.object({
+  id: z.string(),
   name: z.string(),
   ownerId: z.string(),
   items: z.array(ListItemSchema),
   collaborators: z.array(z.string()),
   modifiedBy: z.string().nullable(),
   createdAt: z.instanceof(Timestamp),
-  updatedAt: z.instanceof(Timestamp)
+  updatedAt: z.instanceof(Timestamp),
+  isOwner: z.boolean().optional()
 });
 
 export type List = z.infer<typeof ListSchema>;
 
-export interface ListDisplay extends List {
-  id: string;
-  isOwner: boolean;
-}
+// export interface ListDisplay extends List {
+//   id: string;
+//   isOwner: boolean;
+// }
 
 export interface RealtimeList {
   listId: string;
