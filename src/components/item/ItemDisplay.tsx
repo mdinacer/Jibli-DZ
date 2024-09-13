@@ -1,7 +1,6 @@
 import { ListItem } from '@/models/ListItem';
 import React from 'react';
-import { Image } from 'tamagui';
-import { SizableText, Square, Text, XStack, YStack } from 'tamagui';
+import { Text, View } from 'react-native';
 
 interface Props {
   item: ListItem;
@@ -9,14 +8,7 @@ interface Props {
 
 const ItemDisplay: React.FC<Props> = ({ item }) => {
   return (
-    <XStack
-      elevation={2}
-      padding="$2"
-      alignItems="center"
-      backgroundColor={'$background'}
-      borderRadius={'$1'}
-      overflow="hidden"
-    >
+    <View>
       {/* <Square size={60} backgroundColor="$gray10Light">
         <Image
           objectFit="contain"
@@ -30,18 +22,16 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
         />
       </Square> */}
 
-      <YStack paddingVertical="$2" paddingHorizontal="$4" flex={1}>
-        <XStack alignItems="center">
-          <SizableText size="$4" fontWeight="800" flex={1}>
-            {item.name}
-          </SizableText>
+      <View>
+        <View>
+          <Text>{item.name}</Text>
           <Text>
             {item.quantity} {item.unit}
           </Text>
-        </XStack>
+        </View>
         <Text>{item.note}</Text>
-      </YStack>
-    </XStack>
+      </View>
+    </View>
   );
 };
 

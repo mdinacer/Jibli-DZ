@@ -1,10 +1,9 @@
 import { mockListItems } from '@/data/mock-data';
+import { ListItem } from '@/models/ListItem';
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
-import UserItemDisplay from './UserItemDisplay';
-import { ListItem } from '@/models/ListItem';
-import ItemForm from './ItemForm';
-import CollaboratorItemDisplay from './CollaboratorItemDisplay';
+import CollaboratorItemDisplay from '@/components/item/CollaboratorItemDisplay';
+import ItemForm from '@/components/item/ItemForm';
 
 const ItemsList = () => {
   const [open, setOpen] = useState(false);

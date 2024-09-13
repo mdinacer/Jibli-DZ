@@ -1,14 +1,13 @@
 import { Icons } from '@/constants';
 import { ListItem, ListItemStatus } from '@/models/ListItem';
 import React, { useCallback } from 'react';
-import { Animated, FlexAlignType } from 'react-native';
+import { Animated, FlexAlignType, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
 import { SvgProps } from 'react-native-svg';
-import { View } from 'tamagui';
-import ItemDisplay from './ItemDisplay';
+import ItemDisplay from '@/components/item/ItemDisplay';
 
 interface Props {
   item: ListItem;
@@ -76,7 +75,7 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
           swipeable.close();
         }}
       >
-        <View padding="$1">
+        <View>
           <ItemDisplay item={item} />
         </View>
       </Swipeable>
@@ -99,18 +98,7 @@ const SwipeAction: React.FC<SwipeActionProps> = ({
   alignItems = 'unset'
 }) => {
   return (
-    <View
-      flex={1}
-      backgroundColor={
-        itemStatus !== ListItemStatus.PENDING
-          ? backgroundColor
-          : colorByStatus[ListItemStatus.PENDING]
-      }
-      justifyContent="center"
-      alignItems={alignItems}
-      padding="$4"
-      borderRadius={4}
-    >
+    <View>
       {itemStatus === ListItemStatus.PENDING ? (
         <Icons.ArrowReloadHorizontalIcon
           width={32}

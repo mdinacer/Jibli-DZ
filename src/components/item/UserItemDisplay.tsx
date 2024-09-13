@@ -1,13 +1,11 @@
+import ItemDisplay from '@/components/item/ItemDisplay';
 import { ListItem } from '@/models/ListItem';
-import { Pencil, Trash } from '@tamagui/lucide-icons';
 import React, { useCallback } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Button, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
-import { Button, Square, View, XStack } from 'tamagui';
-import ItemDisplay from './ItemDisplay';
 
 interface Props {
   item: ListItem;
@@ -23,36 +21,26 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
       swipeable: Swipeable
     ) => {
       return (
-        <XStack>
-          <Square height={'100%'} aspectRatio={1}>
+        <View>
+          <View>
             <Button
-              unstyled
-              alignItems="center"
-              justifyContent="center"
-              flex={1}
+              title="edit"
               onPress={() => {
                 swipeable.close();
                 onEdit();
               }}
-              icon={Pencil}
-              size={32}
             />
-          </Square>
-          <Square height={'100%'} aspectRatio={1}>
+          </View>
+          <View>
             <Button
-              unstyled
-              alignItems="center"
-              justifyContent="center"
-              flex={1}
+              title="delete"
               onPress={() => {
                 swipeable.close();
                 onDelete();
               }}
-              icon={Trash}
-              size={32}
             />
-          </Square>
-        </XStack>
+          </View>
+        </View>
       );
     },
     [onDelete, onEdit]
@@ -65,7 +53,7 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
         rightThreshold={60}
         renderRightActions={renderRightActions}
       >
-        <View padding="$1">
+        <View>
           <ItemDisplay item={item} />
         </View>
       </Swipeable>

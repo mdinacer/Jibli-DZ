@@ -1,7 +1,7 @@
 import { FileAsset } from '@/models/FileAsset';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import ImageUpload from './ImageUpload';
+import ImageUpload from '@/components/fileAsset/ImageUpload';
 
 const FileAssetPicker = () => {
   const [asset, setAsset] = useState<FileAsset | null>(null);

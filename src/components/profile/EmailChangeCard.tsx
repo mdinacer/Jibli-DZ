@@ -3,9 +3,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Card, Form, H2, Paragraph, Spinner, XStack } from 'tamagui';
 import { z } from 'zod';
-import InputField from '../fields/InputField';
+import InputField from '@/components/fields/InputField';
+import { Button, Text, View } from 'react-native';
 
 const schema = z.object({
   currentPassword: z.string().min(6, '{value} must be at least 6 characters'),
@@ -55,21 +55,13 @@ const EmailChangeCard = () => {
   );
 
   return (
-    <Card elevate size="$4" bordered>
-      <Card.Header padded>
-        <H2>Email</H2>
-        <Paragraph theme="alt2">Update your email</Paragraph>
-      </Card.Header>
+    <View>
+      <View>
+        <Text>Email</Text>
+        <Text>Update your email</Text>
+      </View>
 
-      <Form
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        minWidth={300}
-        gap="$4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-        paddingHorizontal="$4"
-      >
+      <View>
         <InputField
           id={'email-change-current-password'}
           name="currentPassword"
@@ -86,21 +78,12 @@ const EmailChangeCard = () => {
           placeholder="Type your new email"
         />
 
-        <Card.Footer padded>
-          <XStack flex={1} />
-          <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-            <Button
-              themeInverse
-              borderRadius="$10"
-              icon={isSubmitting ? () => <Spinner /> : undefined}
-              disabled={!isDirty || !isValid || isSubmitting}
-            >
-              Update
-            </Button>
-          </Form.Trigger>
-        </Card.Footer>
-      </Form>
-    </Card>
+        <Button
+          title="update"
+          disabled={!isDirty || !isValid || isSubmitting}
+        ></Button>
+      </View>
+    </View>
   );
 };
 

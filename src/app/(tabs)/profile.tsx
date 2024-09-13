@@ -3,9 +3,14 @@ import ProfilePictureUpdater from '@/components/profile/ProfilePictureUpdater';
 import UserEmailEdit from '@/components/profile/UserEmailEdit';
 import UserNameField from '@/components/profile/UserNameField';
 import React from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { H2, ScrollView, YStack } from 'tamagui';
 
 const Profile = () => {
   return (
@@ -15,13 +20,13 @@ const Profile = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <YStack flexGrow={1} padding="$6" gap="$4">
-            <H2 paddingBottom="$4">Account</H2>
+          <View>
+            <Text>Account</Text>
             <ProfilePictureUpdater />
             <UserNameField />
             <UserEmailEdit />
             <AccountDelete />
-          </YStack>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

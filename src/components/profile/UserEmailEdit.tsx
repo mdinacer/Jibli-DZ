@@ -1,7 +1,7 @@
 import firebaseServices from '@/config/firebaseConfig';
 import React, { useCallback, useEffect, useState } from 'react';
-import EmailChangeCard from './EmailChangeCard';
-import EmailLinkCard from './EmailLinkCard';
+import EmailChangeCard from '@/components/profile/EmailChangeCard';
+import EmailLinkCard from '@/components/profile/EmailLinkCard';
 
 const UserEmailEdit = () => {
   const [authProvider, setAuthProvider] = useState<string | undefined>(

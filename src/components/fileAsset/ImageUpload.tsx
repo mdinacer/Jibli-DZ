@@ -1,12 +1,11 @@
 import { Collections } from '@/config/collections';
+import { Icons } from '@/constants';
 import { FileAsset } from '@/models/FileAsset';
 import FileAssetService from '@/services/FileAssetService';
 import { resizeAndConvertToWebP } from '@/utils/ImageConverter';
-import { ImageMinus, ImagePlus } from '@tamagui/lucide-icons';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useCallback } from 'react';
-import { Alert, TouchableOpacity } from 'react-native';
-import { Button, Stack, Image } from 'tamagui';
+import { Alert, Button, Image, TouchableOpacity, View } from 'react-native';
 
 interface Props {
   onUploadComplete: (asset: FileAsset) => void;
@@ -75,50 +74,20 @@ const ImageUpload: React.FC<Props> = ({
       }}
     >
       {fileUri ? (
-        <Stack position="relative" flex={1}>
+        <View>
           <Image
             source={{ uri: fileUri }}
             style={{ height: '100%', width: '100%' }}
-            objectFit="cover"
+            resizeMode="cover"
           />
-          {onDelete && (
-            <Button
-              position="absolute"
-              bottom={10}
-              right={10}
-              borderRadius={999}
-              size={'$7'}
-              padding="$1"
-              aspectRatio={1}
-              onPress={onDelete}
-              backgroundColor={'$red10'}
-              color="$white1"
-              icon={ImageMinus}
-              scaleIcon={1.4}
-            ></Button>
-          )}
-        </Stack>
+          {onDelete && <Button title="delete"></Button>}
+        </View>
       ) : (
-        <Stack
-          flex={1}
-          alignItems="center"
-          justifyContent="center"
-          borderRadius={16}
-          paddingHorizontal={'$4'}
-        >
-          <Stack
-            height={'$20'}
-            width={'$20'}
-            borderRadius={16}
-            borderStyle="dashed"
-            borderColor={'$borderColor'}
-            borderWidth={5}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <ImagePlus size={'$10'} color={'$borderColor'} />
-          </Stack>
-        </Stack>
+        <View>
+          <View>
+            <Icons.ImageUploadIcon />
+          </View>
+        </View>
       )}
     </TouchableOpacity>
   );

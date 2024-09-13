@@ -1,12 +1,11 @@
-import ItemsList from '@/components/item/ItemsList';
 import React from 'react';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { YStack } from 'tamagui';
 
 const Index = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <YStack flex={1}>{/* <ProductsGrid /> */}</YStack>
+      <View>{/* <ProductsGrid /> */}</View>
     </SafeAreaView>
   );
 };

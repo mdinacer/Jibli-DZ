@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { Button, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Form, H4, Spinner, Text, XStack, YStack } from 'tamagui';
 
 const SignUp = () => {
   const { signUpWithEmailPassword, handleAuthErrors, setUser } = useAuthStore();
@@ -50,22 +50,10 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Form
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        minWidth={300}
-        gap="$4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-        borderWidth={1}
-        borderRadius="$4"
-        backgroundColor="$background"
-        borderColor="$borderColor"
-        padding="$8"
-      >
-        <H4>Sign Up to JIBLI</H4>
+      <View>
+        <Text>Sign Up to JIBLI</Text>
 
-        <YStack width={'100%'} gap="$4">
+        <View>
           <InputField
             id={'signUpEmail'}
             name="email"
@@ -90,26 +78,18 @@ const SignUp = () => {
             placeholder="Confirm Password"
             secureTextEntry
           />
-        </YStack>
+        </View>
 
-        <YStack width={'100%'} rowGap="$4">
-          <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-            <Button
-              width={'100%'}
-              icon={isSubmitting ? () => <Spinner /> : undefined}
-            >
-              Sign Up
-            </Button>
-          </Form.Trigger>
-
+        <View>
+          <Button title="Sign Up"></Button>
           <GoogleAuthButton action="signUp" />
-        </YStack>
+        </View>
 
-        <XStack marginTop="$8" columnGap="$2" alignItems="center">
+        <View>
           <Text>Already have an account?</Text>
           <Link href={'/sign-in'}>Sign In</Link>
-        </XStack>
-      </Form>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };

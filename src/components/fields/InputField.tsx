@@ -2,17 +2,14 @@ import { Icons } from '@/constants';
 import React, { useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import {
-  Button,
-  Input,
-  InputProps,
-  Label,
-  SizableText,
-  Square,
-  View,
-  YStack
-} from 'tamagui';
+  Text,
+  TextInput,
+  TextInputProps,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
-interface Props<T extends FieldValues> extends InputProps {
+interface Props<T extends FieldValues> extends TextInputProps {
   control: Control<T>;
   name: Path<T>;
   label: string;
@@ -34,10 +31,10 @@ const InputField = <T extends FieldValues>({
         field: { onChange, value, ...field },
         fieldState: { error }
       }) => (
-        <YStack width={'100%'} gap="$2">
-          <Label>{label}</Label>
+        <View>
+          <Text>{label}</Text>
           <View style={{ position: 'relative' }}>
-            <Input
+            <TextInput
               {...props}
               {...field}
               value={value}
@@ -45,16 +42,8 @@ const InputField = <T extends FieldValues>({
               secureTextEntry={secureTextEntry && !isVisible}
             />
             {secureTextEntry && (
-              <Square
-                width={32}
-                height={'100%'}
-                borderRadius={999}
-                position="absolute"
-                bottom={0}
-                top={0}
-                right={'$2'}
-              >
-                <Button unstyled onPress={() => setIsVisible(!isVisible)}>
+              <View>
+                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                   {isVisible ? (
                     <Icons.EyeClosedIcon
                       color={'black'}
@@ -64,16 +53,12 @@ const InputField = <T extends FieldValues>({
                   ) : (
                     <Icons.EyeOpenIcon color={'black'} width={20} height={20} />
                   )}
-                </Button>
-              </Square>
+                </TouchableOpacity>
+              </View>
             )}
           </View>
-          {error?.message && (
-            <SizableText textTransform="capitalize" theme="red_alt1" size="$3">
-              {error.message}
-            </SizableText>
-          )}
-        </YStack>
+          {error?.message && <Text>{error.message}</Text>}
+        </View>
       )}
     />
   );

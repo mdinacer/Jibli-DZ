@@ -1,11 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useProfileStore } from '@/stores/useProfileStore';
-import { Button, Card, H2, Input, Paragraph, Stack, XStack } from 'tamagui';
 import ProfileService from '@/services/ProfileService';
-import { useToastController } from '@tamagui/toast';
+import { Button, Text, TextInput, View } from 'react-native';
 
 const UserNameField = () => {
-  const toast = useToastController();
   const [isSaving, setIsSaving] = useState(false);
   const { profile, updateProfile } = useProfileStore();
   const [username, setUsername] = useState<string | undefined>(
@@ -29,51 +27,46 @@ const UserNameField = () => {
         username
       });
       if (!updatedProfile) {
-        toast.show('An error occurred while updating your username');
+        console.error('An error occurred while updating your username');
       }
       updateProfile({ username });
     } catch (error: any) {
-      toast.show('An error occurred while updating your username', {
+      console.error('An error occurred while updating your username', {
         message: error.message
       });
       console.log(error);
     } finally {
       setIsSaving(false);
     }
-  }, [profile, toast, updateProfile, username]);
+  }, [profile, updateProfile, username]);
 
   return (
-    <Card elevate size="$4" bordered>
-      <Card.Header padded>
-        <H2>Username</H2>
-        <Paragraph theme="alt2">Edit your username</Paragraph>
-      </Card.Header>
-      <Stack paddingHorizontal="$4">
-        <Input
+    <View>
+      <View>
+        <Text>Username</Text>
+        <Text>Edit your username</Text>
+      </View>
+      <View>
+        <TextInput
           value={username}
           onChangeText={setUsername}
           placeholder="Enter your username"
         />
-      </Stack>
-      <Card.Footer padded>
+      </View>
+      <View>
         <Button
           onPress={handleReset}
           disabled={!isModified || isSaving}
-          borderRadius="$10"
-        >
-          Reset
-        </Button>
-        <XStack flex={1} />
+          title="Reset"
+        ></Button>
+        <View />
         <Button
           onPress={handleUpdateUserName}
           disabled={!isModified || isSaving}
-          themeInverse
-          borderRadius="$10"
-        >
-          Save
-        </Button>
-      </Card.Footer>
-    </Card>
+          title="Save"
+        ></Button>
+      </View>
+    </View>
   );
 };
 

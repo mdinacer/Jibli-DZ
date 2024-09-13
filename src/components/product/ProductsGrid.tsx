@@ -1,7 +1,7 @@
 import { mockProducts } from '@/data/mock-data';
 import React, { useMemo } from 'react';
 import { Dimensions, FlatList } from 'react-native';
-import ProductDisplay from './ProductDisplay';
+import ProductDisplay from '@/components/product/ProductDisplay';
 
 const COLS_COUNT = 2;
 const ITEMS_SPACING = 0;

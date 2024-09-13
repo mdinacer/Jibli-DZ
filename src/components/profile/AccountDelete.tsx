@@ -1,11 +1,10 @@
+import InputField from '@/components/fields/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert } from 'react-native';
-import { Button, Card, Form, H2, Paragraph, Spinner, XStack } from 'tamagui';
+import { Alert, Button, Text, View } from 'react-native';
 import { z } from 'zod';
-import InputField from '../fields/InputField';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -70,23 +69,13 @@ const AccountDelete = () => {
   );
 
   return (
-    <Card elevate size="$4" bordered width={'100%'}>
-      <Card.Header padded>
-        <H2>Delete Account</H2>
-        <Paragraph theme="alt2">
-          Enter your password to confirm account deletion.
-        </Paragraph>
-      </Card.Header>
+    <View>
+      <View>
+        <Text>Delete Account</Text>
+        <Text>Enter your password to confirm account deletion.</Text>
+      </View>
 
-      <Form
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        minWidth={300}
-        gap="$4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-        paddingHorizontal="$4"
-      >
+      <View>
         <InputField
           id={'account-delete-current-password'}
           name="currentPassword"
@@ -96,22 +85,9 @@ const AccountDelete = () => {
           secureTextEntry
         />
 
-        <Card.Footer padded>
-          <XStack flex={1} />
-          <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-            <Button
-              backgroundColor="$red10"
-              themeInverse
-              borderRadius="$10"
-              icon={isSubmitting ? () => <Spinner /> : undefined}
-              disabled={!isDirty || !isValid || isSubmitting}
-            >
-              Delete
-            </Button>
-          </Form.Trigger>
-        </Card.Footer>
-      </Form>
-    </Card>
+        <Button title="Delete"></Button>
+      </View>
+    </View>
   );
 };
 

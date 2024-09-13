@@ -12,27 +12,20 @@ import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useToastController } from '@tamagui/toast';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Button,
-  Form,
-  H2,
-  H4,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
-  Separator,
-  Spinner,
-  Stack,
-  useTheme
-} from 'tamagui';
+  Text,
+  View
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const InitialProfileScreen = () => {
-  const theme = useTheme();
-  const toast = useToastController();
   const { user } = useAuthStore();
   const { profile, setProfile } = useProfileStore();
   const form = useForm<OnboardingProfileData>({
@@ -68,10 +61,6 @@ const InitialProfileScreen = () => {
         const profile = await ProfileService.create(profileCreateInput);
 
         if (!profile) {
-          toast.show("Couldn't create profile", {
-            description: 'Please try again later.',
-            color: 'danger'
-          });
           return reset();
         }
         setProfile(profile);
@@ -82,43 +71,31 @@ const InitialProfileScreen = () => {
 
         router.push('/');
       } catch (error: any) {
-        toast.show("Couldn't create profile", {
-          description: error.message,
-          color: 'danger'
-        });
+        console.error(error);
       } finally {
         reset();
       }
     },
-    [reset, setProfile, toast, user]
+    [reset, setProfile, user]
   );
 
   const { createList } = watch();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background.val }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView>
-          <Form
-            flex={1}
-            justifyContent="center"
-            minWidth={300}
-            onSubmit={handleSubmit(handleOnSubmit)}
-            backgroundColor="$background"
-            paddingHorizontal="$8"
-            paddingVertical="$4"
-            rowGap="$8"
-          >
-            <H4 paddingBottom="$4">Create Your Profile</H4>
+          <View>
+            <Text>Create Your Profile</Text>
 
             <Controller<OnboardingProfileData>
               name={'picture'}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Stack width={'80%'} marginHorizontal="auto" aspectRatio={1}>
+                <View>
                   <ImageUpload
                     fileUri={
                       (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
@@ -127,7 +104,7 @@ const InitialProfileScreen = () => {
                       onChange(asset);
                     }}
                   />
-                </Stack>
+                </View>
               )}
             />
 
@@ -137,14 +114,13 @@ const InitialProfileScreen = () => {
               label="Username"
               id="onBoardingUsername"
             />
-            <Separator marginVertical={15} />
-            <Stack>
-              <H4>Your List</H4>
+
+            <View>
+              <Text>Your List</Text>
               <CheckBoxField
                 control={control}
                 name="createList"
                 label="Create List"
-                id={'onBoardingCreateList'}
               />
 
               <InputField
@@ -154,21 +130,14 @@ const InitialProfileScreen = () => {
                 label="List Name"
                 id="onBoardingListName"
               />
-              <Separator marginVertical={15} />
-            </Stack>
-            <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-              <Button
-                width={'100%'}
-                icon={isSubmitting ? () => <Spinner /> : undefined}
-              >
-                Create
-              </Button>
-            </Form.Trigger>
+            </View>
+            <Button title="Create" />
 
-            <Button width={'100%'} onPress={() => AuthService.signOut()}>
-              Sing Out
-            </Button>
-          </Form>
+            <Button
+              title="Sing Out"
+              onPress={() => AuthService.signOut()}
+            ></Button>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -1,11 +1,9 @@
 import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
-import { useToastController } from '@tamagui/toast';
 import { useCallback, useEffect } from 'react';
 
 function useLoadProfile() {
-  const toast = useToastController();
   const { user } = useAuthStore();
   const { profile, status, loaded, setProfile, setStatus, setLoaded } =
     useProfileStore();
@@ -23,7 +21,7 @@ function useLoadProfile() {
         setStatus('success');
       } catch (error: any) {
         setStatus('error');
-        toast.show("Couldn't load profile", {
+        console.warn("Couldn't load profile", {
           message: error.message,
           type: 'error'
         });
@@ -31,7 +29,7 @@ function useLoadProfile() {
         setLoaded(true);
       }
     },
-    [setLoaded, setProfile, setStatus, toast]
+    [setLoaded, setProfile, setStatus]
   );
 
   useEffect(() => {
