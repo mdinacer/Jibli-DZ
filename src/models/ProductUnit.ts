@@ -16,41 +16,41 @@ export const ProductUnitsList = [
 ];
 
 export enum ProductUnit {
-  Bag = 'bag',
-  Bottle = 'bottle',
-  Box = 'box',
-  Can = 'can',
-  Jar = 'jar',
-  Kilogram = 'kilogram',
-  Gram = 'gram',
-  Pack = 'pack',
-  Piece = 'piece'
+  BAG = 'bag',
+  BOTTLE = 'bottle',
+  BOX = 'box',
+  CAN = 'can',
+  JAR = 'jar',
+  KG = 'kilogram',
+  GR = 'gram',
+  PACK = 'pack',
+  PIECE = 'piece'
 }
 
 // Update the conversion factors accordingly
 export const conversionFactors: Record<ProductUnit, number | null> = {
-  [ProductUnit.Piece]: null,
-  [ProductUnit.Box]: null,
-  [ProductUnit.Pack]: null,
-  [ProductUnit.Bottle]: null,
-  [ProductUnit.Kilogram]: 1, // 1 kilogram = 1 kilogram
-  [ProductUnit.Gram]: 0.001, // 1 gram = 0.001 kilograms
-  [ProductUnit.Can]: null,
-  [ProductUnit.Bag]: null,
-  [ProductUnit.Jar]: null
+  [ProductUnit.PIECE]: null,
+  [ProductUnit.BOX]: null,
+  [ProductUnit.PACK]: null,
+  [ProductUnit.BOTTLE]: null,
+  [ProductUnit.KG]: 1, // 1 kilogram = 1 kilogram
+  [ProductUnit.GR]: 0.001, // 1 gram = 0.001 kilograms
+  [ProductUnit.CAN]: null,
+  [ProductUnit.BAG]: null,
+  [ProductUnit.JAR]: null
 };
 
 const unitsByCategory: Record<UnitCategory, ProductUnit[]> = {
   [UnitCategory.Packaging]: [
-    ProductUnit.Piece,
-    ProductUnit.Box,
-    ProductUnit.Pack,
-    ProductUnit.Bottle,
-    ProductUnit.Can,
-    ProductUnit.Bag,
-    ProductUnit.Jar
+    ProductUnit.PIECE,
+    ProductUnit.BOX,
+    ProductUnit.PACK,
+    ProductUnit.BOTTLE,
+    ProductUnit.CAN,
+    ProductUnit.BAG,
+    ProductUnit.JAR
   ],
-  [UnitCategory.Weight]: [ProductUnit.Kilogram, ProductUnit.Gram]
+  [UnitCategory.Weight]: [ProductUnit.KG, ProductUnit.GR]
 };
 
 // Function to get the category of a unit

@@ -70,7 +70,7 @@ const AccountDelete = () => {
   );
 
   return (
-    <Card elevate size="$4" bordered>
+    <Card elevate size="$4" bordered width={'100%'}>
       <Card.Header padded>
         <H2>Delete Account</H2>
         <Paragraph theme="alt2">
@@ -85,10 +85,6 @@ const AccountDelete = () => {
         minWidth={300}
         gap="$4"
         onSubmit={handleSubmit(handleOnSubmit)}
-        borderWidth={1}
-        borderRadius="$4"
-        backgroundColor="$background"
-        borderColor="$borderColor"
         paddingHorizontal="$4"
       >
         <InputField

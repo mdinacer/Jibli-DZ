@@ -12,6 +12,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
+import { PortalProvider } from 'tamagui';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,7 +58,11 @@ export default function RootLayout() {
 }
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <Provider>{children}</Provider>;
+  return (
+    <PortalProvider shouldAddRootHost>
+      <Provider>{children}</Provider>
+    </PortalProvider>
+  );
 };
 
 function RootLayoutNav() {

@@ -91,10 +91,6 @@ const EmailLinkCard = () => {
         minWidth={300}
         gap="$4"
         onSubmit={handleSubmit(handleOnSubmit)}
-        borderWidth={1}
-        borderRadius="$4"
-        backgroundColor="$background"
-        borderColor="$borderColor"
         paddingHorizontal="$4"
       >
         <InputField

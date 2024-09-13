@@ -2,7 +2,7 @@ import { useColorScheme } from 'react-native';
 import { TamaguiProvider, type TamaguiProviderProps } from 'tamagui';
 import { ToastProvider, ToastViewport } from '@tamagui/toast';
 import { CurrentToast } from '@/components/CurrentToast';
-import appConfig from '@/config/tamagui.config';
+import appConfig from '../../tamagui.config';
 
 export function Provider({
   children,

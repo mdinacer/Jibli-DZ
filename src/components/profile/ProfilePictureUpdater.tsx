@@ -56,13 +56,11 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
       borderRadius={8}
       overflow="hidden"
       elevate
-      size="100%"
       bordered
       {...props}
     >
       <Card.Footer
         padded
-        backdropFilter="blur(50px)"
         backgroundColor="rgba(0, 0, 0, 0.3)"
         paddingVertical="$2"
       >
@@ -71,7 +69,6 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
         </XStack>
         {profile?.picture && (
           <Button
-            theme={'Button'}
             aspectRatio={1}
             scaleIcon={1.8}
             backgroundColor="$red10Light"

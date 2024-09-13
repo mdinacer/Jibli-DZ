@@ -17,7 +17,6 @@ const Profile = () => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <YStack flexGrow={1} padding="$6" gap="$4">
             <H2 paddingBottom="$4">Account</H2>
-
             <ProfilePictureUpdater />
             <UserNameField />
             <UserEmailEdit />

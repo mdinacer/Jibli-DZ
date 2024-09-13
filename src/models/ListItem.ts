@@ -8,11 +8,19 @@ export enum ListItemStatus {
   UNAVAILABLE = 'unavailable'
 }
 
+export const ListItemInputSchema = z.object({
+  name: z.string(),
+  quantity: z.number(),
+  unit: z.nativeEnum(ProductUnit),
+  note: z.string().nullable()
+});
+
+export type ListItemInput = z.infer<typeof ListItemInputSchema>;
+
 export const ListItemSchema = z.object({
   id: z.string(),
-  productId: z.string(),
+  name: z.string(),
   quantity: z.number(),
-  price: z.number().nullable(),
   unit: z.nativeEnum(ProductUnit),
   status: z.nativeEnum(ListItemStatus),
   note: z.string().nullable(),
@@ -21,8 +29,6 @@ export const ListItemSchema = z.object({
 });
 
 export type ListItem = z.infer<typeof ListItemSchema>;
-
-export type ListItemCreateInput = Omit<ListItem, 'id' | 'status' | 'price'>;
 
 export const StatusOrder = [
   ListItemStatus.PENDING,

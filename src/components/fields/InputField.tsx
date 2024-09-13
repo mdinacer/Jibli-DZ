@@ -4,14 +4,13 @@ import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import {
   Button,
   Input,
+  InputProps,
   Label,
   SizableText,
   Square,
   View,
   YStack
 } from 'tamagui';
-
-type InputProps = React.ComponentProps<typeof Input>;
 
 interface Props<T extends FieldValues> extends InputProps {
   control: Control<T>;
@@ -24,7 +23,6 @@ const InputField = <T extends FieldValues>({
   control,
   name,
   secureTextEntry,
-  id,
   ...props
 }: Props<T>) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,11 +35,10 @@ const InputField = <T extends FieldValues>({
         fieldState: { error }
       }) => (
         <YStack width={'100%'} gap="$2">
-          <Label htmlFor={id}>{label}</Label>
+          <Label>{label}</Label>
           <View style={{ position: 'relative' }}>
             <Input
               {...props}
-              id={id}
               {...field}
               value={value}
               onChangeText={onChange}
@@ -51,7 +48,7 @@ const InputField = <T extends FieldValues>({
               <Square
                 width={32}
                 height={'100%'}
-                borderRadius={'full'}
+                borderRadius={999}
                 position="absolute"
                 bottom={0}
                 top={0}

@@ -110,9 +110,9 @@ const InitialProfileScreen = () => {
             backgroundColor="$background"
             paddingHorizontal="$8"
             paddingVertical="$4"
-            rowGap="$4"
+            rowGap="$8"
           >
-            <H2 paddingBottom="$4">Create Your Profile</H2>
+            <H4 paddingBottom="$4">Create Your Profile</H4>
 
             <Controller<OnboardingProfileData>
               name={'picture'}
