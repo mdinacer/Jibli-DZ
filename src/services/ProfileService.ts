@@ -1,7 +1,7 @@
 import { Collections } from '@/config/collections';
 import firebaseServices from '@/config/firebaseConfig';
 import { FileAsset } from '@/models/FileAsset';
-import { Profile, UserRole } from '@/models/Profile';
+import { Profile, ProfileCreateInput, UserRole } from '@/models/Profile';
 import CustomError from '@/utils/CustomError';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {
@@ -23,14 +23,12 @@ function getCurrentUser(): FirebaseAuthTypes.User {
 }
 
 // Create a new profile and optionally an initial list
-async function create(
-  username: string,
-  email: string,
-  picture?: FileAsset
-): Promise<Profile | undefined> {
+async function create(input: ProfileCreateInput): Promise<Profile | undefined> {
   try {
     const user = getCurrentUser();
     const uid = user.uid;
+
+    const { username, email, picture } = input;
 
     const profileData: Omit<Profile, 'id'> = {
       uid,

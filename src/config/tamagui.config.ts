@@ -1,4 +1,4 @@
-import { themes } from '@/constants/themes';
+import { themes } from '@/constants/Themes';
 import { config } from '@tamagui/config/v3';
 
 import { createTamagui } from 'tamagui'; // or '@tamagui/core'

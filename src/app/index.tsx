@@ -23,6 +23,10 @@ const Index = () => {
   if (user && !profile) {
     return <Redirect href={'/onboarding'} />;
   }
+
+  if (profile) {
+    return <Redirect href={'/home'} />;
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <YStack padding="$6">

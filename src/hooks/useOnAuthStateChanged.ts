@@ -7,7 +7,6 @@ export default function useOnAuthStateChanged() {
 
   useEffect(() => {
     const unsubscribe = firebaseServices.auth.onAuthStateChanged((user) => {
-      console.log('Auth state changed to', user);
       setUser(user);
     });
 
