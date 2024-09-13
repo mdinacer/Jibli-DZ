@@ -52,7 +52,14 @@ const config: ExpoConfig = {
         launchMode: 'most-recent'
       }
     ],
-    'expo-font'
+    'expo-font',
+    [
+      'expo-image-picker',
+      {
+        photosPermission:
+          'The app accesses your photos to let you share them with your collaborators.'
+      }
+    ]
   ],
   experiments: {
     typedRoutes: true
