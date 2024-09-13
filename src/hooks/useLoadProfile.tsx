@@ -2,7 +2,6 @@ import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { useToastController } from '@tamagui/toast';
-import { router } from 'expo-router';
 import { useCallback, useEffect } from 'react';
 
 function useLoadProfile() {

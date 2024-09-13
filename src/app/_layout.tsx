@@ -1,4 +1,5 @@
 import { Provider } from '@/components/Provider';
+import useOnAuthStateChanged from '@/hooks/useOnAuthStateChanged';
 import {
   DarkTheme,
   DefaultTheme,
@@ -7,12 +8,10 @@ import {
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
-import { useTheme } from 'tamagui';
-import { StatusBar } from 'expo-status-bar';
-import useOnAuthStateChanged from '@/hooks/useOnAuthStateChanged';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -63,7 +62,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const theme = useTheme();
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />

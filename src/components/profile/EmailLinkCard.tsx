@@ -1,12 +1,11 @@
-import firebaseServices from '@/config/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Card, Form, H2, Paragraph, Spinner, XStack } from 'tamagui';
 import { z } from 'zod';
 import InputField from '../fields/InputField';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const schema = z.object({
   newEmail: z.string().email('{value} is not a valid email'),
@@ -99,14 +98,14 @@ const EmailLinkCard = () => {
         paddingHorizontal="$4"
       >
         <InputField
-          id={'emailChangeNewEmail'}
+          id={'email-link-new-email'}
           name="newEmail"
           label="New Email"
           control={control}
           placeholder="Type your new email"
         />
         <InputField
-          id={'emailChangeNewPassword'}
+          id={'email-link-new-password'}
           name="newPassword"
           label="New Password"
           control={control}

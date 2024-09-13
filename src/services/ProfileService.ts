@@ -1,6 +1,5 @@
 import { Collections } from '@/config/collections';
 import firebaseServices from '@/config/firebaseConfig';
-import { FileAsset } from '@/models/FileAsset';
 import { Profile, ProfileCreateInput, UserRole } from '@/models/Profile';
 import CustomError from '@/utils/CustomError';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';

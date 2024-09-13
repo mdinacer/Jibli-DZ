@@ -24,6 +24,7 @@ const InputField = <T extends FieldValues>({
   control,
   name,
   secureTextEntry,
+  id,
   ...props
 }: Props<T>) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,10 +37,11 @@ const InputField = <T extends FieldValues>({
         fieldState: { error }
       }) => (
         <YStack width={'100%'} gap="$2">
-          <Label htmlFor={props.id}>{label}</Label>
+          <Label htmlFor={id}>{label}</Label>
           <View style={{ position: 'relative' }}>
             <Input
               {...props}
+              id={id}
               {...field}
               value={value}
               onChangeText={onChange}

@@ -1,41 +1,38 @@
-[debug] [2024-09-12T18:40:49.761Z] ----------------------------------------------------------------------
-[debug] [2024-09-12T18:40:49.764Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
-[debug] [2024-09-12T18:40:49.764Z] CLI Version:   13.13.2
-[debug] [2024-09-12T18:40:49.764Z] Platform:      darwin
-[debug] [2024-09-12T18:40:49.765Z] Node Version:  v20.14.0
-[debug] [2024-09-12T18:40:49.765Z] Time:          Thu Sep 12 2024 19:40:49 GMT+0100 (Central European Standard Time)
-[debug] [2024-09-12T18:40:49.765Z] ----------------------------------------------------------------------
+[debug] [2024-09-13T10:14:56.860Z] ----------------------------------------------------------------------
+[debug] [2024-09-13T10:14:56.864Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
+[debug] [2024-09-13T10:14:56.864Z] CLI Version:   13.13.2
+[debug] [2024-09-13T10:14:56.865Z] Platform:      darwin
+[debug] [2024-09-13T10:14:56.865Z] Node Version:  v20.14.0
+[debug] [2024-09-13T10:14:56.865Z] Time:          Fri Sep 13 2024 11:14:56 GMT+0100 (Central European Standard Time)
+[debug] [2024-09-13T10:14:56.865Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-09-12T18:40:49.767Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2024-09-12T18:40:49.868Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"react-native"}
-[debug] [2024-09-12T18:40:49.869Z] > refreshing access token with scopes: []
-[debug] [2024-09-12T18:40:49.870Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2024-09-12T18:40:49.870Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-09-12T18:40:50.551Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2024-09-12T18:40:50.552Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2024-09-12T18:40:50.617Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2024-09-12T18:40:50.617Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-09-12T18:40:50.663Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-09-12T18:40:50.663Z] > authorizing via signed-in user (mdi.nacer.ytb@gmail.com)
-[debug] [2024-09-12T18:40:51.367Z] java version "22.0.1" 2024-04-16
+[debug] [2024-09-13T10:14:57.021Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"react-native"}
+[debug] [2024-09-13T10:14:57.023Z] > refreshing access token with scopes: []
+[debug] [2024-09-13T10:14:57.026Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-09-13T10:14:57.026Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-13T10:14:57.327Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-09-13T10:14:57.327Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-13T10:14:57.373Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-09-13T10:14:57.373Z] > authorizing via signed-in user (mdi.nacer.ytb@gmail.com)
+[debug] [2024-09-13T10:14:58.375Z] java version "22.0.1" 2024-04-16
 
-[debug] [2024-09-12T18:40:51.367Z] Java(TM) SE Runtime Environment (build 22.0.1+8-16)
+[debug] [2024-09-13T10:14:58.376Z] Java(TM) SE Runtime Environment (build 22.0.1+8-16)
 Java HotSpot(TM) 64-Bit Server VM (build 22.0.1+8-16, mixed mode, sharing)
 
-[debug] [2024-09-12T18:40:51.374Z] Parsed Java major version: 22
+[debug] [2024-09-13T10:14:58.385Z] Parsed Java major version: 22
 [info] i  emulators: Starting emulators: auth, firestore, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, database, storage"}}
-[debug] [2024-09-12T18:40:52.295Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2024-09-12T18:40:52.295Z] assigned listening specs for emulators {"user":{"auth":[{"address":"172.20.10.4","family":"IPv4","port":9099}],"firestore":[{"address":"172.20.10.4","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"172.20.10.4","family":"IPv4","port":9150}],"database":[{"address":"172.20.10.4","family":"IPv4","port":9000}],"storage":[{"address":"172.20.10.4","family":"IPv4","port":9199}],"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2024-09-12T18:40:52.299Z] [hub] writing locator at /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/hub-jibli-dz.json
-[debug] [2024-09-12T18:40:52.306Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2024-09-12T18:40:52.306Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2024-09-12T18:40:52.306Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/nacer/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.7.jar","--host","172.20.10.4","--port",8080,"--websocket_port",9150,"--project_id","jibli-dz","--rules","/Users/nacer/Documents/GitHub/jibli-dz/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/nacer/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.7.jar\",\"--host\",\"172.20.10.4\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"jibli-dz\",\"--rules\",\"/Users/nacer/Documents/GitHub/jibli-dz/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false}"}}
+[debug] [2024-09-13T10:14:59.902Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-09-13T10:14:59.902Z] assigned listening specs for emulators {"user":{"auth":[{"address":"172.20.10.4","family":"IPv4","port":9099}],"firestore":[{"address":"172.20.10.4","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"172.20.10.4","family":"IPv4","port":9150}],"database":[{"address":"172.20.10.4","family":"IPv4","port":9000}],"storage":[{"address":"172.20.10.4","family":"IPv4","port":9199}],"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-09-13T10:14:59.907Z] [hub] writing locator at /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/hub-jibli-dz.json
+[debug] [2024-09-13T10:14:59.916Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-09-13T10:14:59.916Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2024-09-13T10:14:59.916Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/nacer/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.7.jar","--host","172.20.10.4","--port",8080,"--websocket_port",9150,"--project_id","jibli-dz","--rules","/Users/nacer/Documents/GitHub/jibli-dz/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/nacer/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.7.jar\",\"--host\",\"172.20.10.4\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"jibli-dz\",\"--rules\",\"/Users/nacer/Documents/GitHub/jibli-dz/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[debug] [2024-09-12T18:40:53.565Z] Sep 12, 2024 7:40:53 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+[debug] [2024-09-13T10:15:01.855Z] Sep 13, 2024 11:15:01 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
 INFO: Started WebSocket server on ws://172.20.10.4:9150
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:40:53 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://172.20.10.4:9150\n"}}
-[debug] [2024-09-12T18:40:53.589Z] API endpoint: http://172.20.10.4:8080 {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://172.20.10.4:8080"}}
-[debug] [2024-09-12T18:40:53.589Z] 
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:15:01 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://172.20.10.4:9150\n"}}
+[debug] [2024-09-13T10:15:01.892Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2024-09-13T10:15:01.893Z] 172.20.10.4:8080
 If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
 
    export FIRESTORE_EMULATOR_HOST=172.20.10.4:8080
@@ -47,39 +44,39 @@ If you are running a Firestore in Datastore Mode project, run:
 Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
 Dev App Server is now running.
 
- {"metadata":{"emulator":{"name":"firestore"},"message":"\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=172.20.10.4:8080\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=172.20.10.4:8080\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+ {"metadata":{"emulator":{"name":"firestore"},"message":"172.20.10.4:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=172.20.10.4:8080\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=172.20.10.4:8080\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
 [info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2024-09-12T18:40:53.718Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz [none]
-[debug] [2024-09-12T18:40:56.674Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz 200
-[debug] [2024-09-12T18:40:56.674Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz {"projectId":"jibli-dz","projectNumber":"1010212466047","displayName":"Jibli","name":"projects/jibli-dz","resources":{"hostingSite":"jibli-dz","realtimeDatabaseInstance":"jibli-dz-default-rtdb","storageBucket":"jibli-dz.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_5e162b39-b74f-4bad-8400-d87aa3743164"}
-[debug] [2024-09-12T18:40:56.674Z] database rules config:  [{"instance":"jibli-dz-default-rtdb","rules":"/Users/nacer/Documents/GitHub/jibli-dz/database.rules.json"}]
-[debug] [2024-09-12T18:40:56.676Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2024-09-12T18:40:56.676Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2024-09-12T18:40:56.676Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
-[debug] [2024-09-12T18:40:56.676Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/nacer/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar","--host","172.20.10.4","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/Users/nacer/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar\",\"--host\",\"172.20.10.4\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false}"}}
+[debug] [2024-09-13T10:15:01.988Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz [none]
+[debug] [2024-09-13T10:15:02.780Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz 200
+[debug] [2024-09-13T10:15:02.780Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/jibli-dz {"projectId":"jibli-dz","projectNumber":"1010212466047","displayName":"Jibli","name":"projects/jibli-dz","resources":{"hostingSite":"jibli-dz","realtimeDatabaseInstance":"jibli-dz-default-rtdb","storageBucket":"jibli-dz.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_5e162b39-b74f-4bad-8400-d87aa3743164"}
+[debug] [2024-09-13T10:15:02.780Z] database rules config:  [{"instance":"jibli-dz-default-rtdb","rules":"/Users/nacer/Documents/GitHub/jibli-dz/database.rules.json"}]
+[debug] [2024-09-13T10:15:02.782Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2024-09-13T10:15:02.782Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-09-13T10:15:02.782Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2024-09-13T10:15:02.782Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/nacer/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar","--host","172.20.10.4","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/Users/nacer/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar\",\"--host\",\"172.20.10.4\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false}"}}
 [info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
-[debug] [2024-09-12T18:40:57.864Z] 19:40:57.862 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
- {"metadata":{"emulator":{"name":"database"},"message":"19:40:57.862 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
-[debug] [2024-09-12T18:40:58.044Z] 19:40:58.044 [main] INFO com.firebase.server.forge.App$ - Listening at 172.20.10.4:9000
- {"metadata":{"emulator":{"name":"database"},"message":"19:40:58.044 [main] INFO com.firebase.server.forge.App$ - Listening at 172.20.10.4:9000\n"}}
-[debug] [2024-09-12T18:41:03.836Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2024-09-12T18:41:04.658Z] Temp file directory for storage emulator: /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/firebase/storage/blobs"}}
-[debug] [2024-09-12T18:41:04.664Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2024-09-12T18:41:04.664Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2024-09-12T18:41:04.664Z] Starting Emulator UI with command {"binary":"node","args":["/Users/nacer/.cache/firebase/emulators/ui-v1.12.1/server/server.mjs"],"optionalArgs":[],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/nacer/.cache/firebase/emulators/ui-v1.12.1/server/server.mjs\"],\"optionalArgs\":[],\"joinArgs\":false,\"shell\":false}"}}
+[debug] [2024-09-13T10:15:04.499Z] 11:15:04.497 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"11:15:04.497 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
+[debug] [2024-09-13T10:15:04.753Z] 11:15:04.752 [main] INFO com.firebase.server.forge.App$ - Listening at 172.20.10.4:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"11:15:04.752 [main] INFO com.firebase.server.forge.App$ - Listening at 172.20.10.4:9000\n"}}
+[debug] [2024-09-13T10:15:13.246Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-09-13T10:15:14.342Z] Temp file directory for storage emulator: /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/tn/_62c873d3jx79q_gh1mx2wrr0000gn/T/firebase/storage/blobs"}}
+[debug] [2024-09-13T10:15:14.351Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-09-13T10:15:14.351Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-09-13T10:15:14.351Z] Starting Emulator UI with command {"binary":"node","args":["/Users/nacer/.cache/firebase/emulators/ui-v1.12.1/server/server.mjs"],"optionalArgs":[],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/nacer/.cache/firebase/emulators/ui-v1.12.1/server/server.mjs\"],\"optionalArgs\":[],\"joinArgs\":false,\"shell\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2024-09-12T18:41:04.794Z] Web / API server started at 127.0.0.1:4000
+[debug] [2024-09-13T10:15:14.566Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2024-09-12T18:41:04.794Z] Web / API server started at ::1:4000
+[debug] [2024-09-13T10:15:14.566Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
-[debug] [2024-09-12T18:41:04.870Z] >>> [apiv2][query] PUT http://172.20.10.4:9000/.settings/rules.json ns=jibli-dz-default-rtdb
-[debug] [2024-09-12T18:41:04.870Z] >>> [apiv2][body] PUT http://172.20.10.4:9000/.settings/rules.json "{\n  \"rules\": {\n    \".read\": \"auth != null\",\n    \".write\": \"auth != null\"\n  }\n}"
-[debug] [2024-09-12T18:41:05.093Z] 19:41:05.092 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - jibli-dz-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 94ms, init: 0ms
- {"metadata":{"emulator":{"name":"database"},"message":"19:41:05.092 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - jibli-dz-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 94ms, init: 0ms\n"}}
-[debug] [2024-09-12T18:41:05.146Z] 19:41:05.146 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace jibli-dz-default-rtdb status Active to Active
- {"metadata":{"emulator":{"name":"database"},"message":"19:41:05.146 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace jibli-dz-default-rtdb status Active to Active\n"}}
-[debug] [2024-09-12T18:41:05.248Z] <<< [apiv2][status] PUT http://172.20.10.4:9000/.settings/rules.json 200
-[debug] [2024-09-12T18:41:05.248Z] <<< [apiv2][body] PUT http://172.20.10.4:9000/.settings/rules.json {"status":"ok"}
+[debug] [2024-09-13T10:15:14.760Z] >>> [apiv2][query] PUT http://172.20.10.4:9000/.settings/rules.json ns=jibli-dz-default-rtdb
+[debug] [2024-09-13T10:15:14.760Z] >>> [apiv2][body] PUT http://172.20.10.4:9000/.settings/rules.json "{\n  \"rules\": {\n    \".read\": \"auth != null\",\n    \".write\": \"auth != null\"\n  }\n}\n"
+[debug] [2024-09-13T10:15:15.069Z] 11:15:15.068 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - jibli-dz-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 133ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"11:15:15.068 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - jibli-dz-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 133ms, init: 0ms\n"}}
+[debug] [2024-09-13T10:15:15.150Z] 11:15:15.150 [NamespaceSystem-blocking-namespace-operation-dispatcher-8] INFO com.firebase.core.namespace.StateManager - Namespace jibli-dz-default-rtdb status Active to Active
+ {"metadata":{"emulator":{"name":"database"},"message":"11:15:15.150 [NamespaceSystem-blocking-namespace-operation-dispatcher-8] INFO com.firebase.core.namespace.StateManager - Namespace jibli-dz-default-rtdb status Active to Active\n"}}
+[debug] [2024-09-13T10:15:15.179Z] <<< [apiv2][status] PUT http://172.20.10.4:9000/.settings/rules.json 200
+[debug] [2024-09-13T10:15:15.179Z] <<< [apiv2][body] PUT http://172.20.10.4:9000/.settings/rules.json {"status":"ok"}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
 │ ✔  All emulators ready! It is now safe to connect your app. │
@@ -102,24 +99,126 @@ Dev App Server is now running.
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
-[debug] [2024-09-12T18:41:08.860Z] Sep 12, 2024 7:41:08 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+[debug] [2024-09-13T10:15:22.579Z] Sep 13, 2024 11:15:22 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
 INFO: Connected to new websocket client
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:41:08 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
-[debug] [2024-09-12T18:41:08.911Z] Sep 12, 2024 7:41:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:15:22 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2024-09-13T10:15:22.632Z] Sep 13, 2024 11:15:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:41:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
-[debug] [2024-09-12T18:41:11.775Z] Sep 12, 2024 7:41:11 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:15:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T10:15:22.873Z] Sep 13, 2024 11:15:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected HTTP/2 connection.
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:41:11 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
-[debug] [2024-09-12T18:59:12.853Z] Sep 12, 2024 7:59:12 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
-INFO: Websocket client disconnected
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:59:12 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
-[debug] [2024-09-12T18:59:13.086Z] Sep 12, 2024 7:59:13 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:15:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
+[debug] [2024-09-13T10:56:40.984Z] Sep 13, 2024 11:56:40 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
 INFO: Connected to new websocket client
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:59:13 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
-[debug] [2024-09-12T18:59:15.679Z] Sep 12, 2024 7:59:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:56:40 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2024-09-13T10:57:26.493Z] Sep 13, 2024 11:57:26 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:57:26 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
+[debug] [2024-09-13T10:57:26.943Z] Sep 13, 2024 11:57:26 AM io.netty.channel.DefaultChannelPipeline onUnhandledInboundException
+WARNING: An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:403)
+	at java.base/sun.nio.ch.SocketChannelImpl.implRead(SocketChannelImpl.java:435)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:493)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:254)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:57:26 AM io.netty.channel.DefaultChannelPipeline onUnhandledInboundException\nWARNING: An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.\njava.net.SocketException: Connection reset\n\tat java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:403)\n\tat java.base/sun.nio.ch.SocketChannelImpl.implRead(SocketChannelImpl.java:435)\n\tat java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:493)\n\tat io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:254)\n\tat io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)\n\tat io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:357)\n\tat io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\tat java.base/java.lang.Thread.run(Thread.java:1570)\n\n"}}
+[debug] [2024-09-13T10:57:26.943Z] Sep 13, 2024 11:57:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
 INFO: Websocket client disconnected
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:59:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
-[debug] [2024-09-12T18:59:15.827Z] Sep 12, 2024 7:59:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:57:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[info] i  To reset your email address to mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=recoverEmail&lang=en&oobCode=9KgHjTRHfcHfrs_cxR7OaMwEK3OwuIdQIiEEzcrpi2xyFhiQ8vzLhH&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To reset your email address to mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=recoverEmail&lang=en&oobCode=9KgHjTRHfcHfrs_cxR7OaMwEK3OwuIdQIiEEzcrpi2xyFhiQ8vzLhH&apiKey=fake-api-key"}}
+[info] i  To verify the email address mdi.nacer.test@gmail.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=lV-kZvlKZjZktLLj_PCkM9hqHsYcjP_B0rlqxakg1uxIaKBVBLqQLO&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address mdi.nacer.test@gmail.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=lV-kZvlKZjZktLLj_PCkM9hqHsYcjP_B0rlqxakg1uxIaKBVBLqQLO&apiKey=fake-api-key"}}
+[debug] [2024-09-13T10:59:02.330Z] Sep 13, 2024 11:59:02 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:59:02 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2024-09-13T10:59:02.606Z] Sep 13, 2024 11:59:02 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
 INFO: Connected to new websocket client
- {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 12, 2024 7:59:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 11:59:02 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[info] i  To reset your email address to mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=recoverEmail&lang=en&oobCode=ZLOuB-duMy2TkaGNO6mt7xNzHQvuP6sxwJDQ7Yhe0zTH9Fff5lwYzf&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To reset your email address to mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=recoverEmail&lang=en&oobCode=ZLOuB-duMy2TkaGNO6mt7xNzHQvuP6sxwJDQ7Yhe0zTH9Fff5lwYzf&apiKey=fake-api-key"}}
+[info] i  To verify the email address mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ynkj0uXcctDNhr06XBefyeWCTgSzXewieyyKOcGsKsKVoqIOcfGuWj&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address mdi.nacer@outlook.com, follow this link: http://172.20.10.4:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ynkj0uXcctDNhr06XBefyeWCTgSzXewieyyKOcGsKsKVoqIOcfGuWj&apiKey=fake-api-key"}}
+[debug] [2024-09-13T11:00:18.120Z] Sep 13, 2024 12:00:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:00:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2024-09-13T11:00:18.333Z] Sep 13, 2024 12:00:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:00:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2024-09-13T11:00:35.646Z] Sep 13, 2024 12:00:35 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:00:35 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2024-09-13T11:00:35.848Z] Sep 13, 2024 12:00:35 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:00:35 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2024-09-13T11:03:47.836Z] Sep 13, 2024 12:03:47 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:47 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2024-09-13T11:03:48.097Z] Sep 13, 2024 12:03:48 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:48 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2024-09-13T11:03:51.625Z] Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:03:51.644Z] Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:03:51.710Z] Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:03:51.902Z] Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:03:52.011Z] Sep 13, 2024 12:03:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:03:53.859Z] Sep 13, 2024 12:03:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:03:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:04:53.544Z] Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:04:53.546Z] Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:04:53.882Z] Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:04:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:05:53.904Z] Sep 13, 2024 12:05:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:05:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:06:53.919Z] Sep 13, 2024 12:06:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:06:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:07:53.938Z] Sep 13, 2024 12:07:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:07:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:08:53.953Z] Sep 13, 2024 12:08:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:08:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:09:53.970Z] Sep 13, 2024 12:09:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:09:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:11:08.993Z] Sep 13, 2024 12:11:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:11:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:12:09.008Z] Sep 13, 2024 12:12:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:12:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:13:09.021Z] Sep 13, 2024 12:13:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:13:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:14:09.032Z] Sep 13, 2024 12:14:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:14:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2024-09-13T11:14:54.953Z] Sep 13, 2024 12:14:54 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 13, 2024 12:14:54 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}

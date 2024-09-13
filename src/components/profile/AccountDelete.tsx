@@ -92,7 +92,7 @@ const AccountDelete = () => {
         paddingHorizontal="$4"
       >
         <InputField
-          id={'emailChangeCurrentPassword'}
+          id={'account-delete-current-password'}
           name="currentPassword"
           label="Current Password"
           control={control}

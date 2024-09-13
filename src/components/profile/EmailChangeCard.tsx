@@ -25,30 +25,34 @@ const EmailChangeCard = () => {
   const {
     control,
     formState: { isSubmitting, isDirty, isValid, isLoading },
-    handleSubmit
+    handleSubmit,
+    reset
   } = form;
 
-  const handleOnSubmit = useCallback(async (data: SchemaType) => {
-    try {
-      const user = firebaseServices.auth.currentUser;
-      if (!user) {
-        throw new Error('User not found');
+  const handleOnSubmit = useCallback(
+    async (data: SchemaType) => {
+      try {
+        const user = firebaseServices.auth.currentUser;
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        const credential = auth.EmailAuthProvider.credential(
+          user.email!,
+          data.currentPassword
+        );
+
+        await user.reauthenticateWithCredential(credential);
+        await user.updateEmail(data.newEmail);
+        await user.sendEmailVerification();
+
+        reset();
+      } catch (error) {
+        console.error('Error updating email:', error);
       }
-
-      const credential = auth.EmailAuthProvider.credential(
-        user.email!,
-        data.currentPassword
-      );
-
-      await user.reauthenticateWithCredential(credential);
-      await user.updateEmail(data.newEmail);
-      await user.sendEmailVerification();
-
-      console.info('Email updated successfully');
-    } catch (error) {
-      console.error('Error updating email:', error);
-    }
-  }, []);
+    },
+    [reset]
+  );
 
   return (
     <Card elevate size="$4" bordered>
@@ -71,7 +75,7 @@ const EmailChangeCard = () => {
         paddingHorizontal="$4"
       >
         <InputField
-          id={'emailChangeCurrentPassword'}
+          id={'email-change-current-password'}
           name="currentPassword"
           label="Current Password"
           control={control}
@@ -79,7 +83,7 @@ const EmailChangeCard = () => {
           secureTextEntry
         />
         <InputField
-          id={'emailChangeNewEmail'}
+          id={'email-change-new-email'}
           name="newEmail"
           label="New Email"
           control={control}

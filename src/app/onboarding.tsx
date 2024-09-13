@@ -7,6 +7,7 @@ import {
   OnboardingProfileData,
   OnboardingProfileSchema
 } from '@/schemas/OnboardingProfileSchema';
+import AuthService from '@/services/AuthService';
 import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
@@ -117,7 +118,7 @@ const InitialProfileScreen = () => {
               name={'picture'}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Stack width={'80%'} aspectRatio={1}>
+                <Stack width={'80%'} marginHorizontal="auto" aspectRatio={1}>
                   <ImageUpload
                     fileUri={
                       (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
@@ -157,13 +158,16 @@ const InitialProfileScreen = () => {
             </Stack>
             <Form.Trigger asChild disabled={isLoading || isSubmitting}>
               <Button
-                theme={'active_Button'}
                 width={'100%'}
                 icon={isSubmitting ? () => <Spinner /> : undefined}
               >
                 Create
               </Button>
             </Form.Trigger>
+
+            <Button width={'100%'} onPress={() => AuthService.signOut()}>
+              Sing Out
+            </Button>
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
