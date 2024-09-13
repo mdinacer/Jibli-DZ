@@ -1,12 +1,11 @@
-import firebaseServices from '@/config/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 import { Button, Card, Form, H2, Paragraph, Spinner, XStack } from 'tamagui';
 import { z } from 'zod';
 import InputField from '../fields/InputField';
-import { Alert } from 'react-native';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -105,6 +104,7 @@ const AccountDelete = () => {
           <XStack flex={1} />
           <Form.Trigger asChild disabled={isLoading || isSubmitting}>
             <Button
+              backgroundColor="$red10"
               themeInverse
               borderRadius="$10"
               icon={isSubmitting ? () => <Spinner /> : undefined}
