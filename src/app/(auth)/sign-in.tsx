@@ -85,7 +85,6 @@ const SignIn = () => {
         <YStack width={'100%'} rowGap="$4">
           <Form.Trigger asChild disabled={isLoading || isSubmitting}>
             <Button
-              theme={'active_Button'}
               width={'100%'}
               icon={isSubmitting ? () => <Spinner /> : undefined}
             >

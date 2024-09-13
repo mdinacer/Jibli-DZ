@@ -1,4 +1,8 @@
+import AccountDelete from '@/components/profile/AccountDelete';
+import EmailChangeCard from '@/components/profile/EmailChangeCard';
+import EmailLinkCard from '@/components/profile/EmailLinkCard';
 import ProfilePictureUpdater from '@/components/profile/ProfilePictureUpdater';
+import UserEmailEdit from '@/components/profile/UserEmailEdit';
 import UserNameField from '@/components/profile/UserNameField';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React from 'react';
@@ -20,6 +24,8 @@ const Profile = () => {
 
             <ProfilePictureUpdater />
             <UserNameField />
+            <UserEmailEdit />
+            <AccountDelete />
           </YStack>
         </ScrollView>
       </KeyboardAvoidingView>
