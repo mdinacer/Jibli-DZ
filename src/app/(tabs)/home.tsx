@@ -6,10 +6,7 @@ import { YStack } from 'tamagui';
 const Index = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <YStack flex={1}>
-        <ItemsList />
-        {/* <ProductsGrid /> */}
-      </YStack>
+      <YStack flex={1}>{/* <ProductsGrid /> */}</YStack>
     </SafeAreaView>
   );
 };

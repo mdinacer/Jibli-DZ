@@ -61,6 +61,21 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
+        name="create"
+        options={{
+          title: 'Create',
+          headerShown: false,
+          tabBarIcon: ({ color, focused, size }) => (
+            <TabIcon
+              icon={Icons.AddCircleIcon}
+              color={color}
+              focused={focused}
+              name={'Create'}
+            />
+          )
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
