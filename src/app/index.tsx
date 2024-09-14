@@ -2,8 +2,8 @@ import useLoadProfile from '@/hooks/useLoadProfile';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Link, Redirect } from 'expo-router';
 import React from 'react';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, XStack, YStack } from 'tamagui';
 
 const Index = () => {
   const { user } = useAuthStore();
@@ -12,10 +12,10 @@ const Index = () => {
   if (status === 'pending') {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <YStack padding="$6">
+        <View>
           <Text>{status}</Text>
           <Text>Loading profile...</Text>
-        </YStack>
+        </View>
       </SafeAreaView>
     );
   }
@@ -30,17 +30,15 @@ const Index = () => {
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <YStack padding="$6">
-        <Text width={'100%'} color={'green'}>
-          {user ? `Signed in as ${user.email}` : 'Not signed in'}
-        </Text>
+      <View>
+        <Text>{user ? `Signed in as ${user.email}` : 'Not signed in'}</Text>
         <Text>Index</Text>
 
-        <XStack width={'100%'} justifyContent={'center'} gap={'$8'}>
+        <View>
           <Link href={'/sign-in'}>Sign-In</Link>
           <Link href={'/sign-up'}>Sign-Up</Link>
-        </XStack>
-      </YStack>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };

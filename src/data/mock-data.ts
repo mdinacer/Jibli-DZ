@@ -12,7 +12,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'apples.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Fruits',
     createdAt: Timestamp.now(),
@@ -26,7 +26,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'bananas.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Fruits',
     createdAt: Timestamp.now(),
@@ -40,7 +40,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'carrots.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Vegetables',
     createdAt: Timestamp.now(),
@@ -54,7 +54,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'potatoes.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Vegetables',
     createdAt: Timestamp.now(),
@@ -68,7 +68,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'tomatoes.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Vegetables',
     createdAt: Timestamp.now(),
@@ -82,7 +82,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'oranges.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Fruits',
     createdAt: Timestamp.now(),
@@ -96,7 +96,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.PIECE,
     image: {
       fileName: 'broccoli.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Vegetables',
     createdAt: Timestamp.now(),
@@ -110,7 +110,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.BOTTLE,
     image: {
       fileName: 'milk.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Dairy',
     createdAt: Timestamp.now(),
@@ -124,7 +124,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.PACK,
     image: {
       fileName: 'eggs.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Dairy',
     createdAt: Timestamp.now(),
@@ -138,7 +138,7 @@ export const mockProducts: Product[] = [
     unit: ProductUnit.KG,
     image: {
       fileName: 'cheese.jpg',
-      fileUrl: 'https://placehold.co/200x200/webp'
+      fileUrl: 'https://picsum.photos/200'
     },
     category: 'Dairy',
     createdAt: Timestamp.now(),

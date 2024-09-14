@@ -1,17 +1,15 @@
-import { useProfileStore } from '@/stores/useProfileStore';
-import { ImageMinus } from '@tamagui/lucide-icons';
-import React, { useCallback } from 'react';
-import { Button, Card, CardProps, H2, Stack, XStack } from 'tamagui';
-import ImageUpload from '../fileAsset/ImageUpload';
+import ImageUpload from '@/components/fileAsset/ImageUpload';
 import { Collections } from '@/config/collections';
+import { Icons } from '@/constants';
 import FileAssetService from '@/services/FileAssetService';
 import ProfileService from '@/services/ProfileService';
-import { useToastController } from '@tamagui/toast';
-import { Alert } from 'react-native';
+import { useProfileStore } from '@/stores/useProfileStore';
+import React, { useCallback } from 'react';
+import { Alert, Text, View } from 'react-native';
+import AppButton from '../AppButton';
 
-interface Props extends CardProps {}
+interface Props {}
 const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
-  const toast = useToastController();
   const { profile, updateProfile } = useProfileStore();
 
   const handleDeleteAsset = useCallback(async () => {
@@ -26,11 +24,9 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
         updateProfile({ picture: null });
       }
     } catch (error: any) {
-      toast.show('An error occurred while deleting the profile picture', {
-        message: error.message
-      });
+      console.error(error);
     }
-  }, [profile, toast, updateProfile]);
+  }, [profile, updateProfile]);
 
   const handlePictureDeletePrompt = () => {
     Alert.alert(
@@ -51,43 +47,34 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
   };
 
   return (
-    <Card
-      aspectRatio={1}
-      borderRadius={8}
-      overflow="hidden"
-      elevate
-      bordered
+    <View
       {...props}
+      className="relative aspect-square w-full overflow-hidden rounded-lg"
     >
-      <Card.Footer
-        padded
-        backgroundColor="rgba(0, 0, 0, 0.3)"
-        paddingVertical="$2"
-      >
-        <XStack flex={1}>
-          <H2 color={'white'}>{profile?.username}</H2>
-        </XStack>
-        {profile?.picture && (
-          <Button
-            aspectRatio={1}
-            scaleIcon={1.8}
-            backgroundColor="$red10Light"
-            color={'white'}
-            icon={ImageMinus}
-            borderRadius="$10"
-            onPress={handlePictureDeletePrompt}
-          />
-        )}
-      </Card.Footer>
-      <Card.Background>
-        <Stack width={'100%'}>
+      <View>
+        <View>
           <ImageUpload
             fileUri={profile?.picture?.fileUrl}
             onUploadComplete={(asset) => {}}
           />
-        </Stack>
-      </Card.Background>
-    </Card>
+        </View>
+      </View>
+      <View className="absolute inset-x-0 bottom-0 flex-row items-center justify-between bg-black/40 px-4 py-2">
+        <View>
+          <Text className="font-pbold text-2xl text-white">
+            {profile?.username}
+          </Text>
+        </View>
+        {profile?.picture && (
+          <AppButton
+            icon={Icons.ImageDeleteIcon}
+            iconStyles="h-6 w-6 text-white"
+            variant="destructive"
+            onPress={handlePictureDeletePrompt}
+          ></AppButton>
+        )}
+      </View>
+    </View>
   );
 };
 

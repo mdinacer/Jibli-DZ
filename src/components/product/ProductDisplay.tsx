@@ -1,7 +1,6 @@
 import { Product } from '@/models/Product';
-import { Button, Card, H2, Image, Paragraph, XStack } from 'tamagui';
 import React from 'react';
-import { Plus } from '@tamagui/lucide-icons';
+import { Image, Text, View } from 'react-native';
 
 interface Props {
   product: Product;
@@ -10,29 +9,21 @@ interface Props {
 
 const ProductDisplay: React.FC<Props> = ({ product, size }) => {
   return (
-    <Card elevate width={size} aspectRatio={1} bordered>
-      <Card.Header padded>
-        <Paragraph theme="alt2">{product.category}</Paragraph>
-        <H2>{product.name}</H2>
-      </Card.Header>
-      <Card.Footer padded>
-        <XStack flex={1} />
-        <Button borderRadius="$10">
-          <Plus />
-        </Button>
-      </Card.Footer>
-      <Card.Background>
-        <Image
-          objectFit="contain"
-          alignSelf="center"
-          source={{
-            width: size,
-            height: size,
-            uri: 'https://picsum.photos/200'
-          }}
-        />
-      </Card.Background>
-    </Card>
+    <View className="relative aspect-video">
+      <View>
+        {product.image && (
+          <Image
+            source={{ uri: product.image.fileUrl }}
+            style={{ width: size, height: '100%' }}
+          />
+        )}
+      </View>
+      <View className="absolute inset-x-0 bottom-0 bg-black/50 px-4 py-2">
+        <Text className="font-psemibold text-lg text-white">
+          {product.name}
+        </Text>
+      </View>
+    </View>
   );
 };
 

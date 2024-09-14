@@ -1,11 +1,11 @@
+import { CardTitle } from '@/components/Card';
 import AccountDelete from '@/components/profile/AccountDelete';
 import ProfilePictureUpdater from '@/components/profile/ProfilePictureUpdater';
 import UserEmailEdit from '@/components/profile/UserEmailEdit';
 import UserNameField from '@/components/profile/UserNameField';
 import React from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { H2, ScrollView, YStack } from 'tamagui';
 
 const Profile = () => {
   return (
@@ -14,14 +14,14 @@ const Profile = () => {
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <YStack flexGrow={1} padding="$6" gap="$4">
-            <H2 paddingBottom="$4">Account</H2>
+        <ScrollView className="p-6" contentContainerStyle={{ flexGrow: 1 }}>
+          <View className="relative" style={{ flex: 1, rowGap: 20 }}>
+            <CardTitle>Account</CardTitle>
             <ProfilePictureUpdater />
             <UserNameField />
             <UserEmailEdit />
             <AccountDelete />
-          </YStack>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

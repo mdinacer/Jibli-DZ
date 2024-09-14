@@ -1,13 +1,21 @@
+import InputField from '@/components/fields/InputField';
+import { List, ListCreateInput } from '@/models/List';
+import ListsService from '@/services/ListService';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Card, Form, H2, Paragraph, Spinner, XStack } from 'tamagui';
+import { Button, View } from 'react-native';
 import { z } from 'zod';
-import InputField from '@/components/fields/InputField';
-import { List, ListCreateInput } from '@/models/List';
-import listsService from '@/services/ListService';
-import ListsService from '@/services/ListService';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '../Card';
+import AppButton from '../AppButton';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Required')
@@ -57,40 +65,28 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
   );
 
   return (
-    <Card elevate bordered>
-      <Card.Header padded>
-        <H2>Create List</H2>
-        <Paragraph theme="alt2">Create your initial list</Paragraph>
-      </Card.Header>
-
-      <Form
-        alignItems="center"
-        justifyContent="center"
-        minWidth={300}
-        paddingHorizontal="$4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-      >
+    <Card className="my-auto">
+      <CardHeader>
+        <CardTitle>List creation</CardTitle>
+        <CardDescription>Create you initial list</CardDescription>
+      </CardHeader>
+      <CardContent>
         <InputField
           name="name"
           label="List name"
           control={control}
           placeholder="Enter list name"
         />
-
-        <Card.Footer padded>
-          <XStack flex={1} />
-          <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-            <Button
-              themeInverse
-              borderRadius="$10"
-              icon={isSubmitting ? () => <Spinner /> : undefined}
-              disabled={!isValid || isSubmitting}
-            >
-              Create
-            </Button>
-          </Form.Trigger>
-        </Card.Footer>
-      </Form>
+      </CardContent>
+      <CardFooter>
+        <AppButton
+          className="w-full"
+          onPress={handleSubmit(handleOnSubmit)}
+          disabled={!isValid || isSubmitting}
+        >
+          Create
+        </AppButton>
+      </CardFooter>
     </Card>
   );
 };

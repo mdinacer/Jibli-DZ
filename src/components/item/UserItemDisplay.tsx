@@ -1,13 +1,13 @@
+import ItemDisplay from '@/components/item/ItemDisplay';
+import { Icons } from '@/constants';
 import { ListItem } from '@/models/ListItem';
-import { Pencil, Trash } from '@tamagui/lucide-icons';
 import React, { useCallback } from 'react';
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
-import { Button, Square, View, XStack } from 'tamagui';
-import ItemDisplay from './ItemDisplay';
+import AppButton from '../AppButton';
 
 interface Props {
   item: ListItem;
@@ -23,36 +23,32 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
       swipeable: Swipeable
     ) => {
       return (
-        <XStack>
-          <Square height={'100%'} aspectRatio={1}>
-            <Button
-              unstyled
-              alignItems="center"
-              justifyContent="center"
-              flex={1}
+        <View className="flex-row space-x-2 overflow-hidden rounded-l p-1">
+          <View className="h-full">
+            <AppButton
+              variant="ghost"
+              className="h-full w-full"
+              icon={Icons.PencilEditIcon}
+              iconStyles="h-8 w-8 text-primary"
               onPress={() => {
                 swipeable.close();
                 onEdit();
               }}
-              icon={Pencil}
-              size={32}
-            />
-          </Square>
-          <Square height={'100%'} aspectRatio={1}>
-            <Button
-              unstyled
-              alignItems="center"
-              justifyContent="center"
-              flex={1}
+            ></AppButton>
+          </View>
+          <View className="h-full">
+            <AppButton
+              variant="ghost"
+              className="h-full w-full"
+              icon={Icons.TrashIcon}
+              iconStyles="h-8 w-8 text-destructive"
               onPress={() => {
                 swipeable.close();
                 onDelete();
               }}
-              icon={Trash}
-              size={32}
-            />
-          </Square>
-        </XStack>
+            ></AppButton>
+          </View>
+        </View>
       );
     },
     [onDelete, onEdit]
@@ -65,7 +61,7 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
         rightThreshold={60}
         renderRightActions={renderRightActions}
       >
-        <View padding="$1">
+        <View className="p-1">
           <ItemDisplay item={item} />
         </View>
       </Swipeable>

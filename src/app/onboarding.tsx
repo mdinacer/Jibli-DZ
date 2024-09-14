@@ -1,3 +1,5 @@
+import AppButton from '@/components/AppButton';
+import { CardContent, CardHeader, CardTitle } from '@/components/Card';
 import CheckBoxField from '@/components/fields/CheckboxField';
 import InputField from '@/components/fields/InputField';
 import ImageUpload from '@/components/fileAsset/ImageUpload';
@@ -12,27 +14,19 @@ import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useToastController } from '@tamagui/toast';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {
-  Button,
-  Form,
-  H2,
-  H4,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
-  Separator,
-  Spinner,
-  Stack,
-  useTheme
-} from 'tamagui';
+  Text,
+  View
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const InitialProfileScreen = () => {
-  const theme = useTheme();
-  const toast = useToastController();
   const { user } = useAuthStore();
   const { profile, setProfile } = useProfileStore();
   const form = useForm<OnboardingProfileData>({
@@ -68,10 +62,6 @@ const InitialProfileScreen = () => {
         const profile = await ProfileService.create(profileCreateInput);
 
         if (!profile) {
-          toast.show("Couldn't create profile", {
-            description: 'Please try again later.',
-            color: 'danger'
-          });
           return reset();
         }
         setProfile(profile);
@@ -82,43 +72,36 @@ const InitialProfileScreen = () => {
 
         router.push('/');
       } catch (error: any) {
-        toast.show("Couldn't create profile", {
-          description: error.message,
-          color: 'danger'
-        });
+        console.error(error);
       } finally {
         reset();
       }
     },
-    [reset, setProfile, toast, user]
+    [reset, setProfile, user]
   );
 
   const { createList } = watch();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background.val }}>
+    <SafeAreaView
+      className="flex-1 bg-background"
+      edges={['top', 'left', 'right']}
+    >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView>
-          <Form
-            flex={1}
-            justifyContent="center"
-            minWidth={300}
-            onSubmit={handleSubmit(handleOnSubmit)}
-            backgroundColor="$background"
-            paddingHorizontal="$8"
-            paddingVertical="$4"
-            rowGap="$8"
-          >
-            <H4 paddingBottom="$4">Create Your Profile</H4>
+        <ScrollView className="flex-1 px-4">
+          <View style={{ rowGap: 16 }}>
+            <CardHeader className="">
+              <CardTitle>Create Your Profile</CardTitle>
+            </CardHeader>
 
             <Controller<OnboardingProfileData>
               name={'picture'}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Stack width={'80%'} marginHorizontal="auto" aspectRatio={1}>
+                <View className="aspect-square w-full rounded-lg">
                   <ImageUpload
                     fileUri={
                       (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
@@ -127,24 +110,22 @@ const InitialProfileScreen = () => {
                       onChange(asset);
                     }}
                   />
-                </Stack>
+                </View>
               )}
             />
-
             <InputField
               control={control}
               name="username"
               label="Username"
               id="onBoardingUsername"
             />
-            <Separator marginVertical={15} />
-            <Stack>
-              <H4>Your List</H4>
+
+            {/* <View className="rounded-md border-y border-border py-4">
+              <Text>Your List</Text>
               <CheckBoxField
                 control={control}
                 name="createList"
                 label="Create List"
-                id={'onBoardingCreateList'}
               />
 
               <InputField
@@ -154,21 +135,25 @@ const InitialProfileScreen = () => {
                 label="List Name"
                 id="onBoardingListName"
               />
-              <Separator marginVertical={15} />
-            </Stack>
-            <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-              <Button
-                width={'100%'}
-                icon={isSubmitting ? () => <Spinner /> : undefined}
-              >
-                Create
-              </Button>
-            </Form.Trigger>
+            </View> */}
 
-            <Button width={'100%'} onPress={() => AuthService.signOut()}>
-              Sing Out
-            </Button>
-          </Form>
+            <View className="w-full gap-y-4 pt-10">
+              <AppButton
+                disabled={isSubmitting}
+                onPress={handleSubmit(handleOnSubmit)}
+              >
+                {isSubmitting ? 'Saving...' : 'Create'}
+              </AppButton>
+
+              <AppButton
+                disabled={isSubmitting}
+                variant="destructive"
+                onPress={() => AuthService.signOut()}
+              >
+                Sing Out
+              </AppButton>
+            </View>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

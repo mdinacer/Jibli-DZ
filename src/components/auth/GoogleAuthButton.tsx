@@ -4,11 +4,10 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
-import { Button, Circle, Text } from 'tamagui';
+import { TouchableOpacityProps } from 'react-native';
+import AppButton from '../AppButton';
 
-type ButtonProps = React.ComponentProps<typeof Button>;
-
-interface Props extends ButtonProps {
+interface Props extends TouchableOpacityProps {
   action: 'signUp' | 'signIn';
   onAuthenticated?: (user: FirebaseAuthTypes.User) => void;
 }
@@ -48,13 +47,15 @@ const GoogleAuthButton: React.FC<Props> = ({
   }, [onAuthenticated]);
 
   return (
-    <Button {...props} width={'100%'} onPress={handleGoogleAuthentication}>
-      <Circle size={32} backgroundColor="$red10Light">
-        <Icons.GoogleIcon color="white" />
-      </Circle>
-
-      <Text>{` ${action === 'signUp' ? 'Sign Up' : 'Sign In'} with Google`}</Text>
-    </Button>
+    <AppButton
+      icon={Icons.GoogleIcon}
+      className="flex-row items-center justify-center rounded-md bg-destructive px-4 py-2"
+      {...props}
+      iconStyles="text-white"
+      onPress={handleGoogleAuthentication}
+    >
+      {` ${action === 'signUp' ? 'Sign Up' : 'Sign In'} with Google`}
+    </AppButton>
   );
 };
 

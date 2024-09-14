@@ -1,11 +1,8 @@
-import { Check as CheckIcon } from '@tamagui/lucide-icons';
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { Checkbox, Label, XStack } from 'tamagui';
+import { View } from 'react-native';
 
-type InputProps = React.ComponentProps<typeof Checkbox>;
-
-interface Props<T extends FieldValues> extends InputProps {
+interface Props<T extends FieldValues> {
   control: Control<T>;
   name: Path<T>;
   label: string;
@@ -22,8 +19,8 @@ const CheckBoxField = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field: { onChange, value, disabled, ...field } }) => (
-        <XStack width={'100%'} alignItems="center" gap="$4">
-          <Checkbox
+        <View>
+          {/* <CheckBox
             {...props}
             disabled={disabled}
             checked={value}
@@ -32,9 +29,9 @@ const CheckBoxField = <T extends FieldValues>({
             <Checkbox.Indicator>
               <CheckIcon />
             </Checkbox.Indicator>
-          </Checkbox>
-          <Label htmlFor={props.id}>{label}</Label>
-        </XStack>
+          </CheckBox>
+          <Label htmlFor={props.id}>{label}</Label> */}
+        </View>
       )}
     />
   );

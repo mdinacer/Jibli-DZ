@@ -1,10 +1,10 @@
 import { mockListItems } from '@/data/mock-data';
+import { ListItem } from '@/models/ListItem';
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
+import CollaboratorItemDisplay from '@/components/item/CollaboratorItemDisplay';
+import ItemForm from '@/components/item/ItemForm';
 import UserItemDisplay from './UserItemDisplay';
-import { ListItem } from '@/models/ListItem';
-import ItemForm from './ItemForm';
-import CollaboratorItemDisplay from './CollaboratorItemDisplay';
 
 const ItemsList = () => {
   const [open, setOpen] = useState(false);
@@ -19,19 +19,20 @@ const ItemsList = () => {
         keyExtractor={(item) => item.id}
         data={mockListItems}
         renderItem={({ item }) => (
-          <CollaboratorItemDisplay
-            item={item}
-            onStatusChange={(status) => {}}
-          />
+          // <CollaboratorItemDisplay
+          //   item={item}
+          //   onStatusChange={(status) => {}}
+          // />
+          <UserItemDisplay item={item} onEdit={() => {}} onDelete={() => {}} />
         )}
       />
-      <ItemForm
+      {/* <ItemForm
         item={selectedItem}
         key={selectedItem?.id}
         open={open}
         setOpen={setOpen}
         onSubmit={(data) => {}}
-      />
+      /> */}
     </>
   );
 };

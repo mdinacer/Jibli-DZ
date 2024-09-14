@@ -1,3 +1,4 @@
+import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
 import InputField from '@/components/fields/InputField';
 import { SignInFormData, SignInFormSchema } from '@/schemas/SingInFormSchema';
@@ -6,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Form, H4, Spinner, Text, XStack, YStack } from 'tamagui';
 
 const SignIn = () => {
   const { signInWithEmailPassword, handleAuthErrors, setUser } = useAuthStore();
@@ -48,23 +49,13 @@ const SignIn = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Form
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        minWidth={300}
-        gap="$4"
-        onSubmit={handleSubmit(handleOnSubmit)}
-        borderWidth={1}
-        borderRadius="$4"
-        backgroundColor="$background"
-        borderColor="$borderColor"
-        padding="$8"
-      >
-        <H4>Login to JIBLI</H4>
+    <SafeAreaView className="flex-1 justify-center p-6">
+      <View style={{ rowGap: 32 }} className=" ">
+        <Text className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          Login to JIBLI
+        </Text>
 
-        <YStack width={'100%'} gap="$4">
+        <View style={{ rowGap: 16 }} className="">
           <InputField
             id={'signInEmail'}
             name="email"
@@ -80,26 +71,26 @@ const SignIn = () => {
             placeholder="Password"
             secureTextEntry
           />
-        </YStack>
+        </View>
 
-        <YStack width={'100%'} rowGap="$4">
-          <Form.Trigger asChild disabled={isLoading || isSubmitting}>
-            <Button
-              width={'100%'}
-              icon={isSubmitting ? () => <Spinner /> : undefined}
-            >
-              Sign In
-            </Button>
-          </Form.Trigger>
+        <View className="gap-y-2">
+          <AppButton onPress={handleSubmit(handleOnSubmit)}>Sign In</AppButton>
 
           <GoogleAuthButton action="signIn" />
-        </YStack>
+        </View>
 
-        <XStack marginTop="$8" columnGap="$2" alignItems="center">
-          <Text> Don&apos;t have account?</Text>
-          <Link href={'/sign-up'}>Sign Up!</Link>
-        </XStack>
-      </Form>
+        <View className="flex-row items-center justify-center space-x-2">
+          <Text className="font-pregular text-base">
+            Don&apos;t have account?
+          </Text>
+          <Link
+            className="font-pregular text-base underline underline-offset-2"
+            href={'/sign-up'}
+          >
+            Sign Up!
+          </Link>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
