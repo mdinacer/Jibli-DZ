@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Create = () => {
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={{ flex: 1 }}>
-      <View>
+      <View className="flex-1 p-6">
         <ListCreateField
           onComplete={(list) => {
             console.log(JSON.stringify(list, null, 2));

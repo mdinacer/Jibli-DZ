@@ -1,11 +1,13 @@
 import ItemDisplay from '@/components/item/ItemDisplay';
+import { Icons } from '@/constants';
 import { ListItem } from '@/models/ListItem';
 import React, { useCallback } from 'react';
-import { Animated, Button, View } from 'react-native';
+import { Animated, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
+import AppButton from '../AppButton';
 
 interface Props {
   item: ListItem;
@@ -21,24 +23,30 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
       swipeable: Swipeable
     ) => {
       return (
-        <View>
-          <View>
-            <Button
-              title="edit"
+        <View className="flex-row space-x-2 overflow-hidden rounded-l p-1">
+          <View className="h-full">
+            <AppButton
+              variant="ghost"
+              className="h-full w-full"
+              icon={Icons.PencilEditIcon}
+              iconStyles="h-8 w-8 text-primary"
               onPress={() => {
                 swipeable.close();
                 onEdit();
               }}
-            />
+            ></AppButton>
           </View>
-          <View>
-            <Button
-              title="delete"
+          <View className="h-full">
+            <AppButton
+              variant="ghost"
+              className="h-full w-full"
+              icon={Icons.TrashIcon}
+              iconStyles="h-8 w-8 text-destructive"
               onPress={() => {
                 swipeable.close();
                 onDelete();
               }}
-            />
+            ></AppButton>
           </View>
         </View>
       );
@@ -53,7 +61,7 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
         rightThreshold={60}
         renderRightActions={renderRightActions}
       >
-        <View>
+        <View className="p-1">
           <ItemDisplay item={item} />
         </View>
       </Swipeable>

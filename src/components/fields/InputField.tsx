@@ -1,13 +1,7 @@
-import { Icons } from '@/constants';
 import React, { useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import {
-  Text,
-  TextInput,
-  TextInputProps,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Text, TextInputProps, View } from 'react-native';
+import AppInput from '../AppInput';
 
 interface Props<T extends FieldValues> extends TextInputProps {
   control: Control<T>;
@@ -31,32 +25,17 @@ const InputField = <T extends FieldValues>({
         field: { onChange, value, ...field },
         fieldState: { error }
       }) => (
-        <View>
-          <Text>{label}</Text>
-          <View style={{ position: 'relative' }}>
-            <TextInput
-              {...props}
-              {...field}
-              value={value}
-              onChangeText={onChange}
-              secureTextEntry={secureTextEntry && !isVisible}
-            />
-            {secureTextEntry && (
-              <View>
-                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-                  {isVisible ? (
-                    <Icons.EyeClosedIcon
-                      color={'black'}
-                      width={20}
-                      height={20}
-                    />
-                  ) : (
-                    <Icons.EyeOpenIcon color={'black'} width={20} height={20} />
-                  )}
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
+        <View style={{ rowGap: 6 }} className="w-full max-w-sm">
+          <Text className="font-pregular text-base font-medium leading-none">
+            {label}
+          </Text>
+          <AppInput
+            {...props}
+            {...field}
+            value={value}
+            onChangeText={onChange}
+            secureTextEntry={secureTextEntry && !isVisible}
+          />
           {error?.message && <Text>{error.message}</Text>}
         </View>
       )}

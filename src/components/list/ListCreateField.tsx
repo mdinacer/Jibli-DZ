@@ -7,6 +7,15 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, View } from 'react-native';
 import { z } from 'zod';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '../Card';
+import AppButton from '../AppButton';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Required')
@@ -56,16 +65,29 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
   );
 
   return (
-    <View>
-      <InputField
-        name="name"
-        label="List name"
-        control={control}
-        placeholder="Enter list name"
-      />
-
-      <Button title="Create" disabled={!isValid || isSubmitting}></Button>
-    </View>
+    <Card className="my-auto">
+      <CardHeader>
+        <CardTitle>List creation</CardTitle>
+        <CardDescription>Create you initial list</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <InputField
+          name="name"
+          label="List name"
+          control={control}
+          placeholder="Enter list name"
+        />
+      </CardContent>
+      <CardFooter>
+        <AppButton
+          className="w-full"
+          onPress={handleSubmit(handleOnSubmit)}
+          disabled={!isValid || isSubmitting}
+        >
+          Create
+        </AppButton>
+      </CardFooter>
+    </Card>
   );
 };
 

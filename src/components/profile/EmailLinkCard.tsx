@@ -4,8 +4,15 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import AppButton from '../AppButton';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '../Card';
 import InputField from '../fields/InputField';
-import { Button, Text, View } from 'react-native';
 
 const schema = z.object({
   newEmail: z.string().email('{value} is not a valid email'),
@@ -78,13 +85,13 @@ const EmailLinkCard = () => {
   );
 
   return (
-    <View>
-      <View>
-        <Text>Email</Text>
-        <Text>Link a new email to your account</Text>
-      </View>
+    <Card>
+      <CardHeader>
+        <CardTitle>Email</CardTitle>
+        <CardDescription>Link a new email to your account</CardDescription>
+      </CardHeader>
 
-      <View>
+      <CardContent style={{ rowGap: 24 }}>
         <InputField
           id={'email-link-new-email'}
           name="newEmail"
@@ -101,9 +108,14 @@ const EmailLinkCard = () => {
           secureTextEntry
         />
 
-        <Button title="Link"></Button>
-      </View>
-    </View>
+        <AppButton
+          onPress={handleSubmit(handleOnSubmit)}
+          disabled={!isDirty || !isValid || isSubmitting}
+        >
+          Link
+        </AppButton>
+      </CardContent>
+    </Card>
   );
 };
 

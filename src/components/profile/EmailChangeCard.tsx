@@ -1,11 +1,18 @@
+import InputField from '@/components/fields/InputField';
 import firebaseServices from '@/config/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import InputField from '@/components/fields/InputField';
-import { Button, Text, View } from 'react-native';
+import AppButton from '../AppButton';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '../Card';
 
 const schema = z.object({
   currentPassword: z.string().min(6, '{value} must be at least 6 characters'),
@@ -24,7 +31,7 @@ const EmailChangeCard = () => {
 
   const {
     control,
-    formState: { isSubmitting, isDirty, isValid, isLoading },
+    formState: { isSubmitting, isDirty, isValid },
     handleSubmit,
     reset
   } = form;
@@ -55,13 +62,13 @@ const EmailChangeCard = () => {
   );
 
   return (
-    <View>
-      <View>
-        <Text>Email</Text>
-        <Text>Update your email</Text>
-      </View>
+    <Card>
+      <CardHeader>
+        <CardTitle>Email</CardTitle>
+        <CardDescription>Update your email</CardDescription>
+      </CardHeader>
 
-      <View>
+      <CardContent style={{ rowGap: 24 }}>
         <InputField
           id={'email-change-current-password'}
           name="currentPassword"
@@ -78,12 +85,14 @@ const EmailChangeCard = () => {
           placeholder="Type your new email"
         />
 
-        <Button
-          title="update"
+        <AppButton
+          onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
-        ></Button>
-      </View>
-    </View>
+        >
+          update
+        </AppButton>
+      </CardContent>
+    </Card>
   );
 };
 

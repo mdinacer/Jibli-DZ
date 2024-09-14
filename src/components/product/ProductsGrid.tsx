@@ -4,7 +4,7 @@ import { Dimensions, FlatList } from 'react-native';
 import ProductDisplay from '@/components/product/ProductDisplay';
 
 const COLS_COUNT = 2;
-const ITEMS_SPACING = 0;
+const ITEMS_SPACING = 4;
 const ITEM_PADDING = 16;
 const ProductsGrid = () => {
   const products = mockProducts;

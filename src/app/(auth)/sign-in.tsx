@@ -1,3 +1,4 @@
+import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
 import InputField from '@/components/fields/InputField';
 import { SignInFormData, SignInFormSchema } from '@/schemas/SingInFormSchema';
@@ -48,11 +49,13 @@ const SignIn = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text>Login to JIBLI</Text>
+    <SafeAreaView className="flex-1 justify-center p-6">
+      <View style={{ rowGap: 32 }} className=" ">
+        <Text className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          Login to JIBLI
+        </Text>
 
-        <View>
+        <View style={{ rowGap: 16 }} className="">
           <InputField
             id={'signInEmail'}
             name="email"
@@ -70,15 +73,22 @@ const SignIn = () => {
           />
         </View>
 
-        <View>
-          <TouchableOpacity>Sign In</TouchableOpacity>
+        <View className="gap-y-2">
+          <AppButton onPress={handleSubmit(handleOnSubmit)}>Sign In</AppButton>
 
           <GoogleAuthButton action="signIn" />
         </View>
 
-        <View>
-          <Text> Don&apos;t have account?</Text>
-          <Link href={'/sign-up'}>Sign Up!</Link>
+        <View className="flex-row items-center justify-center space-x-2">
+          <Text className="font-pregular text-base">
+            Don&apos;t have account?
+          </Text>
+          <Link
+            className="font-pregular text-base underline underline-offset-2"
+            href={'/sign-up'}
+          >
+            Sign Up!
+          </Link>
         </View>
       </View>
     </SafeAreaView>

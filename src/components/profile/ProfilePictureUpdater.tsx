@@ -1,10 +1,12 @@
+import ImageUpload from '@/components/fileAsset/ImageUpload';
 import { Collections } from '@/config/collections';
+import { Icons } from '@/constants';
 import FileAssetService from '@/services/FileAssetService';
 import ProfileService from '@/services/ProfileService';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback } from 'react';
-import { Alert, Button, Text, View } from 'react-native';
-import ImageUpload from '@/components/fileAsset/ImageUpload';
+import { Alert, Text, View } from 'react-native';
+import AppButton from '../AppButton';
 
 interface Props {}
 const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
@@ -45,15 +47,10 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
   };
 
   return (
-    <View {...props}>
-      <View>
-        <View>
-          <Text>{profile?.username}</Text>
-        </View>
-        {profile?.picture && (
-          <Button title="remove image" onPress={handlePictureDeletePrompt} />
-        )}
-      </View>
+    <View
+      {...props}
+      className="relative aspect-square w-full overflow-hidden rounded-lg"
+    >
       <View>
         <View>
           <ImageUpload
@@ -61,6 +58,21 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
             onUploadComplete={(asset) => {}}
           />
         </View>
+      </View>
+      <View className="absolute inset-x-0 bottom-0 flex-row items-center justify-between bg-black/40 px-4 py-2">
+        <View>
+          <Text className="font-pbold text-2xl text-white">
+            {profile?.username}
+          </Text>
+        </View>
+        {profile?.picture && (
+          <AppButton
+            icon={Icons.ImageDeleteIcon}
+            iconStyles="h-6 w-6 text-white"
+            variant="destructive"
+            onPress={handlePictureDeletePrompt}
+          ></AppButton>
+        )}
       </View>
     </View>
   );

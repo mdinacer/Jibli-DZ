@@ -1,3 +1,5 @@
+import AppButton from '@/components/AppButton';
+import { CardContent, CardHeader, CardTitle } from '@/components/Card';
 import CheckBoxField from '@/components/fields/CheckboxField';
 import InputField from '@/components/fields/InputField';
 import ImageUpload from '@/components/fileAsset/ImageUpload';
@@ -16,7 +18,6 @@ import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
-  Button,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -82,20 +83,25 @@ const InitialProfileScreen = () => {
   const { createList } = watch();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      className="flex-1 bg-background"
+      edges={['top', 'left', 'right']}
+    >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView>
-          <View>
-            <Text>Create Your Profile</Text>
+        <ScrollView className="flex-1 px-4">
+          <View style={{ rowGap: 16 }}>
+            <CardHeader className="">
+              <CardTitle>Create Your Profile</CardTitle>
+            </CardHeader>
 
             <Controller<OnboardingProfileData>
               name={'picture'}
               control={control}
               render={({ field: { onChange, value } }) => (
-                <View>
+                <View className="aspect-square w-full rounded-lg">
                   <ImageUpload
                     fileUri={
                       (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
@@ -107,7 +113,6 @@ const InitialProfileScreen = () => {
                 </View>
               )}
             />
-
             <InputField
               control={control}
               name="username"
@@ -115,7 +120,7 @@ const InitialProfileScreen = () => {
               id="onBoardingUsername"
             />
 
-            <View>
+            {/* <View className="rounded-md border-y border-border py-4">
               <Text>Your List</Text>
               <CheckBoxField
                 control={control}
@@ -130,13 +135,24 @@ const InitialProfileScreen = () => {
                 label="List Name"
                 id="onBoardingListName"
               />
-            </View>
-            <Button title="Create" />
+            </View> */}
 
-            <Button
-              title="Sing Out"
-              onPress={() => AuthService.signOut()}
-            ></Button>
+            <View className="w-full gap-y-4 pt-10">
+              <AppButton
+                disabled={isSubmitting}
+                onPress={handleSubmit(handleOnSubmit)}
+              >
+                {isSubmitting ? 'Saving...' : 'Create'}
+              </AppButton>
+
+              <AppButton
+                disabled={isSubmitting}
+                variant="destructive"
+                onPress={() => AuthService.signOut()}
+              >
+                Sing Out
+              </AppButton>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

@@ -1,3 +1,4 @@
+import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
 import InputField from '@/components/fields/InputField';
 import { SignUpFormData, SignUpFormSchema } from '@/schemas/SingUpFormSchema';
@@ -49,11 +50,13 @@ const SignUp = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text>Sign Up to JIBLI</Text>
+    <SafeAreaView className="flex-1 justify-center p-6">
+      <View style={{ rowGap: 32 }} className=" ">
+        <Text className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          Sign Up to JIBLI
+        </Text>
 
-        <View>
+        <View style={{ rowGap: 16 }} className="">
           <InputField
             id={'signUpEmail'}
             name="email"
@@ -80,14 +83,21 @@ const SignUp = () => {
           />
         </View>
 
-        <View>
-          <Button title="Sign Up"></Button>
+        <View className="gap-y-2">
+          <AppButton onPress={handleSubmit(handleOnSubmit)}>Sign Up</AppButton>
           <GoogleAuthButton action="signUp" />
         </View>
 
-        <View>
-          <Text>Already have an account?</Text>
-          <Link href={'/sign-in'}>Sign In</Link>
+        <View className="flex-row items-center justify-center space-x-2">
+          <Text className="font-pregular text-base">
+            Already have an account?
+          </Text>
+          <Link
+            className="font-pregular text-base underline underline-offset-2"
+            href={'/sign-in'}
+          >
+            Sign In
+          </Link>
         </View>
       </View>
     </SafeAreaView>

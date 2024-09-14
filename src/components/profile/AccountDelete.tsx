@@ -5,6 +5,15 @@ import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, Button, Text, View } from 'react-native';
 import { z } from 'zod';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '../Card';
+import AppButton from '../AppButton';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -69,13 +78,15 @@ const AccountDelete = () => {
   );
 
   return (
-    <View>
-      <View>
-        <Text>Delete Account</Text>
-        <Text>Enter your password to confirm account deletion.</Text>
-      </View>
+    <Card>
+      <CardHeader>
+        <CardTitle>Delete Account</CardTitle>
+        <CardDescription>
+          Enter your password to confirm account deletion.
+        </CardDescription>
+      </CardHeader>
 
-      <View>
+      <CardContent>
         <InputField
           id={'account-delete-current-password'}
           name="currentPassword"
@@ -84,10 +95,17 @@ const AccountDelete = () => {
           placeholder="Type your current password"
           secureTextEntry
         />
-
-        <Button title="Delete"></Button>
-      </View>
-    </View>
+      </CardContent>
+      <CardFooter>
+        <AppButton
+          className="w-full"
+          onPress={handleSubmit(handleOnSubmit)}
+          disabled={!isDirty || !isValid || isSubmitting}
+        >
+          Delete
+        </AppButton>
+      </CardFooter>
+    </Card>
   );
 };
 

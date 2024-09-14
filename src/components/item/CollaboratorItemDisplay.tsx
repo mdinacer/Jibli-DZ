@@ -1,13 +1,13 @@
+import ItemDisplay from '@/components/item/ItemDisplay';
 import { Icons } from '@/constants';
 import { ListItem, ListItemStatus } from '@/models/ListItem';
 import React, { useCallback } from 'react';
-import { Animated, FlexAlignType, View } from 'react-native';
+import { Animated, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
 import { SvgProps } from 'react-native-svg';
-import ItemDisplay from '@/components/item/ItemDisplay';
 
 interface Props {
   item: ListItem;
@@ -15,9 +15,9 @@ interface Props {
 }
 
 const colorByStatus = {
-  [ListItemStatus.PENDING]: '#FF885B',
-  [ListItemStatus.BOUGHT]: '#8FD14F',
-  [ListItemStatus.UNAVAILABLE]: '#C7253E'
+  [ListItemStatus.PENDING]: 'bg-[#FF885B]',
+  [ListItemStatus.BOUGHT]: 'bg-[#8FD14F]',
+  [ListItemStatus.UNAVAILABLE]: 'bg-[#C7253E]'
 };
 
 const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
@@ -27,16 +27,10 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
       dragX: Animated.AnimatedInterpolation<string | number>,
       swipeable: Swipeable
     ) => {
-      const trans = dragX.interpolate({
-        inputRange: [-101, -100, -50, 0],
-        outputRange: [-20, 0, 0, 1], // reversed for left swipe
-        extrapolate: 'clamp'
-      });
-
       return (
         <SwipeAction
-          alignItems="flex-end"
           backgroundColor={colorByStatus[ListItemStatus.UNAVAILABLE]}
+          containerStyle={` justify-end`}
           itemStatus={item.status}
           icon={Icons.UnavailableIcon}
         />
@@ -53,6 +47,7 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
       return (
         <SwipeAction
           backgroundColor={colorByStatus[ListItemStatus.BOUGHT]}
+          containerStyle={` `}
           itemStatus={item.status}
           icon={Icons.ShoppingBasketIcon}
         />
@@ -75,7 +70,7 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
           swipeable.close();
         }}
       >
-        <View>
+        <View className="w-full items-center p-2">
           <ItemDisplay item={item} />
         </View>
       </Swipeable>
@@ -86,28 +81,32 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
 export default CollaboratorItemDisplay;
 
 interface SwipeActionProps {
-  backgroundColor: string;
+  containerStyle?: string;
+  backgroundColor?: string;
+  iconStyle?: string;
   itemStatus: ListItemStatus;
   icon: (props: SvgProps) => JSX.Element;
-  alignItems?: FlexAlignType | 'unset' | undefined;
 }
 const SwipeAction: React.FC<SwipeActionProps> = ({
-  backgroundColor,
+  containerStyle,
+  iconStyle,
   itemStatus,
-  icon: Icon,
-  alignItems = 'unset'
+  backgroundColor,
+  icon: Icon
 }) => {
   return (
-    <View>
-      {itemStatus === ListItemStatus.PENDING ? (
-        <Icons.ArrowReloadHorizontalIcon
-          width={32}
-          height={32}
-          color={'white'}
-        />
-      ) : (
-        <Icon width={32} height={32} color={'white'} />
-      )}
+    <View
+      className={`h-full flex-1 flex-row items-center rounded-lg p-4 transition-colors ${itemStatus !== ListItemStatus.PENDING ? colorByStatus[ListItemStatus.PENDING] : backgroundColor} ${containerStyle}`}
+    >
+      <View className="h-full items-center justify-center">
+        {itemStatus !== ListItemStatus.PENDING ? (
+          <Icons.ArrowReloadHorizontalIcon
+            className={`h-8 w-8 text-white ${iconStyle}`}
+          />
+        ) : (
+          <Icon className={`h-8 w-8 text-white ${iconStyle}`} />
+        )}
+      </View>
     </View>
   );
 };

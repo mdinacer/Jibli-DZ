@@ -66,18 +66,14 @@ const ImageUpload: React.FC<Props> = ({
 
   return (
     <TouchableOpacity
+      className="mx-auto h-full w-full"
       onPress={() => openFilePicker()}
-      style={{
-        width: '100%',
-        height: '100%',
-        marginHorizontal: 'auto'
-      }}
     >
       {fileUri ? (
-        <View>
+        <View className="aspect-square overflow-hidden rounded-lg">
           <Image
             source={{ uri: fileUri }}
-            style={{ height: '100%', width: '100%' }}
+            className="h-full w-full"
             resizeMode="cover"
           />
           {onDelete && <Button title="delete"></Button>}
@@ -85,7 +81,7 @@ const ImageUpload: React.FC<Props> = ({
       ) : (
         <View>
           <View>
-            <Icons.ImageUploadIcon />
+            <Icons.ImageUploadIcon className="text-muted" />
           </View>
         </View>
       )}

@@ -8,7 +8,7 @@ interface Props {
 
 const ItemDisplay: React.FC<Props> = ({ item }) => {
   return (
-    <View>
+    <View className="min-h-[60px] w-full rounded-lg bg-background p-4 shadow-sm">
       {/* <Square size={60} backgroundColor="$gray10Light">
         <Image
           objectFit="contain"
@@ -22,14 +22,17 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
         />
       </Square> */}
 
-      <View>
-        <View>
-          <Text>{item.name}</Text>
-          <Text>
-            {item.quantity} {item.unit}
-          </Text>
+      <View className="" style={{ flex: 1, rowGap: 2 }}>
+        <View className="flex-row items-center">
+          <Text className="flex-1 font-psemibold text-lg">{item.name}</Text>
+          <View className="flex-row items-center space-x-2">
+            <Text className="font-pbold text-lg">{item.quantity}</Text>
+            <Text className="font-pregular text-base">{item.unit}</Text>
+          </View>
         </View>
-        <Text>{item.note}</Text>
+        <Text className="font-pregular text-base text-muted-foreground">
+          {item.note}
+        </Text>
       </View>
     </View>
   );

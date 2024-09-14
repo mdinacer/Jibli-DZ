@@ -1,7 +1,17 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { useProfileStore } from '@/stores/useProfileStore';
+import AppButton from '@/components/AppButton';
+import AppInput from '@/components/AppInput';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/Card';
 import ProfileService from '@/services/ProfileService';
-import { Button, Text, TextInput, View } from 'react-native';
+import { useProfileStore } from '@/stores/useProfileStore';
+import React, { useCallback, useMemo, useState } from 'react';
+import { View } from 'react-native';
 
 const UserNameField = () => {
   const [isSaving, setIsSaving] = useState(false);
@@ -41,32 +51,35 @@ const UserNameField = () => {
   }, [profile, updateProfile, username]);
 
   return (
-    <View>
-      <View>
-        <Text>Username</Text>
-        <Text>Edit your username</Text>
-      </View>
-      <View>
-        <TextInput
+    <Card>
+      <CardHeader>
+        <CardTitle>Username</CardTitle>
+        <CardDescription>Edit your username</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <AppInput
           value={username}
           onChangeText={setUsername}
           placeholder="Enter your username"
         />
-      </View>
-      <View>
-        <Button
+      </CardContent>
+      <CardFooter className="justify-between">
+        <AppButton
+          variant="secondary"
           onPress={handleReset}
           disabled={!isModified || isSaving}
-          title="Reset"
-        ></Button>
+        >
+          Reset
+        </AppButton>
         <View />
-        <Button
+        <AppButton
           onPress={handleUpdateUserName}
           disabled={!isModified || isSaving}
-          title="Save"
-        ></Button>
-      </View>
-    </View>
+        >
+          Save
+        </AppButton>
+      </CardFooter>
+    </Card>
   );
 };
 
