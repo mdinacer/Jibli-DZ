@@ -1,11 +1,12 @@
+import AppButton from '@/components/AppButton';
 import InputField from '@/components/fields/InputField';
 import { List, ListCreateInput } from '@/models/List';
 import ListsService from '@/services/ListService';
 import { useProfileStore } from '@/stores/useProfileStore';
+import { useUserListStore } from '@/stores/useUserListStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, View } from 'react-native';
 import { z } from 'zod';
 import {
   Card,
@@ -15,7 +16,6 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
-import AppButton from '../AppButton';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Required')
@@ -29,6 +29,7 @@ interface Props {
 
 const ListCreateField: React.FC<Props> = ({ onComplete }) => {
   const { profile } = useProfileStore();
+  const { setList } = useUserListStore();
   const form = useForm<FormDataType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,13 +56,14 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
 
         if (createdList) {
           onComplete(createdList);
+          setList(createdList);
         }
         console.log(data);
       } catch (error: any) {
         console.error(error);
       }
     },
-    [onComplete]
+    [onComplete, setList]
   );
 
   return (

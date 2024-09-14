@@ -10,7 +10,7 @@ export enum ListItemStatus {
 
 export const ListItemInputSchema = z.object({
   name: z.string(),
-  quantity: z.number(),
+  quantity: z.coerce.number(),
   unit: z.nativeEnum(ProductUnit),
   note: z.string().nullable()
 });

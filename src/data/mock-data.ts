@@ -1,3 +1,4 @@
+import { Collaborator } from '@/models/Collaborator';
 import { ListItem, ListItemStatus } from '@/models/ListItem';
 import { Product } from '@/models/Product';
 import { ProductUnit } from '@/models/ProductUnit';
@@ -246,5 +247,38 @@ export const mockListItems: ListItem[] = [
     note: 'For sandwiches.',
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now()
+  }
+];
+
+export const MockCollaborators: Collaborator[] = [
+  {
+    userId: 'user_1',
+    username: 'John Doe',
+    picture: 'https://randomuser.me/api/portraits/men/5.jpg',
+    email: 'john.doe@example.com'
+  },
+  {
+    userId: 'user_2',
+    username: 'Jane Smith',
+    picture: 'https://randomuser.me/api/portraits/women/2.jpg',
+    email: 'jane.smith@example.com'
+  },
+  {
+    userId: 'user_3',
+    username: 'Sam Wilson',
+    picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    email: 'sam.wilson@example.com'
+  },
+  {
+    userId: 'user_4',
+    username: 'Emily Jones',
+    email: 'emily.jones@example.com',
+    picture: 'https://randomuser.me/api/portraits/women/3.jpg'
+  },
+  {
+    userId: 'user_5',
+    username: 'Michael Brown',
+    picture: 'https://randomuser.me/api/portraits/men/4.jpg',
+    email: 'michael.brown@example.com'
   }
 ];

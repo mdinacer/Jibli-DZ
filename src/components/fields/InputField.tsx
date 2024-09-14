@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Text, TextInputProps, View } from 'react-native';
 import AppInput from '../AppInput';
@@ -13,10 +13,8 @@ const InputField = <T extends FieldValues>({
   label,
   control,
   name,
-  secureTextEntry,
   ...props
 }: Props<T>) => {
-  const [isVisible, setIsVisible] = useState(false);
   return (
     <Controller
       control={control}
@@ -34,7 +32,6 @@ const InputField = <T extends FieldValues>({
             {...field}
             value={value}
             onChangeText={onChange}
-            secureTextEntry={secureTextEntry && !isVisible}
           />
           {error?.message && <Text>{error.message}</Text>}
         </View>

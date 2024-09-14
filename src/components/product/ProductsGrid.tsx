@@ -2,6 +2,7 @@ import { mockProducts } from '@/data/mock-data';
 import React, { useMemo } from 'react';
 import { Dimensions, FlatList } from 'react-native';
 import ProductDisplay from '@/components/product/ProductDisplay';
+import { useColumnWidth } from '@/hooks/useColumnWidth';
 
 const COLS_COUNT = 2;
 const ITEMS_SPACING = 4;
@@ -9,13 +10,12 @@ const ITEM_PADDING = 16;
 const ProductsGrid = () => {
   const products = mockProducts;
 
-  const itemSize = useMemo(() => {
-    const { width } = Dimensions.get('window');
-    const itemSize =
-      (width - ITEM_PADDING * 2 - (COLS_COUNT - 1) * ITEMS_SPACING) /
-      COLS_COUNT;
-    return itemSize;
-  }, []);
+  const { size: itemSize } = useColumnWidth({
+    colsCount: COLS_COUNT,
+    itemsSpacing: ITEMS_SPACING,
+    itemPadding: ITEM_PADDING
+  });
+
   return (
     <FlatList
       style={{ flex: 1 }}

@@ -1,12 +1,14 @@
+import AppLink from '@/components/AppLink';
 import useLoadProfile from '@/hooks/useLoadProfile';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { Link, Redirect } from 'expo-router';
+import { Redirect } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   const { user } = useAuthStore();
+
   const { profile, status } = useLoadProfile();
 
   if (status === 'pending') {
@@ -34,9 +36,9 @@ const Index = () => {
         <Text>{user ? `Signed in as ${user.email}` : 'Not signed in'}</Text>
         <Text>Index</Text>
 
-        <View>
-          <Link href={'/sign-in'}>Sign-In</Link>
-          <Link href={'/sign-up'}>Sign-Up</Link>
+        <View className="w-full flex-row justify-evenly">
+          <AppLink href={'/sign-in'}>Sign-In</AppLink>
+          <AppLink href={'/sign-up'}>Sign-Up</AppLink>
         </View>
       </View>
     </SafeAreaView>

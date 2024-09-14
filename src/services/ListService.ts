@@ -69,6 +69,41 @@ const getLists = async (): Promise<List[]> => {
   }
 };
 
+// Get user own lists
+const getUserLists = async (): Promise<List[]> => {
+  try {
+    const user = getCurrentUser();
+
+    const listsRef = firebaseServices.firestore.collection(Collections.LISTS);
+
+    // Query for lists where the user is the owner
+    const ownerQuery = listsRef.where('ownerId', '==', user.uid);
+    const ownerQuerySnapshot = await ownerQuery.get();
+
+    if (ownerQuerySnapshot.empty) {
+      return [];
+    }
+
+    const userLists = ownerQuerySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+        isOwner: true
+      } as List;
+    });
+
+    // Convert the combined results to an array
+    return userLists;
+  } catch (error: any) {
+    if (error instanceof CustomError) {
+      error.logToCrashlytics();
+    } else {
+      firebaseServices.crashlytics.recordError(error);
+    }
+    throw new CustomError('Failed to fetch lists', 'FETCH_LISTS_FAILED');
+  }
+};
+
 // Get a specific list by its ID
 const getListById = async (listId: string): Promise<List | undefined> => {
   try {
@@ -233,7 +268,8 @@ const ListsService = {
   get: getListById,
   update: updateList,
   updateCollaborators: updateListCollaborators,
-  delete: deleteList
+  delete: deleteList,
+  getUserLists
 };
 
 export default ListsService;

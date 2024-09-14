@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import React, { forwardRef } from 'react';
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { styled } from 'nativewind';
 import { SvgProps } from 'react-native-svg';
 
@@ -31,7 +31,7 @@ const buttonStyles = {
 
 const StyledButton = styled(TouchableOpacity);
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   className?: string;
   variant?: keyof typeof buttonStyles.variants;
   size?: keyof typeof buttonStyles.sizes;
@@ -42,36 +42,44 @@ interface ButtonProps {
   onPress?: () => void;
 }
 
-const AppButton: React.FC<ButtonProps> = ({
-  variant = 'default',
-  size = 'default',
-  disabled,
-  children,
-  onPress,
-  icon: Icon,
-  iconStyles,
-  className,
-  ...props
-}) => {
-  const variantStyle = buttonStyles.variants[variant];
-  const sizeStyle = buttonStyles.sizes[size];
-  const textStyle = buttonStyles.textStyles[variant];
+const AppButton = forwardRef<TouchableOpacity, ButtonProps>(
+  (
+    {
+      variant = 'default',
+      size = 'default',
+      disabled,
+      children,
+      onPress,
+      icon: Icon,
+      iconStyles,
+      className,
+      ...props
+    },
+    ref
+  ) => {
+    const variantStyle = buttonStyles.variants[variant];
+    const sizeStyle = buttonStyles.sizes[size];
+    const textStyle = buttonStyles.textStyles[variant];
 
-  return (
-    <StyledButton
-      className={`${buttonStyles.base} ${variantStyle} ${sizeStyle} ${className} ${disabled ? 'opacity-50' : 'opacity-100'}`}
-      disabled={disabled}
-      onPress={onPress}
-      {...props}
-    >
-      {Icon && <Icon className={`h-5 w-5 ${iconStyles}`} />}
-      {children && (
-        <Text className={`${textStyle} font-pmedium text-base capitalize`}>
-          {children}
-        </Text>
-      )}
-    </StyledButton>
-  );
-};
+    return (
+      <StyledButton
+        ref={ref}
+        className={`${buttonStyles.base} ${variantStyle} ${sizeStyle} ${className} ${disabled ? 'opacity-50' : 'opacity-100'}`}
+        disabled={disabled}
+        onPress={onPress}
+        {...props}
+      >
+        {Icon && <Icon className={`h-5 w-5 ${iconStyles}`} />}
+        {children && (
+          <Text className={`${textStyle} font-pmedium text-base capitalize`}>
+            {children}
+          </Text>
+        )}
+      </StyledButton>
+    );
+  }
+);
+
+AppButton.displayName = 'AppButton';
 
 export default AppButton;
