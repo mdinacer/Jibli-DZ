@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   const { list, state } = useLoadUserList();
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
       <View className="flex-1 px-4" style={{ gap: 16 }}>

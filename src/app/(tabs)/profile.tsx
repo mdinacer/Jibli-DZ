@@ -14,7 +14,10 @@ const Profile = () => {
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <ScrollView className="p-6" contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView
+          className="p-6"
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
+        >
           <View className="relative" style={{ flex: 1, rowGap: 20 }}>
             <CardTitle>Account</CardTitle>
             <ProfilePictureUpdater />

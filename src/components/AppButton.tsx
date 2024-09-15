@@ -4,7 +4,7 @@ import { styled } from 'nativewind';
 import { SvgProps } from 'react-native-svg';
 
 const buttonStyles = {
-  base: 'inline-flex items-center space-x-2 justify-center rounded-md disabled:opacity-50',
+  base: 'inline-flex items-center space-x-2 justify-center rounded-full disabled:opacity-50',
   variants: {
     default: 'bg-primary hover:bg-primary/90',
     destructive: 'bg-destructive hover:bg-destructive/90',

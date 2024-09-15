@@ -7,6 +7,7 @@ import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback } from 'react';
 import { Alert, Text, View } from 'react-native';
 import AppButton from '../AppButton';
+import { FileAsset } from '@/models/FileAsset';
 
 interface Props {}
 const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
@@ -46,6 +47,29 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
     );
   };
 
+  const handleUpdatePicture = useCallback(
+    async (asset: FileAsset) => {
+      if (!profile) return;
+
+      try {
+        if (profile.picture) {
+          const { fileName } = profile.picture;
+          await FileAssetService.deleteFile(Collections.PICTURES, fileName);
+        }
+        const updatedProfile = await ProfileService.update(profile.id, {
+          picture: asset
+        });
+
+        if (updatedProfile) {
+          updateProfile({ picture: null });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [profile, updateProfile]
+  );
+
   return (
     <View
       {...props}
@@ -55,7 +79,7 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
         <View>
           <ImageUpload
             fileUri={profile?.picture?.fileUrl}
-            onUploadComplete={(asset) => {}}
+            onUploadComplete={handleUpdatePicture}
           />
         </View>
       </View>
@@ -71,7 +95,7 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
             iconStyles="h-6 w-6 text-white"
             variant="destructive"
             onPress={handlePictureDeletePrompt}
-          ></AppButton>
+          />
         )}
       </View>
     </View>

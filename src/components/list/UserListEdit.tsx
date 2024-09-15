@@ -98,8 +98,8 @@ const UserListEdit = () => {
 
       <View className="absolute inset-x-0 bottom-0 items-center justify-center px-8">
         <View
-          style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
-          className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border px-4 py-2 backdrop-blur-md"
+          //style={{ backgroundColor: 'rgba(107,114,128,0.3)' }}
+          className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border bg-gray-400/20 px-4 py-2"
         >
           <IconButton
             disabled={!modified || state.saving}
