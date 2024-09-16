@@ -29,6 +29,10 @@ async function create(input: ProfileCreateInput): Promise<Profile | undefined> {
 
     const { username, email, picture } = input;
 
+    const profileRef = firebaseServices.firestore
+      .collection(Collections.PROFILES)
+      .doc(user.uid);
+
     const profileData: Omit<Profile, 'id'> = {
       uid,
       username,
@@ -40,11 +44,12 @@ async function create(input: ProfileCreateInput): Promise<Profile | undefined> {
       picture: picture || null
     };
 
-    // Add the new user profile and get the document reference
-    const userDoc = await profilesCollection.add(profileData as Profile);
+    await profileRef.set(profileData);
 
     // Fetch the newly created document snapshot
-    const createdUserSnapshot = await userDoc.get();
+    const createdUserSnapshot = await profileRef.get();
+
+    console.log(createdUserSnapshot.data());
 
     return createdUserSnapshot.exists
       ? ({
@@ -108,17 +113,20 @@ async function updateCurrent(updates: Partial<Profile>) {
 // Get a profile by user ID
 async function getByUserId(userId: string): Promise<Profile | undefined> {
   try {
-    const profileQuery = profilesCollection.where('uid', '==', userId);
-    const profileQuerySnapshot = await profileQuery.get({ source: 'server' });
+    // Directly reference the document by userId
+    const profileDoc = await profilesCollection.doc(userId).get();
 
-    if (profileQuerySnapshot.empty) {
-      return undefined;
+    if (!profileDoc.exists) {
+      return undefined; // No profile found for the given userId
     }
-
-    const profileDoc = profileQuerySnapshot.docs[0];
 
     const profileData = profileDoc.data();
 
+    if (!profileData) {
+      return undefined;
+    }
+
+    // Return the profile data, including the document ID
     return { ...profileData, id: profileDoc.id } as Profile;
   } catch (error: any) {
     if (error instanceof CustomError) {

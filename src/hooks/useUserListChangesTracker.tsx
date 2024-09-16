@@ -5,7 +5,7 @@ import { useEffect, useMemo } from 'react';
 export default function useUserListChangesTracker() {
   const { lists } = useListStore();
   const originalList = useMemo(() => lists.find((l) => l.isOwner), [lists]);
-  const { list, setModified } = useUserListStore();
+  const { list, setModified, setCollaboratorsModified } = useUserListStore();
 
   const nameChanged = useMemo(() => {
     if (!originalList || !list) return false;
@@ -34,6 +34,11 @@ export default function useUserListChangesTracker() {
     if (!originalList || !list) return false;
     return nameChanged || itemsChanged || collaboratorsChanged;
   }, [collaboratorsChanged, itemsChanged, list, nameChanged, originalList]);
+
+  useEffect(() => {
+    setCollaboratorsModified(collaboratorsChanged);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collaboratorsChanged]);
 
   useEffect(() => {
     setModified(listModified);

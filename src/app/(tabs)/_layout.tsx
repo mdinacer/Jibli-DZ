@@ -1,3 +1,6 @@
+import AuthProvider from '@/components/AuthProvider';
+import DataListeners from '@/components/DataListeners';
+import DataLoader from '@/components/DataLoader';
 import ListModificationBanner from '@/components/list/ListModificationBanner';
 import { Icons } from '@/constants';
 import { Tabs } from 'expo-router';
@@ -19,7 +22,7 @@ const TabIcon: React.FC<TabIconProps> = ({
 }) => {
   return (
     <View>
-      <Icon color={color} height={32} width={32} />
+      <Icon color={color} className="" height={32} width={32} />
       {/* <Text
         style={{ color }}
         className={` ${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
@@ -32,19 +35,20 @@ const TabIcon: React.FC<TabIconProps> = ({
 
 const TabsLayout = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <AuthProvider>
+      <DataLoader />
       <ListModificationBanner />
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          //tabBarActiveTintColor: '#FFA001',
-          // tabBarInactiveTintColor: '#CDCDE0',
+          tabBarActiveTintColor: '#ec4899',
+          tabBarInactiveTintColor: '#6b7280',
           tabBarStyle: {
             paddingTop: 0,
-            //backgroundColor: '#161622',
-            borderTopWidth: 1
-            //borderTopColor: '#232533',
-            // height: 84
+            backgroundColor: '#f3f4f6',
+            borderTopWidth: 1,
+            borderTopColor: '#e5e7eb',
+            height: 80
           }
         }}
       >
@@ -78,6 +82,22 @@ const TabsLayout = () => {
             )
           }}
         />
+
+        <Tabs.Screen
+          name="collaborators"
+          options={{
+            title: 'Collaborators',
+            headerShown: false,
+            tabBarIcon: ({ color, focused, size }) => (
+              <TabIcon
+                icon={Icons.ShareKnowledgeIcon}
+                color={color}
+                focused={focused}
+                name={'Collaborators'}
+              />
+            )
+          }}
+        />
         <Tabs.Screen
           name="profile"
           options={{
@@ -94,7 +114,8 @@ const TabsLayout = () => {
           }}
         />
       </Tabs>
-    </View>
+      <DataListeners />
+    </AuthProvider>
   );
 };
 

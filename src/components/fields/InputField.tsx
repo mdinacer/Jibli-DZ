@@ -33,7 +33,11 @@ const InputField = <T extends FieldValues>({
             value={value}
             onChangeText={onChange}
           />
-          {error?.message && <Text>{error.message}</Text>}
+          {error?.message && (
+            <Text className="font-pregular text-base text-destructive">
+              {error.message}
+            </Text>
+          )}
         </View>
       )}
     />

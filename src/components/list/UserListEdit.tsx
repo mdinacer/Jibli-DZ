@@ -2,13 +2,13 @@ import IconButton from '@/components/IconButton';
 import ItemFormModal from '@/components/item/ItemFormModal';
 import UserItemDisplay from '@/components/item/UserItemDisplay';
 import ListCollaboratorsModal from '@/components/list/ListCollaboratorsModal';
+import useUserListEdit from '@/components/list/useUserListEdit';
 import { Icons } from '@/constants';
 import { List } from '@/models/List';
 import { ListItem } from '@/models/ListItem';
 import { Redirect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
 import { Alert, FlatList, Text, View } from 'react-native';
-import useUserListEdit from './useUserListEdit';
 
 const UserListEdit = () => {
   const {
@@ -96,10 +96,10 @@ const UserListEdit = () => {
         />
       </View>
 
-      <View className="absolute inset-x-0 bottom-0 items-center justify-center px-8">
+      <View className="absolute inset-x-0 bottom-0 items-center justify-center px-8 pb-5">
         <View
-          style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
-          className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border px-4 py-2 backdrop-blur-md"
+          //style={{ backgroundColor: 'rgba(107,114,128,0.3)' }}
+          className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border bg-gray-400/20 px-4 py-2"
         >
           <IconButton
             disabled={!modified || state.saving}

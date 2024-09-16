@@ -69,11 +69,7 @@ const CardFooter = React.forwardRef<
   View,
   React.ComponentPropsWithoutRef<typeof View>
 >(({ className, ...props }, ref) => (
-  <View
-    ref={ref}
-    className={'flex-row items-center p-6 pt-0 ' + className}
-    {...props}
-  />
+  <View ref={ref} className={'p-6 pt-0 ' + className} {...props} />
 ));
 CardFooter.displayName = 'CardFooter';
 

@@ -1,7 +1,7 @@
 import useUserListChangesTracker from '@/hooks/useUserListChangesTracker';
 import { Link } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ListModificationBanner = () => {
@@ -18,9 +18,14 @@ const ListModificationBanner = () => {
           You have unsaved changes
         </Text>
 
-        <Link className="font-pregular text-white" href={`/list/${list.id}`}>
-          View
-        </Link>
+        <View className="flex-row items-center space-x-3">
+          <TouchableOpacity>
+            <Text className="font-pregular text-white">Save</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text className="font-pregular text-white">Discard</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

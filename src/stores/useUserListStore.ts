@@ -12,7 +12,7 @@ interface UserListStoreState {
   loaded: boolean;
   state: StoreState;
 
-  setList: (list: List) => void;
+  setList: (list: List | null) => void;
   updateList: (updater: Partial<List> | ((prevState: List) => List)) => void;
   resetList: () => void;
 

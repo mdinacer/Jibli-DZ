@@ -88,7 +88,7 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
       visible={open}
       onRequestClose={() => setOpen(false)}
     >
-      <Card className="absolute inset-x-0 bottom-0 h-auto w-full rounded-t-2xl bg-muted pb-4">
+      <Card className="absolute inset-x-0 bottom-0 h-auto max-h-screen w-full rounded-t-2xl bg-muted pb-4">
         <CardHeader>
           <CardTitle>Edit item</CardTitle>
         </CardHeader>

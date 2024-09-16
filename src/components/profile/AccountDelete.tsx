@@ -98,6 +98,7 @@ const AccountDelete = () => {
       </CardContent>
       <CardFooter>
         <AppButton
+          variant="destructive"
           className="w-full"
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}

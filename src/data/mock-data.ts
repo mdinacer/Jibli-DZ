@@ -1,4 +1,5 @@
 import { Collaborator } from '@/models/Collaborator';
+import { Invitation } from '@/models/Invitation';
 import { ListItem, ListItemStatus } from '@/models/ListItem';
 import { Product } from '@/models/Product';
 import { ProductUnit } from '@/models/ProductUnit';
@@ -280,5 +281,56 @@ export const MockCollaborators: Collaborator[] = [
     username: 'Michael Brown',
     picture: 'https://randomuser.me/api/portraits/men/4.jpg',
     email: 'michael.brown@example.com'
+  }
+];
+
+export const MockInvitations: Invitation[] = [
+  {
+    id: 'invite_1',
+    senderId: 'user_1',
+    senderName: 'John Doe',
+    recipientId: 'user_2',
+    message: 'Join us for the upcoming project!',
+    createdAt: Timestamp.fromDate(new Date('2024-09-01T10:00:00Z')),
+    status: 'pending',
+    isOwner: true
+  },
+  {
+    id: 'invite_2',
+    senderId: 'user_3',
+    senderName: 'Sam Wilson',
+    recipientId: 'user_4',
+    createdAt: Timestamp.fromDate(new Date('2024-09-01T12:30:00Z')),
+    status: 'accepted',
+    isOwner: false
+  },
+  {
+    id: 'invite_3',
+    senderId: 'user_2',
+    senderName: 'Jane Smith',
+    recipientId: 'user_5',
+    message: 'We would love to have you on board.',
+    createdAt: Timestamp.fromDate(new Date('2024-09-02T09:15:00Z')),
+    status: 'rejected',
+    isOwner: false
+  },
+  {
+    id: 'invite_4',
+    senderId: 'user_5',
+    senderName: 'Michael Brown',
+    recipientId: 'user_1',
+    message: 'Excited to collaborate with you!',
+    createdAt: Timestamp.fromDate(new Date('2024-09-02T11:45:00Z')),
+    status: 'pending',
+    isOwner: true
+  },
+  {
+    id: 'invite_5',
+    senderId: 'user_4',
+    senderName: 'Emily Jones',
+    recipientId: 'user_3',
+    createdAt: Timestamp.fromDate(new Date('2024-09-01T14:00:00Z')),
+    status: 'accepted',
+    isOwner: false
   }
 ];

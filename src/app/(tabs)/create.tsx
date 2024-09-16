@@ -5,7 +5,7 @@ import { useUserListStore } from '@/stores/useUserListStore';
 import { generateId } from '@/utils/IdGenerator';
 import { Timestamp } from '@react-native-firebase/firestore';
 import React, { useCallback } from 'react';
-import { View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Create = () => {
@@ -28,17 +28,21 @@ const Create = () => {
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={{ flex: 1 }}>
-      <View className="flex-1 justify-center">
-        {list ? (
-          <ItemForm onSubmit={addNewItem} onCancel={function (): void {}} />
-        ) : (
-          <ListCreateField
-            onComplete={(list) => {
-              console.log(JSON.stringify(list, null, 2));
-            }}
-          />
-        )}
-      </View>
+      <KeyboardAvoidingView>
+        <ScrollView>
+          <View className="flex-1 justify-center">
+            {list ? (
+              <ItemForm onSubmit={addNewItem} onCancel={function (): void {}} />
+            ) : (
+              <ListCreateField
+                onComplete={(list) => {
+                  console.log(JSON.stringify(list, null, 2));
+                }}
+              />
+            )}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

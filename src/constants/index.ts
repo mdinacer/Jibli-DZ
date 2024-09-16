@@ -1,4 +1,4 @@
-import Icons from './Icons';
-//import images from './images';
+import Icons from '@/constants/Icons';
+import Images from '@/constants/Images';
 
-export { Icons };
+export { Icons, Images };
