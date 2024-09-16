@@ -1,0 +1,32 @@
+{
+    "updated": "Mis à jour",
+    "your_list": "Votre liste",
+    "my_list": "Ma liste",
+    "shared": "Partagée",
+    "private": "Privée",
+    "itemWithCount_zero": "Aucun article",
+    "itemWithCount_one": "1 article",
+    "itemWithCount_two": "2 articles",
+    "itemWithCount_few": "{{count}} articles",
+    "itemWithCount_many": "{{count}} articles",
+    "itemWithCount_other": "{{count}} articles",
+    "item_zero": "Aucun article",
+    "item_one": "1 article",
+    "item_two": "2 articles",
+    "item_few": "articles",
+    "item_many": "articles",
+    "item_other": "articles",
+    "home": {
+        "welcome_back": "Bienvenue de nouveau"
+    },
+    "user_list": {
+        "no_items_text": " Commencez par créer votre première liste pour organiser et gérer facilement vos items.",
+        "no_items_action": "Creer une nouvelle liste"
+    },
+    "delete_list": {
+        "title": "Supprimer la liste",
+        "description": "Etes-vous sûr de vouloir supprimer cette liste ?",
+        "cancel": "Annuler",
+        "delete": "Supprimer"
+    }
+}

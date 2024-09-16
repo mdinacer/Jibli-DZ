@@ -1,25 +1,32 @@
+import LanguageSelector from '@/components/LanguageSelector';
 import PendingItemsLists from '@/components/pendingItems/PendingItemsLists';
 import SharedLists from '@/components/sharedList/SharedLists';
 import UserListDisplay from '@/components/userList/UserListDisplay';
 import { Images } from '@/constants';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   const { profile } = useProfileStore();
+  const { t } = useTranslation('common', { keyPrefix: 'home' });
+
   return (
     <SafeAreaView
       style={{ flex: 1 }}
       edges={['top', 'left', 'right', 'bottom']}
     >
+      <LanguageSelector />
       <PendingItemsLists
         ListHeaderComponent={
           <View className="pt-6" style={{ rowGap: 24 }}>
             <View className="flex-row items-center justify-between">
               <View>
-                <Text className="font-pmedium text-sm">Welcome Back</Text>
+                <Text className="font-pmedium text-sm">
+                  {t('welcome_back')}
+                </Text>
                 <Text className="font-psemibold text-2xl">
                   {profile?.username}
                 </Text>

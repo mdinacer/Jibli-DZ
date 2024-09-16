@@ -10,23 +10,37 @@ import IconButton from '@/components/IconButton';
 import UserListItems from '@/components/userList/UserListItems';
 import { Icons } from '@/constants';
 import { useLoadUserList } from '@/hooks/useLoadUserList';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { formatDistanceToNow } from 'date-fns';
-import { Link, router } from 'expo-router';
-import React, { useCallback, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import EmptyState from '../EmptyState';
-import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
 import ListsService from '@/services/ListService';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import { useListStore } from '@/stores/useListStore';
+import { formatDistanceToNow } from 'date-fns';
+import { arDZ, enUS, fr } from 'date-fns/locale';
+import { Link, router } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert, Text, View } from 'react-native';
+import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
+import tw from 'twrnc';
 
 interface Props {}
 
 const UserListDisplay: React.FC<Props> = () => {
+  const { t, i18n } = useTranslation('common');
   const [open, setOpen] = useState(false);
   const { list, state, setList } = useLoadUserList();
   const { collaborators } = useCollaboratorStore();
   const { removeList } = useListStore();
+
+  const locale = useMemo(() => {
+    switch (i18n.language) {
+      case 'ar-DZ':
+        return arDZ;
+      case 'fr-FR':
+        return fr;
+      default:
+        return enUS;
+    }
+  }, [i18n.language]);
 
   const handleDeleteList = useCallback(async () => {
     if (!list) return;
@@ -40,13 +54,13 @@ const UserListDisplay: React.FC<Props> = () => {
   }, [list, removeList, setList]);
 
   const handleListDeletePrompt = () => {
-    Alert.alert('Delete List', 'Are you sure you want to delete this list?', [
+    Alert.alert(t('delete_list.title'), t('delete_list.description'), [
       {
-        text: 'Cancel',
+        text: t('delete_list.cancel'),
         style: 'cancel'
       },
       {
-        text: 'Delete',
+        text: t('delete_list.delete'),
         style: 'destructive',
         onPress: handleDeleteList
       }
@@ -54,31 +68,35 @@ const UserListDisplay: React.FC<Props> = () => {
   };
   if (!list) {
     return (
-      <View className="w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6">
+      <View
+        style={tw`w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6`}
+      >
         <Text className="font-pregular text-base">
-          Start by creating your first list to organize and manage your items
-          effortlessly.
+          {t('user_list.no_items_text')}
         </Text>
         <Link
-          className="font-pregular text-base text-pink-500 underline underline-offset-2"
+          style={tw`font-pregular text-base text-pink-500 underline underline-offset-2`}
           href={'/create'}
         >
-          Create a New List
+          {t('user_list.no_items_action')}
         </Link>
       </View>
     );
   }
   return (
     <>
-      <Text className="font-pregular text-base text-muted-foreground">
-        Your list
+      <Text style={tw`font-pregular text-base text-muted-foreground`}>
+        {t('my_list')}
       </Text>
       <Card>
         <CardHeader>
-          <CardTitle>{list.name}</CardTitle>
+          <CardTitle style={{ writingDirection: 'rtl' }}>{list.name}</CardTitle>
           <CardDescription>
-            Updated{' '}
-            {formatDistanceToNow(list.updatedAt.toDate(), { addSuffix: true })}
+            {t('updated')}{' '}
+            {formatDistanceToNow(list.updatedAt.toDate(), {
+              addSuffix: true,
+              locale
+            })}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -87,40 +105,31 @@ const UserListDisplay: React.FC<Props> = () => {
         <CardFooter className="flex-row items-center border-t border-border bg-muted bg-muted/50 px-6 py-3">
           <View className="flex-1">
             <Text className="font-pregular text-muted-foreground">
-              {list.collaborators.length > 0 ? 'Shared' : 'Private'}
+              {t(list.collaborators.length > 0 ? 'shared' : 'private')}
             </Text>
           </View>
 
-          {list.isOwner ? (
-            <View className="flex-row space-x-4">
-              <IconButton
-                icon={Icons.PencilEditIcon}
-                variant={'secondary'}
-                size="sm"
-                onPress={() => router.push(`/list/${list.id}`)}
-              />
-              <IconButton
-                variant={'secondary'}
-                size="sm"
-                onPress={handleListDeletePrompt}
-                icon={Icons.TrashIcon}
-              />
-              <IconButton
-                variant={'secondary'}
-                size="sm"
-                disabled={collaborators.length === 0}
-                icon={Icons.ShareIcon}
-                onPress={() => setOpen(true)}
-              />
-            </View>
-          ) : (
+          <View className="flex-row space-x-4">
             <IconButton
+              icon={Icons.PencilEditIcon}
               variant={'secondary'}
               size="sm"
               onPress={() => router.push(`/list/${list.id}`)}
-              icon={Icons.ArrowRightIcon}
             />
-          )}
+            <IconButton
+              variant={'secondary'}
+              size="sm"
+              onPress={handleListDeletePrompt}
+              icon={Icons.TrashIcon}
+            />
+            <IconButton
+              variant={'secondary'}
+              size="sm"
+              disabled={collaborators.length === 0}
+              icon={Icons.ShareIcon}
+              onPress={() => setOpen(true)}
+            />
+          </View>
         </CardFooter>
       </Card>
       <ListCollaboratorsModal open={open} setOpen={setOpen} />

@@ -33,6 +33,7 @@ const config: ExpoConfig = {
     favicon: './src/assets/images/favicon.png'
   },
   plugins: [
+    'expo-localization',
     '@react-native-firebase/app',
     '@react-native-firebase/auth',
     '@react-native-firebase/crashlytics',
@@ -65,6 +66,7 @@ const config: ExpoConfig = {
     typedRoutes: true
   },
   extra: {
+    supportsRTL: true,
     router: {
       origin: false
     },

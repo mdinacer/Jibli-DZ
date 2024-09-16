@@ -1,0 +1,32 @@
+{
+    "updated": "تم التحديث",
+    "your_list": "قائمتك",
+    "my_list": "قائمتي",
+    "shared": "مشتركة",
+    "private": "خاصة",
+    "itemWithCount_zero": "لا عناصر",
+    "itemWithCount_one": "عنصر واحد",
+    "itemWithCount_two": "عنصران",
+    "itemWithCount_few": "{{count}} عناصر",
+    "itemWithCount_many": "{{count}} عنصرًا",
+    "itemWithCount_other": "{{count}} عنصرًا",
+    "item_zero": "لا عناصر",
+    "item_one": "عنصر واحد",
+    "item_two": "عنصران",
+    "item_few": "عناصر",
+    "item_many": "عناصر",
+    "item_other": "عناصر",
+    "home": {
+        "welcome_back": "مرحبا بعودتك"
+    },
+    "user_list": {
+        "no_items_text": "ابدأ بإنشاء القائمة الأساسية لتنظيم وإدارة العناصر بسهولة.",
+        "no_items_action": "إنشاء قائمة جديدة"
+    },
+    "delete_list": {
+        "title": "حذف القائمة",
+        "description": "هل أنت متاكد من حذف هذه القائمة؟",
+        "cancel": "الغاء",
+        "delete": "حذف"
+    }
+}
