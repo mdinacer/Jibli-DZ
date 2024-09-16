@@ -1,5 +1,5 @@
-import { ListItem } from '@/models/ListItem';
-import React from 'react';
+import { ItemStatusStyles, ListItem, ListItemStatus } from '@/models/ListItem';
+import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
 
 interface Props {
@@ -7,8 +7,15 @@ interface Props {
 }
 
 const ItemDisplay: React.FC<Props> = ({ item }) => {
+  const { background, text, muted } = useMemo(
+    () => ItemStatusStyles[item.status],
+    [item.status]
+  );
+
   return (
-    <View className="min-h-[60px] w-full rounded-lg bg-background p-4 shadow-sm">
+    <View
+      className={`min-h-[60px] w-full rounded-lg bg-background p-4 shadow-sm ${background}`}
+    >
       {/* <Square size={60} backgroundColor="$gray10Light">
         <Image
           objectFit="contain"
@@ -24,13 +31,21 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
 
       <View className="" style={{ flex: 1, rowGap: 2 }}>
         <View className="flex-row items-center">
-          <Text className="flex-1 font-psemibold text-lg">{item.name}</Text>
+          <Text className={`flex-1 font-psemibold text-lg ${text}`}>
+            {item.name}
+          </Text>
           <View className="flex-row items-center space-x-2">
-            <Text className="font-pbold text-lg">{item.quantity}</Text>
-            <Text className="font-pregular text-base">{item.unit}</Text>
+            <Text className={`font-pbold text-lg ${text}`}>
+              {item.quantity}
+            </Text>
+            <Text className={`font-pregular text-base ${text}`}>
+              {item.unit}
+            </Text>
           </View>
         </View>
-        <Text className="font-pregular text-base text-muted-foreground">
+        <Text
+          className={`font-pregular text-base text-muted-foreground ${muted}`}
+        >
           {item.note}
         </Text>
       </View>

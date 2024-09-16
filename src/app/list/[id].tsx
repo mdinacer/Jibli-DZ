@@ -1,6 +1,6 @@
 import UserListEdit from '@/components/list/UserListEdit';
+import SharedListEdit from '@/components/sharedList/SharedListEdit';
 import useLoadLists from '@/hooks/useLoadLists';
-import { useListStore } from '@/stores/useListStore';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
@@ -22,9 +22,9 @@ const List = () => {
   return (
     <SafeAreaView
       className="relative"
-      edges={['top', 'left', 'right', 'bottom']}
+      //edges={['top', 'left', 'right', 'bottom']}
     >
-      {list.isOwner ? <UserListEdit /> : <Text>Shared list edit</Text>}
+      {list.isOwner ? <UserListEdit /> : <SharedListEdit listData={list} />}
     </SafeAreaView>
   );
 };

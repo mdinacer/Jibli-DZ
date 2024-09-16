@@ -6,8 +6,10 @@ import { List } from '@/models/List';
 import { Profile } from '@/models/Profile';
 import {
   FirebaseFirestoreTypes,
+  and,
   arrayRemove,
-  arrayUnion
+  arrayUnion,
+  where
 } from '@react-native-firebase/firestore';
 
 // Firestore collection reference for user profiles
@@ -26,19 +28,7 @@ function getCurrentUser() {
 
 // Helper function to get a Firestore reference to a profile
 async function getProfileRefById(uid: string) {
-  const profilesQuery = firebaseServices.firestore
-    .collection(Collections.PROFILES)
-    .where('uid', '==', uid);
-
-  const querySnapshot = await profilesQuery.get();
-
-  if (querySnapshot.empty) {
-    throw new CustomError('User profile not found', 'USER_PROFILE_NOT_FOUND');
-  }
-
-  return firebaseServices.firestore
-    .collection(Collections.PROFILES)
-    .doc(querySnapshot.docs[0].id);
+  return collaboratorsCollection.doc(uid);
 }
 
 // Helper function to convert Profile to Collaborator
@@ -62,7 +52,7 @@ async function getCollaboratorsByIds(
 
     const collaboratorsQuery = firebaseServices.firestore
       .collection(Collections.PROFILES)
-      .where('uid', 'in', collaboratorsIds)
+      .where('__name__', 'in', collaboratorsIds)
       .where('collaborators', 'array-contains', user.uid);
 
     const querySnapshot = await collaboratorsQuery.get();

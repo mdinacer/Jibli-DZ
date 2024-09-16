@@ -19,7 +19,8 @@ export default function useUserListEdit() {
 
   const { list, removeItem, setModified, setList } = useUserListStore();
 
-  const { listModified: modified } = useUserListChangesTracker();
+  const { listModified: modified, collaboratorsChanged } =
+    useUserListChangesTracker();
 
   const saveChanges = useCallback(async () => {
     if (!list) return;
@@ -27,13 +28,16 @@ export default function useUserListEdit() {
     try {
       await ListsService.update(list.id, list);
       updateOriginalList(list.id, list);
+      if (collaboratorsChanged) {
+        await ListsService.updateCollaborators(list.id, list.collaborators);
+      }
       setModified(false);
     } catch (error) {
       console.error(error);
     } finally {
       setState({ ...state, saving: false });
     }
-  }, [list, setModified, state, updateOriginalList]);
+  }, [collaboratorsChanged, list, setModified, state, updateOriginalList]);
 
   const discardChanges = useCallback(() => {
     if (!originalList) return;

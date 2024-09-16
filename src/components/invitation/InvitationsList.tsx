@@ -6,6 +6,7 @@ import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback } from 'react';
 import { Alert, FlatList, FlatListProps } from 'react-native';
 import InvitationCard from './InvitationCard';
+import EmptyState from '../EmptyState';
 
 interface Props extends Partial<FlatListProps<Invitation>> {}
 
@@ -84,6 +85,12 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
           onDecline={(action) => invitationDeclinePrompt(invitation, action)}
         />
       )}
+      ListEmptyComponent={
+        <EmptyState
+          title="No invitations"
+          description="You have no pending invitations"
+        />
+      }
     />
   );
 };

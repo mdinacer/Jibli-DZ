@@ -1,3 +1,6 @@
+import AuthProvider from '@/components/AuthProvider';
+import DataListeners from '@/components/DataListeners';
+import DataLoader from '@/components/DataLoader';
 import ListModificationBanner from '@/components/list/ListModificationBanner';
 import { Icons } from '@/constants';
 import { Tabs } from 'expo-router';
@@ -32,7 +35,8 @@ const TabIcon: React.FC<TabIconProps> = ({
 
 const TabsLayout = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <AuthProvider>
+      <DataLoader />
       <ListModificationBanner />
       <Tabs
         screenOptions={{
@@ -110,7 +114,8 @@ const TabsLayout = () => {
           }}
         />
       </Tabs>
-    </View>
+      <DataListeners />
+    </AuthProvider>
   );
 };
 

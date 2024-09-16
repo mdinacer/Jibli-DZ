@@ -14,6 +14,7 @@ import {} from 'react-native-gesture-handler';
 import { CardTitle } from '../Card';
 import IconButton from '../IconButton';
 import { useUserListStore } from '@/stores/useUserListStore';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 
 interface Props {
   open: boolean;
@@ -22,6 +23,7 @@ interface Props {
 
 const ListCollaboratorsModal: React.FC<Props> = ({ open, setOpen }) => {
   const { list, updateList } = useUserListStore();
+  const { collaborators } = useCollaboratorStore();
 
   const [listCollaborators, setListCollaborators] = useState<string[]>(
     list?.collaborators || []
@@ -63,7 +65,7 @@ const ListCollaboratorsModal: React.FC<Props> = ({ open, setOpen }) => {
         <CardTitle>Collaborators</CardTitle>
         <FlatList
           contentContainerStyle={{ gap: 16 }}
-          data={MockCollaborators}
+          data={collaborators}
           keyExtractor={(c) => c.userId}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleCollaboratorsSelect(item)}>

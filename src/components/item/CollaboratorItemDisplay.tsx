@@ -1,6 +1,6 @@
 import ItemDisplay from '@/components/item/ItemDisplay';
 import { Icons } from '@/constants';
-import { ListItem, ListItemStatus } from '@/models/ListItem';
+import { ItemStatusStyles, ListItem, ListItemStatus } from '@/models/ListItem';
 import React, { useCallback } from 'react';
 import { Animated, View } from 'react-native';
 import {
@@ -14,46 +14,53 @@ interface Props {
   onStatusChange: (status: ListItemStatus) => void;
 }
 
-const colorByStatus = {
-  [ListItemStatus.PENDING]: 'bg-[#FF885B]',
-  [ListItemStatus.BOUGHT]: 'bg-[#8FD14F]',
-  [ListItemStatus.UNAVAILABLE]: 'bg-[#C7253E]'
-};
+// const ItemStatusStyles = {
+//   [ListItemStatus.PENDING]: 'bg-[#FF885B]',
+//   [ListItemStatus.BOUGHT]: 'bg-[#8FD14F]',
+//   [ListItemStatus.UNAVAILABLE]: 'bg-[#C7253E]'
+// };
 
 const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
-  const renderRightActions = useCallback(
-    (
-      progress: Animated.AnimatedInterpolation<string | number>,
-      dragX: Animated.AnimatedInterpolation<string | number>,
-      swipeable: Swipeable
-    ) => {
-      return (
-        <SwipeAction
-          backgroundColor={colorByStatus[ListItemStatus.UNAVAILABLE]}
-          containerStyle={` justify-end`}
-          itemStatus={item.status}
-          icon={Icons.UnavailableIcon}
-        />
-      );
+  const renderRightActions = useCallback(() => {
+    return (
+      <SwipeAction
+        backgroundColor={
+          ItemStatusStyles[ListItemStatus.UNAVAILABLE].background
+        }
+        containerStyle={` justify-end`}
+        itemStatus={item.status}
+        icon={Icons.UnavailableIcon}
+      />
+    );
+  }, [item.status]);
+  const renderLeftActions = useCallback(() => {
+    return (
+      <SwipeAction
+        backgroundColor={ItemStatusStyles[ListItemStatus.BOUGHT].background}
+        containerStyle={` `}
+        itemStatus={item.status}
+        icon={Icons.ShoppingBasketIcon}
+      />
+    );
+  }, [item.status]);
+
+  const handleOnSwipe = useCallback(
+    (direction: 'left' | 'right', swipeable: Swipeable) => {
+      if (item.status !== ListItemStatus.PENDING) {
+        onStatusChange(ListItemStatus.PENDING);
+        swipeable.close();
+        return;
+      }
+
+      if (direction === 'left') {
+        onStatusChange(ListItemStatus.BOUGHT);
+      } else if (direction === 'right') {
+        onStatusChange(ListItemStatus.UNAVAILABLE);
+      }
+
+      swipeable.close();
     },
-    [item.status]
-  );
-  const renderLeftActions = useCallback(
-    (
-      progress: Animated.AnimatedInterpolation<string | number>,
-      dragX: Animated.AnimatedInterpolation<string | number>,
-      swipeable: Swipeable
-    ) => {
-      return (
-        <SwipeAction
-          backgroundColor={colorByStatus[ListItemStatus.BOUGHT]}
-          containerStyle={` `}
-          itemStatus={item.status}
-          icon={Icons.ShoppingBasketIcon}
-        />
-      );
-    },
-    [item.status]
+    [item.status, onStatusChange]
   );
 
   return (
@@ -66,11 +73,9 @@ const CollaboratorItemDisplay: React.FC<Props> = ({ item, onStatusChange }) => {
         overshootRight
         renderRightActions={renderRightActions}
         renderLeftActions={renderLeftActions}
-        onSwipeableOpen={(direction, swipeable) => {
-          swipeable.close();
-        }}
+        onSwipeableOpen={handleOnSwipe}
       >
-        <View className="w-full items-center p-2">
+        <View className="w-full items-center">
           <ItemDisplay item={item} />
         </View>
       </Swipeable>
@@ -96,7 +101,7 @@ const SwipeAction: React.FC<SwipeActionProps> = ({
 }) => {
   return (
     <View
-      className={`h-full flex-1 flex-row items-center rounded-lg p-4 transition-colors ${itemStatus !== ListItemStatus.PENDING ? colorByStatus[ListItemStatus.PENDING] : backgroundColor} ${containerStyle}`}
+      className={`h-full flex-1 flex-row items-center rounded-lg p-4 transition-colors ${itemStatus !== ListItemStatus.PENDING ? 'bg-[#FFC470]' : backgroundColor} ${containerStyle}`}
     >
       <View className="h-full items-center justify-center">
         {itemStatus !== ListItemStatus.PENDING ? (

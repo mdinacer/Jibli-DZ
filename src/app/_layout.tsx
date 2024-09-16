@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import useLoadUserProfile from '@/hooks/useLoadUserProfile';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,7 +53,7 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  useOnAuthStateChanged();
+  useLoadUserProfile();
 
   if (!loaded) {
     return null;

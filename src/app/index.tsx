@@ -23,7 +23,6 @@ const Index = () => {
   }
 
   if (user && !profile) {
-    console.log(user);
     return <Redirect href={'/onboarding'} />;
   }
 

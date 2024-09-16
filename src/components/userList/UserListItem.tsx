@@ -16,7 +16,7 @@ interface Props extends ViewProps {
   item: ListItem;
 }
 
-const ItemDisplay: React.FC<Props> = ({ item, ...props }) => {
+const UserListItem: React.FC<Props> = ({ item, ...props }) => {
   const Icon = useMemo(() => itemStatusIcon[item.status], [item.status]);
   return (
     <View className="flex-row items-center space-x-2" {...props}>
@@ -34,4 +34,4 @@ const isEqual = (prevProps: Props, nextProps: Props) => {
   return compareItems(prevProps.item, nextProps.item);
 };
 
-export default React.memo(ItemDisplay, isEqual);
+export default React.memo(UserListItem, isEqual);

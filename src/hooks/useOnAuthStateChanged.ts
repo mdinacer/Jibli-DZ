@@ -1,13 +1,25 @@
 import firebaseServices from '@/config/firebaseConfig';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useEffect } from 'react';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { router } from 'expo-router';
+import { useCallback, useEffect } from 'react';
 
 export default function useOnAuthStateChanged() {
   const { setUser, user } = useAuthStore();
 
+  const handleAuthStateChange = useCallback(
+    (user: FirebaseAuthTypes.User | null) => {
+      setUser(user);
+      if (!user) {
+        router.push('/');
+      }
+    },
+    [setUser]
+  );
+
   useEffect(() => {
     const unsubscribe = firebaseServices.auth.onAuthStateChanged((user) => {
-      setUser(user);
+      handleAuthStateChange(user);
     });
 
     return () => {
