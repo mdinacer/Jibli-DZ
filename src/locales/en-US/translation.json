@@ -238,5 +238,43 @@
         "pending": "Pending",
         "bought": "Bought",
         "unavailable": "Unavailable"
-    }
+    },
+    "units_list": [
+        {
+            "label": "Bag",
+            "value": "bag"
+        },
+        {
+            "label": "Bottle",
+            "value": "bottle"
+        },
+        {
+            "label": "Box",
+            "value": "box"
+        },
+        {
+            "label": "Can",
+            "value": "can"
+        },
+        {
+            "label": "Jar",
+            "value": "jar"
+        },
+        {
+            "label": "Kilogram",
+            "value": "kilogram"
+        },
+        {
+            "label": "Gram",
+            "value": "gram"
+        },
+        {
+            "label": "Pack",
+            "value": "pack"
+        },
+        {
+            "label": "Piece",
+            "value": "piece"
+        }
+    ]
 }

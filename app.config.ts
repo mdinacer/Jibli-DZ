@@ -74,7 +74,8 @@ const config: ExpoConfig = {
       projectId: 'f1b0c2df-ba3e-4efe-91ee-01c4ca5331f4'
     }
   },
-  owner: 'ochentero'
+  owner: 'ochentero',
+  assetBundlePatterns: ['assets/fonts/*']
 };
 
 export default config;

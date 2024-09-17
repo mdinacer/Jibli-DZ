@@ -19,7 +19,7 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
-import ButtonsSelectField from '../fields/ButtonSelectField';
+import PickerSelectField from '../fields/PickerSelectField';
 import NumberInputField from '../fields/NumberInputField';
 
 interface Props {
@@ -86,7 +86,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           keyboardType="number-pad"
         />
 
-        <ButtonsSelectField
+        <PickerSelectField
           control={control}
           name="unit"
           label={t('fields.unit.label')}
