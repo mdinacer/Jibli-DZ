@@ -1,0 +1,116 @@
+{
+    "notifications": {
+        "user_lists": {
+            "updated": {
+                "message": "Liste d'utilisateurs mise à jour.",
+                "description": "Votre liste a été mise à jour par un collaborateur {{collaboratorName}}."
+            }
+        },
+        "collaborator_list": {
+            "shared": {
+                "message": "Liste des collaborateurs partagée avec vous.",
+                "description": "Une liste de collaborateurs a été partagée avec vous par {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "Liste des collaborateurs mise à jour.",
+                "description": "La liste des collaborateurs a été mise à jour par {{collaboratorName}}."
+            },
+            "deleted": {
+                "message": "Liste des collaborateurs supprimée.",
+                "description": "La liste des collaborateurs a été supprimée par {{collaboratorName}}."
+            }
+        },
+        "collaboration": {
+            "added": {
+                "message": "Collaboration ajoutée.",
+                "description": "Vous avez été ajouté à une nouvelle collaboration par {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "Collaboration mise à jour.",
+                "description": "La collaboration a été mise à jour par {{collaboratorName}}."
+            },
+            "revoked": {
+                "message": "Collaboration révoquée.",
+                "description": "Votre collaboration avec {{collaboratorName}} a été révoquée."
+            }
+        },
+        "invitations": {
+            "sent": {
+                "message": "Invitation envoyée.",
+                "description": "Vous avez envoyé une invitation à {{recipientName}}."
+            },
+            "received": {
+                "message": "Invitation reçue.",
+                "description": "Vous avez reçu une invitation de {{senderName}}."
+            },
+            "accepted": {
+                "message": "Invitation acceptée.",
+                "description": "Votre invitation à {{recipientName}} a été acceptée."
+            },
+            "rejected": {
+                "message": "Invitation rejetée.",
+                "description": "Votre invitation à {{recipientName}} a été rejetée."
+            }
+        },
+        "collaborator": {
+            "added": {
+                "message": "Collaborateur ajouté.",
+                "description": "{{collaboratorName}} a été ajouté en tant que collaborateur."
+            },
+            "removed": {
+                "message": "Collaborateur supprimé.",
+                "description": "{{collaboratorName}} a été supprimé de la collaboration."
+            }
+        },
+        "list_items": {
+            "added": {
+                "message": "Élément ajouté à la liste.",
+                "description": "Un élément a été ajouté à votre liste par {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "Élément mis à jour dans la liste.",
+                "description": "Un élément dans votre liste a été mis à jour par {{collaboratorName}}."
+            },
+            "deleted": {
+                "message": "Élément supprimé de la liste.",
+                "description": "Un élément a été supprimé de votre liste par {{collaboratorName}}."
+            },
+            "status_change": {
+                "pending": {
+                    "message": "Statut de l'élément changé en attente.",
+                    "description": "Le statut d'un élément dans votre liste a changé en attente."
+                },
+                "bought": {
+                    "message": "Statut de l'élément changé en acheté.",
+                    "description": "Le statut d'un élément dans votre liste a changé en acheté."
+                },
+                "unavailable": {
+                    "message": "Statut de l'élément changé en indisponible.",
+                    "description": "Le statut d'un élément dans votre liste a changé en indisponible."
+                }
+            }
+        },
+        "alerts": {
+            "sent": {
+                "message": "Alerte envoyée.",
+                "description": "Vous avez envoyé une alerte à {{recipientName}}."
+            },
+            "received": {
+                "message": "Alerte reçue.",
+                "description": "Vous avez reçu une alerte de {{senderName}}."
+            },
+            "started": {
+                "message": "Alerte commencée.",
+                "description": "Une alerte a été commencée."
+            },
+            "timed_out": {
+                "message": "Alerte expirée.",
+                "description": "Une alerte a expiré."
+            },
+            "snoozed": {
+                "message": "Alerte reportée.",
+                "description": "Une alerte a été reportée."
+            }
+        }
+    }
+}

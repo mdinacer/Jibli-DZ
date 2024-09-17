@@ -18,6 +18,7 @@ import NumberInputField from '../fields/NumberInputField';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { generateId } from '@/utils/IdGenerator';
 import { Timestamp } from '@react-native-firebase/firestore';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   item?: ListItem;
@@ -27,7 +28,9 @@ interface Props {
 }
 
 const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
+  const { t } = useTranslation('common', { keyPrefix: 'item_form' });
   const { list, updateItem, addItem } = useUserListStore();
+  const isEdit = !!item;
   const form = useForm<ListItemInput>({
     resolver: zodResolver(ListItemInputSchema),
     defaultValues: item
@@ -90,35 +93,36 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
     >
       <Card className="absolute inset-x-0 bottom-0 h-auto max-h-screen w-full rounded-t-2xl bg-muted pb-4">
         <CardHeader>
-          <CardTitle>Edit item</CardTitle>
+          <CardTitle>{t(isEdit ? 'title_edit' : 'title_create')}</CardTitle>
         </CardHeader>
         <CardContent>
           <View className="" style={{ rowGap: 24 }}>
             <InputField
               name="name"
-              label="Name"
+              label={t('fields.name.label')}
               control={control}
-              placeholder="Type the item name"
+              placeholder={t('fields.name.placeholder')}
             />
             <NumberInputField
               name="quantity"
-              label="Quantity"
+              clearTextOnFocus
+              label={t('fields.quantity.label')}
               control={control}
-              placeholder="Type the item name"
+              placeholder={t('fields.quantity.placeholder')}
               keyboardType="number-pad"
             />
 
             <ButtonsSelectField
               control={control}
               name="unit"
-              label="Unit"
+              label={t('fields.unit.label')}
               items={ProductUnitsList}
             />
             <InputField
               name="note"
-              label="Note"
+              label={t('fields.note.label')}
               control={control}
-              placeholder="Type the item note"
+              placeholder={t('fields.note.placeholder')}
               multiline
               numberOfLines={3}
             />
@@ -128,14 +132,14 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
                 onPress={handleSubmit(handleOnSubmit)}
                 //disabled={isSubmitting || !isValid}
               >
-                Save
+                {t('submit_button')}
               </AppButton>
               <AppButton
                 variant="outline"
                 onPress={handleClose}
                 disabled={isSubmitting}
               >
-                {isDirty ? 'Cancel' : 'Close'}
+                {t(isDirty ? 'cancel_button' : 'close_button')}
               </AppButton>
             </View>
           </View>

@@ -4,12 +4,14 @@ import { Dimensions, FlatList, FlatListProps, Text, View } from 'react-native';
 import SharedListDisplay from '@/components/sharedList/SharedListDisplay';
 import { List } from '@/models/List';
 import EmptyState from '../EmptyState';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
 const PADDING = 16;
 
 const SharedLists: React.FC<Props> = ({ ...props }) => {
+  const { t } = useTranslation('common');
   const lists = useListStore((state) => state.lists.filter((l) => !l.isOwner));
   const { width } = Dimensions.get('window');
 
@@ -22,7 +24,7 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
   return (
     <>
       <Text className="mt-5 font-pregular text-base text-muted-foreground">
-        Shared Lists
+        {t('shared_list_many')}
       </Text>
       <FlatList
         style={{ flex: 1, width: '100%' }}
@@ -35,8 +37,12 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         ListEmptyComponent={
           <View style={{ width: width - PADDING * 2 }}>
             <EmptyState
-              title="No shared lists"
-              description="You don’t have any shared lists yet. When others share a list with you, it will appear here."
+              title={t('title', {
+                keyPrefix: 'shared_list_empty_state'
+              })}
+              description={t('description', {
+                keyPrefix: 'shared_list_empty_state'
+              })}
             />
           </View>
         }

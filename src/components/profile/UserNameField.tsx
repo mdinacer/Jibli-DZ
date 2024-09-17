@@ -11,9 +11,11 @@ import {
 import ProfileService from '@/services/ProfileService';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 const UserNameField = () => {
+  const { t } = useTranslation('common', { keyPrefix: 'username_form' });
   const [isSaving, setIsSaving] = useState(false);
   const { profile, updateProfile } = useProfileStore();
   const [username, setUsername] = useState<string | undefined>(
@@ -53,8 +55,8 @@ const UserNameField = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Username</CardTitle>
-        <CardDescription>Edit your username</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <AppInput
@@ -63,20 +65,20 @@ const UserNameField = () => {
           placeholder="Enter your username"
         />
       </CardContent>
-      <CardFooter className="justify-between">
+      <CardFooter className="flex-row justify-between">
         <AppButton
           variant="secondary"
           onPress={handleReset}
           disabled={!isModified || isSaving}
         >
-          Reset
+          {t('cancel_button')}
         </AppButton>
         <View />
         <AppButton
           onPress={handleUpdateUserName}
           disabled={!isModified || isSaving}
         >
-          Save
+          {t('submit_button')}
         </AppButton>
       </CardFooter>
     </Card>

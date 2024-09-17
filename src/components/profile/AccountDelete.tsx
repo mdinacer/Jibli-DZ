@@ -14,6 +14,7 @@ import {
   CardTitle
 } from '../Card';
 import AppButton from '../AppButton';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -21,6 +22,7 @@ const schema = z.object({
 
 type SchemaType = z.infer<typeof schema>;
 const AccountDelete = () => {
+  const { t } = useTranslation('common', { keyPrefix: 'account_delete_form' });
   const [isDeleted, setIsDeleted] = useState(false);
 
   const form = useForm<SchemaType>({
@@ -58,41 +60,34 @@ const AccountDelete = () => {
 
   const handleOnSubmit = useCallback(
     async (data: SchemaType) => {
-      Alert.alert(
-        'Are you sure?',
-        'Are you sure you want to delete your account?',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel'
-          },
-          {
-            text: 'Delete',
-            style: 'destructive',
-            onPress: () => handleDeleteAccount(data.currentPassword)
-          }
-        ]
-      );
+      Alert.alert(t('title'), t('prompt'), [
+        {
+          text: t('cancel'),
+          style: 'cancel'
+        },
+        {
+          text: t('delete'),
+          style: 'destructive',
+          onPress: () => handleDeleteAccount(data.currentPassword)
+        }
+      ]);
     },
-    [handleDeleteAccount]
+    [handleDeleteAccount, t]
   );
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Delete Account</CardTitle>
-        <CardDescription>
-          Enter your password to confirm account deletion.
-        </CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
 
       <CardContent>
         <InputField
-          id={'account-delete-current-password'}
           name="currentPassword"
-          label="Current Password"
+          label={t('fields.current_password.label')}
           control={control}
-          placeholder="Type your current password"
+          placeholder={t('fields.current_password.placeholder')}
           secureTextEntry
         />
       </CardContent>
@@ -103,7 +98,7 @@ const AccountDelete = () => {
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
-          Delete
+          {t('submit_button')}
         </AppButton>
       </CardFooter>
     </Card>

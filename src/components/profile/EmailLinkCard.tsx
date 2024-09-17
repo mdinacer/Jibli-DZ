@@ -13,14 +13,22 @@ import {
   CardTitle
 } from '../Card';
 import InputField from '../fields/InputField';
+import { useTranslation } from 'react-i18next';
 
-const schema = z.object({
-  newEmail: z.string().email('{value} is not a valid email'),
-  newPassword: z.string().min(6, '{value} must be at least 6 characters')
-});
+const schema = z
+  .object({
+    newEmail: z.string().email('{value} is not a valid email'),
+    newPassword: z.string().min(6, '{value} must be at least 6 characters'),
+    confirmPassword: z.string().min(6, '{value} must be at least 6 characters')
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword']
+  });
 
 type SchemaType = z.infer<typeof schema>;
 const EmailLinkCard = () => {
+  const { t } = useTranslation('common', { keyPrefix: 'email_link_form' });
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -93,18 +101,23 @@ const EmailLinkCard = () => {
 
       <CardContent style={{ rowGap: 24 }}>
         <InputField
-          id={'email-link-new-email'}
           name="newEmail"
-          label="New Email"
+          label={t('fields.new_email.label')}
           control={control}
-          placeholder="Type your new email"
+          placeholder={t('fields.new_email.placeholder')}
         />
         <InputField
-          id={'email-link-new-password'}
           name="newPassword"
-          label="New Password"
+          label={t('fields.new_password.label')}
           control={control}
-          placeholder="Type your new password"
+          placeholder={t('fields.new_password.placeholder')}
+          secureTextEntry
+        />
+        <InputField
+          name="confirmPassword"
+          label={t('fields.confirm_password.label')}
+          control={control}
+          placeholder={t('fields.confirm_password.placeholder')}
           secureTextEntry
         />
 
@@ -112,7 +125,7 @@ const EmailLinkCard = () => {
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
-          Link
+          {t('submit_button')}
         </AppButton>
       </CardContent>
     </Card>

@@ -22,7 +22,7 @@ const TabIcon: React.FC<TabIconProps> = ({
 }) => {
   return (
     <View>
-      <Icon color={color} className="" height={32} width={32} />
+      <Icon color={color} height={32} width={32} />
       {/* <Text
         style={{ color }}
         className={` ${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}

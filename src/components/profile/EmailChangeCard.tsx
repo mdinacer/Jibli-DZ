@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
+import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   currentPassword: z.string().min(6, '{value} must be at least 6 characters'),
@@ -21,6 +22,7 @@ const schema = z.object({
 
 type SchemaType = z.infer<typeof schema>;
 const EmailChangeCard = () => {
+  const { t } = useTranslation('common', { keyPrefix: 'email_change_form' });
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -64,32 +66,32 @@ const EmailChangeCard = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Email</CardTitle>
-        <CardDescription>Update your email</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
 
       <CardContent style={{ rowGap: 24 }}>
         <InputField
           id={'email-change-current-password'}
           name="currentPassword"
-          label="Current Password"
+          label={t('fields.current_password.label')}
           control={control}
-          placeholder="Type your current password"
+          placeholder={t('fields.current_password.placeholder')}
           secureTextEntry
         />
         <InputField
           id={'email-change-new-email'}
           name="newEmail"
-          label="New Email"
+          label={t('fields.email.label')}
           control={control}
-          placeholder="Type your new email"
+          placeholder={t('fields.email.placeholder')}
         />
 
         <AppButton
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
-          update
+          {t('submit_button')}
         </AppButton>
       </CardContent>
     </Card>

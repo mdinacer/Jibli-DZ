@@ -15,6 +15,7 @@ import { CardTitle } from '../Card';
 import IconButton from '../IconButton';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   open: boolean;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const ListCollaboratorsModal: React.FC<Props> = ({ open, setOpen }) => {
+  const { t } = useTranslation('common');
   const { list, updateList } = useUserListStore();
   const { collaborators } = useCollaboratorStore();
 
@@ -62,7 +64,7 @@ const ListCollaboratorsModal: React.FC<Props> = ({ open, setOpen }) => {
         style={{ rowGap: 16 }}
         className="absolute inset-x-0 bottom-0 min-h-[60%] rounded-t-2xl border-t border-border bg-muted p-6"
       >
-        <CardTitle>Collaborators</CardTitle>
+        <CardTitle>{t('collaborator_many')}</CardTitle>
         <FlatList
           contentContainerStyle={{ gap: 16 }}
           data={collaborators}

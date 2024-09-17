@@ -9,10 +9,12 @@ import { Icons } from '@/constants';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Profile = () => {
+  const { t } = useTranslation('common');
   const { signOut } = useAuthStore();
   const { setProfile } = useProfileStore();
 
@@ -38,7 +40,7 @@ const Profile = () => {
         >
           <View className="relative" style={{ flex: 1, rowGap: 20 }}>
             <View className="flex-row items-center justify-between">
-              <CardTitle>Account</CardTitle>
+              <CardTitle>{t('my_account')}</CardTitle>
               <IconButton
                 onPress={handleSignOut}
                 variant="destructive"

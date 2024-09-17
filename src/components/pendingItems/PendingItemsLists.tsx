@@ -10,10 +10,14 @@ import { SectionList, SectionListProps } from 'react-native';
 import EmptyState from '@/components/EmptyState';
 import CollaboratorItemDisplay from '@/components/item/CollaboratorItemDisplay';
 import SectionHeader from '@/components/pendingItems/SectionHeader';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<SectionListProps<ListItem>> {}
 
 const PendingItemsLists: React.FC<Props> = ({ ...props }) => {
+  const { t } = useTranslation('common', {
+    keyPrefix: 'pending_item_empty_state'
+  });
   const { lists } = useListStore();
   const [state, dispatch] = useReducer(PendingItemsReducer, InitialState);
 
@@ -86,10 +90,7 @@ const PendingItemsLists: React.FC<Props> = ({ ...props }) => {
         />
       )}
       ListEmptyComponent={
-        <EmptyState
-          title="No Pending Items"
-          description="You're all caught up! There are no pending items in the lists shared with you."
-        />
+        <EmptyState title={t('title')} description={t('description')} />
       }
       {...props}
     />

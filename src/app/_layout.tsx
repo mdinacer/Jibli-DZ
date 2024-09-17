@@ -1,5 +1,7 @@
 import { Provider } from '@/components/Provider';
-import useOnAuthStateChanged from '@/hooks/useOnAuthStateChanged';
+import useLoadUserProfile from '@/hooks/useLoadUserProfile';
+import '@/i18n';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {
   DarkTheme,
   DefaultTheme,
@@ -12,8 +14,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import useLoadUserProfile from '@/hooks/useLoadUserProfile';
 
 export {
   // Catch any errors thrown by the Layout component.
