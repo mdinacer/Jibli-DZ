@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import InputField from '@/components/fields/InputField';
 import {
@@ -29,7 +29,16 @@ interface Props {
 }
 
 const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
-  const { t } = useTranslation('common', { keyPrefix: 'item_form' });
+  const { t } = useTranslation('common');
+
+  const unitsList = useMemo(
+    () =>
+      t('units_list', { returnObjects: true }) as {
+        label: string;
+        value: string;
+      }[],
+    [t]
+  );
   const form = useForm<ListItemInput>({
     resolver: zodResolver(ListItemInputSchema),
     defaultValues: item
@@ -67,36 +76,49 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
   return (
     <View className="">
       <CardHeader>
-        <CardTitle>{t('title_create')}</CardTitle>
-        <CardDescription>{t('description_create')}</CardDescription>
+        <CardTitle>{t('title_create', { keyPrefix: 'item_form' })}</CardTitle>
+        <CardDescription>
+          {t('description_create', {
+            keyPrefix: 'item_form'
+          })}
+        </CardDescription>
       </CardHeader>
       <CardContent style={{ rowGap: 24 }}>
         <InputField
           name="name"
-          label={t('fields.name.label')}
+          label={t('fields.name.label', { keyPrefix: 'item_form' })}
           control={control}
-          placeholder={t('fields.name.placeholder')}
+          placeholder={t('fields.name.placeholder', {
+            keyPrefix: 'item_form'
+          })}
         />
         <NumberInputField
           name="quantity"
           clearTextOnFocus
-          label={t('fields.quantity.label')}
+          label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
           control={control}
-          placeholder={t('fields.quantity.placeholder')}
+          placeholder={t('fields.quantity.placeholder', {
+            keyPrefix: 'item_form'
+          })}
           keyboardType="number-pad"
         />
 
         <PickerSelectField
           control={control}
           name="unit"
-          label={t('fields.unit.label')}
-          items={ProductUnitsList}
+          label={t('fields.unit.label', { keyPrefix: 'item_form' })}
+          items={unitsList}
+          placeholder={{
+            label: t('fields.unit.placeholder', { keyPrefix: 'item_form' })
+          }}
         />
         <InputField
           name="note"
-          label={t('fields.note.label')}
+          label={t('fields.note.label', { keyPrefix: 'item_form' })}
           control={control}
-          placeholder={t('fields.note.placeholder')}
+          placeholder={t('fields.note.placeholder', {
+            keyPrefix: 'item_form'
+          })}
           multiline
           numberOfLines={3}
         />
@@ -108,7 +130,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           onPress={handleSubmit(handleOnSubmit)}
           //disabled={isSubmitting || !isValid}
         >
-          {t('submit_button')}
+          {t('submit_button', { keyPrefix: 'item_form' })}
         </AppButton>
         <AppButton
           className="w-full"
@@ -116,7 +138,9 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           onPress={onCancel}
           disabled={isSubmitting}
         >
-          {t(isDirty ? 'cancel_button' : 'back_button')}
+          {t(isDirty ? 'cancel_button' : 'back_button', {
+            keyPrefix: 'item_form'
+          })}
         </AppButton>
       </CardFooter>
     </View>

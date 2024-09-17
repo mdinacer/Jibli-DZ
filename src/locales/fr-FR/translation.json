@@ -234,8 +234,8 @@
     },
     "item_status": {
         "pending": "En attente",
-        "accepted": "Accepté",
-        "rejected": "Refusé"
+        "bought": "Acheté",
+        "unavailable": "Indisponible"
     },
     "units_list": [
         {

@@ -68,8 +68,6 @@ const PendingItemsLists: React.FC<Props> = ({ ...props }) => {
 
   return (
     <SectionList
-      className="p-4"
-      style={{ flex: 1, rowGap: 16 }}
       contentContainerStyle={{ rowGap: 16, paddingVertical: 16 }}
       sections={sections}
       keyExtractor={(i) => i.id}

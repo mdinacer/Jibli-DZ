@@ -63,12 +63,17 @@ const SectionHeader: React.FC<Props> = ({
   }, [listId, lists, state.lists, updateList]);
 
   return (
-    <View className={`flex-row items-center justify-between`}>
-      <Text
-        className={`font-pregular text-base ${isModified ? 'text-primary' : 'text-muted-foreground'}`}
-      >
-        {listName}
-      </Text>
+    <View
+      className={`flex-row items-center justify-between rounded-lg bg-gray-200 px-4 py-2`}
+    >
+      <View className="flex-row items-center space-x-2">
+        <Icons.ArrowRightIcon className="h-6 w-6 text-muted-foreground" />
+        <Text
+          className={`font-pregular text-base ${isModified ? 'text-primary' : 'text-muted-foreground'}`}
+        >
+          {listName}
+        </Text>
+      </View>
       <View className="flex-row space-x-4">
         <IconButton
           size="sm"

@@ -74,8 +74,8 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+    <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
+      <StatusBar style={colorScheme === 'dark' ? 'dark' : 'dark'} />
 
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />

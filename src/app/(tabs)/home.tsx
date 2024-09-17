@@ -1,4 +1,3 @@
-import LanguageSelector from '@/components/LanguageSelector';
 import PendingItemsLists from '@/components/pendingItems/PendingItemsLists';
 import SharedLists from '@/components/sharedList/SharedLists';
 import UserListDisplay from '@/components/userList/UserListDisplay';
@@ -18,10 +17,11 @@ const Index = () => {
       style={{ flex: 1 }}
       edges={['top', 'left', 'right', 'bottom']}
     >
-      <LanguageSelector />
       <PendingItemsLists
+        className="flex-1 p-4"
+        style={{ rowGap: 16 }}
         ListHeaderComponent={
-          <View className="pt-6" style={{ rowGap: 24 }}>
+          <View className="py-6" style={{ rowGap: 24 }}>
             <View className="flex-row items-center justify-between">
               <View>
                 <Text className="font-pmedium text-sm">

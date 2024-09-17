@@ -1,3 +1,4 @@
+import { Icons } from '@/constants';
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -29,14 +30,16 @@ const PickerSelectField = <T extends FieldValues>({
           <Text className="font-pregular text-base font-medium leading-none">
             {label}
           </Text>
-          <RNPickerSelect
-            {...props}
-            value={value}
-            onValueChange={onChange}
-            items={items}
-            dropdownItemStyle={{ backgroundColor: '#fff' }}
-            style={styles}
-          />
+          <View className="h-16 justify-center rounded-2xl border border-input bg-background px-2 py-1">
+            <RNPickerSelect
+              {...props}
+              value={value}
+              onValueChange={onChange}
+              items={items}
+              dropdownItemStyle={{ backgroundColor: '#fff' }}
+              //style={styles}
+            />
+          </View>
           {error?.message && <Text>{error.message}</Text>}
         </View>
       )}
@@ -53,7 +56,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderColor: '#e5e7eb',
-    borderRadius: 6,
+    borderRadius: 16,
     backgroundColor: '#fff',
     color: '#000'
   },
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderColor: '#e5e7eb',
-    borderRadius: 4,
+    borderRadius: 16,
     backgroundColor: '#fff',
     color: '#000'
   },

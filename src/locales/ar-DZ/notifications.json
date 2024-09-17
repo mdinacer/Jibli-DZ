@@ -1,0 +1,116 @@
+{
+    "notifications": {
+        "user_lists": {
+            "updated": {
+                "message": "تم تحديث قائمة المستخدم.",
+                "description": "تم تحديث قائمتك بواسطة المتعاون {{collaboratorName}}."
+            }
+        },
+        "collaborator_list": {
+            "shared": {
+                "message": "تمت مشاركة قائمة المتعاون معك.",
+                "description": "تمت مشاركة قائمة المتعاون معك بواسطة {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "تم تحديث قائمة المتعاون.",
+                "description": "تم تحديث قائمة المتعاون بواسطة {{collaboratorName}}."
+            },
+            "deleted": {
+                "message": "تم حذف قائمة المتعاون.",
+                "description": "تم حذف قائمة المتعاون بواسطة {{collaboratorName}}."
+            }
+        },
+        "collaboration": {
+            "added": {
+                "message": "تمت إضافة التعاون.",
+                "description": "تمت إضافتك إلى تعاون جديد بواسطة {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "تم تحديث التعاون.",
+                "description": "تم تحديث التعاون بواسطة {{collaboratorName}}."
+            },
+            "revoked": {
+                "message": "تم إلغاء التعاون.",
+                "description": "تم إلغاء تعاونك مع {{collaboratorName}}."
+            }
+        },
+        "invitations": {
+            "sent": {
+                "message": "تم إرسال الدعوة.",
+                "description": "لقد أرسلت دعوة إلى {{recipientName}}."
+            },
+            "received": {
+                "message": "تم استلام الدعوة.",
+                "description": "لقد تلقيت دعوة من {{senderName}}."
+            },
+            "accepted": {
+                "message": "تم قبول الدعوة.",
+                "description": "تم قبول دعوتك من قبل {{recipientName}}."
+            },
+            "rejected": {
+                "message": "تم رفض الدعوة.",
+                "description": "تم رفض دعوتك من قبل {{recipientName}}."
+            }
+        },
+        "collaborator": {
+            "added": {
+                "message": "تمت إضافة متعاون.",
+                "description": "تمت إضافة {{collaboratorName}} كمتعاون."
+            },
+            "removed": {
+                "message": "تمت إزالة المتعاون.",
+                "description": "تمت إزالة {{collaboratorName}} من التعاون."
+            }
+        },
+        "list_items": {
+            "added": {
+                "message": "تمت إضافة عنصر إلى القائمة.",
+                "description": "تمت إضافة عنصر إلى قائمتك بواسطة {{collaboratorName}}."
+            },
+            "updated": {
+                "message": "تم تحديث عنصر في القائمة.",
+                "description": "تم تحديث عنصر في قائمتك بواسطة {{collaboratorName}}."
+            },
+            "deleted": {
+                "message": "تم حذف عنصر من القائمة.",
+                "description": "تم حذف عنصر من قائمتك بواسطة {{collaboratorName}}."
+            },
+            "status_change": {
+                "pending": {
+                    "message": "تم تغيير حالة العنصر إلى قيد الانتظار.",
+                    "description": "تم تغيير حالة عنصر في قائمتك إلى قيد الانتظار."
+                },
+                "bought": {
+                    "message": "تم تغيير حالة العنصر إلى تم الشراء.",
+                    "description": "تم تغيير حالة عنصر في قائمتك إلى تم الشراء."
+                },
+                "unavailable": {
+                    "message": "تم تغيير حالة العنصر إلى غير متوفر.",
+                    "description": "تم تغيير حالة عنصر في قائمتك إلى غير متوفر."
+                }
+            }
+        },
+        "alerts": {
+            "sent": {
+                "message": "تم إرسال التنبيه.",
+                "description": "لقد أرسلت تنبيهًا إلى {{recipientName}}."
+            },
+            "received": {
+                "message": "تم استلام التنبيه.",
+                "description": "لقد تلقيت تنبيهًا من {{senderName}}."
+            },
+            "started": {
+                "message": "تم بدء التنبيه.",
+                "description": "تم بدء التنبيه."
+            },
+            "timed_out": {
+                "message": "انتهى وقت التنبيه.",
+                "description": "انتهى وقت التنبيه."
+            },
+            "snoozed": {
+                "message": "تم تأجيل التنبيه.",
+                "description": "تم تأجيل التنبيه."
+            }
+        }
+    }
+}
