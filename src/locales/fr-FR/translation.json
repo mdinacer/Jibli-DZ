@@ -28,5 +28,213 @@
         "description": "Etes-vous sûr de vouloir supprimer cette liste ?",
         "cancel": "Annuler",
         "delete": "Supprimer"
+    },
+    "shared_list_zero": "Aucune liste partagée",
+    "shared_list_one": "Liste partagée",
+    "shared_list_many": "Listes partagées",
+    "shared_list_empty_state": {
+        "title": "Aucune liste partagée",
+        "description": "Vous n'avez encore aucune liste partagée. Quand quelqu'un partage une liste avec vous, elle apparaîtra ici."
+    },
+    "pending_item_zero": "Aucun article en attente",
+    "pending_item_one": "Article en attente",
+    "pending_item_many": "Articles en attente",
+    "pending_item_empty_state": {
+        "title": "Aucun article en attente",
+        "description": "Vous n'avez encore aucun article en attente. Lorsque quelqu'un partage une liste avec vous, des articles seront visibles ici."
+    },
+    "item_form": {
+        "title_create": "Ajouter un nouvel article",
+        "title_edit": "Modifier l'article",
+        "description_create": "Remplissez les détails pour ajouter cet article à votre liste de courses.",
+        "description_edit": "Mettez à jour les détails pour modifier cet article dans votre liste de courses.",
+        "fields": {
+            "name": {
+                "label": "Nom",
+                "placeholder": "Entrez le nom de l'article (ex. : Pommes)"
+            },
+            "quantity": {
+                "label": "Quantité",
+                "placeholder": "Entrez la quantité (ex. : 2)"
+            },
+            "unit": {
+                "label": "Unité",
+                "placeholder": "Entrez l'unité (ex. : kg, pièces)"
+            },
+            "note": {
+                "label": "Note",
+                "placeholder": "(facultatif, ex. : De préférence bio)"
+            }
+        },
+        "submit_button": "Enregistrer l'article",
+        "cancel_button": "Annuler",
+        "back_button": "Retour",
+        "close_button": "Fermer"
+    },
+    "units": {
+        "bag": "Sac",
+        "bottle": "Bouteille",
+        "box": "Boîte",
+        "can": "Canette",
+        "jar": "Bocal",
+        "kilogram": "Kilogramme",
+        "gram": "Gramme",
+        "pack": "Paquet",
+        "piece": "Pièce"
+    },
+    "item_delete": {
+        "title": "Supprimer l'article",
+        "description": "Etes-vous sûr de vouloir supprimer cet article ?",
+        "cancel": "Annuler",
+        "delete": "Supprimer"
+    },
+    "collaborator_zero": "Aucun collaborateur",
+    "collaborator_one": "Collaborateur",
+    "collaborator_many": "Collaborateurs",
+    "invitation_zero": "Aucune invitation",
+    "invitation_one": "Invitation",
+    "invitation_many": "Invitations",
+    "invitation_empty_state": {
+        "title": "Aucune invitation",
+        "description": "Vous n'avez encore aucune invitation. Lorsque quelqu'un partage une liste avec vous, des invitations seront visibles ici."
+    },
+    "invitation_form": {
+        "title": "Envoyer une invitation",
+        "description": "Partagez cette liste avec un nouveau collaborateur",
+        "fields": {
+            "email": {
+                "label": "Email",
+                "placeholder": "Entrez l'adresse courriel de l'utilisateur"
+            },
+            "message": {
+                "label": "Message",
+                "placeholder": "Ajoutez des commentaires (facultatif)"
+            }
+        },
+        "send": "Envoyer",
+        "close": "Fermer",
+        "cancel": "Annuler"
+    },
+    "profile_picture_delete": {
+        "title": "Supprimer la photo de profil",
+        "description": "Etes-vous sûr de vouloir supprimer votre photo de profil ?",
+        "cancel": "Annuler",
+        "delete": "Supprimer"
+    },
+    "account": "Compte",
+    "my_account": "Mon compte",
+    "username_form": {
+        "title": "Modifier votre nom d'utilisateur",
+        "description": "Entrez votre nouveau nom d'utilisateur",
+        "fields": {
+            "username": {
+                "label": "Nom d'utilisateur",
+                "placeholder": "Entrez votre nouveau nom d'utilisateur"
+            }
+        },
+        "submit_button": "Enregistrer",
+        "cancel_button": "Annuler"
+    },
+    "email_change_form": {
+        "title": "Modifier votre courriel",
+        "description": "Entrez votre nouveau courriel",
+        "fields": {
+            "current_password": {
+                "label": "Mot de passe actuel",
+                "placeholder": "Entrez votre mot de passe actuel"
+            },
+            "email": {
+                "label": "Courriel",
+                "placeholder": "Entrez votre nouveau courriel"
+            }
+        },
+        "submit_button": "Enregistrer",
+        "cancel_button": "Annuler"
+    },
+    "email_link_form": {
+        "title": "Modifier votre courriel",
+        "description": "Entrez votre nouveau courriel et votre mot de passe",
+        "fields": {
+            "new_email": {
+                "label": "Courriel",
+                "placeholder": "Entrez votre nouveau courriel"
+            },
+            "new_password": {
+                "label": "Mot de passe",
+                "placeholder": "Entrez votre nouveau mot de passe"
+            },
+            "confirm_password": {
+                "label": "Confirmer le mot de passe",
+                "placeholder": "Confirmez votre nouveau mot de passe"
+            }
+        },
+        "submit_button": "Enregistrer",
+        "cancel_button": "Annuler"
+    },
+    "account_delete_form": {
+        "title": "Supprimer le compte",
+        "description": "Entrez votre mot de passe actuel pour confirmer la suppression du compte",
+        "prompt": "Etes-vous sûr de vouloir supprimer votre compte ?",
+        "fields": {
+            "current_password": {
+                "label": "Mot de passe actuel",
+                "placeholder": "Entrez votre mot de passe actuel"
+            }
+        },
+        "cancel": "Annuler",
+        "delete": "Supprimer"
+    },
+    "sign_in_form": {
+        "title": "Se connecter",
+        "description": "Entrez votre nom d'utilisateur et votre mot de passe",
+        "fields": {
+            "username": {
+                "label": "Nom d'utilisateur",
+                "placeholder": "Entrez votre nom d'utilisateur"
+            },
+            "password": {
+                "label": "Mot de passe",
+                "placeholder": "Entrez votre mot de passe"
+            }
+        },
+        "submit_button": "Se connecter",
+        "cancel_button": "Annuler",
+        "google_button": "Se connecter avec Google",
+        "forgot_password": "Mot de passe oublié?",
+        "no_account_prompt": "Vous n'avez pas de compte?",
+        "no_account_link": "S'enregistrer"
+    },
+    "sign_up_form": {
+        "title": "S'enregistrer",
+        "description": "Entrez votre nom d'utilisateur et votre mot de passe",
+        "fields": {
+            "username": {
+                "label": "Nom d'utilisateur",
+                "placeholder": "Entrez votre nom d'utilisateur"
+            },
+            "email": {
+                "label": "Courriel",
+                "placeholder": "Entrez votre courriel"
+            },
+            "password": {
+                "label": "Mot de passe",
+                "placeholder": "Entrez votre mot de passe"
+            },
+            "confirm_password": {
+                "label": "Confirmer le mot de passe",
+                "placeholder": "Confirmez votre mot de passe"
+            }
+        },
+        "submit_button": "S'enregistrer",
+        "has_account_prompt": "Vous avez déjà un compte?",
+        "has_account_link": "Se connecter"
+    },
+    "google_auth": {
+        "sign_in": "Se connecter avec Google"
+    },
+    "item_status": {
+        "pending": "En attente",
+        "accepted": "Accepté",
+        "rejected": "Refusé"
     }
 }

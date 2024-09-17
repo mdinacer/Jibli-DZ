@@ -1,5 +1,6 @@
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Text, TextInputProps, TouchableOpacity, View } from 'react-native';
 
 interface Props<T extends FieldValues> extends TextInputProps {
@@ -15,14 +16,12 @@ const ButtonsSelectField = <T extends FieldValues>({
   name,
   items = []
 }: Props<T>) => {
+  const { t } = useTranslation('common', { keyPrefix: 'units' });
   return (
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, value, ...field },
-        fieldState: { error }
-      }) => (
+      render={({ field: { onChange, value }, fieldState: { error } }) => (
         <View style={{ rowGap: 6 }} className="w-full max-w-sm">
           <Text className="font-pregular text-base font-medium leading-none">
             {label}
@@ -40,7 +39,7 @@ const ButtonsSelectField = <T extends FieldValues>({
                 <Text
                   className={` ${value === item.value ? 'font-pmedium text-primary' : 'font-pregular text-muted-foreground'}`}
                 >
-                  {item.label}
+                  {t(item.value)}
                 </Text>
               </TouchableOpacity>
             ))}

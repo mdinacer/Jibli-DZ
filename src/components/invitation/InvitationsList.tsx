@@ -7,10 +7,12 @@ import React, { useCallback } from 'react';
 import { Alert, FlatList, FlatListProps } from 'react-native';
 import InvitationCard from './InvitationCard';
 import EmptyState from '../EmptyState';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<FlatListProps<Invitation>> {}
 
 const InvitationsList: React.FC<Props> = ({ ...props }) => {
+  const { t } = useTranslation('common');
   const { profile } = useProfileStore();
   useLoadInvitations();
   const { invitations, removeInvitation } = useInvitationStore();
@@ -87,8 +89,8 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
       )}
       ListEmptyComponent={
         <EmptyState
-          title="No invitations"
-          description="You have no pending invitations"
+          title={t('invitation_empty_state.title')}
+          description={t('invitation_empty_state.description')}
         />
       }
     />

@@ -9,18 +9,18 @@ import {
 import { ProductUnit, ProductUnitsList } from '@/models/ProductUnit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import AppButton from '../AppButton';
-import ButtonsSelectField from '../fields/ButtonSelectField';
-import NumberInputField from '../fields/NumberInputField';
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
 } from '../Card';
+import ButtonsSelectField from '../fields/ButtonSelectField';
+import NumberInputField from '../fields/NumberInputField';
 
 interface Props {
   item?: ListItem;
@@ -29,6 +29,7 @@ interface Props {
 }
 
 const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
+  const { t } = useTranslation('common', { keyPrefix: 'item_form' });
   const form = useForm<ListItemInput>({
     resolver: zodResolver(ListItemInputSchema),
     defaultValues: item
@@ -45,7 +46,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
 
   const {
     control,
-    formState: { isSubmitting, isValid, isDirty, errors },
+    formState: { isSubmitting, isDirty },
     handleSubmit,
     reset
   } = form;
@@ -66,36 +67,36 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
   return (
     <View className="">
       <CardHeader>
-        <CardTitle>Add Item</CardTitle>
-        <CardDescription>Type item details</CardDescription>
+        <CardTitle>{t('title_create')}</CardTitle>
+        <CardDescription>{t('description_create')}</CardDescription>
       </CardHeader>
       <CardContent style={{ rowGap: 24 }}>
         <InputField
           name="name"
-          label="Name"
+          label={t('fields.name.label')}
           control={control}
-          placeholder="Type the item name"
+          placeholder={t('fields.name.placeholder')}
         />
         <NumberInputField
           name="quantity"
           clearTextOnFocus
-          label="Quantity"
+          label={t('fields.quantity.label')}
           control={control}
-          placeholder="Type the item name"
+          placeholder={t('fields.quantity.placeholder')}
           keyboardType="number-pad"
         />
 
         <ButtonsSelectField
           control={control}
           name="unit"
-          label="Unit"
+          label={t('fields.unit.label')}
           items={ProductUnitsList}
         />
         <InputField
           name="note"
-          label="Note"
+          label={t('fields.note.label')}
           control={control}
-          placeholder="Type the item note"
+          placeholder={t('fields.note.placeholder')}
           multiline
           numberOfLines={3}
         />
@@ -107,7 +108,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           onPress={handleSubmit(handleOnSubmit)}
           //disabled={isSubmitting || !isValid}
         >
-          Add
+          {t('submit_button')}
         </AppButton>
         <AppButton
           className="w-full"
@@ -115,7 +116,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           onPress={onCancel}
           disabled={isSubmitting}
         >
-          {isDirty ? 'Cancel' : 'Back'}
+          {t(isDirty ? 'cancel_button' : 'back_button')}
         </AppButton>
       </CardFooter>
     </View>

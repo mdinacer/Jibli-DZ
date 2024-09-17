@@ -4,6 +4,7 @@ import { ListItemStatus } from '@/models/ListItem';
 import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import { router } from 'expo-router';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
+  const { t } = useTranslation('common');
   const owner = useCollaboratorStore((state) =>
     state.collaborators.find((c) => c.userId === list.ownerId)
   );
@@ -55,7 +57,7 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
               {pendingItems.length}
             </Text>
             <Text className="font-psemibold text-sm uppercase text-muted-foreground">
-              pending
+              {t(ListItemStatus.PENDING, { keyPrefix: 'item_status' })}
             </Text>
           </View>
         ) : (

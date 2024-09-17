@@ -14,6 +14,7 @@ import collaboratorService from '@/services/collaborator-service';
 import invitationService from '@/services/InvitationService';
 import InputField from '../fields/InputField';
 import AppButton from '../AppButton';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   open: boolean;
@@ -26,6 +27,7 @@ const defaultValues = {
 };
 
 const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
+  const { t } = useTranslation('common', { keyPrefix: 'invitation_form' });
   const { profile } = useProfileStore();
   const { invitations, addInvitation } = useInvitationStore();
 
@@ -52,7 +54,7 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
 
   const { control, formState, handleSubmit, setError, reset } =
     useForm<InvitationFormData>({
-      resolver: zodResolver(InvitationFormSchema),
+      resolver: zodResolver(schema),
       defaultValues
     });
 
@@ -140,20 +142,21 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
     >
       <View className="absolute inset-x-0 bottom-0 min-h-[50%] w-full rounded-t-2xl bg-white p-6">
         <CardHeader>
-          <CardTitle>Invite collaborator</CardTitle>
+          <CardTitle>{t('title')}</CardTitle>
         </CardHeader>
         <CardContent style={{ rowGap: 24 }}>
           <InputField
             name="recipient"
-            label="Email"
+            label={t('fields.email.label')}
             control={control}
-            placeholder="Type the recipient email"
+            placeholder={t('fields.email.placeholder')}
           />
 
           <InputField
             control={control}
             name="message"
-            label="Message"
+            label={t('fields.message.label')}
+            placeholder={t('fields.message.placeholder')}
             multiline
             numberOfLines={3}
           />
@@ -164,10 +167,10 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
             onPress={handleSubmit(handleOnSubmit)}
             disabled={isSubmitting || !isDirty}
           >
-            Send
+            {t('send')}
           </AppButton>
           <AppButton variant="outline" onPress={handleDiscardChanges}>
-            {isDirty ? 'Cancel' : 'Close'}
+            {t(isDirty ? 'cancel' : 'close')}
           </AppButton>
         </CardFooter>
       </View>

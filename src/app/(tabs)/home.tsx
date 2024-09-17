@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   const { profile } = useProfileStore();
-  const { t } = useTranslation('common', { keyPrefix: 'home' });
+  const { t } = useTranslation('common');
 
   return (
     <SafeAreaView
@@ -25,7 +25,7 @@ const Index = () => {
             <View className="flex-row items-center justify-between">
               <View>
                 <Text className="font-pmedium text-sm">
-                  {t('welcome_back')}
+                  {t('welcome_back', { keyPrefix: 'home' })}
                 </Text>
                 <Text className="font-psemibold text-2xl">
                   {profile?.username}
@@ -43,7 +43,7 @@ const Index = () => {
             <UserListDisplay />
             <SharedLists horizontal />
             <Text className="mt-5 font-pregular text-base text-muted-foreground">
-              Pending items
+              {t('pending_item_many')}
             </Text>
           </View>
         }

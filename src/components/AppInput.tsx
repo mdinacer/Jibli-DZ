@@ -20,10 +20,10 @@ const AppInput = React.forwardRef<TextInput, TextInputProps>(
           ref={ref}
           {...props}
           placeholderTextColor={'#6b7280'}
-          className={`w-full px-3 py-2 font-pregular text-base ${props.multiline ? 'min-h-[80px]' : 'min-h-10'}`}
+          className={`w-full px-3 py-2 font-pregular text-base placeholder:text-sm ${props.multiline ? 'min-h-[80px]' : 'min-h-10'}`}
           secureTextEntry={secureTextEntry && !isVisible}
         />
-        {secureTextEntry && (
+        {secureTextEntry && props.value && (
           <View className="absolute right-3 top-3">
             <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
               {isVisible ? (

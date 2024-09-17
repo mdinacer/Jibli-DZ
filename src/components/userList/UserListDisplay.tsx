@@ -20,7 +20,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Text, View } from 'react-native';
 import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
-import tw from 'twrnc';
 
 interface Props {}
 
@@ -69,13 +68,13 @@ const UserListDisplay: React.FC<Props> = () => {
   if (!list) {
     return (
       <View
-        style={tw`w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6`}
+        className={`w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6`}
       >
         <Text className="font-pregular text-base">
           {t('user_list.no_items_text')}
         </Text>
         <Link
-          style={tw`font-pregular text-base text-pink-500 underline underline-offset-2`}
+          className={`font-pregular text-base text-pink-500 underline underline-offset-2`}
           href={'/create'}
         >
           {t('user_list.no_items_action')}
@@ -85,12 +84,12 @@ const UserListDisplay: React.FC<Props> = () => {
   }
   return (
     <>
-      <Text style={tw`font-pregular text-base text-muted-foreground`}>
+      <Text className={`font-pregular text-base text-muted-foreground`}>
         {t('my_list')}
       </Text>
       <Card>
         <CardHeader>
-          <CardTitle style={{ writingDirection: 'rtl' }}>{list.name}</CardTitle>
+          <CardTitle>{list.name}</CardTitle>
           <CardDescription>
             {t('updated')}{' '}
             {formatDistanceToNow(list.updatedAt.toDate(), {

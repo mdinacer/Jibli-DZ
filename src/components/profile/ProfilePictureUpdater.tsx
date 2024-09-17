@@ -8,9 +8,11 @@ import React, { useCallback } from 'react';
 import { Alert, Text, View } from 'react-native';
 import AppButton from '../AppButton';
 import { FileAsset } from '@/models/FileAsset';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
+  const { t } = useTranslation('common');
   const { profile, updateProfile } = useProfileStore();
 
   const handleDeleteAsset = useCallback(async () => {
@@ -31,15 +33,15 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
 
   const handlePictureDeletePrompt = () => {
     Alert.alert(
-      'Are you sure?',
-      'Are you sure you want to delete your profile picture?',
+      t('profile_picture_delete.title'),
+      t('profile_picture_delete.description'),
       [
         {
-          text: 'Cancel',
+          text: t('profile_picture_delete.cancel'),
           style: 'cancel'
         },
         {
-          text: 'Delete',
+          text: t('profile_picture_delete.delete'),
           style: 'destructive',
           onPress: handleDeleteAsset
         }

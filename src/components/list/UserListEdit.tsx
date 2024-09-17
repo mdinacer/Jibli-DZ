@@ -8,9 +8,11 @@ import { List } from '@/models/List';
 import { ListItem } from '@/models/ListItem';
 import { Redirect } from 'expo-router';
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, FlatList, Text, View } from 'react-native';
 
 const UserListEdit = () => {
+  const { t } = useTranslation('common');
   const {
     list,
     modals,
@@ -33,26 +35,22 @@ const UserListEdit = () => {
       if (action === 'edit') {
         toggleItemFormModal(true);
       } else if (action === 'delete') {
-        Alert.alert(
-          'Delete item',
-          'Are you sure you want to delete this item?',
-          [
-            {
-              text: 'Cancel',
-              style: 'cancel'
-            },
-            {
-              text: 'Delete',
-              style: 'destructive',
-              onPress: () => {
-                removeItem(item.id);
-              }
+        Alert.alert(t('item_delete.title'), t('item_delete.description'), [
+          {
+            text: t('item_delete.cancel'),
+            style: 'cancel'
+          },
+          {
+            text: t('item_delete.delete'),
+            style: 'destructive',
+            onPress: () => {
+              removeItem(item.id);
             }
-          ]
-        );
+          }
+        ]);
       }
     },
-    [removeItem, toggleItemFormModal]
+    [removeItem, t, toggleItemFormModal]
   );
 
   const handleItemSubmit = useCallback(() => {

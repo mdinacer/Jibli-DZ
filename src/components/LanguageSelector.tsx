@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 
 const languages = [
-  { lang: 'ar-DZ', name: 'Arabic' },
+  //  { lang: 'ar-DZ', name: 'Arabic' },
   { lang: 'en-US', name: 'English' },
   { lang: 'fr-FR', name: 'French' }
 ];
