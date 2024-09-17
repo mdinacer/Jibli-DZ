@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import InputField from '@/components/fields/InputField';
 import {
@@ -13,12 +13,13 @@ import { useForm } from 'react-hook-form';
 import { Modal, View } from 'react-native';
 import AppButton from '../AppButton';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
-import ButtonsSelectField from '../fields/ButtonSelectField';
+import PickerSelectField from '../fields/PickerSelectField';
 import NumberInputField from '../fields/NumberInputField';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { generateId } from '@/utils/IdGenerator';
 import { Timestamp } from '@react-native-firebase/firestore';
 import { useTranslation } from 'react-i18next';
+import RNPickerSelect from 'react-native-picker-select';
 
 interface Props {
   item?: ListItem;
@@ -28,7 +29,17 @@ interface Props {
 }
 
 const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
-  const { t } = useTranslation('common', { keyPrefix: 'item_form' });
+  const { t } = useTranslation('common');
+
+  const unitsList = useMemo(
+    () =>
+      t('units_list', { returnObjects: true }) as {
+        label: string;
+        value: string;
+      }[],
+    [t]
+  );
+
   const { list, updateItem, addItem } = useUserListStore();
   const isEdit = !!item;
   const form = useForm<ListItemInput>({
@@ -93,36 +104,49 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
     >
       <Card className="absolute inset-x-0 bottom-0 h-auto max-h-screen w-full rounded-t-2xl bg-muted pb-4">
         <CardHeader>
-          <CardTitle>{t(isEdit ? 'title_edit' : 'title_create')}</CardTitle>
+          <CardTitle>
+            {t(isEdit ? 'title_edit' : 'title_create', {
+              keyPrefix: 'item_form'
+            })}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <View className="" style={{ rowGap: 24 }}>
             <InputField
               name="name"
-              label={t('fields.name.label')}
+              label={t('fields.name.label', { keyPrefix: 'item_form' })}
               control={control}
-              placeholder={t('fields.name.placeholder')}
+              placeholder={t('fields.name.placeholder', {
+                keyPrefix: 'item_form'
+              })}
             />
             <NumberInputField
               name="quantity"
               clearTextOnFocus
-              label={t('fields.quantity.label')}
+              label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
               control={control}
-              placeholder={t('fields.quantity.placeholder')}
+              placeholder={t('fields.quantity.placeholder', {
+                keyPrefix: 'item_form'
+              })}
               keyboardType="number-pad"
             />
 
-            <ButtonsSelectField
+            <PickerSelectField
               control={control}
               name="unit"
-              label={t('fields.unit.label')}
-              items={ProductUnitsList}
+              label={t('fields.unit.label', { keyPrefix: 'item_form' })}
+              items={unitsList}
+              placeholder={{
+                label: t('fields.unit.placeholder', { keyPrefix: 'item_form' })
+              }}
             />
             <InputField
               name="note"
-              label={t('fields.note.label')}
+              label={t('fields.note.label', { keyPrefix: 'item_form' })}
               control={control}
-              placeholder={t('fields.note.placeholder')}
+              placeholder={t('fields.note.placeholder', {
+                keyPrefix: 'item_form'
+              })}
               multiline
               numberOfLines={3}
             />
@@ -132,14 +156,16 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
                 onPress={handleSubmit(handleOnSubmit)}
                 //disabled={isSubmitting || !isValid}
               >
-                {t('submit_button')}
+                {t('submit_button', { keyPrefix: 'item_form' })}
               </AppButton>
               <AppButton
                 variant="outline"
                 onPress={handleClose}
                 disabled={isSubmitting}
               >
-                {t(isDirty ? 'cancel_button' : 'close_button')}
+                {t(isDirty ? 'cancel_button' : 'close_button', {
+                  keyPrefix: 'item_form'
+                })}
               </AppButton>
             </View>
           </View>

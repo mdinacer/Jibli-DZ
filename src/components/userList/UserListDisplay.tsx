@@ -20,6 +20,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Text, View } from 'react-native';
 import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
+import Squircle from '../Squircle';
 
 interface Props {}
 
@@ -87,7 +88,7 @@ const UserListDisplay: React.FC<Props> = () => {
       <Text className={`font-pregular text-base text-muted-foreground`}>
         {t('my_list')}
       </Text>
-      <Card>
+      <Squircle className="" squircleParams={{ fillColor: '#ffffff' }}>
         <CardHeader>
           <CardTitle>{list.name}</CardTitle>
           <CardDescription>
@@ -101,7 +102,7 @@ const UserListDisplay: React.FC<Props> = () => {
         <CardContent>
           <UserListItems items={list.items} />
         </CardContent>
-        <CardFooter className="flex-row items-center border-t border-border bg-muted bg-muted/50 px-6 py-3">
+        <CardFooter className="flex-row items-center border-t border-border px-6 py-3">
           <View className="flex-1">
             <Text className="font-pregular text-muted-foreground">
               {t(list.collaborators.length > 0 ? 'shared' : 'private')}
@@ -130,7 +131,7 @@ const UserListDisplay: React.FC<Props> = () => {
             />
           </View>
         </CardFooter>
-      </Card>
+      </Squircle>
       <ListCollaboratorsModal open={open} setOpen={setOpen} />
     </>
   );

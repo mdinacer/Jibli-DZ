@@ -37,7 +37,7 @@ const TabsLayout = () => {
   return (
     <AuthProvider>
       <DataLoader />
-      <ListModificationBanner />
+
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
@@ -115,6 +115,7 @@ const TabsLayout = () => {
         />
       </Tabs>
       <DataListeners />
+      <ListModificationBanner />
     </AuthProvider>
   );
 };

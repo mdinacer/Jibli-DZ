@@ -14,13 +14,13 @@ const AppInput = React.forwardRef<TextInput, TextInputProps>(
     return (
       <View
         style={{ position: 'relative' }}
-        className="relative w-full rounded-md border border-border bg-background px-3 py-1"
+        className="dark relative w-full rounded-2xl border border-border bg-background px-3 py-1 dark:bg-red-600"
       >
         <TextInput
           ref={ref}
           {...props}
           placeholderTextColor={'#6b7280'}
-          className={`w-full px-3 py-2 font-pregular text-base placeholder:text-sm ${props.multiline ? 'min-h-[80px]' : 'min-h-10'}`}
+          className={`w-full px-3 py-2 font-pregular text-base placeholder:text-sm ${props.multiline ? 'min-h-[80px]' : 'h-10'}`}
           secureTextEntry={secureTextEntry && !isVisible}
         />
         {secureTextEntry && props.value && (

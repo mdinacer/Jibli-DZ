@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 
 const languages = [
-  //  { lang: 'ar-DZ', name: 'Arabic' },
+  { lang: 'ar-DZ', name: 'Arabic' },
   { lang: 'en-US', name: 'English' },
   { lang: 'fr-FR', name: 'French' }
 ];
@@ -43,27 +43,26 @@ const LanguageSelector = () => {
     setRTL(lang);
   };
   return (
-    <View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ flexDirection: 'row', paddingVertical: 10 }}
-      >
-        {languages.map(({ lang, name }) => (
-          <TouchableOpacity
-            key={name}
-            onPress={() => changeLanguage(lang)}
-            style={[
-              { paddingHorizontal: 10 },
-              currentLanguage === lang && { transform: [{ scale: 1.2 }] },
-              currentLanguage !== lang && { opacity: 0.5 }
-            ]}
-          >
-            <Text>{name}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </View>
+    <ScrollView
+      horizontal
+      style={{ flexGrow: 1, height: 24 }}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ flexDirection: 'row', paddingVertical: 10 }}
+    >
+      {languages.map(({ lang, name }) => (
+        <TouchableOpacity
+          key={name}
+          onPress={() => changeLanguage(lang)}
+          style={[
+            { paddingHorizontal: 10, height: 16 },
+            currentLanguage === lang && { transform: [{ scale: 1.2 }] },
+            currentLanguage !== lang && { opacity: 0.5 }
+          ]}
+        >
+          <Text>{name}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 

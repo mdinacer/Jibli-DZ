@@ -1,3 +1,6 @@
+import translationAr from '@/locales/ar-DZ/translation.json';
+import errorsAr from '@/locales/ar-DZ/errors.json';
+import notificationsAr from '@/locales/ar-DZ/notifications.json';
 import translationEn from '@/locales/en-US/translation.json';
 import errorsEn from '@/locales/en-US/errors.json';
 import notificationsEn from '@/locales/en-US/notifications.json';
@@ -9,7 +12,11 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
-  // 'ar-DZ': { common: translationAr },
+  'ar-DZ': {
+    common: translationAr,
+    errors: errorsAr,
+    notifications: notificationsAr
+  },
   'en-US': {
     common: translationEn,
     errors: errorsEn,

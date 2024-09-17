@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1010212466047",
+    "firebase_url": "https://jibli-dz-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "jibli-dz",
+    "storage_bucket": "jibli-dz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010212466047:android:17173a8ad663ad6dcc3e4a",
+        "android_client_info": {
+          "package_name": "com.ochentero.jiblidz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010212466047-7hrl53ir7s2aahltdq6olpvc85ngkpj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ochentero.jiblidz",
+            "certificate_hash": "972baad14a680c365fe10758c910bebf2e412555"
+          }
+        },
+        {
+          "client_id": "1010212466047-9i4ruvu4edl0149872ec4j9bf4eq85pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6U5Svp7AEwaKqMmh_Yf4xElMPjHGHc5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010212466047-9i4ruvu4edl0149872ec4j9bf4eq85pk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1010212466047-oul2o4d09m481nrrhh0th1q8ph8oi3bu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ochentero.jiblidz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

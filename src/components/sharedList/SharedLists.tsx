@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
-const PADDING = 16;
+const PADDING = 0;
 
 const SharedLists: React.FC<Props> = ({ ...props }) => {
   const { t } = useTranslation('common');
@@ -17,7 +17,7 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
 
   const size = useMemo(
     () =>
-      lists.length > 0 ? width - PADDING * 2 : (width - PADDING * 2) * 0.8,
+      lists.length > 0 ? (width - PADDING * 2) * 0.9 : width - PADDING * 2,
     [lists.length, width]
   );
 
@@ -27,8 +27,12 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         {t('shared_list_many')}
       </Text>
       <FlatList
-        style={{ flex: 1, width: '100%' }}
-        contentContainerStyle={{ rowGap: 8 }}
+        className="flex-1 pb-4"
+        contentContainerStyle={{
+          columnGap: 16,
+          paddingBottom: 16,
+          padding: 16
+        }}
         data={lists}
         keyExtractor={(l) => l.id}
         renderItem={({ item }) => (

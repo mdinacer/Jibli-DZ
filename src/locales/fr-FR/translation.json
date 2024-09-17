@@ -234,7 +234,45 @@
     },
     "item_status": {
         "pending": "En attente",
-        "accepted": "Accepté",
-        "rejected": "Refusé"
-    }
+        "bought": "Acheté",
+        "unavailable": "Indisponible"
+    },
+    "units_list": [
+        {
+            "label": "Sac",
+            "value": "bag"
+        },
+        {
+            "label": "Bouteille",
+            "value": "bottle"
+        },
+        {
+            "label": "Boîte",
+            "value": "box"
+        },
+        {
+            "label": "Canette",
+            "value": "can"
+        },
+        {
+            "label": "Bocal",
+            "value": "jar"
+        },
+        {
+            "label": "Kilogramme",
+            "value": "kilogram"
+        },
+        {
+            "label": "Gramme",
+            "value": "gram"
+        },
+        {
+            "label": "Paquet",
+            "value": "pack"
+        },
+        {
+            "label": "Pièce",
+            "value": "piece"
+        }
+    ]
 }
