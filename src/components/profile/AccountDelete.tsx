@@ -3,8 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert, Button, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Alert } from 'react-native';
 import { z } from 'zod';
+import AppButton from '../AppButton';
 import {
   Card,
   CardContent,
@@ -13,8 +15,6 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
-import AppButton from '../AppButton';
-import { useTranslation } from 'react-i18next';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -34,7 +34,7 @@ const AccountDelete = () => {
 
   const {
     control,
-    formState: { isSubmitting, isDirty, isValid, isLoading },
+    formState: { isSubmitting, isDirty, isValid },
     handleSubmit
   } = form;
 

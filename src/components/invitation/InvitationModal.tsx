@@ -1,20 +1,20 @@
-import { View, Text, Modal, Alert } from 'react-native';
-import React, { useCallback, useMemo } from 'react';
-import { CardContent, CardFooter, CardHeader, CardTitle } from '../Card';
-import { useForm } from 'react-hook-form';
 import {
   InvitationFormData,
   InvitationFormSchema,
   InvitationInput
 } from '@/models/Invitation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useProfileStore } from '@/stores/useProfileStore';
-import { useInvitationStore } from '@/stores/useInvitationStore';
 import collaboratorService from '@/services/collaborator-service';
 import invitationService from '@/services/InvitationService';
-import InputField from '../fields/InputField';
-import AppButton from '../AppButton';
+import { useInvitationStore } from '@/stores/useInvitationStore';
+import { useProfileStore } from '@/stores/useProfileStore';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useCallback, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { Alert, Modal, View } from 'react-native';
+import AppButton from '../AppButton';
+import { CardContent, CardFooter, CardHeader, CardTitle } from '../Card';
+import InputField from '../fields/InputField';
 
 interface Props {
   open: boolean;

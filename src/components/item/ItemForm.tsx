@@ -6,7 +6,7 @@ import {
   ListItemInput,
   ListItemInputSchema
 } from '@/models/ListItem';
-import { ProductUnit, ProductUnitsList } from '@/models/ProductUnit';
+import { ProductUnit } from '@/models/ProductUnit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -19,8 +19,8 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
-import PickerSelectField from '../fields/PickerSelectField';
 import NumberInputField from '../fields/NumberInputField';
+import PickerSelectField from '../fields/PickerSelectField';
 
 interface Props {
   item?: ListItem;

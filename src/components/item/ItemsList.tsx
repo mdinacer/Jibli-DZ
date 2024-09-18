@@ -1,14 +1,9 @@
 import { mockListItems } from '@/data/mock-data';
-import { ListItem } from '@/models/ListItem';
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import UserItemDisplay from './UserItemDisplay';
 
 const ItemsList = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ListItem | undefined>(
-    undefined
-  );
   return (
     <>
       <FlatList

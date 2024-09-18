@@ -34,11 +34,6 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
     [list]
   );
 
-  const pendingItems = useMemo(
-    () => list.items.filter((i) => i.status === ListItemStatus.PENDING),
-    [list.items]
-  );
-
   if (!owner) return null;
   return (
     <TouchableOpacity

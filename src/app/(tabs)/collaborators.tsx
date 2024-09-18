@@ -1,4 +1,3 @@
-import { CardTitle } from '@/components/Card';
 import CollaboratorsList from '@/components/collaborator/CollaboratorsList';
 import IconButton from '@/components/IconButton';
 import InvitationModal from '@/components/invitation/InvitationModal';

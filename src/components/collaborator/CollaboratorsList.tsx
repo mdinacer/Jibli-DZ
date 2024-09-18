@@ -1,9 +1,8 @@
-import { MockCollaborators } from '@/data/mock-data';
 import { Collaborator } from '@/models/Collaborator';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import React from 'react';
 import { FlatList, FlatListProps } from 'react-native';
 import CollaboratorCard from './CollaboratorCard';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 
 interface Props extends Partial<FlatListProps<Collaborator>> {}
 

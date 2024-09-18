@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 
 export function useLoadUserList() {
   const userListStore = useUserListStore();
-  const { list, setList, state, loaded, setState, setLoaded } = userListStore;
+  const { setList, state, loaded, setState, setLoaded } = userListStore;
 
   const handleLoadUserList = useCallback(async () => {
     setState('pending');

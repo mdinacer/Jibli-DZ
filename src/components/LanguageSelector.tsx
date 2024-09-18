@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  I18nManager
-} from 'react-native';
-import React, { useCallback, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
+import React, { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { I18nManager, ScrollView, Text, TouchableOpacity } from 'react-native';
 
 const languages = [
   { lang: 'ar-DZ', name: 'Arabic' },
@@ -17,7 +11,7 @@ const languages = [
 ];
 
 const LanguageSelector = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
   useEffect(() => {

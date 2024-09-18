@@ -18,7 +18,7 @@ export default {
   }
 };
 
-const theme = {
+export const theme = {
   primary: '#161622',
   secondary: {
     DEFAULT: '#FF9C01',

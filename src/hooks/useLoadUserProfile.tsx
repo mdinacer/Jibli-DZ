@@ -8,7 +8,7 @@ import { useCallback, useEffect } from 'react';
 
 export default function useLoadUserProfile() {
   const { user, setUser, signOut } = useAuthStore();
-  const { profile, status, loaded, setProfile } = useProfileStore();
+  const { profile, status, setProfile } = useProfileStore();
 
   const handleSignOut = useCallback(async () => {
     await signOut();
@@ -29,7 +29,7 @@ export default function useLoadUserProfile() {
         throw error;
       }
     },
-    [handleSignOut, setProfile]
+    [setProfile]
   );
 
   const handleAuthStateChange = useCallback(
@@ -49,7 +49,7 @@ export default function useLoadUserProfile() {
         console.error(error);
       }
     },
-    [handleLoadProfile, handleSignOut, setUser]
+    [handleLoadProfile, setUser]
   );
   useEffect(() => {
     const unsubscribe = firebaseServices.auth.onAuthStateChanged((user) => {
@@ -64,6 +64,7 @@ export default function useLoadUserProfile() {
   return {
     user,
     profile,
-    status
+    status,
+    handleSignOut
   };
 }

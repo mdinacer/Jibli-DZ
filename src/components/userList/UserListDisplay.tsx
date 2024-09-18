@@ -1,5 +1,4 @@
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
@@ -27,7 +26,7 @@ interface Props {}
 const UserListDisplay: React.FC<Props> = () => {
   const { t, i18n } = useTranslation('common');
   const [open, setOpen] = useState(false);
-  const { list, state, setList } = useLoadUserList();
+  const { list, setList } = useLoadUserList();
   const { collaborators } = useCollaboratorStore();
   const { removeList } = useListStore();
 

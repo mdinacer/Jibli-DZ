@@ -5,7 +5,7 @@ import { useUserListStore } from '@/stores/useUserListStore';
 import { generateId } from '@/utils/IdGenerator';
 import { Timestamp } from '@react-native-firebase/firestore';
 import React, { useCallback } from 'react';
-import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Create = () => {
@@ -28,11 +28,15 @@ const Create = () => {
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={{ flex: 1 }}>
-      <KeyboardAvoidingView>
-        <ScrollView>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={80} // Adjust based on your header height or SafeArea
+      >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View className="flex-1 justify-center">
             {list ? (
-              <ItemForm onSubmit={addNewItem} onCancel={function (): void {}} />
+              <ItemForm onSubmit={addNewItem} onCancel={() => {}} />
             ) : (
               <ListCreateField
                 onComplete={(list) => {

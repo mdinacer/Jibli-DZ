@@ -22,7 +22,7 @@ function useListsListener() {
     error: null
   });
 
-  const { lists, loaded, updateList, addList, removeList } = useListStore();
+  const { lists, loaded, updateList, removeList } = useListStore();
 
   const handleDocChanges = useCallback(
     (change: FirebaseFirestoreTypes.DocumentChange<List>, userId: string) => {

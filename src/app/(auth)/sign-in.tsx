@@ -1,6 +1,6 @@
 import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
-import { CardDescription, CardHeader, CardTitle } from '@/components/Card';
+import { CardDescription, CardTitle } from '@/components/Card';
 import InputField from '@/components/fields/InputField';
 import { SignInFormData, SignInFormSchema } from '@/schemas/SingInFormSchema';
 import { useAuthStore } from '@/stores/useAuthStore';

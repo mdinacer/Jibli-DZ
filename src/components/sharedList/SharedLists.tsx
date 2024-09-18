@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
-const PADDING = 0;
+const PADDING = 16;
 
 const SharedLists: React.FC<Props> = ({ ...props }) => {
   const { t } = useTranslation('common');

@@ -49,3 +49,9 @@ fire**.json
 .firebaserc
 *.rules
 database.rules.json
+
+# add fierebase emulators logs
+firebase-debug.log
+firebase-debug.*.log
+npm-debug.log
+ui-debug.log

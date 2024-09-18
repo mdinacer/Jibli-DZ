@@ -7,19 +7,18 @@ import {
   ListItemInputSchema,
   ListItemStatus
 } from '@/models/ListItem';
-import { ProductUnit, ProductUnitsList } from '@/models/ProductUnit';
+import { ProductUnit } from '@/models/ProductUnit';
+import { useUserListStore } from '@/stores/useUserListStore';
+import { generateId } from '@/utils/IdGenerator';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Timestamp } from '@react-native-firebase/firestore';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Modal, View } from 'react-native';
 import AppButton from '../AppButton';
 import { Card, CardContent, CardHeader, CardTitle } from '../Card';
-import PickerSelectField from '../fields/PickerSelectField';
 import NumberInputField from '../fields/NumberInputField';
-import { useUserListStore } from '@/stores/useUserListStore';
-import { generateId } from '@/utils/IdGenerator';
-import { Timestamp } from '@react-native-firebase/firestore';
-import { useTranslation } from 'react-i18next';
-import RNPickerSelect from 'react-native-picker-select';
+import PickerSelectField from '../fields/PickerSelectField';
 
 interface Props {
   item?: ListItem;

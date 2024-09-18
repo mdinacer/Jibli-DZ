@@ -1,6 +1,5 @@
 import AppButton from '@/components/AppButton';
-import { CardContent, CardHeader, CardTitle } from '@/components/Card';
-import CheckBoxField from '@/components/fields/CheckboxField';
+import { CardHeader, CardTitle } from '@/components/Card';
 import InputField from '@/components/fields/InputField';
 import ImageUpload from '@/components/fileAsset/ImageUpload';
 import { FileAsset } from '@/models/FileAsset';
@@ -17,13 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const InitialProfileScreen = () => {
@@ -40,9 +33,8 @@ const InitialProfileScreen = () => {
 
   const {
     control,
-    formState: { isSubmitting, isLoading },
+    formState: { isSubmitting },
     handleSubmit,
-    watch,
     reset
   } = form;
 
@@ -79,8 +71,6 @@ const InitialProfileScreen = () => {
     },
     [reset, setProfile, user]
   );
-
-  const { createList } = watch();
 
   return (
     <SafeAreaView

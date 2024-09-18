@@ -1,7 +1,9 @@
 import { Icons } from '@/constants';
-import { MockCollaborators } from '@/data/mock-data';
 import { Collaborator } from '@/models/Collaborator';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
+import { useUserListStore } from '@/stores/useUserListStore';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   FlatList,
   Image,
@@ -13,9 +15,6 @@ import {
 import {} from 'react-native-gesture-handler';
 import { CardTitle } from '../Card';
 import IconButton from '../IconButton';
-import { useUserListStore } from '@/stores/useUserListStore';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { useTranslation } from 'react-i18next';
 
 interface Props {
   open: boolean;

@@ -38,7 +38,7 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
   });
 
   const {
-    formState: { isSubmitting, isLoading, isValid, isDirty },
+    formState: { isSubmitting, isValid },
     control,
     handleSubmit
   } = form;

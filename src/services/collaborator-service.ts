@@ -1,15 +1,12 @@
 import { Collections } from '@/config/collections';
 import firebaseServices from '@/config/firebaseConfig';
-import CustomError from '@/utils/CustomError';
 import { Collaborator } from '@/models/Collaborator';
-import { List } from '@/models/List';
 import { Profile } from '@/models/Profile';
+import CustomError from '@/utils/CustomError';
 import {
   FirebaseFirestoreTypes,
-  and,
   arrayRemove,
-  arrayUnion,
-  where
+  arrayUnion
 } from '@react-native-firebase/firestore';
 
 // Firestore collection reference for user profiles

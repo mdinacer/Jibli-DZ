@@ -2,7 +2,7 @@ import ItemDisplay from '@/components/item/ItemDisplay';
 import { Icons } from '@/constants';
 import { ItemStatusStyles, ListItem, ListItemStatus } from '@/models/ListItem';
 import React, { useCallback } from 'react';
-import { Animated, View } from 'react-native';
+import { View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable

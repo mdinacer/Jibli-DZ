@@ -1,12 +1,12 @@
 import { List } from '@/models/List';
 import { ListItem, StatusOrder } from '@/models/ListItem';
 
-interface ListChanges {
-  nameChanged: boolean;
-  addedItems: ListItem[];
-  updatedItems: ListItem[];
-  removedItems: ListItem[];
-}
+// interface ListChanges {
+//   nameChanged: boolean;
+//   addedItems: ListItem[];
+//   updatedItems: ListItem[];
+//   removedItems: ListItem[];
+// }
 
 export const generateSlug = (name: string): string => {
   return name

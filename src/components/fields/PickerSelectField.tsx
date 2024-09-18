@@ -1,8 +1,6 @@
-import { Icons } from '@/constants';
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import RNPickerSelect, { PickerSelectProps } from 'react-native-picker-select';
 
 interface Props<T extends FieldValues>
@@ -20,7 +18,7 @@ const PickerSelectField = <T extends FieldValues>({
   items = [],
   ...props
 }: Props<T>) => {
-  const { t } = useTranslation('common', { keyPrefix: 'units' });
+  // const { t } = useTranslation('common', { keyPrefix: 'units' });
   return (
     <Controller
       control={control}
@@ -49,35 +47,35 @@ const PickerSelectField = <T extends FieldValues>({
 
 export default PickerSelectField;
 
-const styles = StyleSheet.create({
-  inputIOS: {
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    borderRadius: 16,
-    backgroundColor: '#fff',
-    color: '#000'
-  },
-  inputAndroid: {
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    borderRadius: 16,
-    backgroundColor: '#fff',
-    color: '#000'
-  },
-  placeholder: {
-    color: '#6b7280'
-  },
-  iconContainer: {
-    top: 10,
-    right: 12
-  },
-  viewContainer: {
-    marginBottom: 12
-  }
-});
+// const styles = StyleSheet.create({
+//   inputIOS: {
+//     fontFamily: 'Poppins-Regular',
+//     fontSize: 16,
+//     padding: 12,
+//     borderWidth: 1,
+//     borderColor: '#e5e7eb',
+//     borderRadius: 16,
+//     backgroundColor: '#fff',
+//     color: '#000'
+//   },
+//   inputAndroid: {
+//     fontFamily: 'Poppins-Regular',
+//     fontSize: 16,
+//     padding: 12,
+//     borderWidth: 1,
+//     borderColor: '#e5e7eb',
+//     borderRadius: 16,
+//     backgroundColor: '#fff',
+//     color: '#000'
+//   },
+//   placeholder: {
+//     color: '#6b7280'
+//   },
+//   iconContainer: {
+//     top: 10,
+//     right: 12
+//   },
+//   viewContainer: {
+//     marginBottom: 12
+//   }
+// });

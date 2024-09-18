@@ -39,7 +39,7 @@ const EmailLinkCard = () => {
 
   const {
     control,
-    formState: { isSubmitting, isDirty, isValid, isLoading },
+    formState: { isSubmitting, isDirty, isValid },
     handleSubmit
   } = form;
 
@@ -58,6 +58,7 @@ const EmailLinkCard = () => {
         await auth().currentUser?.reauthenticateWithCredential(
           googleCredential
         );
+      console.log(result);
     } catch (error: any) {
       throw new Error('Re-authentication failed: ' + error.message);
     }
