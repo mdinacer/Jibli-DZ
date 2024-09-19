@@ -33,16 +33,12 @@ const Create = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={80} // Adjust based on your header height or SafeArea
       >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View className="flex-1 justify-center">
+        <ScrollView className="px-4" contentContainerStyle={{ flexGrow: 1 }}>
+          <View className="flex-1">
             {list ? (
               <ItemForm onSubmit={addNewItem} onCancel={() => {}} />
             ) : (
-              <ListCreateField
-                onComplete={(list) => {
-                  console.log(JSON.stringify(list, null, 2));
-                }}
-              />
+              <ListCreateField onComplete={(list) => {}} />
             )}
           </View>
         </ScrollView>

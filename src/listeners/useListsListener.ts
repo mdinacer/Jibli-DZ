@@ -105,7 +105,7 @@ function useListsListener() {
           const source = querySnapshot.metadata.fromCache
             ? 'local cache'
             : 'server';
-          console.log('Data came from ' + source);
+          console.info('Data came from ' + source);
         },
         (error: any) => {
           console.error('Error listening to lists:', error);

@@ -14,9 +14,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Timestamp } from '@react-native-firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Modal, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  Text,
+  View
+} from 'react-native';
 import AppButton from '../AppButton';
-import { Card, CardContent, CardHeader, CardTitle } from '../Card';
 import NumberInputField from '../fields/NumberInputField';
 import PickerSelectField from '../fields/PickerSelectField';
 
@@ -79,7 +85,6 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
 
           addItem(item);
         }
-        console.log(data);
         onSubmit?.(data);
         reset();
       } catch (error: any) {
@@ -101,75 +106,83 @@ const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
       visible={open}
       onRequestClose={() => setOpen(false)}
     >
-      <Card className="absolute inset-x-0 bottom-0 h-auto max-h-screen w-full rounded-t-2xl bg-muted pb-4">
-        <CardHeader>
-          <CardTitle>
-            {t(isEdit ? 'title_edit' : 'title_create', {
-              keyPrefix: 'item_form'
-            })}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <View className="" style={{ rowGap: 24 }}>
-            <InputField
-              name="name"
-              label={t('fields.name.label', { keyPrefix: 'item_form' })}
-              control={control}
-              placeholder={t('fields.name.placeholder', {
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1"
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+      >
+        <ScrollView className="w-full rounded-t-2xl bg-muted pb-4">
+          <View>
+            <Text className="mb-4 px-4 pt-4 font-psemibold text-xl">
+              {t(isEdit ? 'title_edit' : 'title_create', {
                 keyPrefix: 'item_form'
               })}
-            />
-            <NumberInputField
-              name="quantity"
-              clearTextOnFocus
-              label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
-              control={control}
-              placeholder={t('fields.quantity.placeholder', {
-                keyPrefix: 'item_form'
-              })}
-              keyboardType="number-pad"
-            />
-
-            <PickerSelectField
-              control={control}
-              name="unit"
-              label={t('fields.unit.label', { keyPrefix: 'item_form' })}
-              items={unitsList}
-              placeholder={{
-                label: t('fields.unit.placeholder', { keyPrefix: 'item_form' })
-              }}
-            />
-            <InputField
-              name="note"
-              label={t('fields.note.label', { keyPrefix: 'item_form' })}
-              control={control}
-              placeholder={t('fields.note.placeholder', {
-                keyPrefix: 'item_form'
-              })}
-              multiline
-              numberOfLines={3}
-            />
-
-            <View className="gap-y-4">
-              <AppButton
-                onPress={handleSubmit(handleOnSubmit)}
-                //disabled={isSubmitting || !isValid}
-              >
-                {t('submit_button', { keyPrefix: 'item_form' })}
-              </AppButton>
-              <AppButton
-                variant="outline"
-                onPress={handleClose}
-                disabled={isSubmitting}
-              >
-                {t(isDirty ? 'cancel_button' : 'close_button', {
+            </Text>
+          </View>
+          <View className="w-full p-4">
+            <View className="" style={{ rowGap: 24 }}>
+              <InputField
+                name="name"
+                label={t('fields.name.label', { keyPrefix: 'item_form' })}
+                control={control}
+                placeholder={t('fields.name.placeholder', {
                   keyPrefix: 'item_form'
                 })}
-              </AppButton>
+              />
+              <NumberInputField
+                name="quantity"
+                clearTextOnFocus
+                label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
+                control={control}
+                placeholder={t('fields.quantity.placeholder', {
+                  keyPrefix: 'item_form'
+                })}
+                keyboardType="number-pad"
+              />
+
+              <PickerSelectField
+                control={control}
+                name="unit"
+                label={t('fields.unit.label', { keyPrefix: 'item_form' })}
+                items={unitsList}
+                placeholder={{
+                  label: t('fields.unit.placeholder', {
+                    keyPrefix: 'item_form'
+                  })
+                }}
+              />
+              <InputField
+                name="note"
+                label={t('fields.note.label', { keyPrefix: 'item_form' })}
+                control={control}
+                placeholder={t('fields.note.placeholder', {
+                  keyPrefix: 'item_form'
+                })}
+                multiline
+                numberOfLines={3}
+              />
+
+              <View className="gap-y-4">
+                <AppButton
+                  onPress={handleSubmit(handleOnSubmit)}
+                  //disabled={isSubmitting || !isValid}
+                >
+                  {t('submit_button', { keyPrefix: 'item_form' })}
+                </AppButton>
+                <AppButton
+                  variant="outline"
+                  onPress={handleClose}
+                  disabled={isSubmitting}
+                >
+                  {t(isDirty ? 'cancel_button' : 'close_button', {
+                    keyPrefix: 'item_form'
+                  })}
+                </AppButton>
+              </View>
             </View>
           </View>
-        </CardContent>
-      </Card>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

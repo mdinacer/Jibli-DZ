@@ -274,5 +274,9 @@
             "label": "Pièce",
             "value": "piece"
         }
-    ]
+    ],
+    "collaborators_empty_state":{
+        "title": "Aucun collaborateur",
+        "description": "Ajoutez des collaborateurs à votre liste pour les afficher ici."
+    }
 }

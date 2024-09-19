@@ -90,6 +90,9 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
           <Text className="font-pbold text-2xl text-white">
             {profile?.username}
           </Text>
+          <Text className="font-pregular text-sm text-white">
+            {profile?.email}
+          </Text>
         </View>
         {profile?.picture && (
           <AppButton

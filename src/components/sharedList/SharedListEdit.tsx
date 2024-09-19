@@ -14,6 +14,7 @@ interface Props {
 
 const SharedListEdit: React.FC<Props> = ({ listData }) => {
   const {
+    isSaving,
     list,
     isModified,
     discardChanges,
@@ -52,7 +53,7 @@ const SharedListEdit: React.FC<Props> = ({ listData }) => {
           className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border bg-gray-400/20 px-4 py-2"
         >
           <IconButton
-            //  disabled={!modified || state.saving}
+            disabled={!isModified || isSaving}
             variant="bordered"
             icon={Icons.CheckIcon}
             onPress={saveChanges}

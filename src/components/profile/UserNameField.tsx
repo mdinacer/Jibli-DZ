@@ -46,7 +46,7 @@ const UserNameField = () => {
       console.error('An error occurred while updating your username', {
         message: error.message
       });
-      console.log(error);
+      console.error(error);
     } finally {
       setIsSaving(false);
     }

@@ -24,7 +24,7 @@ const InputField = <T extends FieldValues>({
         fieldState: { error }
       }) => (
         <View style={{ rowGap: 6 }} className="w-full max-w-sm">
-          <Text className="font-pregular text-base font-medium leading-none">
+          <Text className="font-pregular text-sm font-medium leading-none">
             {label}
           </Text>
           <AppInput

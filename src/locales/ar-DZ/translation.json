@@ -83,7 +83,7 @@
         "pack": "عبوة",
         "piece": "قطعة"
     },
-    "delete_item": {
+    "item_delete": {
         "title": "حذف العنصر",
         "description": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
         "cancel": "إلغاء",
@@ -276,5 +276,9 @@
             "label": "عبوة",
             "value": "pack"
         }
-    ]
+    ],
+    "collaborators_empty_state": {
+        "title": "لا يوجد متعاقدين",
+        "description": "لا يوجد متعاقدين لعرضهم في القائمة الخاصة بك."
+    }
 }

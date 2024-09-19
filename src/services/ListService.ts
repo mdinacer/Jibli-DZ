@@ -212,8 +212,6 @@ const updateListCollaborators = async (
   collaborators: string[]
 ): Promise<void> => {
   try {
-    console.log('updateListCollaborators', listId, collaborators);
-
     const realtimeRef = firebaseServices.database.ref(
       `${Collections.LISTS}/${listId}`
     );
@@ -224,8 +222,6 @@ const updateListCollaborators = async (
         collaborators,
         updatedAt: Timestamp.now()
       };
-
-      console.log(data);
 
       await realtimeRef.set(data);
     } else {

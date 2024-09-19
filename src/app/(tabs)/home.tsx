@@ -2,6 +2,7 @@ import PendingItemsLists from '@/components/pendingItems/PendingItemsLists';
 import SharedLists from '@/components/sharedList/SharedLists';
 import UserListDisplay from '@/components/userList/UserListDisplay';
 import { Images } from '@/constants';
+import usePushNotification from '@/hooks/usePushNotification';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,19 +10,19 @@ import { Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
+  usePushNotification();
   const { profile } = useProfileStore();
   const { t } = useTranslation('common');
 
   return (
-    <SafeAreaView
-      style={{ flex: 1 }}
-      edges={['top', 'left', 'right', 'bottom']}
-    >
+    <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
       <PendingItemsLists
         className="flex-1 p-4"
         style={{ rowGap: 16 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: 60 }}
+        ListHeaderComponentStyle={{ rowGap: 24, paddingBottom: 24 }}
         ListHeaderComponent={
-          <View className="py-6" style={{ rowGap: 24 }}>
+          <>
             <View className="flex-row items-center justify-between">
               <View>
                 <Text className="font-pmedium text-sm">
@@ -45,7 +46,7 @@ const Index = () => {
             <Text className="mt-5 font-pregular text-base text-muted-foreground">
               {t('pending_item_many')}
             </Text>
-          </View>
+          </>
         }
       />
     </SafeAreaView>

@@ -1,11 +1,6 @@
-import {
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/Card';
 import IconButton from '@/components/IconButton';
+import ListCollaboratorsModal from '@/components/list/ListCollaboratorsModal';
+import Squircle from '@/components/Squircle';
 import UserListItems from '@/components/userList/UserListItems';
 import { Icons } from '@/constants';
 import { useLoadUserList } from '@/hooks/useLoadUserList';
@@ -18,12 +13,8 @@ import { Link, router } from 'expo-router';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Text, View } from 'react-native';
-import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
-import Squircle from '../Squircle';
 
-interface Props {}
-
-const UserListDisplay: React.FC<Props> = () => {
+const UserListDisplay: React.FC = () => {
   const { t, i18n } = useTranslation('common');
   const [open, setOpen] = useState(false);
   const { list, setList } = useLoadUserList();
@@ -83,25 +74,27 @@ const UserListDisplay: React.FC<Props> = () => {
     );
   }
   return (
-    <>
-      <Text className={`font-pregular text-base text-muted-foreground`}>
+    <View>
+      <Text className={`mb-4 font-pregular text-base text-muted-foreground`}>
         {t('my_list')}
       </Text>
-      <Squircle className="" squircleParams={{ fillColor: '#ffffff' }}>
-        <CardHeader>
-          <CardTitle>{list.name}</CardTitle>
-          <CardDescription>
+      <Squircle className="w-fill" squircleParams={{ fillColor: '#ffffff' }}>
+        <View className="p-6 pb-4">
+          <Text className="font-psemibold text-lg capitalize leading-none">
+            {list.name}
+          </Text>
+          <Text className="text-sm text-muted-foreground">
             {t('updated')}{' '}
             {formatDistanceToNow(list.updatedAt.toDate(), {
               addSuffix: true,
               locale
             })}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+          </Text>
+        </View>
+        <View className="px-6 pb-6">
           <UserListItems items={list.items} />
-        </CardContent>
-        <CardFooter className="flex-row items-center border-t border-border px-6 py-3">
+        </View>
+        <View className="flex-row items-center border-t border-border px-6 py-3">
           <View className="flex-1">
             <Text className="font-pregular text-muted-foreground">
               {t(list.collaborators.length > 0 ? 'shared' : 'private')}
@@ -111,6 +104,7 @@ const UserListDisplay: React.FC<Props> = () => {
           <View className="flex-row space-x-4">
             <IconButton
               icon={Icons.PencilEditIcon}
+              iconStyles=" text-pink-500 h-5 w-5"
               variant={'secondary'}
               size="sm"
               onPress={() => router.push(`/list/${list.id}`)}
@@ -129,10 +123,10 @@ const UserListDisplay: React.FC<Props> = () => {
               onPress={() => setOpen(true)}
             />
           </View>
-        </CardFooter>
+        </View>
       </Squircle>
       <ListCollaboratorsModal open={open} setOpen={setOpen} />
-    </>
+    </View>
   );
 };
 

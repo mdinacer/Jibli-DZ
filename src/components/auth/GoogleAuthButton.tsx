@@ -17,6 +17,7 @@ const GoogleAuthButton: React.FC<Props> = ({ onAuthenticated, ...props }) => {
   const handleGoogleAuthentication = useCallback(async () => {
     try {
       // Initiate the Google sign-in process
+      GoogleSignin.configure({});
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
 

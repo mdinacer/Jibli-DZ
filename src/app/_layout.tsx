@@ -1,5 +1,4 @@
-import { Provider } from '@/components/Provider';
-import useLoadUserProfile from '@/hooks/useLoadUserProfile';
+import useAuthListener from '@/hooks/useAuthListener';
 import '@/i18n';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
@@ -9,6 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+
 import 'react-native-reanimated';
 
 export {
@@ -49,22 +49,14 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  useLoadUserProfile();
+  useAuthListener();
 
   if (!loaded) {
     return null;
   }
 
-  return (
-    <Providers>
-      <RootLayoutNav />
-    </Providers>
-  );
+  return <RootLayoutNav />;
 }
-
-const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <Provider>{children}</Provider>;
-};
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
@@ -72,7 +64,6 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
       <StatusBar style={colorScheme === 'dark' ? 'dark' : 'dark'} />
-
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />

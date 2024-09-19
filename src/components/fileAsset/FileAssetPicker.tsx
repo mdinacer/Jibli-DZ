@@ -12,7 +12,6 @@ const FileAssetPicker = () => {
         fileUri={asset?.fileUrl}
         onUploadComplete={function (asset: FileAsset): void {
           setAsset(asset);
-          console.log(asset);
         }}
       />
     </View>

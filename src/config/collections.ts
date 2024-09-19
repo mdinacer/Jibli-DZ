@@ -5,5 +5,5 @@ export const Collections = {
   PICTURES: 'pictures',
   PRODUCTS: 'products',
   PROFILES: 'profiles',
-  TOKENS: 'fcmTokens'
+  TOKENS: 'tokens'
 };

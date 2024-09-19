@@ -10,7 +10,7 @@ import { ProductUnit } from '@/models/ProductUnit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import AppButton from '../AppButton';
 import {
   CardContent,
@@ -63,7 +63,6 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
   const handleOnSubmit = useCallback(
     async (data: ListItemInput) => {
       try {
-        console.log(data);
         onSubmit(data);
         reset();
       } catch (error: any) {
@@ -74,16 +73,11 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
   );
 
   return (
-    <View className="">
-      <CardHeader>
-        <CardTitle>{t('title_create', { keyPrefix: 'item_form' })}</CardTitle>
-        <CardDescription>
-          {t('description_create', {
-            keyPrefix: 'item_form'
-          })}
-        </CardDescription>
-      </CardHeader>
-      <CardContent style={{ rowGap: 24 }}>
+    <View className="flex-1 py-6">
+      <Text className="mb-8 font-pmedium text-lg">
+        {t('title_create', { keyPrefix: 'item_form' })}
+      </Text>
+      <View className="mb-8" style={{ rowGap: 24 }}>
         <InputField
           name="name"
           label={t('fields.name.label', { keyPrefix: 'item_form' })}
@@ -122,9 +116,9 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
           multiline
           numberOfLines={3}
         />
-      </CardContent>
+      </View>
 
-      <CardFooter className="flex-col gap-y-4">
+      <View style={{ rowGap: 16 }} className="flex-col">
         <AppButton
           className="w-full"
           onPress={handleSubmit(handleOnSubmit)}
@@ -142,7 +136,7 @@ const ItemForm: React.FC<Props> = ({ item, onSubmit, onCancel }) => {
             keyPrefix: 'item_form'
           })}
         </AppButton>
-      </CardFooter>
+      </View>
     </View>
   );
 };

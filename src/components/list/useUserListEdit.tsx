@@ -1,5 +1,6 @@
 import useUserListChangesTracker from '@/hooks/useUserListChangesTracker';
 import ListsService from '@/services/ListService';
+import PushNotificationsService from '@/services/PushNotificationsService';
 import { useListStore } from '@/stores/useListStore';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { router } from 'expo-router';
@@ -19,8 +20,11 @@ export default function useUserListEdit() {
 
   const { list, removeItem, setModified, setList } = useUserListStore();
 
-  const { listModified: modified, collaboratorsChanged } =
-    useUserListChangesTracker();
+  const {
+    listModified: modified,
+    collaboratorsChanged,
+    itemsChanged
+  } = useUserListChangesTracker();
 
   const saveChanges = useCallback(async () => {
     if (!list) return;
@@ -32,12 +36,26 @@ export default function useUserListEdit() {
         await ListsService.updateCollaborators(list.id, list.collaborators);
       }
       setModified(false);
+      if (list.collaborators.length > 0 && itemsChanged) {
+        PushNotificationsService.multicast({
+          userIds: list.collaborators,
+          title: 'List updated',
+          body: ` ${list.name} has been updated`
+        });
+      }
     } catch (error) {
       console.error(error);
     } finally {
       setState({ ...state, saving: false });
     }
-  }, [collaboratorsChanged, list, setModified, state, updateOriginalList]);
+  }, [
+    collaboratorsChanged,
+    itemsChanged,
+    list,
+    setModified,
+    state,
+    updateOriginalList
+  ]);
 
   const discardChanges = useCallback(() => {
     if (!originalList) return;
@@ -58,6 +76,7 @@ export default function useUserListEdit() {
   };
 
   return {
+    itemsChanged,
     list,
     modals,
     modified,

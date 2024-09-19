@@ -13,7 +13,6 @@ function useLoadProfile() {
       setStatus('pending');
       try {
         const profile = await ProfileService.getByUserId(userId);
-        console.log('profile', JSON.stringify(profile, null, 2));
 
         if (!profile) {
           setStatus('error');

@@ -25,7 +25,7 @@ const PickerSelectField = <T extends FieldValues>({
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <View style={{ rowGap: 6 }} className="w-full max-w-sm">
-          <Text className="font-pregular text-base font-medium leading-none">
+          <Text className="font-pregular text-sm font-medium leading-none">
             {label}
           </Text>
           <View className="h-16 justify-center rounded-2xl border border-input bg-background px-2 py-1">

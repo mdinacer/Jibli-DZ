@@ -9,7 +9,13 @@ import { Link, router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SignIn = () => {
@@ -46,51 +52,56 @@ const SignIn = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1 justify-center p-6">
-      <View style={{ rowGap: 32 }} className=" ">
-        <View>
-          <CardTitle className="text-2xl font-semibold tracking-tight">
-            {t('title')}
-          </CardTitle>
-          <CardDescription>{t('description')}</CardDescription>
-        </View>
+    <SafeAreaView className="flex-1">
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+      >
+        <ScrollView
+          className="p-6"
+          contentContainerStyle={{
+            flexGrow: 1
+          }}
+        >
+          <View className="mb-8">
+            <Text className="mb-2 text-2xl font-semibold">{t('title')}</Text>
+          </View>
 
-        <View style={{ rowGap: 16 }} className="">
-          <InputField
-            name="email"
-            label={t('fields.username.label')}
-            control={control}
-            placeholder={t('fields.username.placeholder')}
-          />
-          <InputField
-            name="password"
-            label={t('fields.password.label')}
-            control={control}
-            placeholder={t('fields.password.placeholder')}
-            secureTextEntry
-          />
-        </View>
+          <View style={{ rowGap: 16 }} className="mb-8">
+            <InputField
+              name="email"
+              label={t('fields.username.label')}
+              control={control}
+              placeholder={t('fields.username.placeholder')}
+            />
+            <InputField
+              name="password"
+              label={t('fields.password.label')}
+              control={control}
+              placeholder={t('fields.password.placeholder')}
+              secureTextEntry
+            />
+          </View>
 
-        <View className="gap-y-2">
-          <AppButton onPress={handleSubmit(handleOnSubmit)}>
-            {t('submit_button')}
-          </AppButton>
+          <View className="mb-4" style={{ rowGap: 8 }}>
+            <AppButton onPress={handleSubmit(handleOnSubmit)}>
+              {t('submit_button')}
+            </AppButton>
+            <GoogleAuthButton />
+          </View>
 
-          <GoogleAuthButton />
-        </View>
-
-        <View className="flex-row items-center justify-center space-x-2">
-          <Text className="font-pregular text-base">
-            {t('no_account_prompt')}
-          </Text>
-          <Link
-            className="font-pregular text-base underline underline-offset-2"
-            href={'/sign-up'}
+          <View
+            style={{ columnGap: 8 }}
+            className="mt-4 flex-row items-center justify-center"
           >
-            {t('no_account_link')}
-          </Link>
-        </View>
-      </View>
+            <Text className="text-base">{t('no_account_prompt')}</Text>
+            <Link className="text-base underline" href={'/sign-up'}>
+              {t('no_account_link')}
+            </Link>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

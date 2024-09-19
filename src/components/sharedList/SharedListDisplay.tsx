@@ -41,10 +41,7 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
       className="min-h-[200px] w-full"
       onPress={() => router.push(`/list/${list.id}`)}
     >
-      <Squircle
-        squircleParams={{ fillColor: '#ffffff' }}
-        className="p-6 shadow-sm"
-      >
+      <Squircle squircleParams={{ fillColor: '#ffffff' }} className="p-6">
         <CollaboratorDetails collaborator={owner} title={list.name} />
 
         <View className="w-full flex-row items-center justify-evenly">

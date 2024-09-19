@@ -58,7 +58,6 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
           onComplete(createdList);
           setList(createdList);
         }
-        console.log(data);
       } catch (error: any) {
         console.error(error);
       }

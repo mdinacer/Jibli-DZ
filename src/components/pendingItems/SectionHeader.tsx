@@ -6,6 +6,7 @@ import { useListStore } from '@/stores/useListStore';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import IconButton from '../IconButton';
+import PushNotificationsService from '@/services/PushNotificationsService';
 
 interface Props extends PendingItemsReducerPropsType {
   listId: string;
@@ -53,6 +54,14 @@ const SectionHeader: React.FC<Props> = ({
       });
       updateList(listId, {
         items: updatedItems
+      });
+      await PushNotificationsService.send({
+        userId: originalList.ownerId,
+        title: 'List updated',
+        body: 'Your list has been updated',
+        data: {
+          listId
+        }
       });
       // loadFilteredLists();
     } catch (error: any) {

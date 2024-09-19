@@ -27,9 +27,9 @@ const AppInput = React.forwardRef<TextInput, TextInputProps>(
           <View className="absolute right-3 top-3">
             <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
               {isVisible ? (
-                <Icons.EyeClosedIcon color={'black'} width={20} height={20} />
+                <Icons.EyeClosedIcon className="h-5 w-5 text-muted-foreground" />
               ) : (
-                <Icons.EyeOpenIcon color={'black'} width={20} height={20} />
+                <Icons.EyeOpenIcon className="h-5 w-5 text-muted-foreground" />
               )}
             </TouchableOpacity>
           </View>

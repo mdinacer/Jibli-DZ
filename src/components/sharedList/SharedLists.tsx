@@ -30,8 +30,8 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         className="flex-1 pb-4"
         contentContainerStyle={{
           columnGap: 16,
-          paddingBottom: 16,
-          padding: 16
+          paddingBottom: 16
+          //padding: 16
         }}
         data={lists}
         keyExtractor={(l) => l.id}
