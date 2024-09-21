@@ -3,12 +3,8 @@ import { Images } from '@/constants';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Redirect } from 'expo-router';
 import React from 'react';
-import { ImageBackground, Text, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-const image = {
-  uri: 'https://docs.expo.dev/static/images/tutorial/background-image.png'
-};
 
 const Index = () => {
   const { user } = useAuthStore();

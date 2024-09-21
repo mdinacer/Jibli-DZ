@@ -16,14 +16,9 @@ const EmptyState: React.FC<Props> = ({
   showImage = true
 }) => {
   return (
-    <Squircle
-      className="w-full items-center justify-center p-6"
+    <View
+      className="w-full items-center justify-center rounded-2xl bg-background p-6"
       style={{ rowGap: 16 }}
-      squircleParams={{
-        cornerSmoothing: 0.7,
-        cornerRadius: 30,
-        fillColor: '#ffffff'
-      }}
     >
       <View className="w-full gap-y-2">
         {title && (
@@ -41,7 +36,7 @@ const EmptyState: React.FC<Props> = ({
         )}
       </View>
       {action}
-    </Squircle>
+    </View>
   );
 };
 

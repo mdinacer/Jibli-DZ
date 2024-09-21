@@ -1,16 +1,20 @@
-import { View, Text, Image } from 'react-native';
-import React from 'react';
-import { Collaborator } from '@/models/Collaborator';
 import { Icons } from '@/constants';
+import { Collaborator } from '@/models/Collaborator';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Image, Text, View } from 'react-native';
+import AppButton from '../AppButton';
 
 interface Props {
   collaborator: Collaborator;
+  onRevoke: (collaborator: Collaborator) => void;
 }
 
-const CollaboratorCard: React.FC<Props> = ({ collaborator }) => {
+const CollaboratorCard: React.FC<Props> = ({ collaborator, onRevoke }) => {
+  const { t } = useTranslation('common');
   return (
     <View className="relative w-[60vw] overflow-hidden rounded-lg bg-card">
-      <View className="aspect-square w-[full] items-center justify-center overflow-hidden bg-border">
+      <View className="relative aspect-square w-[full] items-center justify-center overflow-hidden bg-border">
         {collaborator.picture ? (
           <Image
             source={{ uri: collaborator.picture }}
@@ -20,13 +24,23 @@ const CollaboratorCard: React.FC<Props> = ({ collaborator }) => {
         ) : (
           <Icons.UserIcon className="h-28 w-28 text-muted-foreground" />
         )}
+        <View className="absolute inset-x-0 bottom-0 bg-black/50 px-4 py-2">
+          <Text className="font-psemibold text-lg capitalize text-primary-foreground">
+            {collaborator.username}
+          </Text>
+          <Text className="font-pregular text-base text-white/80">
+            {collaborator.email}
+          </Text>
+        </View>
       </View>
-      <View className="px-4 py-2">
-        <Text className="font-pmedium text-base">{collaborator.username}</Text>
-        <Text className="font-pregular text-sm text-muted-foreground">
-          {collaborator.email}
-        </Text>
-      </View>
+
+      <AppButton
+        className="rounded-none"
+        variant="destructive"
+        onPress={() => onRevoke(collaborator)}
+      >
+        {t('collaborator_revoke')}
+      </AppButton>
     </View>
   );
 };

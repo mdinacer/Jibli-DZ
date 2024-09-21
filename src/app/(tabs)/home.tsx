@@ -10,25 +10,23 @@ import { Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
-  usePushNotification();
   const { profile } = useProfileStore();
+  //usePushNotification();
   const { t } = useTranslation('common');
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
       <PendingItemsLists
-        className="flex-1 p-4"
-        style={{ rowGap: 16 }}
         contentContainerStyle={{ flexGrow: 1, paddingBottom: 60 }}
-        ListHeaderComponentStyle={{ rowGap: 24, paddingBottom: 24 }}
+        ListHeaderComponentStyle={{ paddingBottom: 24 }}
         ListHeaderComponent={
-          <>
+          <View style={{ rowGap: 64 }}>
             <View className="flex-row items-center justify-between">
-              <View>
+              <View style={{ rowGap: 4 }}>
                 <Text className="font-pmedium text-sm">
                   {t('welcome_back', { keyPrefix: 'home' })}
                 </Text>
-                <Text className="font-psemibold text-2xl">
+                <Text className="font-pbold text-5xl capitalize">
                   {profile?.username}
                 </Text>
               </View>
@@ -46,7 +44,7 @@ const Index = () => {
             <Text className="mt-5 font-pregular text-base text-muted-foreground">
               {t('pending_item_many')}
             </Text>
-          </>
+          </View>
         }
       />
     </SafeAreaView>

@@ -7,10 +7,6 @@ import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 
 export default function useUserListEdit() {
-  const [modals, setModals] = useState({
-    form: false,
-    collaborators: false
-  });
   const [state, setState] = useState({
     loading: false,
     saving: false
@@ -67,24 +63,14 @@ export default function useUserListEdit() {
     }
   }, [modified, originalList, setList, setModified]);
 
-  const toggleItemFormModal = (value: boolean) => {
-    setModals({ collaborators: false, form: value });
-  };
-
-  const toggleCollaboratorsModal = (value: boolean) => {
-    setModals({ form: false, collaborators: value });
-  };
-
   return {
     itemsChanged,
     list,
-    modals,
+
     modified,
     state,
     discardChanges,
     removeItem,
-    saveChanges,
-    toggleCollaboratorsModal,
-    toggleItemFormModal
+    saveChanges
   };
 }

@@ -1,6 +1,5 @@
 import IconButton from '@/components/IconButton';
 import ListCollaboratorsModal from '@/components/list/ListCollaboratorsModal';
-import Squircle from '@/components/Squircle';
 import UserListItems from '@/components/userList/UserListItems';
 import { Icons } from '@/constants';
 import { useLoadUserList } from '@/hooks/useLoadUserList';
@@ -61,8 +60,11 @@ const UserListDisplay: React.FC = () => {
       <View
         className={`w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6`}
       >
-        <Text className="font-pregular text-base">
-          {t('user_list.no_items_text')}
+        <Text className="text-xl font-semibold leading-none tracking-tight">
+          {t('user_list.no_items_title')}
+        </Text>
+        <Text className="font-pregular text-base leading-7">
+          {t('user_list.no_items_description')}
         </Text>
         <Link
           className={`font-pregular text-base text-pink-500 underline underline-offset-2`}
@@ -78,7 +80,7 @@ const UserListDisplay: React.FC = () => {
       <Text className={`mb-4 font-pregular text-base text-muted-foreground`}>
         {t('my_list')}
       </Text>
-      <Squircle className="w-fill" squircleParams={{ fillColor: '#ffffff' }}>
+      <View className="w-full rounded-2xl bg-background shadow-sm">
         <View className="p-6 pb-4">
           <Text className="font-psemibold text-lg capitalize leading-none">
             {list.name}
@@ -120,11 +122,11 @@ const UserListDisplay: React.FC = () => {
               size="sm"
               disabled={collaborators.length === 0}
               icon={Icons.ShareIcon}
-              onPress={() => setOpen(true)}
+              onPress={() => router.push('/listCollaborators')}
             />
           </View>
         </View>
-      </Squircle>
+      </View>
       <ListCollaboratorsModal open={open} setOpen={setOpen} />
     </View>
   );

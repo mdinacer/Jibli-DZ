@@ -1,6 +1,6 @@
 import firebaseServices from '@/config/firebaseConfig';
 import PushNotificationsService from '@/services/PushNotificationsService';
-import { set } from 'date-fns';
+import { useAuthStore } from '@/stores/useAuthStore';
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
@@ -12,6 +12,8 @@ export interface PushNotificationsState {
   expoPushToken: Notifications.ExpoPushToken | null;
 }
 export default function usePushNotification(): PushNotificationsState {
+  const { user } = useAuthStore();
+
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldPlaySound: false,
@@ -37,7 +39,7 @@ export default function usePushNotification(): PushNotificationsState {
 
   async function registerForPushNotificationsAsync() {
     let token: Notifications.ExpoPushToken | null = null;
-    if (true) {
+    if (Device.isDevice) {
       const { status: existingStatus } =
         await Notifications.getPermissionsAsync();
 
@@ -91,6 +93,8 @@ export default function usePushNotification(): PushNotificationsState {
   };
 
   useEffect(() => {
+    if (!user) return;
+
     registerForPushNotificationsAsync().then(setupToken);
 
     notificationListener.current =
@@ -115,7 +119,7 @@ export default function usePushNotification(): PushNotificationsState {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   return {
     expoPushToken,

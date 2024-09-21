@@ -24,11 +24,11 @@ const PickerSelectField = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <View style={{ rowGap: 6 }} className="w-full max-w-sm">
+        <View style={{ rowGap: 6 }} className="w-full">
           <Text className="font-pregular text-sm font-medium leading-none">
             {label}
           </Text>
-          <View className="h-16 justify-center rounded-2xl border border-input bg-background px-2 py-1">
+          <View className="h-16 justify-center rounded-2xl border border-input bg-background px-4 py-1">
             <RNPickerSelect
               {...props}
               value={value}

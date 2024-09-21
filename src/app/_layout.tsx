@@ -1,5 +1,6 @@
 import useAuthListener from '@/hooks/useAuthListener';
 import '@/i18n';
+import useProfileListener from '@/listeners/useProfileListener';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -50,6 +51,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   useAuthListener();
+  useProfileListener();
 
   if (!loaded) {
     return null;
@@ -69,7 +71,28 @@ function RootLayoutNav() {
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="list/[id]" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="list/[id]"
+          options={{
+            headerShown: false,
+            presentation: 'fullScreenModal'
+          }}
+        />
+
+        <Stack.Screen
+          name="item/[id]"
+          options={{
+            headerShown: false,
+            presentation: 'formSheet'
+          }}
+        />
+        <Stack.Screen
+          name="listCollaborators"
+          options={{
+            headerShown: false,
+            presentation: 'modal'
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

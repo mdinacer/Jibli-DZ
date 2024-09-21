@@ -1,6 +1,7 @@
 import useUserListChangesTracker from '@/hooks/useUserListChangesTracker';
+import { Link } from '@react-navigation/native';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ListModificationBanner = () => {
@@ -18,12 +19,7 @@ const ListModificationBanner = () => {
         </Text>
 
         <View className="flex-row items-center space-x-3">
-          <TouchableOpacity>
-            <Text className="font-pregular text-base">Save</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text className="font-pregular text-base">Discard</Text>
-          </TouchableOpacity>
+          <Link to={`/list/${list.id}`}>View changes</Link>
         </View>
       </View>
     </SafeAreaView>

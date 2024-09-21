@@ -15,7 +15,7 @@ import AppButton from '../AppButton';
 
 interface Props {
   invitation: Invitation;
-  onAccept: () => void;
+  onAccept: (collaborator: Collaborator) => void;
   onDecline: (action: 'revoke' | 'decline') => void;
 }
 
@@ -33,6 +33,15 @@ const InvitationCard: React.FC<Props> = ({
   const mockCollaborator = useMemo(
     () => MockCollaborators.find((c) => c.userId === invitation.senderId),
     [invitation.senderId]
+  );
+
+  const handleAcceptInvitation = useCallback(
+    (swipeable: Swipeable) => {
+      if (!collaborator) return;
+      onAccept(collaborator);
+      swipeable.close();
+    },
+    [collaborator, onAccept]
   );
 
   const renderRightActions = useCallback(
@@ -63,10 +72,7 @@ const InvitationCard: React.FC<Props> = ({
                 className="h-full w-14"
                 icon={Icons.MailValidationIcon}
                 iconStyles="h-8 w-8 text-primary"
-                onPress={() => {
-                  swipeable.close();
-                  onAccept();
-                }}
+                onPress={() => handleAcceptInvitation(swipeable)}
               />
               <AppButton
                 variant="ghost"

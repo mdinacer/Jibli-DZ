@@ -16,6 +16,10 @@ import {
   CardHeader,
   CardTitle
 } from '../Card';
+import { useTranslation } from 'react-i18next';
+import { Text } from 'react-native';
+import { useListStore } from '@/stores/useListStore';
+import { router } from 'expo-router';
 
 const formSchema = z.object({
   name: z.string().min(1, 'Required')
@@ -28,8 +32,10 @@ interface Props {
 }
 
 const ListCreateField: React.FC<Props> = ({ onComplete }) => {
+  const { t } = useTranslation('common', { keyPrefix: 'list_create' });
   const { profile } = useProfileStore();
   const { setList } = useUserListStore();
+  const { addList } = useListStore();
   const form = useForm<FormDataType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,26 +63,32 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
         if (createdList) {
           onComplete(createdList);
           setList(createdList);
+          addList(createdList);
+          router.push({
+            pathname: `/list/[id]`,
+            params: { id: createdList.id }
+          });
         }
       } catch (error: any) {
         console.error(error);
       }
     },
-    [onComplete, setList]
+    [addList, onComplete, setList]
   );
 
   return (
     <Card className="my-auto">
       <CardHeader>
-        <CardTitle>List creation</CardTitle>
-        <CardDescription>Create you initial list</CardDescription>
+        <Text className="font-pbold text-xl leading-none tracking-tight">
+          {t('title')}
+        </Text>
       </CardHeader>
       <CardContent>
         <InputField
           name="name"
-          label="List name"
+          label={t('fields.name.label')}
           control={control}
-          placeholder="Enter list name"
+          placeholder={t('fields.name.placeholder')}
         />
       </CardContent>
       <CardFooter>
@@ -85,7 +97,7 @@ const ListCreateField: React.FC<Props> = ({ onComplete }) => {
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isValid || isSubmitting}
         >
-          Create
+          {t('cta')}
         </AppButton>
       </CardFooter>
     </Card>

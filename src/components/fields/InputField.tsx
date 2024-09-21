@@ -23,7 +23,7 @@ const InputField = <T extends FieldValues>({
         field: { onChange, value, ...field },
         fieldState: { error }
       }) => (
-        <View style={{ rowGap: 6 }} className="w-full max-w-sm">
+        <View style={{ rowGap: 6 }} className="w-full">
           <Text className="font-pregular text-sm font-medium leading-none">
             {label}
           </Text>

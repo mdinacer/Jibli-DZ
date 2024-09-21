@@ -5,7 +5,7 @@ import ListModificationBanner from '@/components/list/ListModificationBanner';
 import { Icons } from '@/constants';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 interface TabIconProps {
@@ -13,22 +13,24 @@ interface TabIconProps {
   color: string;
   name: string;
   focused: boolean;
+  size: number;
 }
 const TabIcon: React.FC<TabIconProps> = ({
   icon: Icon,
   focused,
   color,
-  name
+  name,
+  size
 }) => {
   return (
-    <View>
-      <Icon color={color} height={32} width={32} />
-      {/* <Text
+    <View className="items-center justify-center space-y-1">
+      <Icon color={color} height={size} width={size} />
+      <Text
         style={{ color }}
         className={` ${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
       >
         {name}
-      </Text> */}
+      </Text>
     </View>
   );
 };
@@ -37,18 +39,17 @@ const TabsLayout = () => {
   return (
     <AuthProvider>
       <DataLoader />
-
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: '#ec4899',
           tabBarInactiveTintColor: '#6b7280',
           tabBarStyle: {
-            paddingTop: 0,
+            paddingTop: 16,
             backgroundColor: '#f3f4f6',
             borderTopWidth: 1,
             borderTopColor: '#e5e7eb',
-            height: 80
+            minHeight: 80
           }
         }}
       >
@@ -63,21 +64,7 @@ const TabsLayout = () => {
                 color={color}
                 focused={focused}
                 name={'Home'}
-              />
-            )
-          }}
-        />
-        <Tabs.Screen
-          name="create"
-          options={{
-            title: 'Create',
-            headerShown: false,
-            tabBarIcon: ({ color, focused, size }) => (
-              <TabIcon
-                icon={Icons.AddCircleIcon}
-                color={color}
-                focused={focused}
-                name={'Create'}
+                size={size}
               />
             )
           }}
@@ -94,6 +81,7 @@ const TabsLayout = () => {
                 color={color}
                 focused={focused}
                 name={'Collaborators'}
+                size={size}
               />
             )
           }}
@@ -109,6 +97,7 @@ const TabsLayout = () => {
                 color={color}
                 focused={focused}
                 name={'Profile'}
+                size={size}
               />
             )
           }}

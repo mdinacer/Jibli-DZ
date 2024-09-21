@@ -19,40 +19,56 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
     state.collaborators.find((c) => c.userId === list.ownerId)
   );
 
-  const { pendingCount, boughtCount, unavailableCount } = useMemo(
+  const itemsDetails = useMemo(
     () =>
-      list.items.reduce(
-        (acc, item) => {
-          if (item.status === ListItemStatus.PENDING) acc.pendingCount++;
-          else if (item.status === ListItemStatus.BOUGHT) acc.boughtCount++;
-          else if (item.status === ListItemStatus.UNAVAILABLE)
-            acc.unavailableCount++;
-          return acc;
-        },
-        { pendingCount: 0, boughtCount: 0, unavailableCount: 0 }
-      ),
+      list.items.length > 0
+        ? list.items.reduce(
+            (acc, item) => {
+              if (item.status === ListItemStatus.PENDING) acc.pendingCount++;
+              else if (item.status === ListItemStatus.BOUGHT) acc.boughtCount++;
+              else if (item.status === ListItemStatus.UNAVAILABLE)
+                acc.unavailableCount++;
+              return acc;
+            },
+            { pendingCount: 0, boughtCount: 0, unavailableCount: 0 }
+          )
+        : undefined,
     [list]
   );
 
   if (!owner) return null;
   return (
     <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={list.items.length === 0}
       style={{ width, height: '100%' }}
       className="min-h-[200px] w-full"
       onPress={() => router.push(`/list/${list.id}`)}
     >
-      <Squircle squircleParams={{ fillColor: '#ffffff' }} className="p-6">
+      <View className="w-full rounded-2xl bg-background p-6 shadow-sm">
         <CollaboratorDetails collaborator={owner} title={list.name} />
 
-        <View className="w-full flex-row items-center justify-evenly">
-          <InfoBox title={t('item_status.pending')} value={pendingCount} />
-          <InfoBox title={t('item_status.bought')} value={boughtCount} />
-          <InfoBox
-            title={t('item_status.unavailable')}
-            value={unavailableCount}
-          />
-        </View>
-      </Squircle>
+        {itemsDetails ? (
+          <View className="w-full flex-row items-center justify-evenly">
+            <InfoBox
+              title={t('item_status.pending')}
+              value={itemsDetails.pendingCount}
+            />
+            <InfoBox
+              title={t('item_status.bought')}
+              value={itemsDetails.boughtCount}
+            />
+            <InfoBox
+              title={t('item_status.unavailable')}
+              value={itemsDetails.unavailableCount}
+            />
+          </View>
+        ) : (
+          <View className="w-full flex-row items-center justify-evenly">
+            <Text>This list is empty at the moment</Text>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };

@@ -35,7 +35,7 @@ const SignUp = () => {
 
   const {
     control,
-    formState: { isDirty, isSubmitting },
+    formState: { isSubmitting },
     handleSubmit,
     setError,
     reset
@@ -126,7 +126,7 @@ const SignUp = () => {
 
           <View className="mb-4" style={{ rowGap: 8 }}>
             <AppButton
-              disabled={!isDirty || isSubmitting}
+              disabled={isSubmitting}
               onPress={handleSubmit(handleOnSubmit)}
             >
               {t('submit_button')}

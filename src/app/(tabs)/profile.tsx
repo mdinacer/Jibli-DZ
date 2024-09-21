@@ -1,6 +1,7 @@
 import { CardTitle } from '@/components/Card';
 import IconButton from '@/components/IconButton';
 import AccountDelete from '@/components/profile/AccountDelete';
+import ListNameEdit from '@/components/profile/ListNameEdit';
 import ProfilePictureUpdater from '@/components/profile/ProfilePictureUpdater';
 import UserEmailEdit from '@/components/profile/UserEmailEdit';
 import UserNameField from '@/components/profile/UserNameField';
@@ -50,6 +51,7 @@ const Profile = () => {
             </View>
             <ProfilePictureUpdater />
             <UserNameField />
+            <ListNameEdit />
             <UserEmailEdit />
             <AccountDelete />
           </View>

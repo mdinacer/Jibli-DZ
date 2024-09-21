@@ -20,8 +20,9 @@
         "welcome_back": "Welcome back"
     },
     "user_list": {
-        "no_items_text": " Start by creating your first list to organize and manage your items effortlessly.",
-        "no_items_action": "Create a New List"
+        "no_items_title": " Welcome to your shopping assistant!",
+        "no_items_description": "Let's get started by creating your first shopping list. Add items you need to purchase, invite collaborators to help manage the list, and easily share it with friends or family. Stay organized and ensure you never miss an item!",
+        "no_items_action": "Create your list now!"
     },
     "user_list_card": {},
     "delete_list": {
@@ -46,7 +47,7 @@
     },
     "item_form": {
         "title_create": "Add New Item",
-        "title_edit": "Edit Item",
+        "title_edit": "Edit Item {{itemName}}",
         "description_create": "Fill out the details to add this item to your shopping list.",
         "description_edit": "Update the details to modify this item in your shopping list.",
         "fields": {
@@ -280,5 +281,32 @@
     "collaborators_empty_state": {
         "title": "No collaborators",
         "description": "You're all caught up! There are no collaborators in the lists shared with you."
-    }
+    },
+    "list_create": {
+        "title": "Create Your List",
+        "cta": "Create your list now!",
+        "fields" :{
+            "name": {
+                "label": "List Name",
+                "placeholder": "Enter list name"
+            }
+        }
+      },
+      "list_name_edit": {
+        "title": "Edit List Name",
+        "cta": "Update list name",
+        "fields" :{
+            "name": {
+                "label": "List Name",
+                "placeholder": "Enter list name"
+            }
+        }
+      },
+      "collaborator_revoke": "Revoke Collaboration",
+      "collaborator_revoke_prompt":{
+        "title": "Remove Collaborator",
+        "description": "Are you sure you want to remove this collaborator?",
+        "cta": "Remove",
+        "cancel": "Cancel"
+      }
 }

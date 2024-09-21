@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
-const PADDING = 16;
+const PADDING = 0;
 
 const SharedLists: React.FC<Props> = ({ ...props }) => {
   const { t } = useTranslation('common');
@@ -39,7 +39,7 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
           <SharedListDisplay width={size} list={item} />
         )}
         ListEmptyComponent={
-          <View style={{ width: width - PADDING * 2 }}>
+          <View style={{ width: width - 16 * 2 }}>
             <EmptyState
               title={t('title', {
                 keyPrefix: 'shared_list_empty_state'
