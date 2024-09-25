@@ -3,6 +3,8 @@ import DataListeners from '@/components/DataListeners';
 import DataLoader from '@/components/DataLoader';
 import ListModificationBanner from '@/components/list/ListModificationBanner';
 import { Icons } from '@/constants';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Text, View } from 'react-native';
@@ -36,6 +38,7 @@ const TabIcon: React.FC<TabIconProps> = ({
 };
 
 const TabsLayout = () => {
+  const theme = useThemeColor({}) as ThemeType;
   return (
     <AuthProvider>
       <DataLoader />
@@ -43,12 +46,12 @@ const TabsLayout = () => {
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: '#ec4899',
-          tabBarInactiveTintColor: '#6b7280',
+          tabBarInactiveTintColor: theme.mutedForeground,
           tabBarStyle: {
             paddingTop: 16,
-            backgroundColor: '#f3f4f6',
+            backgroundColor: theme.muted,
             borderTopWidth: 1,
-            borderTopColor: '#e5e7eb',
+            borderTopColor: theme.border,
             minHeight: 80
           }
         }}
@@ -89,14 +92,14 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Profile',
+            title: 'Account',
             headerShown: false,
             tabBarIcon: ({ color, focused, size }) => (
               <TabIcon
                 icon={Icons.UserSquareIcon}
                 color={color}
                 focused={focused}
-                name={'Profile'}
+                name={'Account'}
                 size={size}
               />
             )

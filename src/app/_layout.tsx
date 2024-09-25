@@ -2,14 +2,16 @@ import useAuthListener from '@/hooks/useAuthListener';
 import '@/i18n';
 import useProfileListener from '@/listeners/useProfileListener';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  ThemeProvider,
+  DarkTheme,
+  DefaultTheme
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
-
 import 'react-native-reanimated';
 
 export {
@@ -62,10 +64,8 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
-      <StatusBar style={colorScheme === 'dark' ? 'dark' : 'dark'} />
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
@@ -86,8 +86,17 @@ function RootLayoutNav() {
             presentation: 'formSheet'
           }}
         />
+
         <Stack.Screen
           name="listCollaborators"
+          options={{
+            headerShown: false,
+            presentation: 'modal'
+          }}
+        />
+
+        <Stack.Screen
+          name="create"
           options={{
             headerShown: false,
             presentation: 'modal'

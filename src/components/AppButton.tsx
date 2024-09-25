@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { styled } from 'nativewind';
 import { SvgProps } from 'react-native-svg';
 
 const buttonStyles = {
@@ -20,7 +19,7 @@ const buttonStyles = {
     icon: 'h-10 w-10'
   },
   textStyles: {
-    default: 'text-primary-foreground',
+    default: 'text-primary-foreground ',
     destructive: 'text-destructive-foreground',
     outline: 'hover:text-accent-foreground',
     secondary: 'text-secondary-foreground',
@@ -29,10 +28,9 @@ const buttonStyles = {
   }
 };
 
-const StyledButton = styled(TouchableOpacity);
+const StyledButton = TouchableOpacity;
 
 interface ButtonProps extends TouchableOpacityProps {
-  className?: string;
   variant?: keyof typeof buttonStyles.variants;
   size?: keyof typeof buttonStyles.sizes;
   disabled?: boolean;
@@ -71,7 +69,7 @@ const AppButton = forwardRef<TouchableOpacity, ButtonProps>(
       >
         {Icon && <Icon className={`h-5 w-5 ${iconStyles}`} />}
         {children && (
-          <Text className={`${textStyle} font-pmedium text-base capitalize`}>
+          <Text className={`${textStyle} font-pmedium text-sm capitalize`}>
             {children}
           </Text>
         )}

@@ -1,12 +1,15 @@
 import { PendingItemsReducerPropsType } from '@/components/pendingItems/pendingItemsReducer';
+import Text from '@/components/Themed/Text';
 import { Icons } from '@/constants';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { ListItemStatus } from '@/models/ListItem';
 import listsService from '@/services/ListService';
+import PushNotificationsService from '@/services/PushNotificationsService';
 import { useListStore } from '@/stores/useListStore';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import IconButton from '../IconButton';
-import PushNotificationsService from '@/services/PushNotificationsService';
 
 interface Props extends PendingItemsReducerPropsType {
   listId: string;
@@ -18,6 +21,7 @@ const SectionHeader: React.FC<Props> = ({
   listId,
   listName
 }) => {
+  const theme = useThemeColor({}) as ThemeType;
   const { lists, updateList } = useListStore();
   const [saving, setSaving] = useState(false);
   const isModified = useMemo(() => {
@@ -73,30 +77,34 @@ const SectionHeader: React.FC<Props> = ({
 
   return (
     <View
-      className={`flex-row items-center justify-between rounded-lg bg-gray-200 px-4 py-2`}
+      style={[styles.container, { backgroundColor: theme.mutedForeground }]}
     >
-      <View className="flex-row items-center space-x-2">
-        <Icons.ArrowRightIcon className="h-6 w-6 text-muted-foreground" />
+      <View style={styles.leftContainer}>
+        <Icons.ArrowRightIcon
+          style={styles.icon}
+          color={isModified ? theme.primary : theme.muted}
+        />
         <Text
-          className={`font-pregular text-base ${isModified ? 'text-primary' : 'text-muted-foreground'}`}
+          style={[
+            styles.listName,
+            { color: isModified ? theme.primary : theme.muted }
+          ]}
         >
           {listName}
         </Text>
       </View>
-      <View className="flex-row space-x-4">
+      <View style={styles.rightContainer}>
         <IconButton
-          size="sm"
-          variant="bordered"
           icon={Icons.CheckIcon}
+          iconStyles={{ ...styles.iconButton, color: theme.muted }}
           onPress={handleSaveChanges}
           disabled={!isModified || saving}
         />
         <IconButton
-          variant="secondary"
-          size="sm"
           icon={Icons.CancelIcon}
-          disabled={!isModified || saving}
+          iconStyles={{ ...styles.iconButton, color: theme.muted }}
           onPress={handleRestoreList}
+          disabled={!isModified || saving}
         />
       </View>
     </View>
@@ -104,3 +112,34 @@ const SectionHeader: React.FC<Props> = ({
 };
 
 export default React.memo(SectionHeader);
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 8
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    columnGap: 16
+  },
+  icon: {
+    height: 24,
+    width: 24
+  },
+  listName: {
+    textTransform: 'capitalize'
+  },
+  iconButton: {
+    height: 24,
+    width: 24
+  }
+});

@@ -97,7 +97,7 @@
     "invitation_many": "Invitations",
     "invitation_empty_state": {
         "title": "Aucune invitation",
-        "description": "Vous n'avez encore aucune invitation. Lorsque quelqu'un partage une liste avec vous, des invitations seront visibles ici."
+        "description": "Vous n'avez encore aucune invitation. Lorsque quelqu'un vous invites, les invitations seront visibles ici."
     },
     "invitation_form": {
         "title": "Envoyer une invitation",
@@ -283,6 +283,8 @@
     "list_create": {
         "title": "Créez votre liste",
         "cta": "Créez votre liste maintenant !",
+        "cancel":"Annuler",
+        "back":"Retour",
         "fields":{
             "name": {
                 "label": "Nom de la liste",
@@ -306,5 +308,10 @@
         "description": "Êtes-vous sûr de vouloir supprimer ce collaborateur ?",
         "cancel": "Annuler",
         "revoke": "Supprimer"
-      }
+      },
+      "items_list_empty_state":{
+        "title": "Aucun article",
+        "description": "Ajoutez des articles à votre liste pour les afficher ici."
+      },
+      "list_empty":"Cette list est vide pour la moment."
 }

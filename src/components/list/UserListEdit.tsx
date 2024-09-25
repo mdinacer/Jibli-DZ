@@ -1,17 +1,31 @@
+import { CardHeader } from '@/components/Card';
 import IconButton from '@/components/IconButton';
 import UserItemDisplay from '@/components/item/UserItemDisplay';
 import useUserListEdit from '@/components/list/useUserListEdit';
+import Text from '@/components/Themed/Text';
 import { Icons } from '@/constants';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { ListItem } from '@/models/ListItem';
+import { hslToRgb, parseHSL } from '@/utils/hslConverter';
 import { Redirect, router } from 'expo-router';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, FlatList, Text, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 
 const UserListEdit = () => {
   const { t } = useTranslation('common');
   const { list, modified, state, discardChanges, removeItem, saveChanges } =
     useUserListEdit();
+
+  const theme = useThemeColor({}) as ThemeType;
+  const rgbBackground = useMemo(() => {
+    const rgbValues = parseHSL(theme.background);
+
+    return rgbValues
+      ? hslToRgb(rgbValues[0], rgbValues[1], rgbValues[2])
+      : null;
+  }, [theme.background]);
 
   const handleDeleteItemPrompt = useCallback(
     (item: ListItem) => {
@@ -37,17 +51,27 @@ const UserListEdit = () => {
   }
 
   return (
-    <View className="relative">
-      <View className="h-full">
-        <View className="p-4">
-          <Text className="font-pmedium text-lg">{list?.name}</Text>
-        </View>
+    <>
+      <View style={styles.container}>
+        <CardHeader>
+          <Text style={styles.listName}>{list?.name}</Text>
+        </CardHeader>
 
         <FlatList<ListItem>
-          className="flex-1 px-4"
+          style={styles.flatList}
           data={list.items}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingBottom: 80 }}
+          contentContainerStyle={styles.flatListContent}
+          ListEmptyComponent={
+            <View style={styles.emptyStateContainer}>
+              <Text muted style={styles.emptyStateTitle}>
+                {t('items_list_empty_state.title')}
+              </Text>
+              <Text muted style={styles.emptyStateDescription}>
+                {t('items_list_empty_state.description')}
+              </Text>
+            </View>
+          }
           renderItem={({ item }) => (
             <UserItemDisplay
               item={item}
@@ -63,32 +87,119 @@ const UserListEdit = () => {
         />
       </View>
 
-      <View className="absolute inset-x-0 bottom-0 items-center justify-center px-8 pb-5">
+      <View style={styles.buttonContainer}>
         <View
-          //style={{ backgroundColor: 'rgba(107,114,128,0.3)' }}
-          className="w-full flex-row items-center justify-between space-x-8 rounded-full border border-border bg-gray-400/20 px-4 py-2"
+          style={[
+            styles.iconButtonContainer,
+            {
+              borderColor: theme.border,
+              backgroundColor: rgbBackground
+                ? `rgba(${rgbBackground}, 0.4)`
+                : 'rgba(156, 163, 175, 0.2)'
+            }
+          ]}
         >
           <IconButton
             disabled={!modified || state.saving}
-            variant="bordered"
             icon={Icons.CheckIcon}
             onPress={saveChanges}
+            iconStyles={{
+              ...styles.icon,
+              color: theme.primaryForeground
+            }}
+            style={[
+              styles.iconButton,
+              {
+                backgroundColor: theme.primary
+              }
+            ]}
           />
           <IconButton
-            variant="default"
-            className="bg-pink-500"
             onPress={() => router.push('/item/new')}
             icon={Icons.PlusIcon}
+            iconStyles={styles.icon}
+            style={{
+              backgroundColor: '#ec4899',
+              ...styles.iconButton
+            }}
           />
           <IconButton
-            variant="bordered"
             icon={modified ? Icons.CancelIcon : Icons.ArrowTurnBackwardIcon}
             onPress={discardChanges}
+            iconStyles={styles.icon}
+            style={{
+              backgroundColor: theme.accent,
+              ...styles.iconButton
+            }}
           />
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
 export default UserListEdit;
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%'
+  },
+  headerContainer: {
+    flex: 1
+  },
+  listName: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
+    lineHeight: 24
+  },
+  flatList: {
+    flex: 1,
+    paddingHorizontal: 16
+  },
+  flatListContent: {
+    paddingBottom: 80
+  },
+  emptyStateContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 32
+  },
+  emptyStateTitle: {
+    fontFamily: 'Poppins-SemiBold'
+  },
+  emptyStateDescription: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: 'center'
+  },
+  buttonContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+    paddingBottom: 20
+  },
+  iconButtonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: 32,
+    borderRadius: 9999,
+    paddingHorizontal: 8,
+    paddingVertical: 8
+  },
+  iconButton: {
+    borderRadius: 9999,
+    padding: 8
+  },
+  icon: {
+    height: 32,
+    width: 32
+  }
+});

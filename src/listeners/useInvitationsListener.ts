@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Collections } from '@/config/collections';
 import firebaseServices from '@/config/firebaseConfig';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import * as Notifications from 'expo-notifications';
 
 export default function useInvitationsListener() {
   const { profile, updateProfile } = useProfileStore();
@@ -15,6 +16,16 @@ export default function useInvitationsListener() {
   const { loaded, addInvitation, removeInvitation } = useInvitationStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const showNotification = async (title: string, body: string) => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title,
+        body
+      },
+      trigger: null // Immediate notification
+    });
+  };
 
   const handleDocChanges = useCallback(
     async (
@@ -42,6 +53,10 @@ export default function useInvitationsListener() {
             !invitations.some((inv) => inv.id === doc.id)
           ) {
             addInvitation(invitation);
+            showNotification(
+              'Invitation Received',
+              `You have received an invitation from ${invitation.senderName}`
+            );
           }
         } else if (type === 'modified') {
           if (
@@ -54,12 +69,16 @@ export default function useInvitationsListener() {
               invitation.recipientId
             ];
 
-            await Promise.all([
-              updateProfile({ collaborators: updatedCollaborators }),
-              fetchCollaboratorById(invitation.recipientId),
-              removeInvitation(invitation.id)
-              // invitationService.deleteInvitation(invitation)
-            ]);
+            updateProfile({ collaborators: updatedCollaborators });
+            const collaborator = await fetchCollaboratorById(
+              invitation.recipientId
+            );
+            removeInvitation(invitation.id);
+
+            showNotification(
+              'Invitation Accepted',
+              `${collaborator?.username}has accepted your invitation!`
+            );
           }
         } else if (type === 'removed') {
           if (invitations.some((inv) => inv.id === doc.id)) {

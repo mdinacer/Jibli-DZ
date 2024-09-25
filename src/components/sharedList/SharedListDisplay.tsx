@@ -1,12 +1,15 @@
+import CollaboratorDetails from '@/components/collaborator/CollaboratorDetails';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { List } from '@/models/List';
 import { ListItemStatus } from '@/models/ListItem';
 import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import { router } from 'expo-router';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
-import Squircle from '../Squircle';
-import CollaboratorDetails from '../collaborator/CollaboratorDetails';
+import { TouchableOpacity, View } from 'react-native';
+import { Card, CardFooter, CardHeader } from '../Card';
+import Text from '../Themed/Text';
 
 interface Props {
   list: List;
@@ -14,6 +17,8 @@ interface Props {
 }
 
 const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
+  const theme = useThemeColor({}) as ThemeType;
+
   const { t } = useTranslation('common');
   const owner = useCollaboratorStore((state) =>
     state.collaborators.find((c) => c.userId === list.ownerId)
@@ -41,15 +46,24 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
     <TouchableOpacity
       activeOpacity={0.8}
       disabled={list.items.length === 0}
-      style={{ width, height: '100%' }}
-      className="min-h-[200px] w-full"
+      style={{ width, height: '100%', minHeight: 200 }}
       onPress={() => router.push(`/list/${list.id}`)}
     >
-      <View className="w-full rounded-2xl bg-background p-6 shadow-sm">
-        <CollaboratorDetails collaborator={owner} title={list.name} />
+      <Card>
+        <CardHeader style={{ paddingVertical: 4 }}>
+          <CollaboratorDetails collaborator={owner} title={list.name} />
+        </CardHeader>
 
         {itemsDetails ? (
-          <View className="w-full flex-row items-center justify-evenly">
+          <CardFooter
+            style={{
+              width: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+              paddingVertical: 4
+            }}
+          >
             <InfoBox
               title={t('item_status.pending')}
               value={itemsDetails.pendingCount}
@@ -62,13 +76,20 @@ const SharedListDisplay: React.FC<Props> = ({ list, width }) => {
               title={t('item_status.unavailable')}
               value={itemsDetails.unavailableCount}
             />
-          </View>
+          </CardFooter>
         ) : (
-          <View className="w-full flex-row items-center justify-evenly">
-            <Text>This list is empty at the moment</Text>
-          </View>
+          <CardFooter
+            style={{
+              width: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-evenly'
+            }}
+          >
+            <Text muted>This list is empty at the moment</Text>
+          </CardFooter>
         )}
-      </View>
+      </Card>
     </TouchableOpacity>
   );
 };
@@ -81,9 +102,24 @@ interface InfoBoxProps {
 }
 const InfoBox: React.FC<InfoBoxProps> = ({ title, value }) => {
   return (
-    <View className="items-center justify-center">
-      <Text className="font-pbold text-2xl">{value}</Text>
-      <Text className="font-pregular text-base">{title}</Text>
+    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text
+        style={{
+          fontFamily: 'Poppins-Bold',
+          fontSize: 20,
+          lineHeight: 28
+        }}
+      >
+        {value}
+      </Text>
+      <Text
+        style={{
+          fontSize: 12,
+          lineHeight: 20
+        }}
+      >
+        {title}
+      </Text>
     </View>
   );
 };

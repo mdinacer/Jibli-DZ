@@ -1,22 +1,24 @@
-import {
-  View,
-  Text,
-  Platform,
-  FlatList,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/Themed/Button';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
+import { Icons } from '@/constants';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { Collaborator } from '@/models/Collaborator';
+import ListsService from '@/services/ListService';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
+import { useListStore } from '@/stores/useListStore';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { Redirect, router } from 'expo-router';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { Collaborator } from '@/models/Collaborator';
-import { Icons } from '@/constants';
-import AppButton from '@/components/AppButton';
-import { useListStore } from '@/stores/useListStore';
-import ListsService from '@/services/ListService';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+  FlatList,
+  Image,
+  Platform,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 const ListCollaborators = () => {
   const { t } = useTranslation();
@@ -79,15 +81,20 @@ const ListCollaborators = () => {
   if (!list) return <Redirect href={'/home'} />;
   return (
     <SafeAreaView
-      className="flex-1"
       edges={
         Platform.OS === 'android'
           ? ['top', 'left', 'right', 'bottom']
           : ['left', 'right', 'bottom']
       }
     >
-      <View className="flex-1 p-6" style={{ rowGap: 24 }}>
-        <Text className="font-psemibold text-lg">
+      <View style={{ rowGap: 24, flex: 1, padding: 24 }}>
+        <Text
+          style={{
+            fontFamily: 'Poppins-SemiBold',
+            fontSize: 18,
+            lineHeight: 28
+          }}
+        >
           Share you list with your friends
         </Text>
 
@@ -105,12 +112,12 @@ const ListCollaborators = () => {
           )}
         />
         <View style={{ rowGap: 12 }}>
-          <AppButton disabled={!isModified} onPress={handleSaveChanges}>
+          <Button disabled={!isModified} onPress={handleSaveChanges}>
             Save
-          </AppButton>
-          <AppButton onPress={handleDiscardChanges} variant="outline">
+          </Button>
+          <Button onPress={handleDiscardChanges} variant="outline">
             Cancel
-          </AppButton>
+          </Button>
         </View>
       </View>
     </SafeAreaView>
@@ -128,11 +135,31 @@ const CollaboratorDisplay: React.FC<CollaboratorDisplayProps> = ({
   collaborator,
   active
 }) => {
+  const theme = useThemeColor({}) as ThemeType;
+
   return (
     <View
-      className={`flex-row items-center space-x-4 rounded-full px-2 py-1 ${active ? 'bg-card' : 'bg-muted'}`}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 16,
+        borderRadius: 9999,
+        paddingHorizontal: 8,
+        paddingVertical: 8,
+        backgroundColor: active ? theme.card : theme.muted
+      }}
     >
-      <View className="aspect-square h-10 items-center justify-center overflow-hidden rounded-full bg-muted">
+      <View
+        style={{
+          height: 40,
+          width: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          borderRadius: 9999,
+          backgroundColor: theme.muted
+        }}
+      >
         {collaborator.picture ? (
           <Image
             source={{ uri: collaborator.picture }}
@@ -141,24 +168,44 @@ const CollaboratorDisplay: React.FC<CollaboratorDisplayProps> = ({
             resizeMode="cover"
           />
         ) : (
-          <Icons.UserIcon className="h-5 w-5 text-muted-foreground" />
+          <Icons.UserIcon
+            style={{ height: 20, width: 20 }}
+            color={theme.mutedForeground}
+          />
         )}
       </View>
-      <View className="flex-1">
-        <Text className="font-pmedium text-base capitalize">
+      <View style={{ flex: 1 }}>
+        <Text
+          style={{
+            fontFamily: 'Poppins-Medium',
+            textTransform: 'capitalize'
+          }}
+        >
           {collaborator.username}
         </Text>
-        <Text className="font-pregular text-base text-muted-foreground">
-          {collaborator.email}
-        </Text>
+        <Text muted>{collaborator.email}</Text>
       </View>
       <View
-        className={`aspect-square h-10 items-center justify-center overflow-hidden rounded-full ${active ? 'bg-primary' : 'bg-muted'}`}
+        style={{
+          height: 40,
+          width: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          borderRadius: 9999,
+          backgroundColor: active ? theme.primary : theme.muted
+        }}
       >
         {active ? (
-          <Icons.CheckIcon className="h-5 w-5 text-primary-foreground" />
+          <Icons.CheckIcon
+            style={{ height: 20, width: 20 }}
+            color={theme.primaryForeground}
+          />
         ) : (
-          <Icons.CancelIcon className="h-5 w-5 text-muted-foreground" />
+          <Icons.CancelIcon
+            style={{ height: 20, width: 20 }}
+            color={theme.mutedForeground}
+          />
         )}
       </View>
     </View>

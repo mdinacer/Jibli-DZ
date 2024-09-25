@@ -1,7 +1,7 @@
+import TextInput from '@/components/Themed/TextInput';
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Text, TextInputProps, View } from 'react-native';
-import AppInput from '../AppInput';
 
 interface Props<T extends FieldValues> extends TextInputProps {
   control: Control<T>;
@@ -29,10 +29,8 @@ const NumberInputField = <T extends FieldValues>({
         fieldState: { error }
       }) => (
         <View style={{ rowGap: 6 }} className="w-full">
-          <Text className="font-pregular text-sm font-medium leading-none">
-            {label}
-          </Text>
-          <AppInput
+          <TextInput
+            label={label}
             {...props}
             {...field}
             value={value.toString()}

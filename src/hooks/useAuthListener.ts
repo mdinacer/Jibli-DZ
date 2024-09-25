@@ -1,4 +1,4 @@
-import firebaseServices from '@/config/firebaseConfig';
+import firebaseServices, { crashlyticsInstance } from '@/config/firebaseConfig';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useCallback, useEffect } from 'react';
@@ -12,6 +12,7 @@ export default function useAuthListener() {
         await user.reload();
         setUser(user);
       } catch (error: any) {
+        crashlyticsInstance.recordError(error);
         await signOut();
         setUser(null);
       }

@@ -98,7 +98,7 @@
     "invitation_many": "دعوات",
     "invitation_empty_state": {
         "title": "لا توجد دعوات",
-        "description": "ليس لديك أي دعوات حتى الآن. عندما يشارك الآخرون قائمة معك، ستظهر هنا."
+        "description": "ليس لديك أي دعوات حتى الآن"
     },
     "invitation_form": {
         "title": "إرسال دعوة",
@@ -285,6 +285,8 @@
     "list_create": {
         "title": "أنشئ قائمتك",
         "cta": "أنشئ قائمتك الآن",
+        "cancel":"إلغاء",
+        "back":"العودة",
         "fields" :{
             "name": {
                 "label": "اسم القائمة",
@@ -308,5 +310,12 @@
         "description": "هل أنت متأكد من أنك تريد حذف هذا المتعاقد؟",
         "cta": "حذف",
         "cancel": "الغاء"
-      }
+      },
+      "items_list_empty_state": {
+        "title": "لا يوجد عناصر",
+        "description": "لا يوجد عناصر لعرضها في القائمة الخاصة بك."
+      },
+      "share_list_with_collaborators": "مشاركة القائمة مع المتعاقدين",
+       "list_empty": "هذه القائمة فارغة في الوقت الحالي"
+      
 }

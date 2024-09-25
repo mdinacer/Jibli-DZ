@@ -86,20 +86,20 @@ const SignUp = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1" edges={['top', 'left', 'right']}>
+    <SafeAreaView
+      className="flex-1 bg-background"
+      edges={['top', 'left', 'right']}
+    >
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
-        <ScrollView
-          className="p-6"
-          contentContainerStyle={{
-            flexGrow: 1
-          }}
-        >
+        <ScrollView className="flex-grow p-6">
           <View className="mb-4">
-            <Text className="mb-2 text-2xl font-semibold">{t('title')}</Text>
+            <Text className="mb-2 text-2xl font-semibold text-foreground">
+              {t('title')}
+            </Text>
           </View>
 
           <View style={{ rowGap: 16 }} className="mb-6">
@@ -138,10 +138,13 @@ const SignUp = () => {
             style={{ columnGap: 8 }}
             className="mt-4 flex-row items-center justify-center"
           >
-            <Text className="font-pregular text-sm text-muted-foreground">
+            <Text className="font-pregular text-sm text-foreground">
               {t('has_account_prompt')}
             </Text>
-            <Link className="font-pregular text-sm underline" href={'/sign-in'}>
+            <Link
+              className="font-pregular text-sm text-foreground underline"
+              href={'/sign-in'}
+            >
               {t('has_account_link')}
             </Link>
           </View>

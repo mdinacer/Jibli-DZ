@@ -98,7 +98,7 @@
     "invitation_many": "Invitations",
     "invitation_empty_state": {
         "title": "No invitations",
-        "description": "You don't have any invitations yet. When others share a list with you, it will appear here."
+        "description": "You don't have any invitations yet. When others send you an invitation, it will appear here."
     },
     "invitation_form": {
         "title": "Send Invitation",
@@ -285,6 +285,8 @@
     "list_create": {
         "title": "Create Your List",
         "cta": "Create your list now!",
+        "cancel":"Cancel",
+        "back":"Back",
         "fields" :{
             "name": {
                 "label": "List Name",
@@ -308,5 +310,11 @@
         "description": "Are you sure you want to remove this collaborator?",
         "cta": "Remove",
         "cancel": "Cancel"
-      }
+      },
+      "items_list_empty_state": {
+        "title": "No items",
+        "description": "There are no items in this list yet. Start adding items to your list."
+      },
+      "share_list_with_collaborators": "Share list with collaborators",
+      "list_empty" : "This list is empty at the moment."
 }

@@ -17,7 +17,7 @@ import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Platform, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Edit = () => {
@@ -106,74 +106,79 @@ const Edit = () => {
       className="flex-1"
       edges={Platform.OS === 'android' ? ['top', 'left', 'right'] : []}
     >
-      <View className="flex-1 justify-center p-6" style={{ rowGap: 24 }}>
-        <View className="">
-          <Text className="font-pmedium text-xl">
-            {item
-              ? t('title_edit', { keyPrefix: 'item_form', itemName: item.name })
-              : t('title_create', { keyPrefix: 'item_form' })}
-          </Text>
-        </View>
+      <ScrollView className="flex-grow">
+        <View className="flex-1 justify-center p-6" style={{ rowGap: 24 }}>
+          <View className="">
+            <Text className="font-pmedium text-xl">
+              {item
+                ? t('title_edit', {
+                    keyPrefix: 'item_form',
+                    itemName: item.name
+                  })
+                : t('title_create', { keyPrefix: 'item_form' })}
+            </Text>
+          </View>
 
-        <View className="" style={{ rowGap: 48 }}>
-          <InputField
-            name="name"
-            label={t('fields.name.label', { keyPrefix: 'item_form' })}
-            control={control}
-            placeholder={t('fields.name.placeholder', {
-              keyPrefix: 'item_form'
-            })}
-          />
-          <NumberInputField
-            name="quantity"
-            clearTextOnFocus
-            label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
-            control={control}
-            placeholder={t('fields.quantity.placeholder', {
-              keyPrefix: 'item_form'
-            })}
-            keyboardType="number-pad"
-          />
+          <View className="" style={{ rowGap: 16 }}>
+            <InputField
+              name="name"
+              label={t('fields.name.label', { keyPrefix: 'item_form' })}
+              control={control}
+              placeholder={t('fields.name.placeholder', {
+                keyPrefix: 'item_form'
+              })}
+            />
+            <NumberInputField
+              name="quantity"
+              clearTextOnFocus
+              label={t('fields.quantity.label', { keyPrefix: 'item_form' })}
+              control={control}
+              placeholder={t('fields.quantity.placeholder', {
+                keyPrefix: 'item_form'
+              })}
+              keyboardType="number-pad"
+            />
 
-          <PickerSelectField
-            control={control}
-            name="unit"
-            label={t('fields.unit.label', { keyPrefix: 'item_form' })}
-            items={unitsList}
-            placeholder={{
-              label: t('fields.unit.placeholder', { keyPrefix: 'item_form' })
-            }}
-          />
-          <InputField
-            name="note"
-            label={t('fields.note.label', { keyPrefix: 'item_form' })}
-            control={control}
-            placeholder={t('fields.note.placeholder', {
-              keyPrefix: 'item_form'
-            })}
-            multiline
-            numberOfLines={3}
-          />
-        </View>
+            <PickerSelectField
+              control={control}
+              name="unit"
+              label={t('fields.unit.label', { keyPrefix: 'item_form' })}
+              items={unitsList}
+              placeholder={{
+                label: t('fields.unit.placeholder', { keyPrefix: 'item_form' })
+              }}
+            />
+            <InputField
+              name="note"
+              label={t('fields.note.label', { keyPrefix: 'item_form' })}
+              control={control}
+              placeholder={t('fields.note.placeholder', {
+                keyPrefix: 'item_form'
+              })}
+              multiline
+              numberOfLines={3}
+            />
+          </View>
 
-        <View style={{ rowGap: 12 }}>
-          <AppButton
-            onPress={handleSubmit(handleOnSubmit)}
-            disabled={isSubmitting}
-          >
-            {t('submit_button', { keyPrefix: 'item_form' })}
-          </AppButton>
-          <AppButton
-            disabled={isSubmitting}
-            variant="outline"
-            onPress={handleCloseModal}
-          >
-            {t(isDirty ? 'cancel_button' : 'back_button', {
-              keyPrefix: 'item_form'
-            })}
-          </AppButton>
+          <View style={{ rowGap: 12 }}>
+            <AppButton
+              onPress={handleSubmit(handleOnSubmit)}
+              disabled={isSubmitting}
+            >
+              {t('submit_button', { keyPrefix: 'item_form' })}
+            </AppButton>
+            <AppButton
+              disabled={isSubmitting}
+              variant="outline"
+              onPress={handleCloseModal}
+            >
+              {t(isDirty ? 'cancel_button' : 'back_button', {
+                keyPrefix: 'item_form'
+              })}
+            </AppButton>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

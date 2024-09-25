@@ -14,7 +14,7 @@ const PADDING = 16;
 
 const CollaboratorsList: React.FC<Props> = ({ ...props }) => {
   const { t } = useTranslation('common');
-  const { collaborators, removeCollaborator } = useCollaboratorStore();
+  const { collaborators } = useCollaboratorStore();
   const { lists, setLists } = useListStore();
 
   const { width } = Dimensions.get('window');
@@ -71,10 +71,12 @@ const CollaboratorsList: React.FC<Props> = ({ ...props }) => {
       keyExtractor={(c) => c.userId}
       horizontal
       renderItem={({ item: collaborator }) => (
-        <CollaboratorCard
-          collaborator={collaborator}
-          onRevoke={onRevokePrompt}
-        />
+        <View style={{ width: size }}>
+          <CollaboratorCard
+            collaborator={collaborator}
+            onRevoke={onRevokePrompt}
+          />
+        </View>
       )}
       ListEmptyComponent={
         <View style={{ width: width - PADDING * 2 }}>

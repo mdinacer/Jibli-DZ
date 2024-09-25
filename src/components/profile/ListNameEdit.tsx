@@ -1,16 +1,14 @@
-import { View, Text } from 'react-native';
-import React, { useCallback, useState } from 'react';
-import { List } from '@/models/List';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/Card';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import InputField from '../fields/InputField';
-import AppButton from '../AppButton';
-import { useTranslation } from 'react-i18next';
-import { useUserListStore } from '@/stores/useUserListStore';
-import { useListStore } from '@/stores/useListStore';
+import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
 import ListsService from '@/services/ListService';
+import { useListStore } from '@/stores/useListStore';
+import { useUserListStore } from '@/stores/useUserListStore';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
 
 interface Props {}
 
@@ -70,12 +68,12 @@ const ListNameEdit: React.FC<Props> = () => {
           placeholder={t('fields.name.placeholder')}
         />
 
-        <AppButton
+        <Button
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
           {t('cta')}
-        </AppButton>
+        </Button>
       </CardContent>
     </Card>
   );

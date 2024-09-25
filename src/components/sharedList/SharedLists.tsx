@@ -1,10 +1,17 @@
 import { useListStore } from '@/stores/useListStore';
 import React, { useMemo } from 'react';
-import { Dimensions, FlatList, FlatListProps, Text, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  FlatListProps,
+  StyleSheet,
+  View
+} from 'react-native';
 import SharedListDisplay from '@/components/sharedList/SharedListDisplay';
 import { List } from '@/models/List';
 import EmptyState from '../EmptyState';
 import { useTranslation } from 'react-i18next';
+import Text from '@/components/Themed/Text';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
@@ -22,8 +29,8 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
   );
 
   return (
-    <>
-      <Text className="mt-5 font-pregular text-base text-muted-foreground">
+    <View className="aspect-video min-h-[300px] w-full" style={{ rowGap: 16 }}>
+      <Text muted style={styles.sectionTitle}>
         {t('shared_list_many')}
       </Text>
       <FlatList
@@ -31,7 +38,6 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         contentContainerStyle={{
           columnGap: 16,
           paddingBottom: 16
-          //padding: 16
         }}
         data={lists}
         keyExtractor={(l) => l.id}
@@ -52,8 +58,47 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         }
         {...props}
       />
-    </>
+    </View>
   );
 };
 
 export default SharedLists;
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: 60
+  },
+  headerComponentStyle: {
+    paddingBottom: 14
+  },
+  headerContainer: {
+    rowGap: 48
+  },
+  headerTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  welcomeBackText: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    lineHeight: 20
+  },
+  usernameText: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
+    lineHeight: 32,
+    textTransform: 'capitalize'
+  },
+  logo: {
+    height: 40,
+    width: 36
+  },
+  sectionTitle: {
+    marginTop: 20,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    lineHeight: 24
+  }
+});

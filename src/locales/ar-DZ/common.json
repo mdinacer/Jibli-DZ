@@ -1,0 +1,249 @@
+{
+    "common": {
+        "updated": "محدث",
+        "shared": "مشترك",
+        "private": "خاص",
+        "cancel": "إلغاء",
+        "delete": "حذف",
+        "save": "حفظ",
+        "back": "رجوع",
+        "close": "إغلاق"
+    },
+    "list": {
+        "your_list": "قائمتك",
+        "my_list": "قائمتي",
+        "delete_title": "حذف القائمة",
+        "delete_description": "هل أنت متأكد أنك تريد حذف هذه القائمة؟",
+        "create_title": "إنشاء قائمتك",
+        "create_cta": "أنشئ قائمتك الآن!",
+        "edit_name_title": "تعديل اسم القائمة",
+        "edit_name_cta": "تحديث اسم القائمة",
+        "name_field": {
+            "label": "اسم القائمة",
+            "placeholder": "أدخل اسم القائمة"
+        },
+        "no_items_title": "مرحبًا بك في مساعد التسوق الخاص بك!",
+        "no_items_description": "ابدأ بإنشاء أول قائمة تسوق. أضف العناصر التي تحتاج إلى شرائها، وادعُ المتعاونين لإدارة القائمة، وشاركها بسهولة مع الأصدقاء أو العائلة. ابق منظمًا وتأكد من أنك لن تفوت أي عنصر!",
+        "no_items_action": "أنشئ قائمتك الآن!",
+        "empty_state_title": "لا توجد عناصر",
+        "empty_state_description": "لا توجد عناصر في هذه القائمة حتى الآن. ابدأ بإضافة عناصر إلى قائمتك.",
+        "empty_state_cta": "شارك القائمة مع المتعاونين",
+        "empty": "هذه القائمة فارغة في الوقت الحالي."
+    },
+    "count_items": {
+        "zero": "لا توجد عناصر",
+        "one": "عنصر واحد",
+        "two": "عنصران",
+        "few": "{{count}} عناصر",
+        "many": "{{count}} عناصر",
+        "other": "{{count}} عناصر"
+    },
+    "item": {
+        "zero": "لا توجد عناصر",
+        "one": "عنصر واحد",
+        "two": "عنصران",
+        "few": "عناصر",
+        "many": "عناصر",
+        "other": "عناصر",
+        "form": {
+            "create_title": "إضافة عنصر جديد",
+            "edit_title": "تعديل العنصر {{itemName}}",
+            "create_description": "املأ التفاصيل لإضافة هذا العنصر إلى قائمة التسوق الخاصة بك.",
+            "edit_description": "قم بتحديث التفاصيل لتعديل هذا العنصر في قائمة التسوق الخاصة بك.",
+            "fields": {
+                "name": {
+                    "label": "الاسم",
+                    "placeholder": "أدخل اسم العنصر (مثل: تفاح)"
+                },
+                "quantity": {
+                    "label": "الكمية",
+                    "placeholder": "أدخل الكمية (مثل: 2)"
+                },
+                "unit": {
+                    "label": "الوحدة",
+                    "placeholder": "أدخل الوحدة (مثل: كجم، قطع)"
+                },
+                "note": {
+                    "label": "ملاحظة",
+                    "placeholder": "ملاحظات إضافية (اختياري، مثل: يفضل العضوي)"
+                }
+            }
+        },
+        "status": {
+            "pending": "قيد الانتظار",
+            "bought": "تم الشراء",
+            "unavailable": "غير متاح"
+        },
+        "delete_title": "حذف العنصر",
+        "delete_description": "هل أنت متأكد أنك تريد حذف هذا العنصر؟"
+    },
+    "shared_list": {
+        "zero": "لا توجد قوائم مشتركة",
+        "one": "قائمة مشتركة",
+        "many": "قوائم مشتركة",
+        "empty_state_title": "لا توجد قوائم مشتركة",
+        "empty_state_description": "لا توجد لديك أي قوائم مشتركة حتى الآن. عندما يشاركك الآخرون قائمة، ستظهر هنا."
+    },
+    "pending_item": {
+        "zero": "لا توجد عناصر قيد الانتظار",
+        "one": "عنصر قيد الانتظار",
+        "many": "عناصر قيد الانتظار",
+        "empty_state_title": "لا توجد عناصر قيد الانتظار",
+        "empty_state_description": "أنت على علم بكل شيء! لا توجد عناصر قيد الانتظار في القوائم المشتركة معك."
+    },
+    "collaborator": {
+        "zero": "لا يوجد متعاونون",
+        "one": "متعاون",
+        "many": "متعاونون",
+        "revoke": "إلغاء التعاون",
+        "revoke_prompt_title": "إزالة المتعاون",
+        "revoke_prompt_description": "هل أنت متأكد أنك تريد إزالة هذا المتعاون؟",
+        "revoke_prompt_cta": "إزالة",
+        "empty_state_title": "لا يوجد متعاونون",
+        "empty_state_description": "أنت على علم بكل شيء! لا يوجد متعاونون في القوائم المشتركة معك."
+    },
+    "invitation": {
+        "zero": "لا توجد دعوات",
+        "one": "دعوة",
+        "many": "دعوات",
+        "form": {
+            "title": "إرسال دعوة",
+            "description": "شارك هذه القائمة مع متعاون جديد",
+            "fields": {
+                "email": {
+                    "label": "البريد الإلكتروني",
+                    "placeholder": "أدخل عنوان البريد الإلكتروني"
+                },
+                "message": {
+                    "label": "الرسالة",
+                    "placeholder": "أضف تعليقات (اختياري)"
+                }
+            },
+            "send": "إرسال"
+        },
+        "empty_state_title": "لا توجد دعوات",
+        "empty_state_description": "لا توجد لديك دعوات حتى الآن. عندما يرسل لك الآخرون دعوة، ستظهر هنا."
+    },
+    "profile_picture": {
+        "delete_title": "حذف صورة الملف الشخصي",
+        "delete_description": "هل أنت متأكد أنك تريد حذف صورتك الشخصية؟"
+    },
+    "account": {
+        "my_account": "حسابي",
+        "username_form": {
+            "title": "تغيير اسم المستخدم",
+            "description": "أدخل اسم المستخدم الجديد الخاص بك",
+            "fields": {
+                "username": {
+                    "label": "اسم المستخدم",
+                    "placeholder": "أدخل اسم المستخدم الجديد الخاص بك"
+                }
+            }
+        },
+        "email_change_form": {
+            "title": "تغيير البريد الإلكتروني",
+            "description": "أدخل عنوان بريدك الإلكتروني الجديد",
+            "fields": {
+                "current_password": {
+                    "label": "كلمة المرور الحالية",
+                    "placeholder": "أدخل كلمة المرور الحالية"
+                },
+                "email": {
+                    "label": "البريد الإلكتروني",
+                    "placeholder": "أدخل عنوان بريدك الإلكتروني الجديد"
+                }
+            }
+        },
+        "email_link_form": {
+            "title": "ربط بريد إلكتروني آخر",
+            "description": "أدخل البريد الإلكتروني الجديد وكلمة المرور لربطهما بحسابك الحالي.",
+            "fields": {
+                "new_email": {
+                    "label": "البريد الإلكتروني",
+                    "placeholder": "أدخل عنوان بريدك الإلكتروني الجديد"
+                },
+                "new_password": {
+                    "label": "كلمة المرور",
+                    "placeholder": "أدخل كلمة المرور الجديدة"
+                },
+                "confirm_password": {
+                    "label": "تأكيد كلمة المرور",
+                    "placeholder": "أكد كلمة المرور الجديدة"
+                }
+            }
+        },
+        "account_delete_form": {
+            "title": "حذف الحساب",
+            "description": "أدخل كلمة المرور لتأكيد حذف الحساب.",
+            "prompt": "هل أنت متأكد أنك تريد حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
+            "fields": {
+                "current_password": {
+                    "label": "كلمة المرور الحالية",
+                    "placeholder": "أدخل كلمة المرور الحالية"
+                }
+            }
+        }
+    },
+    "auth": {
+        "sign_in_form": {
+            "title": "تسجيل الدخول",
+            "description": "أدخل اسم المستخدم وكلمة المرور لتسجيل الدخول.",
+            "fields": {
+                "username": {
+                    "label": "اسم المستخدم",
+                    "placeholder": "أدخل اسم المستخدم"
+                },
+                "password": {
+                    "label": "كلمة المرور",
+                    "placeholder": "أدخل كلمة المرور"
+                }
+            },
+            "submit_button": "تسجيل الدخول",
+            "forgot_password": "هل نسيت كلمة المرور؟",
+            "no_account_prompt": "ليس لديك حساب؟",
+            "no_account_link": "إنشاء حساب"
+        },
+        "sign_up_form": {
+            "title": "إنشاء حساب",
+            "description": "أدخل اسم المستخدم وكلمة المرور لإنشاء حساب.",
+            "fields": {
+                "username": {
+                    "label": "اسم المستخدم",
+                    "placeholder": "أدخل اسم المستخدم"
+                },
+                "email": {
+                    "label": "البريد الإلكتروني",
+                    "placeholder": "أدخل بريدك الإلكتروني"
+                },
+                "password": {
+                    "label": "كلمة المرور",
+                    "placeholder": "أدخل كلمة المرور"
+                },
+                "confirm_password": {
+                    "label": "تأكيد كلمة المرور",
+                    "placeholder": "أكد كلمة المرور"
+                }
+            },
+            "submit_button": "إنشاء حساب",
+            "has_account_prompt": "هل لديك حساب بالفعل؟",
+            "has_account_link": "تسجيل الدخول"
+        },
+        "google_auth": {
+            "sign_in": "تسجيل الدخول باستخدام Google",
+            "sign_up": "إنشاء حساب باستخدام Google"
+        }
+    },
+    "units": {
+        "list": [
+            {"label": "كيس", "value": "كيس"},
+            {"label": "زجاجة", "value": "زجاجة"},
+            {"label": "علبة", "value": "علبة"},
+            {"label": "علبة", "value": "علبة"},
+            {"label": "جرة", "value": "جرة"},
+            {"label": "كيلوغرام", "value": "كيلوغرام"},
+            {"label": "غرام", "value": "غرام"},
+            {"label": "حزمة", "value": "حزمة"},
+            {"label": "قطعة", "value": "قطعة"}
+        ]
+    }
+}

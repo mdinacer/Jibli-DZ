@@ -1,10 +1,10 @@
 import UserListEdit from '@/components/list/UserListEdit';
 import SharedListEdit from '@/components/sharedList/SharedListEdit';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
 import useLoadLists from '@/hooks/useLoadLists';
 import { useLocalSearchParams } from 'expo-router';
 import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const List = () => {
   const { id } = useLocalSearchParams<{ id?: string }>();

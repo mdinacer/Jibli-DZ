@@ -21,8 +21,6 @@ const languages = [
 ];
 
 const LanguageSelector = () => {
-  const { top } = useSafeAreaInsets();
-  const { y } = useSafeAreaFrame();
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
@@ -53,8 +51,6 @@ const LanguageSelector = () => {
       className="h-8 w-full bg-pink-500"
       style={{
         flexGrow: 1,
-
-        top,
         position: 'absolute',
         zIndex: 5
       }}

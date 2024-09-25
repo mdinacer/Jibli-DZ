@@ -59,6 +59,8 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
   const handleAcceptInvitation = useCallback(
     async (invitation: Invitation, collaborator: Collaborator) => {
       if (!profile) return;
+      console.log('Accepting invitation', invitation, collaborator);
+
       try {
         await invitationService.acceptInvitation(
           invitation.senderId,

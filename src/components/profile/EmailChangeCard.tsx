@@ -1,19 +1,19 @@
-import InputField from '@/components/fields/InputField';
-import firebaseServices from '@/config/firebaseConfig';
-import { zodResolver } from '@hookform/resolvers/zod';
-import auth from '@react-native-firebase/auth';
-import React, { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import AppButton from '../AppButton';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
-} from '../Card';
+} from '@/components/Card';
+import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
+import firebaseServices from '@/config/firebaseConfig';
+import { zodResolver } from '@hookform/resolvers/zod';
+import auth from '@react-native-firebase/auth';
+import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
 
 const schema = z.object({
   currentPassword: z.string().min(6, '{value} must be at least 6 characters'),
@@ -87,12 +87,12 @@ const EmailChangeCard = () => {
           placeholder={t('fields.email.placeholder')}
         />
 
-        <AppButton
+        <Button
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
           {t('submit_button')}
-        </AppButton>
+        </Button>
       </CardContent>
     </Card>
   );

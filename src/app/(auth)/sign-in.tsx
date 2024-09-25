@@ -1,6 +1,5 @@
 import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
-import { CardDescription, CardTitle } from '@/components/Card';
 import InputField from '@/components/fields/InputField';
 import { SignInFormData, SignInFormSchema } from '@/schemas/SingInFormSchema';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -52,20 +51,17 @@ const SignIn = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-background">
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
-        <ScrollView
-          className="p-6"
-          contentContainerStyle={{
-            flexGrow: 1
-          }}
-        >
+        <ScrollView className="flex-grow p-6">
           <View className="mb-8">
-            <Text className="mb-2 text-2xl font-semibold">{t('title')}</Text>
+            <Text className="mb-2 text-2xl font-semibold text-foreground">
+              {t('title')}
+            </Text>
           </View>
 
           <View style={{ rowGap: 16 }} className="mb-8">
@@ -95,8 +91,13 @@ const SignIn = () => {
             style={{ columnGap: 8 }}
             className="mt-4 flex-row items-center justify-center"
           >
-            <Text className="text-base">{t('no_account_prompt')}</Text>
-            <Link className="text-base underline" href={'/sign-up'}>
+            <Text className="text-base text-foreground">
+              {t('no_account_prompt')}
+            </Text>
+            <Link
+              className="text-base text-foreground underline"
+              href={'/sign-up'}
+            >
               {t('no_account_link')}
             </Link>
           </View>

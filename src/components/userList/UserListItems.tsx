@@ -3,7 +3,8 @@ import { ListItem } from '@/models/ListItem';
 import { sortItemByStatus } from '@/utils/list-utils';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
+import Text from '@/components/Themed/Text';
 
 interface Props {
   items: ListItem[];
@@ -18,7 +19,7 @@ const ItemsList: React.FC<Props> = ({ items = [] }) => {
       data={sortedItem}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <UserListItem item={item} />}
-      ListEmptyComponent={<Text>{t('item_zero', { count: 0 })}</Text>}
+      ListEmptyComponent={<Text muted>{t('item_zero', { count: 0 })}</Text>}
     />
   );
 };

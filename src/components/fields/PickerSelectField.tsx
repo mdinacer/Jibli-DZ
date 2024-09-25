@@ -28,7 +28,7 @@ const PickerSelectField = <T extends FieldValues>({
           <Text className="font-pregular text-sm font-medium leading-none">
             {label}
           </Text>
-          <View className="h-16 justify-center rounded-2xl border border-input bg-background px-4 py-1">
+          <View className="h-16 justify-center rounded-md border border-input bg-background px-2">
             <RNPickerSelect
               {...props}
               value={value}

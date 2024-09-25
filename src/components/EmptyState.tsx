@@ -1,42 +1,49 @@
-import Squircle from '@/components/Squircle';
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/Card';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import React from 'react';
-import { Text, View } from 'react-native';
 
 interface Props {
   title?: string;
   description?: string;
   action?: React.ReactNode;
-  showImage?: boolean;
 }
 
-const EmptyState: React.FC<Props> = ({
-  title,
-  description,
-  action,
-  showImage = true
-}) => {
+const EmptyState: React.FC<Props> = ({ title, description, action }) => {
+  const theme = useThemeColor({}) as ThemeType;
   return (
-    <View
-      className="w-full items-center justify-center rounded-2xl bg-background p-6"
-      style={{ rowGap: 16 }}
+    <Card
+      style={{
+        aspectRatio: 16 / 9,
+        width: '100%',
+        borderRadius: 8,
+        rowGap: 16,
+        padding: 24,
+        backgroundColor: theme.background
+      }}
     >
-      <View className="w-full gap-y-2">
-        {title && (
-          <Text className="text-center font-pmedium text-lg text-primary">
-            {title}
-          </Text>
-        )}
+      <CardHeader
+        style={{
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          rowGap: 8
+        }}
+      >
+        {title && <CardTitle>{title}</CardTitle>}
         {description && (
-          <Text
-            style={{ lineHeight: 24 }}
-            className="text-center font-pregular text-sm leading-loose text-muted-foreground"
-          >
+          <CardDescription style={{ textAlign: 'center' }}>
             {description}
-          </Text>
+          </CardDescription>
         )}
-      </View>
+      </CardHeader>
       {action}
-    </View>
+    </Card>
   );
 };
 
