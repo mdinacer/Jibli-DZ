@@ -1,4 +1,15 @@
 import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/Card';
+import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import {
   InvitationFormData,
   InvitationFormSchema,
   InvitationInput
@@ -11,10 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, Modal, View } from 'react-native';
-import AppButton from '../AppButton';
-import { CardContent, CardFooter, CardHeader, CardTitle } from '../Card';
-import InputField from '../fields/InputField';
+import { Alert, Modal, StyleSheet } from 'react-native';
 
 interface Props {
   open: boolean;
@@ -30,6 +38,8 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
   const { t } = useTranslation('common', { keyPrefix: 'invitation_form' });
   const { profile } = useProfileStore();
   const { invitations, addInvitation } = useInvitationStore();
+
+  const theme = useThemeColor({}) as ThemeType;
 
   const receivedInvitations = useMemo(
     () => invitations.map((invitation) => invitation.senderId),
@@ -140,11 +150,18 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
       visible={open}
       onRequestClose={() => setOpen(false)}
     >
-      <View className="absolute inset-x-0 bottom-0 min-h-[50%] w-full rounded-t-2xl bg-white p-6">
+      <Card
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.background
+          }
+        ]}
+      >
         <CardHeader>
           <CardTitle>{t('title')}</CardTitle>
         </CardHeader>
-        <CardContent style={{ rowGap: 24 }}>
+        <CardContent style={styles.cardContent}>
           <InputField
             name="recipient"
             label={t('fields.email.label')}
@@ -162,20 +179,41 @@ const InvitationModal: React.FC<Props> = ({ open, setOpen }) => {
           />
         </CardContent>
 
-        <CardFooter style={{ rowGap: 16 }}>
-          <AppButton
+        <CardFooter style={styles.cardFooter}>
+          <Button
             onPress={handleSubmit(handleOnSubmit)}
             disabled={isSubmitting || !isDirty}
           >
             {t('send')}
-          </AppButton>
-          <AppButton variant="outline" onPress={handleDiscardChanges}>
+          </Button>
+          <Button variant="outline" onPress={handleDiscardChanges}>
             {t(isDirty ? 'cancel' : 'close')}
-          </AppButton>
+          </Button>
         </CardFooter>
-      </View>
+      </Card>
     </Modal>
   );
 };
 
 export default InvitationModal;
+
+const styles = StyleSheet.create({
+  card: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    minHeight: '50%',
+    width: '100%',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0
+  },
+  cardContent: {
+    rowGap: 24
+  },
+  cardFooter: {
+    rowGap: 16
+  }
+});

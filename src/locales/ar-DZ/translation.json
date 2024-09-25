@@ -20,8 +20,9 @@
         "welcome_back": "مرحبًا بعودتك"
     },
     "user_list": {
-        "no_items_text": "ابدأ بإنشاء قائمتك الأولى لتنظيم وإدارة العناصر بسهولة.",
-        "no_items_action": "إنشاء قائمة جديدة"
+        "no_items_title":"مرحبًا بك في مساعد التسوق الخاص بك!",
+        "no_items_description":" لنبدأ بإنشاء قائمتك الأولى للتسوق. أضف العناصر التي تحتاج إلى شرائها، وادعُ المتعاونين للمساعدة في إدارة القائمة، وشاركها بسهولة مع الأصدقاء أو العائلة. حافظ على تنظيمك وتأكد من عدم تفويت أي عنصر!",
+        "no_items_action": "أنشئ قائمتك الآن"
     },
     "user_list_card": {},
     "delete_list": {
@@ -46,7 +47,7 @@
     },
     "item_form": {
         "title_create": "إضافة عنصر جديد",
-        "title_edit": "تعديل العنصر",
+        "title_edit": "تعديل العنصر {{itemName}}",
         "description_create": "املأ التفاصيل لإضافة هذا العنصر إلى قائمة التسوق.",
         "description_edit": "حدث التفاصيل لتعديل هذا العنصر في قائمة التسوق.",
         "fields": {
@@ -83,7 +84,7 @@
         "pack": "عبوة",
         "piece": "قطعة"
     },
-    "delete_item": {
+    "item_delete": {
         "title": "حذف العنصر",
         "description": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
         "cancel": "إلغاء",
@@ -97,7 +98,7 @@
     "invitation_many": "دعوات",
     "invitation_empty_state": {
         "title": "لا توجد دعوات",
-        "description": "ليس لديك أي دعوات حتى الآن. عندما يشارك الآخرون قائمة معك، ستظهر هنا."
+        "description": "ليس لديك أي دعوات حتى الآن"
     },
     "invitation_form": {
         "title": "إرسال دعوة",
@@ -276,5 +277,45 @@
             "label": "عبوة",
             "value": "pack"
         }
-    ]
+    ],
+    "collaborators_empty_state": {
+        "title": "لا يوجد متعاقدين",
+        "description": "لا يوجد متعاقدين لعرضهم في القائمة الخاصة بك."
+    },
+    "list_create": {
+        "title": "أنشئ قائمتك",
+        "cta": "أنشئ قائمتك الآن",
+        "cancel":"إلغاء",
+        "back":"العودة",
+        "fields" :{
+            "name": {
+                "label": "اسم القائمة",
+                "placeholder": "أدخل اسم القائمة"
+            }
+        }
+      },
+      "list_name_edit":{
+        "title": "تعديل اسم القائمة",
+        "cta": "تعديل",
+        "fields" :{
+            "name": {
+                "label": "اسم القائمة",
+                "placeholder": "أدخل اسم القائمة الجديدة"
+            }
+        }
+      },
+      "collaborator_revoke": "حذف متعاقد",
+      "collaborator_revoke_prompt":{
+        "title": "حذف متعاقد",
+        "description": "هل أنت متأكد من أنك تريد حذف هذا المتعاقد؟",
+        "cta": "حذف",
+        "cancel": "الغاء"
+      },
+      "items_list_empty_state": {
+        "title": "لا يوجد عناصر",
+        "description": "لا يوجد عناصر لعرضها في القائمة الخاصة بك."
+      },
+      "share_list_with_collaborators": "مشاركة القائمة مع المتعاقدين",
+       "list_empty": "هذه القائمة فارغة في الوقت الحالي"
+      
 }

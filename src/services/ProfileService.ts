@@ -22,7 +22,7 @@ function getCurrentUser(): FirebaseAuthTypes.User {
 }
 
 // Create a new profile and optionally an initial list
-async function create(input: ProfileCreateInput): Promise<Profile | undefined> {
+async function create(input: ProfileCreateInput): Promise<Profile> {
   try {
     const user = getCurrentUser();
     const uid = user.uid;
@@ -49,14 +49,14 @@ async function create(input: ProfileCreateInput): Promise<Profile | undefined> {
     // Fetch the newly created document snapshot
     const createdUserSnapshot = await profileRef.get();
 
-    console.log(createdUserSnapshot.data());
+    if (!createdUserSnapshot.exists) {
+      throw new CustomError('Profile not created', 'PROFILE_NOT_CREATED');
+    }
 
-    return createdUserSnapshot.exists
-      ? ({
-          id: createdUserSnapshot.id,
-          ...createdUserSnapshot.data()
-        } as Profile)
-      : undefined;
+    return {
+      id: createdUserSnapshot.id,
+      ...createdUserSnapshot.data()
+    } as Profile;
   } catch (error: any) {
     if (error instanceof CustomError) {
       error.logToCrashlytics();

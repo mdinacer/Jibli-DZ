@@ -1,48 +1,48 @@
 import PendingItemsLists from '@/components/pendingItems/PendingItemsLists';
 import SharedLists from '@/components/sharedList/SharedLists';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
 import UserListDisplay from '@/components/userList/UserListDisplay';
 import { Images } from '@/constants';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, StyleSheet, View } from 'react-native';
+import {} from 'react-native-safe-area-context';
 
 const Index = () => {
   const { profile } = useProfileStore();
+  //usePushNotification();
   const { t } = useTranslation('common');
 
   return (
-    <SafeAreaView
-      style={{ flex: 1 }}
-      edges={['top', 'left', 'right', 'bottom']}
-    >
+    <SafeAreaView edges={['top', 'left', 'right']}>
+      {/* <LanguageSelector /> */}
+
       <PendingItemsLists
-        className="flex-1 p-4"
-        style={{ rowGap: 16 }}
+        contentContainerStyle={styles.contentContainer}
+        ListHeaderComponentStyle={styles.headerComponentStyle}
         ListHeaderComponent={
-          <View className="py-6" style={{ rowGap: 24 }}>
-            <View className="flex-row items-center justify-between">
-              <View>
-                <Text className="font-pmedium text-sm">
+          <View style={styles.headerContainer}>
+            <View style={styles.headerTextContainer}>
+              <View style={{ rowGap: 4 }}>
+                <Text style={styles.welcomeBackText}>
                   {t('welcome_back', { keyPrefix: 'home' })}
                 </Text>
-                <Text className="font-psemibold text-2xl">
-                  {profile?.username}
-                </Text>
+                <Text style={styles.usernameText}>{profile?.username}</Text>
               </View>
 
-              <View className="">
+              <View>
                 <Image
                   source={Images.logoSmall}
                   resizeMode="contain"
-                  className="h-10 w-9"
+                  style={styles.logo}
                 />
               </View>
             </View>
             <UserListDisplay />
             <SharedLists horizontal />
-            <Text className="mt-5 font-pregular text-base text-muted-foreground">
+            <Text muted style={styles.sectionTitle}>
               {t('pending_item_many')}
             </Text>
           </View>
@@ -53,3 +53,62 @@ const Index = () => {
 };
 
 export default Index;
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: 60
+  },
+  headerComponentStyle: {
+    paddingBottom: 14
+  },
+  headerContainer: {
+    rowGap: 48
+  },
+  headerTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  welcomeBackText: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    lineHeight: 20
+  },
+  usernameText: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
+    lineHeight: 32,
+    textTransform: 'capitalize'
+  },
+  logo: {
+    height: 40,
+    width: 36
+  },
+  sectionTitle: {
+    marginTop: 20,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    lineHeight: 24
+  }
+});
+
+const stylesd = StyleSheet.create({
+  smallText: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    lineHeight: 20
+  },
+  largeText: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
+    lineHeight: 32,
+    textTransform: 'capitalize'
+  },
+  sectionTitle: {
+    marginTop: 20,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    lineHeight: 24
+  }
+});

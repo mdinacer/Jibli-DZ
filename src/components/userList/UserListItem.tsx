@@ -2,8 +2,11 @@ import { Icons } from '@/constants';
 import { ListItemStatus, ListItem } from '@/models/ListItem';
 import { compareItems } from '@/utils/list-utils';
 import React, { useMemo } from 'react';
-import { Text, View, ViewProps } from 'react-native';
+import { View, ViewProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
+import Text from '@/components/Themed/Text';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { ThemeType } from '@/constants/Colors';
 
 const itemStatusIcon: Record<ListItemStatus, (props: SvgProps) => JSX.Element> =
   {
@@ -17,12 +20,17 @@ interface Props extends ViewProps {
 }
 
 const UserListItem: React.FC<Props> = ({ item, ...props }) => {
+  const { primary } = useThemeColor({}) as ThemeType;
   const Icon = useMemo(() => itemStatusIcon[item.status], [item.status]);
   return (
     <View className="flex-row items-center space-x-2" {...props}>
-      <Icon className="h-5 w-5 text-primary" />
+      <Icon color={primary} style={{ height: 20, width: 20 }} />
       <Text
-        className={`font-pregular text-sm ${item.status !== ListItemStatus.PENDING && 'text-muted-foreground line-through'}`}
+        muted={item.status !== ListItemStatus.PENDING}
+        style={{
+          textDecorationLine:
+            item.status !== ListItemStatus.PENDING ? 'line-through' : 'none'
+        }}
       >
         {item.name}
       </Text>

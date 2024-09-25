@@ -10,7 +10,7 @@ interface CollaboratorStoreState {
   collaborators: Collaborator[];
   setLoadingStatus: (isLoading: boolean, isLoaded?: boolean) => void;
   fetchCollaborators: (ids: string[]) => Promise<void>;
-  fetchCollaboratorById: (id: string) => Promise<void>;
+  fetchCollaboratorById: (id: string) => Promise<Collaborator | undefined>;
   fetchCollaboratorByEmail: (email: string) => Promise<void>;
   getCollaborator: (id: string) => Collaborator | undefined;
   setCollaborators: (collaborators: Collaborator[]) => void;
@@ -82,12 +82,14 @@ export const useCollaboratorStore = create<CollaboratorStoreState>()(
             false,
             'fetchCollaboratorById/success'
           );
+          return collaborator;
         } else {
           set(
             { error: 'Collaborator not found', loading: false, loaded: true },
             false,
             'fetchCollaboratorById/notFound'
           );
+          return undefined;
         }
       } catch {
         set(
@@ -99,6 +101,7 @@ export const useCollaboratorStore = create<CollaboratorStoreState>()(
           false,
           'fetchCollaboratorById/error'
         );
+        return undefined;
       }
     },
 

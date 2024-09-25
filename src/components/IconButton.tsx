@@ -1,60 +1,95 @@
-import { styled } from 'nativewind';
-import { TouchableOpacityProps, TouchableOpacity } from 'react-native';
+import { ThemeProps } from '@/components/Themed/types';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
-const buttonStyles = {
-  base: ' aspect-square rounded-full items-center justify-center',
-  variants: {
-    default: 'bg-primary',
-    destructive: 'bg-destructive hover:bg-destructive/90',
-    bordered: 'border border-input bg-background',
-    secondary: 'bg-secondary border border-secondary',
-    ghost: 'bg-transparent ',
-    link: ''
-  },
-  sizes: {
-    default: 'h-12',
-    sm: 'h-9',
-    lg: 'h-11',
-    icon: 'h-10'
-  },
-  textStyles: {
-    default: 'text-primary-foreground',
-    destructive: 'text-destructive-foreground',
-    bordered: 'text-accent-foreground',
-    secondary: 'text-secondary-foreground',
-    ghost: 'hover:text-accent-foreground',
-    link: 'text-primary underline-offset-4 hover:underline'
-  }
-};
-interface Props extends TouchableOpacityProps {
-  icon: (props: SvgProps) => JSX.Element;
-  iconStyles?: string;
-  className?: string;
-  variant?: keyof typeof buttonStyles.variants;
-  size?: keyof typeof buttonStyles.sizes;
-}
+// const buttonStyles = {
+//   base: {
+//     aspectRatio: 1,
+//     borderRadius: 9999, // Fully rounded
+//     alignItems: 'center',
+//     justifyContent: 'center'
+//   },
+//   variants: {
+//     default: {
+//       backgroundColor: 'var(--primary)'
+//     },
+//     destructive: {
+//       backgroundColor: 'var(--destructive)',
+//       hover: {
+//         backgroundColor: 'rgba(255, 0, 0, 0.9)' // Adjust for hover effect
+//       }
+//     },
+//     bordered: {
+//       borderColor: 'var(--input)',
+//       backgroundColor: 'var(--background)',
+//       borderWidth: 1
+//     },
+//     secondary: {
+//       backgroundColor: 'var(--secondary)',
+//       borderColor: 'var(--secondary)',
+//       borderWidth: 1
+//     },
+//     ghost: {
+//       backgroundColor: 'transparent'
+//     },
+//     link: {}
+//   },
+//   sizes: {
+//     default: {
+//       height: 48 // Example height
+//     },
+//     sm: {
+//       height: 36 // Small size
+//     },
+//     lg: {
+//       height: 44 // Large size
+//     },
+//     icon: {
+//       height: 40 // Icon button size
+//     }
+//   }
+// };
 
-const StyledButton = styled(TouchableOpacity);
+interface Props extends TouchableOpacityProps, ThemeProps {
+  icon: (props: SvgProps) => JSX.Element;
+  iconStyles?: SvgProps;
+  // variant?: keyof typeof buttonStyles.variants;
+  // size?: keyof typeof buttonStyles.sizes;
+}
 
 const IconButton: React.FC<Props> = ({
   icon: Icon,
-  iconStyles = 'h-5 w-5',
-  className,
-  variant = 'default',
-  size = 'default',
+  iconStyles = { height: 20, width: 20 },
+  darkColor,
+  lightColor,
+  style,
+  // variant = 'default',
+  // size = 'default',
   ...props
 }) => {
-  const variantStyle = buttonStyles.variants[variant];
-  const sizeStyle = buttonStyles.sizes[size];
-  const textStyle = buttonStyles.textStyles[variant];
+  const theme = useThemeColor({
+    light: lightColor,
+    dark: darkColor
+  }) as ThemeType;
+
+  // const variantStyle = buttonStyles.variants[variant];
+  // const sizeStyle = buttonStyles.sizes[size];
+
   return (
-    <StyledButton
+    <TouchableOpacity
       {...props}
-      className={`${buttonStyles.base} ${sizeStyle} ${variantStyle} ${className} ${props.disabled && 'opacity-50'}`}
+      style={[
+        // buttonStyles.base as ViewStyle,
+        // variantStyle,
+        // sizeStyle,
+        style,
+        props.disabled && { opacity: 0.5 }
+      ]}
     >
-      <Icon className={`${textStyle} ${iconStyles}`} />
-    </StyledButton>
+      <Icon color={theme.primary} {...iconStyles} />
+    </TouchableOpacity>
   );
 };
 

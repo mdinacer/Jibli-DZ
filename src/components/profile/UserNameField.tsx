@@ -1,5 +1,3 @@
-import AppButton from '@/components/AppButton';
-import AppInput from '@/components/AppInput';
 import {
   Card,
   CardContent,
@@ -8,6 +6,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/Card';
+import { Button } from '@/components/Themed/Button';
+import TextInput from '@/components/Themed/TextInput';
 import ProfileService from '@/services/ProfileService';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -17,7 +17,7 @@ import { View } from 'react-native';
 const UserNameField = () => {
   const { t } = useTranslation('common', { keyPrefix: 'username_form' });
   const [isSaving, setIsSaving] = useState(false);
-  const { profile, updateProfile } = useProfileStore();
+  const { profile } = useProfileStore();
   const [username, setUsername] = useState<string | undefined>(
     profile?.username
   );
@@ -41,16 +41,15 @@ const UserNameField = () => {
       if (!updatedProfile) {
         console.error('An error occurred while updating your username');
       }
-      updateProfile({ username });
     } catch (error: any) {
       console.error('An error occurred while updating your username', {
         message: error.message
       });
-      console.log(error);
+      console.error(error);
     } finally {
       setIsSaving(false);
     }
-  }, [profile, updateProfile, username]);
+  }, [profile, username]);
 
   return (
     <Card>
@@ -59,27 +58,27 @@ const UserNameField = () => {
         <CardDescription>{t('description')}</CardDescription>
       </CardHeader>
       <CardContent>
-        <AppInput
+        <TextInput
           value={username}
           onChangeText={setUsername}
           placeholder="Enter your username"
         />
       </CardContent>
       <CardFooter className="flex-row justify-between">
-        <AppButton
+        <Button
           variant="secondary"
           onPress={handleReset}
           disabled={!isModified || isSaving}
         >
           {t('cancel_button')}
-        </AppButton>
+        </Button>
         <View />
-        <AppButton
+        <Button
           onPress={handleUpdateUserName}
           disabled={!isModified || isSaving}
         >
           {t('submit_button')}
-        </AppButton>
+        </Button>
       </CardFooter>
     </Card>
   );

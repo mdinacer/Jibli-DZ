@@ -1,12 +1,15 @@
-import { Provider } from '@/components/Provider';
-import useLoadUserProfile from '@/hooks/useLoadUserProfile';
+import useAuthListener from '@/hooks/useAuthListener';
 import '@/i18n';
+import useProfileListener from '@/listeners/useProfileListener';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  ThemeProvider,
+  DarkTheme,
+  DefaultTheme
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
@@ -49,36 +52,56 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  useLoadUserProfile();
+  useAuthListener();
+  useProfileListener();
 
   if (!loaded) {
     return null;
   }
 
-  return (
-    <Providers>
-      <RootLayoutNav />
-    </Providers>
-  );
+  return <RootLayoutNav />;
 }
-
-const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <Provider>{children}</Provider>;
-};
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
-      <StatusBar style={colorScheme === 'dark' ? 'dark' : 'dark'} />
-
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="list/[id]" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="list/[id]"
+          options={{
+            headerShown: false,
+            presentation: 'fullScreenModal'
+          }}
+        />
+
+        <Stack.Screen
+          name="item/[id]"
+          options={{
+            headerShown: false,
+            presentation: 'formSheet'
+          }}
+        />
+
+        <Stack.Screen
+          name="listCollaborators"
+          options={{
+            headerShown: false,
+            presentation: 'modal'
+          }}
+        />
+
+        <Stack.Screen
+          name="create"
+          options={{
+            headerShown: false,
+            presentation: 'modal'
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

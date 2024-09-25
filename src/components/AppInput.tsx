@@ -8,28 +8,28 @@ import {
 } from 'react-native';
 
 const AppInput = React.forwardRef<TextInput, TextInputProps>(
-  ({ secureTextEntry, ...props }, ref) => {
+  ({ secureTextEntry, className, ...props }, ref) => {
     const [isVisible, setIsVisible] = useState(false);
 
     return (
       <View
         style={{ position: 'relative' }}
-        className="dark relative w-full rounded-2xl border border-border bg-background px-3 py-1 dark:bg-red-600"
+        className="relative w-full rounded-md border border-input bg-background"
       >
         <TextInput
           ref={ref}
           {...props}
           placeholderTextColor={'#6b7280'}
-          className={`w-full px-3 py-2 font-pregular text-base placeholder:text-sm ${props.multiline ? 'min-h-[80px]' : 'h-10'}`}
+          className={`w-full px-3 py-2 text-sm text-foreground ${className} ${props.multiline ? 'min-h-[100px]' : 'h-10'}`}
           secureTextEntry={secureTextEntry && !isVisible}
         />
         {secureTextEntry && props.value && (
           <View className="absolute right-3 top-3">
             <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
               {isVisible ? (
-                <Icons.EyeClosedIcon color={'black'} width={20} height={20} />
+                <Icons.EyeClosedIcon className="h-5 w-5 text-muted-foreground" />
               ) : (
-                <Icons.EyeOpenIcon color={'black'} width={20} height={20} />
+                <Icons.EyeOpenIcon className="h-5 w-5 text-muted-foreground" />
               )}
             </TouchableOpacity>
           </View>
