@@ -3,11 +3,9 @@ import DataListeners from '@/components/DataListeners';
 import DataLoader from '@/components/DataLoader';
 import ListModificationBanner from '@/components/list/ListModificationBanner';
 import { Icons } from '@/constants';
-import { ThemeType } from '@/constants/Colors';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 interface TabIconProps {
@@ -15,44 +13,42 @@ interface TabIconProps {
   color: string;
   name: string;
   focused: boolean;
-  size: number;
 }
 const TabIcon: React.FC<TabIconProps> = ({
   icon: Icon,
   focused,
   color,
-  name,
-  size
+  name
 }) => {
   return (
-    <View className="items-center justify-center space-y-1">
-      <Icon color={color} height={size} width={size} />
-      <Text
+    <View>
+      <Icon color={color} height={32} width={32} />
+      {/* <Text
         style={{ color }}
         className={` ${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
       >
         {name}
-      </Text>
+      </Text> */}
     </View>
   );
 };
 
 const TabsLayout = () => {
-  const theme = useThemeColor({}) as ThemeType;
   return (
     <AuthProvider>
       <DataLoader />
+
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: '#ec4899',
-          tabBarInactiveTintColor: theme.mutedForeground,
+          tabBarInactiveTintColor: '#6b7280',
           tabBarStyle: {
-            paddingTop: 16,
-            backgroundColor: theme.muted,
+            paddingTop: 0,
+            backgroundColor: '#f3f4f6',
             borderTopWidth: 1,
-            borderTopColor: theme.border,
-            minHeight: 80
+            borderTopColor: '#e5e7eb',
+            height: 80
           }
         }}
       >
@@ -67,7 +63,21 @@ const TabsLayout = () => {
                 color={color}
                 focused={focused}
                 name={'Home'}
-                size={size}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: 'Create',
+            headerShown: false,
+            tabBarIcon: ({ color, focused, size }) => (
+              <TabIcon
+                icon={Icons.AddCircleIcon}
+                color={color}
+                focused={focused}
+                name={'Create'}
               />
             )
           }}
@@ -84,7 +94,6 @@ const TabsLayout = () => {
                 color={color}
                 focused={focused}
                 name={'Collaborators'}
-                size={size}
               />
             )
           }}
@@ -92,15 +101,14 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Account',
+            title: 'Profile',
             headerShown: false,
             tabBarIcon: ({ color, focused, size }) => (
               <TabIcon
                 icon={Icons.UserSquareIcon}
                 color={color}
                 focused={focused}
-                name={'Account'}
-                size={size}
+                name={'Profile'}
               />
             )
           }}

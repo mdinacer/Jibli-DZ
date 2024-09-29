@@ -8,8 +8,6 @@ import { Alert, FlatList, FlatListProps } from 'react-native';
 import InvitationCard from './InvitationCard';
 import EmptyState from '../EmptyState';
 import { useTranslation } from 'react-i18next';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { Collaborator } from '@/models/Collaborator';
 
 interface Props extends Partial<FlatListProps<Invitation>> {}
 
@@ -18,7 +16,6 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
   const { profile } = useProfileStore();
   useLoadInvitations();
   const { invitations, removeInvitation } = useInvitationStore();
-  const { addCollaborator } = useCollaboratorStore();
 
   const handleDeclineInvitation = useCallback(
     async (invitation: Invitation) => {
@@ -57,10 +54,8 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
   };
 
   const handleAcceptInvitation = useCallback(
-    async (invitation: Invitation, collaborator: Collaborator) => {
+    async (invitation: Invitation) => {
       if (!profile) return;
-      console.log('Accepting invitation', invitation, collaborator);
-
       try {
         await invitationService.acceptInvitation(
           invitation.senderId,
@@ -70,12 +65,11 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
         await invitationService.updateInvitation(invitation.id, 'accepted');
 
         removeInvitation(invitation.id);
-        addCollaborator(collaborator);
       } catch (error) {
         console.error(error);
       }
     },
-    [addCollaborator, profile, removeInvitation]
+    [profile, removeInvitation]
   );
 
   return (
@@ -89,9 +83,7 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
       renderItem={({ item: invitation }) => (
         <InvitationCard
           invitation={invitation}
-          onAccept={(collaborator) =>
-            handleAcceptInvitation(invitation, collaborator)
-          }
+          onAccept={() => handleAcceptInvitation(invitation)}
           onDecline={(action) => invitationDeclinePrompt(invitation, action)}
         />
       )}

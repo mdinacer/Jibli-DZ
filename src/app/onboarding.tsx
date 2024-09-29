@@ -40,6 +40,8 @@ const InitialProfileScreen = () => {
 
   const handleOnSubmit = useCallback(
     async (data: OnboardingProfileData) => {
+      console.log(data, user);
+
       if (!user || !user.email) return;
       try {
         const { username, listName, picture, createList } = data;

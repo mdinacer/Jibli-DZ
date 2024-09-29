@@ -1,10 +1,7 @@
-import { View, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { Collaborator } from '@/models/Collaborator';
 import { Icons } from '@/constants';
-import Text from '../Themed/Text';
-import { ThemeType } from '@/constants/Colors';
-import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface Props {
   title?: string;
@@ -12,64 +9,26 @@ interface Props {
 }
 
 const CollaboratorDetails: React.FC<Props> = ({ title, collaborator }) => {
-  const theme = useThemeColor({}) as ThemeType;
-
   return (
-    <View
-      style={{
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        columnGap: 16
-      }}
-    >
-      <View
-        style={{
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
+    <View className="w-full flex-row items-center space-x-4">
+      <View className="h-full items-center justify-center">
         {collaborator.picture ? (
           <Image
             resizeMode="cover"
             source={{ uri: collaborator.picture }}
-            style={{
-              height: 56,
-              width: 56,
-              borderRadius: 9999
-            }}
+            className="h-14 w-14 rounded-full"
           />
         ) : (
-          <View
-            style={{
-              height: 56,
-              width: 56,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 9999,
-              backgroundColor: theme.muted
-            }}
-          >
-            <Icons.UserIcon
-              color={theme.mutedForeground}
-              style={{ height: 32, width: 32 }}
-            />
+          <View className="h-14 w-14 items-center justify-center rounded-full bg-gray-200">
+            <Icons.UserIcon className="h-8 w-8 text-muted" />
           </View>
         )}
       </View>
-      <View style={{ flex: 1 }}>
-        <Text muted style={{ textTransform: 'capitalize' }}>
+      <View className="flex-1">
+        <Text className="font-pregular text-base text-muted-foreground">
           {collaborator.username}
         </Text>
-        <Text
-          style={{
-            fontFamily: 'Poppins-SemiBold',
-            fontSize: 18,
-            lineHeight: 28,
-            textTransform: 'capitalize'
-          }}
-        >
+        <Text className="font-psemibold text-lg">
           {title || collaborator.email}
         </Text>
       </View>

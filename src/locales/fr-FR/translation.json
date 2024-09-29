@@ -20,9 +20,8 @@
         "welcome_back": "Bienvenue de nouveau"
     },
     "user_list": {
-        "no_items_title": "Bienvenue dans votre assistant de shopping !",
-        "no_items_description": "Commençons par créer votre première liste de courses. Ajoutez des articles à acheter, invitez des collaborateurs pour gérer la liste ensemble, et partagez-la facilement avec vos amis ou votre famille. Restez organisé et assurez-vous de ne rien oublier !",
-        "no_items_action": "Créez votre liste maintenant !"
+        "no_items_text": " Commencez par créer votre première liste pour organiser et gérer facilement vos items.",
+        "no_items_action": "Creer une nouvelle liste"
     },
     "delete_list": {
         "title": "Supprimer la liste",
@@ -46,7 +45,7 @@
     },
     "item_form": {
         "title_create": "Ajouter un nouvel article",
-        "title_edit": "Modifier l'article {{itemName}}",
+        "title_edit": "Modifier l'article",
         "description_create": "Remplissez les détails pour ajouter cet article à votre liste de courses.",
         "description_edit": "Mettez à jour les détails pour modifier cet article dans votre liste de courses.",
         "fields": {
@@ -97,7 +96,7 @@
     "invitation_many": "Invitations",
     "invitation_empty_state": {
         "title": "Aucune invitation",
-        "description": "Vous n'avez encore aucune invitation. Lorsque quelqu'un vous invites, les invitations seront visibles ici."
+        "description": "Vous n'avez encore aucune invitation. Lorsque quelqu'un partage une liste avec vous, des invitations seront visibles ici."
     },
     "invitation_form": {
         "title": "Envoyer une invitation",
@@ -275,43 +274,5 @@
             "label": "Pièce",
             "value": "piece"
         }
-    ],
-    "collaborators_empty_state":{
-        "title": "Aucun collaborateur",
-        "description": "Ajoutez des collaborateurs à votre liste pour les afficher ici."
-    },
-    "list_create": {
-        "title": "Créez votre liste",
-        "cta": "Créez votre liste maintenant !",
-        "cancel":"Annuler",
-        "back":"Retour",
-        "fields":{
-            "name": {
-                "label": "Nom de la liste",
-                "placeholder": "Entrez le nom de votre liste"
-            }
-        }
-      },
-      "list_name_edit":{
-        "title": "Modifier le nom de la liste",
-        "cta": "Modifier",
-        "fields":{
-            "name": {
-                "label": "Nom de la liste",
-                "placeholder": "Entrez le nouveau nom de votre liste"
-            }
-        }
-      },
-      "collaborator_revoke": "Supprimer le collaborateur",
-      "collaborator_revoke_prompt":{
-        "title": "Supprimer le collaborateur",
-        "description": "Êtes-vous sûr de vouloir supprimer ce collaborateur ?",
-        "cancel": "Annuler",
-        "revoke": "Supprimer"
-      },
-      "items_list_empty_state":{
-        "title": "Aucun article",
-        "description": "Ajoutez des articles à votre liste pour les afficher ici."
-      },
-      "list_empty":"Cette list est vide pour la moment."
+    ]
 }

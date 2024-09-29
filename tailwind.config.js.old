@@ -7,127 +7,48 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}'
   ],
-  presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        oranged: {
+          DEFAULT: '#FF9C01',
+          100: '#FF9001',
+          200: '#FF8E01'
+        },
+        border: 'hsl(220 13% 91%)',
+        input: 'hsl(220 13% 91%)',
+        ring: 'hsl(224 71.4% 4.1%)',
+        background: 'hsl(0 0% 100%)',
+        foreground: 'hsl(224 71.4% 4.1%)',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: 'hsl(220.9 39.3% 11%)',
+          foreground: 'hsl(210 20% 98%)'
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
+          DEFAULT: 'hsl(220 14.3% 95.9%)',
+          foreground: 'hsl(220.9 39.3% 11%)'
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
+          DEFAULT: 'hsl(0 84.2% 60.2%)',
+          foreground: 'hsl(210 20% 98%)'
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          DEFAULT: 'hsl(220 14.3% 95.9%)',
+          foreground: 'hsl(220 8.9% 46.1%)'
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: 'hsl(220 14.3% 95.9%)',
+          foreground: 'hsl(220.9 39.3% 11%)'
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+          DEFAULT: 'hsl(0 0% 100%)',
+          foreground: 'hsl(224 71.4% 4.1%)'
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+          DEFAULT: 'hsl(0 0% 100%)',
+          foreground: 'hsl(224 71.4% 4.1%)'
         }
       },
-      // colors: {
-      //   light: {
-      //     background: 'hsl(0,0%,100%)',
-      //     foreground: 'hsl(240 10% 3.9%)',
-      //     card: 'hsl(0 0% 100%)',
-      //     'card-foreground': 'hsl(240 10% 3.9%)',
-      //     popover: 'hsl(0 0% 100%)',
-      //     'popover-foreground': 'hsl(240 10% 3.9%)',
-      //     primary: 'hsl(142.1 76.2% 36.3%)', // Updated primary color
-      //     'primary-foreground': 'hsl(355.7 100% 97.3%)',
-      //     secondary: 'hsl(240 4.8% 95.9%)',
-      //     'secondary-foreground': 'hsl(240 5.9% 10%)',
-      //     muted: 'hsl(240 4.8% 95.9%)',
-      //     'muted-foreground': 'hsl(240 3.8% 46.1%)',
-      //     accent: 'hsl(240 4.8% 95.9%)',
-      //     'accent-foreground': 'hsl(240 5.9% 10%)',
-      //     destructive: 'hsl(0 84.2% 60.2%)',
-      //     'destructive-foreground': 'hsl(0 0% 98%)',
-      //     border: 'hsl(240 5.9% 90%)',
-      //     input: 'hsl(240 5.9% 90%)',
-      //     ring: 'hsl(142.1 76.2% 36.3%)', // Updated ring color
-      //     radius: '1rem'
-      //   },
-      //   dark: {
-      //     background: 'hsl(20 14.3% 4.1%)',
-      //     foreground: 'hsl(0 0% 95%)',
-      //     card: 'hsl(24 9.8% 10%)',
-      //     'card-foreground': 'hsl(0 0% 95%)',
-      //     popover: 'hsl(0 0% 9%)',
-      //     'popover-foreground': 'hsl(0 0% 95%)',
-      //     primary: 'hsl(142.1 70.6% 45.3%)', // Updated primary color
-      //     'primary-foreground': 'hsl(144.9 80.4% 10%)', // Updated primary foreground
-      //     secondary: 'hsl(240 3.7% 15.9%)',
-      //     'secondary-foreground': 'hsl(0 0% 98%)',
-      //     muted: 'hsl(0 0% 15%)',
-      //     'muted-foreground': 'hsl(240 5% 64.9%)',
-      //     accent: 'hsl(12 6.5% 15.1%)',
-      //     'accent-foreground': 'hsl(0 0% 98%)',
-      //     destructive: 'hsl(0 62.8% 30.6%)',
-      //     'destructive-foreground': 'hsl(0 85.7% 97.3%)',
-      //     border: 'hsl(240 3.7% 15.9%)',
-      //     input: 'hsl(240 3.7% 15.9%)',
-      //     ring: 'hsl(142.4 71.8% 29.2%)' // Updated ring color
-      //   },
-      //   blueCharcoal: '#011526',
-      //   albescentWhite: '#F2DCC2',
-      //   malta: '#BFAE99',
-      //   jaffa: '#F28B30',
-      //   flamingo: '#F2522E',
-      //   border: 'hsl(220 13% 91%)',
-      //   input: 'hsl(220 13% 91%)',
-      //   ring: 'hsl(224 71.4% 4.1%)',
-      //   background: 'hsl(0 0% 100%)',
-      //   foreground: 'hsl(224 71.4% 4.1%)',
-      //   primary: {
-      //     DEFAULT: 'hsl(220.9 39.3% 11%)',
-      //     foreground: 'hsl(210 20% 98%)'
-      //   },
-      //   secondary: {
-      //     DEFAULT: 'hsl(220 14.3% 95.9%)',
-      //     foreground: 'hsl(220.9 39.3% 11%)'
-      //   },
-      //   destructive: {
-      //     DEFAULT: 'hsl(0 84.2% 60.2%)',
-      //     foreground: 'hsl(210 20% 98%)'
-      //   },
-      //   muted: {
-      //     DEFAULT: 'hsl(220 14.3% 95.9%)',
-      //     foreground: 'hsl(220 8.9% 46.1%)'
-      //   },
-      //   accent: {
-      //     DEFAULT: 'hsl(220 14.3% 95.9%)',
-      //     foreground: 'hsl(220.9 39.3% 11%)'
-      //   },
-      //   popover: {
-      //     DEFAULT: 'hsl(0 0% 100%)',
-      //     foreground: 'hsl(224 71.4% 4.1%)'
-      //   },
-      //   card: {
-      //     DEFAULT: 'hsl(0 0% 100%)',
-      //     foreground: 'hsl(224 71.4% 4.1%)'
-      //   }
-      // },
       fontFamily: {
         pthin: ['Poppins-Thin', 'sans-serif'],
         pextralight: ['Poppins-ExtraLight', 'sans-serif'],
@@ -142,4 +63,5 @@ module.exports = {
     }
   },
   plugins: []
+  //darkMode: 'media'
 };

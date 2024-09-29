@@ -1,7 +1,6 @@
-import AppButton from '@/components/AppButton';
+import React, { useCallback, useMemo } from 'react';
+
 import InputField from '@/components/fields/InputField';
-import NumberInputField from '@/components/fields/NumberInputField';
-import PickerSelectField from '@/components/fields/PickerSelectField';
 import {
   ListItem,
   ListItemInput,
@@ -13,22 +12,23 @@ import { useUserListStore } from '@/stores/useUserListStore';
 import { generateId } from '@/utils/IdGenerator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Timestamp } from '@react-native-firebase/firestore';
-import { Redirect, router, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Platform, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Modal, View } from 'react-native';
+import AppButton from '../AppButton';
+import { Card, CardContent, CardHeader, CardTitle } from '../Card';
+import NumberInputField from '../fields/NumberInputField';
+import PickerSelectField from '../fields/PickerSelectField';
 
-const Edit = () => {
+interface Props {
+  item?: ListItem;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  onSubmit?: (data: ListItemInput) => void;
+}
+
+const ItemFormModal: React.FC<Props> = ({ item, open, setOpen, onSubmit }) => {
   const { t } = useTranslation('common');
-  const { id } = useLocalSearchParams<{ id?: string }>();
-  const { list, addItem, updateItem } = useUserListStore();
-
-  const item = useMemo(
-    () => list?.items.find((i) => i.id === id),
-    [id, list?.items]
-  );
 
   const unitsList = useMemo(
     () =>
@@ -39,6 +39,8 @@ const Edit = () => {
     [t]
   );
 
+  const { list, updateItem, addItem } = useUserListStore();
+  const isEdit = !!item;
   const form = useForm<ListItemInput>({
     resolver: zodResolver(ListItemInputSchema),
     defaultValues: item
@@ -60,66 +62,55 @@ const Edit = () => {
     reset
   } = form;
 
-  const handleGoBack = useCallback(() => {
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.push('/home');
-    }
-  }, []);
-
   const handleOnSubmit = useCallback(
     async (data: ListItemInput) => {
+      if (!list) return;
       try {
-        if (!!item) {
+        if (item) {
           updateItem(item.id, data);
         } else {
-          const itemData: ListItem = {
+          const item: ListItem = {
             ...data,
             id: generateId(),
             status: ListItemStatus.PENDING,
             createdAt: Timestamp.now(),
             updatedAt: Timestamp.now()
           };
-          addItem(itemData);
+
+          addItem(item);
         }
+        console.log(data);
+        onSubmit?.(data);
         reset();
-        handleGoBack();
       } catch (error: any) {
         console.error(error);
       }
     },
-    [addItem, handleGoBack, item, reset, updateItem]
+    [addItem, item, list, onSubmit, reset, updateItem]
   );
 
-  const handleCloseModal = useCallback(() => {
-    if (isDirty) {
-      reset();
-    } else {
-      handleGoBack();
-    }
-  }, [handleGoBack, isDirty, reset]);
+  const handleClose = useCallback(() => {
+    reset();
+    setOpen(false);
+  }, [reset, setOpen]);
 
-  if (!list) return <Redirect href="/home" />;
   return (
-    <SafeAreaView
-      className="flex-1"
-      edges={Platform.OS === 'android' ? ['top', 'left', 'right'] : []}
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={open}
+      onRequestClose={() => setOpen(false)}
     >
-      <ScrollView className="flex-grow">
-        <View className="flex-1 justify-center p-6" style={{ rowGap: 24 }}>
-          <View className="">
-            <Text className="font-pmedium text-xl">
-              {item
-                ? t('title_edit', {
-                    keyPrefix: 'item_form',
-                    itemName: item.name
-                  })
-                : t('title_create', { keyPrefix: 'item_form' })}
-            </Text>
-          </View>
-
-          <View className="" style={{ rowGap: 16 }}>
+      <Card className="absolute inset-x-0 bottom-0 h-auto max-h-screen w-full rounded-t-2xl bg-muted pb-4">
+        <CardHeader>
+          <CardTitle>
+            {t(isEdit ? 'title_edit' : 'title_create', {
+              keyPrefix: 'item_form'
+            })}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <View className="" style={{ rowGap: 24 }}>
             <InputField
               name="name"
               label={t('fields.name.label', { keyPrefix: 'item_form' })}
@@ -158,29 +149,29 @@ const Edit = () => {
               multiline
               numberOfLines={3}
             />
-          </View>
 
-          <View style={{ rowGap: 12 }}>
-            <AppButton
-              onPress={handleSubmit(handleOnSubmit)}
-              disabled={isSubmitting}
-            >
-              {t('submit_button', { keyPrefix: 'item_form' })}
-            </AppButton>
-            <AppButton
-              disabled={isSubmitting}
-              variant="outline"
-              onPress={handleCloseModal}
-            >
-              {t(isDirty ? 'cancel_button' : 'back_button', {
-                keyPrefix: 'item_form'
-              })}
-            </AppButton>
+            <View className="gap-y-4">
+              <AppButton
+                onPress={handleSubmit(handleOnSubmit)}
+                //disabled={isSubmitting || !isValid}
+              >
+                {t('submit_button', { keyPrefix: 'item_form' })}
+              </AppButton>
+              <AppButton
+                variant="outline"
+                onPress={handleClose}
+                disabled={isSubmitting}
+              >
+                {t(isDirty ? 'cancel_button' : 'close_button', {
+                  keyPrefix: 'item_form'
+                })}
+              </AppButton>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </CardContent>
+      </Card>
+    </Modal>
   );
 };
 
-export default Edit;
+export default ItemFormModal;

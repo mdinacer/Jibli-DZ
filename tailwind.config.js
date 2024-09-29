@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'media',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -43,7 +44,6 @@ module.exports = {
           foreground: 'hsl(224 71.4% 4.1%)'
         }
       },
-
       fontFamily: {
         pthin: ['Poppins-Thin', 'sans-serif'],
         pextralight: ['Poppins-ExtraLight', 'sans-serif'],
@@ -58,4 +58,5 @@ module.exports = {
     }
   },
   plugins: []
+  //darkMode: 'media'
 };

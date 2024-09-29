@@ -37,7 +37,19 @@ export const StatusOrder = [
 ];
 
 export const ItemStatusStyles = {
-  [ListItemStatus.PENDING]: undefined,
-  [ListItemStatus.BOUGHT]: '#A2C579',
-  [ListItemStatus.UNAVAILABLE]: '#DD5746'
+  [ListItemStatus.PENDING]: {
+    background: 'bg-background',
+    text: 'text-primary',
+    muted: 'text-muted-foreground'
+  },
+  [ListItemStatus.BOUGHT]: {
+    background: 'bg-[#A2C579]',
+    text: 'text-[#F2FFE9]',
+    muted: 'text-[#F2FFE9CC]'
+  },
+  [ListItemStatus.UNAVAILABLE]: {
+    background: 'bg-[#DD5746]',
+    text: 'text-[#FAF3F3]',
+    muted: 'text-white/70'
+  }
 };

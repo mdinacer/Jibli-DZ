@@ -2,17 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Updates from 'expo-updates';
 import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  I18nManager,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-import {
-  useSafeAreaFrame,
-  useSafeAreaInsets
-} from 'react-native-safe-area-context';
+import { I18nManager, ScrollView, Text, TouchableOpacity } from 'react-native';
 
 const languages = [
   { lang: 'ar-DZ', name: 'Arabic' },
@@ -47,35 +37,26 @@ const LanguageSelector = () => {
     setRTL(lang);
   };
   return (
-    <View
-      className="h-8 w-full bg-pink-500"
-      style={{
-        flexGrow: 1,
-        position: 'absolute',
-        zIndex: 5
-      }}
+    <ScrollView
+      horizontal
+      style={{ flexGrow: 1, height: 24 }}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ flexDirection: 'row', paddingVertical: 10 }}
     >
-      <ScrollView
-        className="w-full"
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ flexDirection: 'row', paddingVertical: 10 }}
-      >
-        {languages.map(({ lang, name }) => (
-          <TouchableOpacity
-            key={name}
-            onPress={() => changeLanguage(lang)}
-            style={[
-              { paddingHorizontal: 10, height: 16 },
-              currentLanguage === lang && { transform: [{ scale: 1.2 }] },
-              currentLanguage !== lang && { opacity: 0.5 }
-            ]}
-          >
-            <Text>{name}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </View>
+      {languages.map(({ lang, name }) => (
+        <TouchableOpacity
+          key={name}
+          onPress={() => changeLanguage(lang)}
+          style={[
+            { paddingHorizontal: 10, height: 16 },
+            currentLanguage === lang && { transform: [{ scale: 1.2 }] },
+            currentLanguage !== lang && { opacity: 0.5 }
+          ]}
+        >
+          <Text>{name}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 

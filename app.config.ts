@@ -17,17 +17,13 @@ const config: ExpoConfig = {
   ios: {
     googleServicesFile: './GoogleService-Info.plist',
     supportsTablet: true,
-    bundleIdentifier: 'com.ochentero.jiblidz',
-    entitlements: {
-      'aps-environment': 'production'
-    }
+    bundleIdentifier: 'com.ochentero.jiblidz'
   },
   android: {
     adaptiveIcon: {
       foregroundImage: './src/assets/images/adaptive-icon.png',
       backgroundColor: '#ffffff'
     },
-    icon: './src/assets/images/icon.png',
     package: 'com.ochentero.jiblidz',
     googleServicesFile: './google-services.json'
   },
@@ -40,16 +36,9 @@ const config: ExpoConfig = {
     'expo-localization',
     '@react-native-firebase/app',
     '@react-native-firebase/auth',
-    '@react-native-firebase/messaging',
     '@react-native-firebase/crashlytics',
     'expo-router',
-    [
-      '@react-native-google-signin/google-signin',
-      {
-        iosUrlScheme:
-          'com.googleusercontent.apps.870726891421-2mudv1jjq6coatqr9aeu236536oo7q9g'
-      }
-    ],
+    '@react-native-google-signin/google-signin',
     [
       'expo-build-properties',
       {

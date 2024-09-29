@@ -4,15 +4,9 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View
-} from 'react-native';
+import { TouchableOpacityProps } from 'react-native';
 import AppButton from '../AppButton';
 import { useTranslation } from 'react-i18next';
-import { GoogleIcon } from '@/assets/icons/GoogleIcon';
 
 interface Props extends TouchableOpacityProps {
   onAuthenticated?: (user: FirebaseAuthTypes.User) => void;
@@ -23,7 +17,6 @@ const GoogleAuthButton: React.FC<Props> = ({ onAuthenticated, ...props }) => {
   const handleGoogleAuthentication = useCallback(async () => {
     try {
       // Initiate the Google sign-in process
-      GoogleSignin.configure({});
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
 
@@ -51,17 +44,15 @@ const GoogleAuthButton: React.FC<Props> = ({ onAuthenticated, ...props }) => {
   }, [onAuthenticated]);
 
   return (
-    <TouchableOpacity
-      className="flex-row items-center justify-center space-x-2 rounded-lg bg-destructive px-4 py-2"
+    <AppButton
+      icon={Icons.GoogleIcon}
+      className="flex-row items-center justify-center bg-destructive px-4 py-2"
+      {...props}
+      iconStyles="text-white"
       onPress={handleGoogleAuthentication}
     >
-      <Icons.GoogleIcon className="h-5 w-5 text-destructive-foreground" />
-      <Text
-        className={`font-pmedium text-base capitalize text-destructive-foreground`}
-      >
-        {t('sign_in')}
-      </Text>
-    </TouchableOpacity>
+      {t('sign_in')}
+    </AppButton>
   );
 };
 

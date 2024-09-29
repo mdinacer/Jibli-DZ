@@ -1,19 +1,19 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import AppButton from '../AppButton';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
-} from '@/components/Card';
-import InputField from '@/components/fields/InputField';
-import { Button } from '@/components/Themed/Button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import React, { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+} from '../Card';
+import InputField from '../fields/InputField';
 import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
 
 const schema = z
   .object({
@@ -54,7 +54,11 @@ const EmailLinkCard = () => {
       );
 
       // Reauthenticate the user with the Google credential
-      await auth().currentUser?.reauthenticateWithCredential(googleCredential);
+      const result =
+        await auth().currentUser?.reauthenticateWithCredential(
+          googleCredential
+        );
+      console.log(result);
     } catch (error: any) {
       throw new Error('Re-authentication failed: ' + error.message);
     }
@@ -118,12 +122,12 @@ const EmailLinkCard = () => {
           secureTextEntry
         />
 
-        <Button
+        <AppButton
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
           {t('submit_button')}
-        </Button>
+        </AppButton>
       </CardContent>
     </Card>
   );

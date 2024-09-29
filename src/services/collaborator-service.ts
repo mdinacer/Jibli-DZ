@@ -41,7 +41,7 @@ function ProfileToCollaborator(profile: Profile): Collaborator {
 // Get collaborators by their IDs
 async function getCollaboratorsByIds(
   collaboratorsIds: string[]
-): Promise<Collaborator[]> {
+): Promise<Collaborator[] | undefined> {
   try {
     if (collaboratorsIds.length === 0) return [];
 
@@ -56,7 +56,7 @@ async function getCollaboratorsByIds(
 
     if (querySnapshot.empty) {
       console.warn('No matching profiles found for ids:', collaboratorsIds);
-      return [];
+      return undefined;
     }
 
     const profiles = querySnapshot.docs.map((doc) => ({

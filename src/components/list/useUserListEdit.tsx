@@ -1,12 +1,15 @@
 import useUserListChangesTracker from '@/hooks/useUserListChangesTracker';
 import ListsService from '@/services/ListService';
-import PushNotificationsService from '@/services/PushNotificationsService';
 import { useListStore } from '@/stores/useListStore';
 import { useUserListStore } from '@/stores/useUserListStore';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 
 export default function useUserListEdit() {
+  const [modals, setModals] = useState({
+    form: false,
+    collaborators: false
+  });
   const [state, setState] = useState({
     loading: false,
     saving: false
@@ -16,11 +19,8 @@ export default function useUserListEdit() {
 
   const { list, removeItem, setModified, setList } = useUserListStore();
 
-  const {
-    listModified: modified,
-    collaboratorsChanged,
-    itemsChanged
-  } = useUserListChangesTracker();
+  const { listModified: modified, collaboratorsChanged } =
+    useUserListChangesTracker();
 
   const saveChanges = useCallback(async () => {
     if (!list) return;
@@ -32,26 +32,12 @@ export default function useUserListEdit() {
         await ListsService.updateCollaborators(list.id, list.collaborators);
       }
       setModified(false);
-      if (list.collaborators.length > 0 && itemsChanged) {
-        PushNotificationsService.multicast({
-          userIds: list.collaborators,
-          title: 'List updated',
-          body: ` ${list.name} has been updated`
-        });
-      }
     } catch (error) {
       console.error(error);
     } finally {
       setState({ ...state, saving: false });
     }
-  }, [
-    collaboratorsChanged,
-    itemsChanged,
-    list,
-    setModified,
-    state,
-    updateOriginalList
-  ]);
+  }, [collaboratorsChanged, list, setModified, state, updateOriginalList]);
 
   const discardChanges = useCallback(() => {
     if (!originalList) return;
@@ -63,14 +49,23 @@ export default function useUserListEdit() {
     }
   }, [modified, originalList, setList, setModified]);
 
-  return {
-    itemsChanged,
-    list,
+  const toggleItemFormModal = (value: boolean) => {
+    setModals({ collaborators: false, form: value });
+  };
 
+  const toggleCollaboratorsModal = (value: boolean) => {
+    setModals({ form: false, collaborators: value });
+  };
+
+  return {
+    list,
+    modals,
     modified,
     state,
     discardChanges,
     removeItem,
-    saveChanges
+    saveChanges,
+    toggleCollaboratorsModal,
+    toggleItemFormModal
   };
 }

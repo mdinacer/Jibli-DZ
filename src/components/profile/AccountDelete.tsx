@@ -1,11 +1,12 @@
 import InputField from '@/components/fields/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth from '@react-native-firebase/auth';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { z } from 'zod';
+import AppButton from '../AppButton';
 import {
   Card,
   CardContent,
@@ -13,8 +14,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from '@/components/Card';
-import { Button } from '@/components/Themed/Button';
+} from '../Card';
 
 const schema = z.object({
   currentPassword: z.string().min(6, 'Password must be at least 6 characters')
@@ -23,6 +23,7 @@ const schema = z.object({
 type SchemaType = z.infer<typeof schema>;
 const AccountDelete = () => {
   const { t } = useTranslation('common', { keyPrefix: 'account_delete_form' });
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const form = useForm<SchemaType>({
     resolver: zodResolver(schema),
@@ -51,6 +52,7 @@ const AccountDelete = () => {
 
       // Delete the user account
       await user.delete();
+      setIsDeleted(true);
     } catch (error) {
       console.error('Error deleting account:', error);
     }
@@ -90,14 +92,14 @@ const AccountDelete = () => {
         />
       </CardContent>
       <CardFooter>
-        <Button
+        <AppButton
           variant="destructive"
           className="w-full"
           onPress={handleSubmit(handleOnSubmit)}
           disabled={!isDirty || !isValid || isSubmitting}
         >
           {t('submit_button')}
-        </Button>
+        </AppButton>
       </CardFooter>
     </Card>
   );

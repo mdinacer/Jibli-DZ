@@ -1,13 +1,10 @@
 import { Collections } from '@/config/collections';
 import { Icons } from '@/constants';
-import { ThemeType } from '@/constants/Colors';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { FileAsset } from '@/models/FileAsset';
 import FileAssetService from '@/services/FileAssetService';
-import { parseHSL, hslToRgb } from '@/utils/hslConverter';
 import { resizeAndConvertToWebP } from '@/utils/ImageConverter';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Alert, Button, Image, TouchableOpacity, View } from 'react-native';
 
 interface Props {

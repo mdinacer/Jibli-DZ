@@ -1,39 +1,34 @@
-import IconButton from '@/components/IconButton';
-import UserListItems from '@/components/userList/UserListItems';
-import { Icons } from '@/constants';
-import { ThemeType } from '@/constants/Colors';
-import { useLoadUserList } from '@/hooks/useLoadUserList';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import ListsService from '@/services/ListService';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { useListStore } from '@/stores/useListStore';
-import { formatDistanceToNow } from 'date-fns';
-import { arDZ, enUS, fr } from 'date-fns/locale';
-import { router } from 'expo-router';
-import React, { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Alert, StyleSheet, View } from 'react-native';
 import {
-  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
-} from '../Card';
-import Link from '../Themed/Link';
-import Text from '../Themed/Text';
+} from '@/components/Card';
+import IconButton from '@/components/IconButton';
+import UserListItems from '@/components/userList/UserListItems';
+import { Icons } from '@/constants';
+import { useLoadUserList } from '@/hooks/useLoadUserList';
+import ListsService from '@/services/ListService';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
+import { useListStore } from '@/stores/useListStore';
+import { formatDistanceToNow } from 'date-fns';
+import { arDZ, enUS, fr } from 'date-fns/locale';
+import { Link, router } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Alert, Text, View } from 'react-native';
+import ListCollaboratorsModal from '../list/ListCollaboratorsModal';
+import Squircle from '../Squircle';
 
-const UserListDisplay: React.FC = () => {
+interface Props {}
+
+const UserListDisplay: React.FC<Props> = () => {
   const { t, i18n } = useTranslation('common');
+  const [open, setOpen] = useState(false);
   const { list, setList } = useLoadUserList();
   const { collaborators } = useCollaboratorStore();
   const { removeList } = useListStore();
-
-  const theme = useThemeColor({
-    light: undefined,
-    dark: undefined
-  }) as ThemeType;
 
   const locale = useMemo(() => {
     switch (i18n.language) {
@@ -70,31 +65,29 @@ const UserListDisplay: React.FC = () => {
       }
     ]);
   };
-
   if (!list) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('user_list.no_items_title')}</CardTitle>
-          <CardDescription>
-            {t('user_list.no_items_description')}
-          </CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <Link lightColor="#ec4899" darkColor="#db2777" href={'/create'}>
-            {t('user_list.no_items_action')}
-          </Link>
-        </CardFooter>
-      </Card>
+      <View
+        className={`w-full items-center justify-center gap-y-4 rounded-lg bg-background p-6`}
+      >
+        <Text className="font-pregular text-base">
+          {t('user_list.no_items_text')}
+        </Text>
+        <Link
+          className={`font-pregular text-base text-pink-500 underline underline-offset-2`}
+          href={'/create'}
+        >
+          {t('user_list.no_items_action')}
+        </Link>
+      </View>
     );
   }
-
   return (
-    <View>
-      <Text style={[styles.title, { color: theme.mutedForeground }]}>
+    <>
+      <Text className={`font-pregular text-base text-muted-foreground`}>
         {t('my_list')}
       </Text>
-      <Card>
+      <Squircle className="" squircleParams={{ fillColor: '#ffffff' }}>
         <CardHeader>
           <CardTitle>{list.name}</CardTitle>
           <CardDescription>
@@ -108,26 +101,16 @@ const UserListDisplay: React.FC = () => {
         <CardContent>
           <UserListItems items={list.items} />
         </CardContent>
-        <CardFooter
-          style={[
-            styles.footer,
-            { borderTopColor: theme.border, borderTopWidth: 1 }
-          ]}
-        >
-          <View style={styles.collaboratorText}>
-            <Text muted>
+        <CardFooter className="flex-row items-center border-t border-border px-6 py-3">
+          <View className="flex-1">
+            <Text className="font-pregular text-muted-foreground">
               {t(list.collaborators.length > 0 ? 'shared' : 'private')}
             </Text>
           </View>
 
-          <View style={styles.buttonContainer}>
+          <View className="flex-row space-x-4">
             <IconButton
               icon={Icons.PencilEditIcon}
-              iconStyles={{
-                color: '#ec4899',
-                height: 20,
-                width: 20
-              }}
               variant={'secondary'}
               size="sm"
               onPress={() => router.push(`/list/${list.id}`)}
@@ -143,37 +126,14 @@ const UserListDisplay: React.FC = () => {
               size="sm"
               disabled={collaborators.length === 0}
               icon={Icons.ShareIcon}
-              onPress={() => router.push('/listCollaborators')}
+              onPress={() => setOpen(true)}
             />
           </View>
         </CardFooter>
-      </Card>
-    </View>
+      </Squircle>
+      <ListCollaboratorsModal open={open} setOpen={setOpen} />
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    marginBottom: 16,
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    lineHeight: 24
-  },
-  footer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 12,
-    paddingBottom: 12
-  },
-  collaboratorText: {
-    flex: 1
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    columnGap: 20
-  }
-});
 
 export default UserListDisplay;

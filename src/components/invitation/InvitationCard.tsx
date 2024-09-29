@@ -1,25 +1,21 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/Card';
-import IconButton from '@/components/IconButton';
-import Text from '@/components/Themed/Text';
 import { Icons } from '@/constants';
-import { ThemeType } from '@/constants/Colors';
 import { MockCollaborators } from '@/data/mock-data';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { Collaborator } from '@/models/Collaborator';
 import { Invitation } from '@/models/Invitation';
 import collaboratorService from '@/services/collaborator-service';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { formatDistanceToNow } from 'date-fns';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Animated, Image, View } from 'react-native';
+import { Animated, Image, Text, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
 } from 'react-native-gesture-handler';
+import AppButton from '../AppButton';
 
 interface Props {
   invitation: Invitation;
-  onAccept: (collaborator: Collaborator) => void;
+  onAccept: () => void;
   onDecline: (action: 'revoke' | 'decline') => void;
 }
 
@@ -28,7 +24,6 @@ const InvitationCard: React.FC<Props> = ({
   onAccept,
   onDecline
 }) => {
-  const theme = useThemeColor({}) as ThemeType;
   const { profile } = useProfileStore();
   const isSent = invitation.isOwner;
   const [collaborator, setCollaborator] = useState<Collaborator | undefined>(
@@ -38,15 +33,6 @@ const InvitationCard: React.FC<Props> = ({
   const mockCollaborator = useMemo(
     () => MockCollaborators.find((c) => c.userId === invitation.senderId),
     [invitation.senderId]
-  );
-
-  const handleAcceptInvitation = useCallback(
-    (swipeable: Swipeable) => {
-      if (!collaborator) return;
-      onAccept(collaborator);
-      swipeable.close();
-    },
-    [collaborator, onAccept]
   );
 
   const renderRightActions = useCallback(
@@ -59,15 +45,11 @@ const InvitationCard: React.FC<Props> = ({
         <>
           {isSent ? (
             <View className="h-full px-4">
-              <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                iconStyles={{ height: 32, width: 32, color: theme.destructive }}
+              <AppButton
+                variant="ghost"
+                className="h-full w-14"
                 icon={Icons.TrashIcon}
+                iconStyles="h-8 w-8 text-destructive"
                 onPress={() => {
                   swipeable.close();
                   onDecline('revoke');
@@ -75,36 +57,22 @@ const InvitationCard: React.FC<Props> = ({
               />
             </View>
           ) : (
-            <View
-              style={{
-                flexDirection: 'row',
-                height: '100%',
-                alignItems: 'flex-end',
-                columnGap: 8,
-                paddingHorizontal: 16,
-                width: 'auto'
-              }}
-            >
-              <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                iconStyles={{ height: 32, width: 32, color: '#16a34a' }}
+            <View className="h-full flex-row justify-end space-x-2 px-4">
+              <AppButton
+                variant="ghost"
+                className="h-full w-14"
                 icon={Icons.MailValidationIcon}
-                onPress={() => handleAcceptInvitation(swipeable)}
-              />
-              <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                iconStyles="h-8 w-8 text-primary"
+                onPress={() => {
+                  swipeable.close();
+                  onAccept();
                 }}
+              />
+              <AppButton
+                variant="ghost"
+                className="h-full w-14"
                 icon={Icons.MailRemoveIcon}
-                iconStyles={{ height: 32, width: 32, color: theme.destructive }}
+                iconStyles="h-8 w-8 text-destructive"
                 onPress={() => {
                   swipeable.close();
                   onDecline('decline');
@@ -115,7 +83,7 @@ const InvitationCard: React.FC<Props> = ({
         </>
       );
     },
-    [handleAcceptInvitation, isSent, onDecline, theme.destructive]
+    [isSent, onAccept, onDecline]
   );
 
   const getUserDetails = useCallback(async () => {
@@ -148,88 +116,46 @@ const InvitationCard: React.FC<Props> = ({
         rightThreshold={60}
         renderRightActions={renderRightActions}
       >
-        <Card style={{ gap: 8, overflow: 'hidden' }}>
-          <CardHeader
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              columnGap: 16
-            }}
-          >
-            <View
-              style={{
-                height: 48,
-                width: 48,
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                borderRadius: 9999,
-                backgroundColor: theme.border
-              }}
-            >
+        <View
+          className="overflow-hidden rounded-lg bg-card p-4 shadow-sm"
+          style={{ gap: 8 }}
+        >
+          <View className="flex-row items-center space-x-2">
+            <View className="aspect-square h-12 items-center justify-center overflow-hidden rounded-full bg-border">
               {collaborator.picture ? (
                 <Image
                   source={{ uri: collaborator.picture }}
                   resizeMode="cover"
-                  style={{
-                    height: 48,
-                    width: 48
-                  }}
+                  className="h-full w-full"
                 />
               ) : (
-                <Icons.UserIcon
-                  color={theme.mutedForeground}
-                  style={{
-                    height: 24,
-                    width: 24
-                  }}
-                />
+                <Icons.UserIcon className="h-6 w-6 text-muted-foreground" />
               )}
             </View>
             <View>
-              <Text
-                style={{
-                  fontFamily: 'Poppins-Medium',
-                  fontSize: 16,
-                  lineHeight: 24,
-                  textTransform: 'capitalize'
-                }}
-              >
+              <Text className="font-pmedium text-base">
                 {collaborator.username}
               </Text>
-              <Text
-                muted
-                style={{
-                  fontSize: 14,
-                  lineHeight: 20
-                }}
-              >
+              <Text className="font-pregular text-sm text-muted-foreground">
                 {collaborator.email}
               </Text>
             </View>
-          </CardHeader>
+          </View>
 
-          {invitation.message && (
-            <CardContent>
-              <Text>{invitation.message}</Text>
-            </CardContent>
-          )}
-
-          <CardFooter>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 20
-              }}
-              muted
-            >
+          <View className="gap-y-2">
+            {invitation.message && (
+              <Text className="font-pregular text-base">
+                {invitation.message}
+              </Text>
+            )}
+            <Text className="font-pregular text-sm text-muted-foreground">
               {isSent ? 'Sent ' : 'Received '}
               {formatDistanceToNow(invitation.createdAt.toDate(), {
                 addSuffix: true
               })}
             </Text>
-          </CardFooter>
-        </Card>
+          </View>
+        </View>
       </Swipeable>
     </GestureHandlerRootView>
   );

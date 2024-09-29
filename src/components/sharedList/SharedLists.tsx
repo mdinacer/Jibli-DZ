@@ -1,21 +1,14 @@
 import { useListStore } from '@/stores/useListStore';
 import React, { useMemo } from 'react';
-import {
-  Dimensions,
-  FlatList,
-  FlatListProps,
-  StyleSheet,
-  View
-} from 'react-native';
+import { Dimensions, FlatList, FlatListProps, Text, View } from 'react-native';
 import SharedListDisplay from '@/components/sharedList/SharedListDisplay';
 import { List } from '@/models/List';
 import EmptyState from '../EmptyState';
 import { useTranslation } from 'react-i18next';
-import Text from '@/components/Themed/Text';
 
 interface Props extends Partial<FlatListProps<List>> {}
 
-const PADDING = 0;
+const PADDING = 16;
 
 const SharedLists: React.FC<Props> = ({ ...props }) => {
   const { t } = useTranslation('common');
@@ -29,15 +22,16 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
   );
 
   return (
-    <View className="aspect-video min-h-[300px] w-full" style={{ rowGap: 16 }}>
-      <Text muted style={styles.sectionTitle}>
+    <>
+      <Text className="mt-5 font-pregular text-base text-muted-foreground">
         {t('shared_list_many')}
       </Text>
       <FlatList
         className="flex-1 pb-4"
         contentContainerStyle={{
           columnGap: 16,
-          paddingBottom: 16
+          paddingBottom: 16,
+          padding: 16
         }}
         data={lists}
         keyExtractor={(l) => l.id}
@@ -45,7 +39,7 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
           <SharedListDisplay width={size} list={item} />
         )}
         ListEmptyComponent={
-          <View style={{ width: width - 16 * 2 }}>
+          <View style={{ width: width - PADDING * 2 }}>
             <EmptyState
               title={t('title', {
                 keyPrefix: 'shared_list_empty_state'
@@ -58,47 +52,8 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
         }
         {...props}
       />
-    </View>
+    </>
   );
 };
 
 export default SharedLists;
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flexGrow: 1,
-    paddingBottom: 60
-  },
-  headerComponentStyle: {
-    paddingBottom: 14
-  },
-  headerContainer: {
-    rowGap: 48
-  },
-  headerTextContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  welcomeBackText: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: 14,
-    lineHeight: 20
-  },
-  usernameText: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: 24,
-    lineHeight: 32,
-    textTransform: 'capitalize'
-  },
-  logo: {
-    height: 40,
-    width: 36
-  },
-  sectionTitle: {
-    marginTop: 20,
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    lineHeight: 24
-  }
-});

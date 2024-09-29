@@ -1,64 +1,66 @@
+import firebaseServices from '@/config/firebaseConfig';
 import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { router } from 'expo-router';
 import { useCallback, useEffect } from 'react';
 
 export default function useLoadUserProfile() {
-  const { user, signOut } = useAuthStore();
-  const { profile, status, loaded, setStatus, setLoaded, setProfile } =
-    useProfileStore();
+  const { user, setUser, signOut } = useAuthStore();
+  const { profile, status, setProfile } = useProfileStore();
 
   const handleSignOut = useCallback(async () => {
     await signOut();
     setProfile(null);
   }, [setProfile, signOut]);
 
-  const handleCreateNewProfile = useCallback(
-    async (user: FirebaseAuthTypes.User, username: string) => {
+  const handleLoadProfile = useCallback(
+    async (userId: string) => {
       try {
-        const createdProfile = await ProfileService.create({
-          username: username,
-          email: user.email!,
-          picture: null
-        });
-        setProfile(createdProfile);
-      } catch (error: any) {
-        console.error(`Error creating new profile: ${error.message}`);
+        const profile = await ProfileService.getByUserId(userId);
+        if (!profile) {
+          //await handleSignOut();
+          return router.replace('/onboarding');
+        }
+        console.log(`User profile ${profile?.username} found`);
+        setProfile(profile);
+      } catch (error) {
+        throw error;
       }
     },
     [setProfile]
   );
 
-  const handleLoadProfile = useCallback(
-    async (user: FirebaseAuthTypes.User) => {
-      setStatus('pending');
+  const handleAuthStateChange = useCallback(
+    async (user: FirebaseAuthTypes.User | null) => {
       try {
-        const profile = await ProfileService.getByUserId(user.uid);
-        if (profile) {
-          setProfile(profile);
-          console.log('profile', profile.username);
-        } else {
-          await handleCreateNewProfile(user, user.displayName || user.email!);
+        if (user) {
+          console.log(`User ${user.uid} logged in`);
+
+          setUser(user);
+          await handleLoadProfile(user.uid);
         }
-        setStatus('success');
+        // else {
+        //   await handleSignOut();
+        //   router.replace('/');
+        // }
       } catch (error) {
-        setStatus('error');
-        throw error;
-      } finally {
-        setLoaded(true);
+        console.error(error);
       }
     },
-    [handleCreateNewProfile, setLoaded, setProfile, setStatus]
+    [handleLoadProfile, setUser]
   );
-
   useEffect(() => {
-    if (user && status === 'idle' && !loaded) {
-      handleLoadProfile(user);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, status, loaded]);
+    const unsubscribe = firebaseServices.auth.onAuthStateChanged((user) => {
+      handleAuthStateChange(user);
+    });
 
+    return () => {
+      unsubscribe();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return {
     user,
     profile,

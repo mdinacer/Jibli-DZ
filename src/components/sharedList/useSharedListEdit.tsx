@@ -2,7 +2,6 @@ import { SharedListReducer } from '@/components/sharedList/sharedListReducer';
 import { List } from '@/models/List';
 import { ListItemStatus } from '@/models/ListItem';
 import ListsService from '@/services/ListService';
-import PushNotificationsService from '@/services/PushNotificationsService';
 import { useListStore } from '@/stores/useListStore';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useReducer, useState } from 'react';
@@ -38,11 +37,6 @@ export default function useSharedListEdit(listData: List) {
       updateList(list.id, list);
       // TODO: Send notification to owner
       // TODO: Show success message
-      await PushNotificationsService.send({
-        userId: list.ownerId,
-        title: 'List updated',
-        body: 'Your list has been updated'
-      });
     } catch (error) {
       console.error(error);
     } finally {
@@ -69,7 +63,6 @@ export default function useSharedListEdit(listData: List) {
     list,
     state,
     isModified,
-    isSaving,
     dispatch,
     discardChanges,
     saveChanges,

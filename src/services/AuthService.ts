@@ -43,10 +43,10 @@ async function signInWithEmailPassword(
 
 export async function signOut(clearPersistence = false): Promise<void> {
   try {
+    await firebaseServices.auth.signOut();
     if (clearPersistence) {
       await firebaseServices.firestore.clearPersistence();
     }
-    await firebaseServices.auth.signOut();
   } catch (error: any) {
     if (error instanceof CustomError) {
       error.logToCrashlytics();

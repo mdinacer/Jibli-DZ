@@ -5,20 +5,9 @@ import listsService from '@/services/ListService';
 import { useListStore } from '@/stores/useListStore';
 import CustomError from '@/utils/CustomError';
 import { useCallback, useEffect } from 'react';
-import * as Notifications from 'expo-notifications';
 
 function useListCollaboratorsListener() {
   const { lists, loaded: listsLoaded, addList, removeList } = useListStore();
-
-  const showNotification = async (title: string, body: string) => {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title,
-        body
-      },
-      trigger: null // Immediate notification
-    });
-  };
 
   const handleCollaboratorsChange = useCallback(
     async (
@@ -36,10 +25,7 @@ function useListCollaboratorsListener() {
           !list.collaborators.includes(userId)
         ) {
           removeList(storeList.id);
-          showNotification(
-            'Collaboration revoked',
-            `Your participation to the list "${storeList.name}" has been revoked`
-          );
+
           // Toast.show({
           //   type: 'error',
           //   text1: 'Collaboration Revoked',
@@ -52,10 +38,6 @@ function useListCollaboratorsListener() {
         const fetchedList = await listsService.get(list.listId);
         if (fetchedList) {
           addList(fetchedList);
-          showNotification(
-            'New shared list',
-            `A new list "${fetchedList.name}" has been shared with you`
-          );
           // Toast.show({
           //   type: 'info',
           //   text1: 'New shared list',

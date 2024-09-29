@@ -2,7 +2,6 @@ import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Text, TextInputProps, View } from 'react-native';
 import AppInput from '../AppInput';
-import TextInput from '../Themed/TextInput';
 
 interface Props<T extends FieldValues> extends TextInputProps {
   control: Control<T>;
@@ -24,13 +23,15 @@ const InputField = <T extends FieldValues>({
         field: { onChange, value, ...field },
         fieldState: { error }
       }) => (
-        <View style={{ rowGap: 6 }} className="w-full">
-          <TextInput
-            label={label}
+        <View style={{ rowGap: 6 }} className="w-full max-w-sm">
+          <Text className="font-pregular text-base font-medium leading-none">
+            {label}
+          </Text>
+          <AppInput
             {...props}
             {...field}
-            onChangeText={onChange}
             value={value}
+            onChangeText={onChange}
           />
           {error?.message && (
             <Text className="font-pregular text-base text-destructive">

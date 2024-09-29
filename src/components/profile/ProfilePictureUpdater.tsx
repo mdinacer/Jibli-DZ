@@ -1,46 +1,35 @@
 import ImageUpload from '@/components/fileAsset/ImageUpload';
-import IconButton from '@/components/IconButton';
-import Text from '@/components/Themed/Text';
 import { Collections } from '@/config/collections';
 import { Icons } from '@/constants';
-import { ThemeType } from '@/constants/Colors';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { FileAsset } from '@/models/FileAsset';
 import FileAssetService from '@/services/FileAssetService';
 import ProfileService from '@/services/ProfileService';
 import { useProfileStore } from '@/stores/useProfileStore';
-import { hslToRgb, parseHSL } from '@/utils/hslConverter';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
+import { Alert, Text, View } from 'react-native';
+import AppButton from '../AppButton';
+import { FileAsset } from '@/models/FileAsset';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
 
 interface Props {}
 const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
-  const theme = useThemeColor({}) as ThemeType;
-
-  const rgbBackground = useMemo(() => {
-    const rgbValues = parseHSL(theme.background);
-
-    return rgbValues
-      ? hslToRgb(rgbValues[0], rgbValues[1], rgbValues[2])
-      : null;
-  }, [theme.background]);
-
   const { t } = useTranslation('common');
-  const { profile } = useProfileStore();
+  const { profile, updateProfile } = useProfileStore();
 
   const handleDeleteAsset = useCallback(async () => {
     if (!profile || !profile.picture) return;
     try {
       const { fileName } = profile.picture;
       await FileAssetService.deleteFile(Collections.PICTURES, fileName);
-      await ProfileService.update(profile.id, {
+      const updatedProfile = await ProfileService.update(profile.id, {
         picture: null
       });
+      if (updatedProfile) {
+        updateProfile({ picture: null });
+      }
     } catch (error: any) {
       console.error(error);
     }
-  }, [profile]);
+  }, [profile, updateProfile]);
 
   const handlePictureDeletePrompt = () => {
     Alert.alert(
@@ -69,28 +58,24 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
           const { fileName } = profile.picture;
           await FileAssetService.deleteFile(Collections.PICTURES, fileName);
         }
-        await ProfileService.update(profile.id, {
+        const updatedProfile = await ProfileService.update(profile.id, {
           picture: asset
         });
+
+        if (updatedProfile) {
+          updateProfile({ picture: null });
+        }
       } catch (error) {
         console.error(error);
       }
     },
-    [profile]
+    [profile, updateProfile]
   );
 
   return (
     <View
       {...props}
-      style={{
-        position: 'relative',
-        aspectRatio: 1,
-        width: '100%',
-        overflow: 'hidden',
-        borderWidth: 1,
-        borderColor: theme.border,
-        backgroundColor: theme.background
-      }}
+      className="relative aspect-square w-full overflow-hidden rounded-lg"
     >
       <View>
         <View>
@@ -100,56 +85,17 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
           />
         </View>
       </View>
-      <View
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          backgroundColor: rgbBackground
-            ? `rgba(${rgbBackground},0.4)`
-            : 'rgba(156 163 175 / 0.2)'
-        }}
-      >
+      <View className="absolute inset-x-0 bottom-0 flex-row items-center justify-between bg-black/40 px-4 py-2">
         <View>
-          <Text
-            style={{
-              fontSize: 24,
-              lineHeight: 32,
-              fontFamily: 'Poppins-Bold',
-              color: theme.foreground
-            }}
-          >
+          <Text className="font-pbold text-2xl text-white">
             {profile?.username}
-          </Text>
-          <Text
-            style={{
-              color: theme.foreground,
-              fontSize: 14,
-              lineHeight: 20
-            }}
-          >
-            {profile?.email}
           </Text>
         </View>
         {profile?.picture && (
-          <IconButton
+          <AppButton
             icon={Icons.ImageDeleteIcon}
-            style={{
-              backgroundColor: theme.destructive,
-              padding: 8,
-              borderRadius: 9999
-            }}
-            iconStyles={{
-              height: 24,
-              width: 24,
-              color: theme.destructiveForeground
-            }}
+            iconStyles="h-6 w-6 text-white"
+            variant="destructive"
             onPress={handlePictureDeletePrompt}
           />
         )}
