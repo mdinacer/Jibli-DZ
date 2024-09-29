@@ -34,7 +34,7 @@ const Profile = () => {
   const theme = useThemeColor({}) as ThemeType;
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} style={{ flex: 1 }}>
+    <SafeAreaView edges={['top', 'left', 'right']}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -42,7 +42,7 @@ const Profile = () => {
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            padding: 24,
+            padding: 8,
             paddingBottom: 40
           }}
         >
@@ -71,7 +71,6 @@ const Profile = () => {
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}
-                className=""
               />
             </View>
             <ProfilePictureUpdater />

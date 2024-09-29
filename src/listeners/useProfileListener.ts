@@ -21,6 +21,8 @@ export default function useProfileListener() {
           JSON.stringify(collaboratorsIds) !==
           JSON.stringify(profile.collaborators);
         if (!isChanged) return;
+        console.log('Handling collaborator changes');
+
         const newCollaborators =
           await collaboratorService.getCollaboratorsByIds(collaboratorsIds);
         setCollaborators(newCollaborators);

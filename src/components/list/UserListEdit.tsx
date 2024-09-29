@@ -59,9 +59,9 @@ const UserListEdit = () => {
 
         <FlatList<ListItem>
           style={styles.flatList}
+          contentContainerStyle={styles.flatListContent}
           data={list.items}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.flatListContent}
           ListEmptyComponent={
             <View style={styles.emptyStateContainer}>
               <Text muted style={styles.emptyStateTitle}>
@@ -117,7 +117,7 @@ const UserListEdit = () => {
           <IconButton
             onPress={() => router.push('/item/new')}
             icon={Icons.PlusIcon}
-            iconStyles={styles.icon}
+            iconStyles={{ ...styles.icon, color: 'white' }}
             style={{
               backgroundColor: '#ec4899',
               ...styles.iconButton

@@ -1,9 +1,12 @@
+import { ThemeType } from '@/constants/Colors';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { Redirect } from 'expo-router';
 import React, { useCallback } from 'react';
-import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Text from './Themed/Text';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { StyleSheet } from 'react-native';
 
 const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { profile, status } = useProfileStore();
@@ -29,8 +32,40 @@ const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
 
 export default AuthProvider;
 
-const StateView = ({ state }: { state: string }) => (
-  <SafeAreaView className="flex-1 items-center justify-center bg-primary">
-    <Text className="font-pbold text-xl text-primary-foreground">{state}</Text>
-  </SafeAreaView>
-);
+const StateView = ({ state }: { state: string }) => {
+  const theme = useThemeColor({}) as ThemeType;
+  return (
+    <SafeAreaView
+      style={[
+        styles.safeAreaView,
+        {
+          backgroundColor: theme.background
+        }
+      ]}
+    >
+      <Text
+        style={[
+          styles.text,
+          {
+            color: theme.primaryForeground
+          }
+        ]}
+      >
+        {state}
+      </Text>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 20,
+    lineHeight: 28
+  }
+});

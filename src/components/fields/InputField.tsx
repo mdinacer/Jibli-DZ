@@ -1,8 +1,9 @@
 import React from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { Text, TextInputProps, View } from 'react-native';
-import AppInput from '../AppInput';
+import { StyleSheet, Text, TextInputProps, View } from 'react-native';
 import TextInput from '../Themed/TextInput';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { ThemeType } from '@/constants/Colors';
 
 interface Props<T extends FieldValues> extends TextInputProps {
   control: Control<T>;
@@ -16,6 +17,7 @@ const InputField = <T extends FieldValues>({
   name,
   ...props
 }: Props<T>) => {
+  const theme = useThemeColor({}) as ThemeType;
   return (
     <Controller
       control={control}
@@ -24,7 +26,7 @@ const InputField = <T extends FieldValues>({
         field: { onChange, value, ...field },
         fieldState: { error }
       }) => (
-        <View style={{ rowGap: 6 }} className="w-full">
+        <View style={styles.container}>
           <TextInput
             label={label}
             {...props}
@@ -33,9 +35,7 @@ const InputField = <T extends FieldValues>({
             value={value}
           />
           {error?.message && (
-            <Text className="font-pregular text-base text-destructive">
-              {error.message}
-            </Text>
+            <Text style={{ color: theme.destructive }}>{error.message}</Text>
           )}
         </View>
       )}
@@ -44,3 +44,10 @@ const InputField = <T extends FieldValues>({
 };
 
 export default InputField;
+
+const styles = StyleSheet.create({
+  container: {
+    rowGap: 6,
+    width: '100%'
+  }
+});

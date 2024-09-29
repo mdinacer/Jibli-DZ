@@ -1,7 +1,9 @@
-import AppButton from '@/components/AppButton';
 import InputField from '@/components/fields/InputField';
 import NumberInputField from '@/components/fields/NumberInputField';
 import PickerSelectField from '@/components/fields/PickerSelectField';
+import { Button } from '@/components/Themed/Button';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
 import {
   ListItem,
   ListItemInput,
@@ -17,8 +19,7 @@ import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Platform, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 const Edit = () => {
   const { t } = useTranslation('common');
@@ -103,13 +104,12 @@ const Edit = () => {
   if (!list) return <Redirect href="/home" />;
   return (
     <SafeAreaView
-      className="flex-1"
       edges={Platform.OS === 'android' ? ['top', 'left', 'right'] : []}
     >
-      <ScrollView className="flex-grow">
-        <View className="flex-1 justify-center p-6" style={{ rowGap: 24 }}>
-          <View className="">
-            <Text className="font-pmedium text-xl">
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.titleText}>
               {item
                 ? t('title_edit', {
                     keyPrefix: 'item_form',
@@ -119,7 +119,7 @@ const Edit = () => {
             </Text>
           </View>
 
-          <View className="" style={{ rowGap: 16 }}>
+          <View style={styles.formFields}>
             <InputField
               name="name"
               label={t('fields.name.label', { keyPrefix: 'item_form' })}
@@ -160,14 +160,14 @@ const Edit = () => {
             />
           </View>
 
-          <View style={{ rowGap: 12 }}>
-            <AppButton
+          <View style={styles.buttonGroup}>
+            <Button
               onPress={handleSubmit(handleOnSubmit)}
               disabled={isSubmitting}
             >
               {t('submit_button', { keyPrefix: 'item_form' })}
-            </AppButton>
-            <AppButton
+            </Button>
+            <Button
               disabled={isSubmitting}
               variant="outline"
               onPress={handleCloseModal}
@@ -175,12 +175,34 @@ const Edit = () => {
               {t(isDirty ? 'cancel_button' : 'back_button', {
                 keyPrefix: 'item_form'
               })}
-            </AppButton>
+            </Button>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1
+  },
+  container: {
+    rowGap: 24,
+    padding: 24,
+    justifyContent: 'center'
+  },
+  titleText: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 20,
+    lineHeight: 28
+  },
+  formFields: {
+    rowGap: 16
+  },
+  buttonGroup: {
+    rowGap: 12
+  }
+});
 
 export default Edit;

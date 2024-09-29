@@ -1,21 +1,17 @@
-import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
 import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
+import Link from '@/components/Themed/Link';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
 import { SignInFormData, SignInFormSchema } from '@/schemas/SingInFormSchema';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 
 const SignIn = () => {
   const { t } = useTranslation('common', { keyPrefix: 'sign_in_form' });
@@ -51,20 +47,27 @@ const SignIn = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView>
       <KeyboardAvoidingView
-        className="flex-1"
+        style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
-        <ScrollView className="flex-grow p-6">
-          <View className="mb-8">
-            <Text className="mb-2 text-2xl font-semibold text-foreground">
+        <ScrollView style={{ flexGrow: 1, padding: 24 }}>
+          <View style={{ marginBottom: 32 }}>
+            <Text
+              style={{
+                marginBottom: 8,
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 24,
+                lineHeight: 32
+              }}
+            >
               {t('title')}
             </Text>
           </View>
 
-          <View style={{ rowGap: 16 }} className="mb-8">
+          <View style={{ rowGap: 16, marginBottom: 32 }}>
             <InputField
               name="email"
               label={t('fields.username.label')}
@@ -80,26 +83,24 @@ const SignIn = () => {
             />
           </View>
 
-          <View className="mb-4" style={{ rowGap: 8 }}>
-            <AppButton onPress={handleSubmit(handleOnSubmit)}>
+          <View style={{ rowGap: 8, marginBottom: 16 }}>
+            <Button onPress={handleSubmit(handleOnSubmit)}>
               {t('submit_button')}
-            </AppButton>
+            </Button>
             <GoogleAuthButton />
           </View>
 
           <View
-            style={{ columnGap: 8 }}
-            className="mt-4 flex-row items-center justify-center"
+            style={{
+              columnGap: 8,
+              marginTop: 16,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <Text className="text-base text-foreground">
-              {t('no_account_prompt')}
-            </Text>
-            <Link
-              className="text-base text-foreground underline"
-              href={'/sign-up'}
-            >
-              {t('no_account_link')}
-            </Link>
+            <Text>{t('no_account_prompt')}</Text>
+            <Link href={'/sign-up'}>{t('no_account_link')}</Link>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

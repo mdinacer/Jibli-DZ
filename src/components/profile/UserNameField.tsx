@@ -12,7 +12,7 @@ import ProfileService from '@/services/ProfileService';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const UserNameField = () => {
   const { t } = useTranslation('common', { keyPrefix: 'username_form' });
@@ -64,7 +64,7 @@ const UserNameField = () => {
           placeholder="Enter your username"
         />
       </CardContent>
-      <CardFooter className="flex-row justify-between">
+      <CardFooter style={styles.footer}>
         <Button
           variant="secondary"
           onPress={handleReset}
@@ -85,3 +85,7 @@ const UserNameField = () => {
 };
 
 export default UserNameField;
+
+const styles = StyleSheet.create({
+  footer: { flexDirection: 'row', justifyContent: 'space-between' }
+});

@@ -9,6 +9,7 @@ import {
 import { ThemeProps } from './types';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemeType } from '@/constants/Colors';
+import { SvgProps } from 'react-native-svg';
 
 type ButtonVariant =
   | 'default'
@@ -24,6 +25,8 @@ interface ButtonProps extends TouchableOpacityProps, ThemeProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   children: React.ReactNode;
+  icon?: (props: SvgProps) => JSX.Element;
+  iconStyles?: SvgProps;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -33,6 +36,8 @@ const Button: React.FC<ButtonProps> = ({
   style,
   lightColor,
   darkColor,
+  icon: Icon,
+  iconStyles = { height: 20, width: 20 },
   ...props
 }) => {
   const theme = useThemeColor({
@@ -67,7 +72,7 @@ const Button: React.FC<ButtonProps> = ({
       case 'destructive':
         return theme.destructiveForeground;
       case 'outline':
-        return theme.destructiveForeground;
+        return theme.foreground;
       case 'secondary':
         return theme.accentForeground;
       case 'ghost':
@@ -87,7 +92,11 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <TouchableOpacity style={[buttonStyles, style]} {...props}>
+    <TouchableOpacity
+      style={[buttonStyles, style, Icon && { flexDirection: 'row', gap: 8 }]}
+      {...props}
+    >
+      {Icon && <Icon color={foregroundColor} {...iconStyles} />}
       <Text style={textStyles}>{children}</Text>
     </TouchableOpacity>
   );

@@ -4,11 +4,17 @@ import { ThemeType } from '@/constants/Colors';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { FileAsset } from '@/models/FileAsset';
 import FileAssetService from '@/services/FileAssetService';
-import { parseHSL, hslToRgb } from '@/utils/hslConverter';
 import { resizeAndConvertToWebP } from '@/utils/ImageConverter';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useMemo } from 'react';
-import { Alert, Button, Image, TouchableOpacity, View } from 'react-native';
+import React, { useCallback } from 'react';
+import {
+  Alert,
+  Button,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 interface Props {
   onUploadComplete: (asset: FileAsset) => void;
@@ -24,6 +30,7 @@ const ImageUpload: React.FC<Props> = ({
   onUploadComplete,
   onDelete
 }) => {
+  const theme = useThemeColor({}) as ThemeType;
   const openFilePicker = useCallback(async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,7 +61,6 @@ const ImageUpload: React.FC<Props> = ({
         );
 
         if (uploadedAsset) {
-          Alert.alert('Success', 'File uploaded successfully');
           onUploadComplete(uploadedAsset);
         }
       } else {
@@ -69,23 +75,24 @@ const ImageUpload: React.FC<Props> = ({
 
   return (
     <TouchableOpacity
-      className="mx-auto h-full w-full"
+      style={styles.touchableOpacity}
       onPress={() => openFilePicker()}
     >
       {fileUri ? (
-        <View className="aspect-square overflow-hidden rounded-lg">
+        <View style={styles.imageContainer}>
           <Image
             source={{ uri: fileUri }}
-            className="h-full w-full"
+            style={styles.image}
             resizeMode="cover"
           />
           {onDelete && <Button title="delete"></Button>}
         </View>
       ) : (
-        <View>
-          <View>
-            <Icons.ImageUploadIcon className="text-muted" />
-          </View>
+        <View style={styles.iconContainer}>
+          <Icons.ImageUploadIcon
+            style={styles.icon}
+            color={theme.mutedForeground}
+          />
         </View>
       )}
     </TouchableOpacity>
@@ -93,3 +100,11 @@ const ImageUpload: React.FC<Props> = ({
 };
 
 export default ImageUpload;
+
+const styles = StyleSheet.create({
+  touchableOpacity: { marginHorizontal: 'auto', width: '100%', height: '100%' },
+  imageContainer: { aspectRatio: 1, overflow: 'hidden', borderRadius: 8 },
+  image: { height: '100%', width: '100%' },
+  iconContainer: { alignItems: 'center', justifyContent: 'center' },
+  icon: { width: '80%', height: '80%' }
+});

@@ -6,7 +6,7 @@ import { ListItem, ListItemStatus } from '@/models/ListItem';
 import { useListStore } from '@/stores/useListStore';
 import { sortItemByStatus } from '@/utils/list-utils';
 import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
-import { SectionList, SectionListProps } from 'react-native';
+import { SectionList, SectionListProps, StyleSheet } from 'react-native';
 import EmptyState from '@/components/EmptyState';
 import CollaboratorItemDisplay from '@/components/item/CollaboratorItemDisplay';
 import SectionHeader from '@/components/pendingItems/SectionHeader';
@@ -69,10 +69,10 @@ const PendingItemsLists: React.FC<Props> = ({ ...props }) => {
   return (
     <SectionList
       {...props}
-      contentContainerStyle={{ rowGap: 16, paddingVertical: 16 }}
+      style={styles.flatList}
+      contentContainerStyle={styles.contentContainer}
       sections={sections}
       keyExtractor={(i) => i.id}
-      className="flex-1 px-4"
       renderItem={({ item, section: { listId } }) => (
         <CollaboratorItemDisplay
           item={item}
@@ -97,3 +97,14 @@ const PendingItemsLists: React.FC<Props> = ({ ...props }) => {
 };
 
 export default PendingItemsLists;
+
+const styles = StyleSheet.create({
+  flatList: {
+    flex: 1,
+    paddingHorizontal: 16
+  },
+  contentContainer: {
+    rowGap: 16,
+    paddingVertical: 16
+  }
+});

@@ -1,15 +1,15 @@
+import EmptyState from '@/components/EmptyState';
+import InvitationCard from '@/components/invitation/InvitationCard';
 import useLoadInvitations from '@/hooks/useLoadInvitations';
+import { Collaborator } from '@/models/Collaborator';
 import { Invitation } from '@/models/Invitation';
 import invitationService from '@/services/InvitationService';
+import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import { useInvitationStore } from '@/stores/useInvitationStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import React, { useCallback } from 'react';
-import { Alert, FlatList, FlatListProps } from 'react-native';
-import InvitationCard from './InvitationCard';
-import EmptyState from '../EmptyState';
 import { useTranslation } from 'react-i18next';
-import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
-import { Collaborator } from '@/models/Collaborator';
+import { Alert, FlatList, FlatListProps, StyleSheet } from 'react-native';
 
 interface Props extends Partial<FlatListProps<Invitation>> {}
 
@@ -82,9 +82,8 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
     <FlatList
       data={invitations}
       {...props}
-      style={{ flex: 1 }}
-      className="px-4"
-      contentContainerStyle={{ gap: 16 }}
+      style={styles.flatList}
+      contentContainerStyle={styles.contentContainer}
       keyExtractor={(item) => item.id}
       renderItem={({ item: invitation }) => (
         <InvitationCard
@@ -106,3 +105,14 @@ const InvitationsList: React.FC<Props> = ({ ...props }) => {
 };
 
 export default InvitationsList;
+
+const styles = StyleSheet.create({
+  flatList: {
+    flex: 1,
+    paddingHorizontal: 16
+  },
+  contentContainer: {
+    rowGap: 16,
+    paddingVertical: 16
+  }
+});

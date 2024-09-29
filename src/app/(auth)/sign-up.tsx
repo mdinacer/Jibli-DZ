@@ -1,13 +1,16 @@
-import AppButton from '@/components/AppButton';
 import GoogleAuthButton from '@/components/auth/GoogleAuthButton';
 import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
+import Link from '@/components/Themed/Link';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
 import { SignUpFormData, SignUpFormSchema } from '@/schemas/SingUpFormSchema';
 import ProfileService from '@/services/ProfileService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -15,10 +18,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Text,
+  StyleSheet,
   View
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SignUp = () => {
   const { setProfile } = useProfileStore();
@@ -68,7 +70,6 @@ const SignUp = () => {
         router.push('/');
       } catch (error: any) {
         console.error(error);
-        // check if error is firebase auth error
         if (error.code) {
           const errorMessage = handleAuthErrors(error.code);
           setError('email', { message: errorMessage });
@@ -86,23 +87,18 @@ const SignUp = () => {
   );
 
   return (
-    <SafeAreaView
-      className="flex-1 bg-background"
-      edges={['top', 'left', 'right']}
-    >
+    <SafeAreaView edges={['top', 'left', 'right']}>
       <KeyboardAvoidingView
-        className="flex-1"
+        style={styles.flex1}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
-        <ScrollView className="flex-grow p-6">
-          <View className="mb-4">
-            <Text className="mb-2 text-2xl font-semibold text-foreground">
-              {t('title')}
-            </Text>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{t('title')}</Text>
           </View>
 
-          <View style={{ rowGap: 16 }} className="mb-6">
+          <View style={styles.inputContainer}>
             <InputField
               name="username"
               label={t('fields.username.label')}
@@ -124,34 +120,65 @@ const SignUp = () => {
             />
           </View>
 
-          <View className="mb-4" style={{ rowGap: 8 }}>
-            <AppButton
+          <View style={styles.buttonContainer}>
+            <Button
               disabled={isSubmitting}
               onPress={handleSubmit(handleOnSubmit)}
             >
               {t('submit_button')}
-            </AppButton>
+            </Button>
             <GoogleAuthButton />
           </View>
 
-          <View
-            style={{ columnGap: 8 }}
-            className="mt-4 flex-row items-center justify-center"
-          >
-            <Text className="font-pregular text-sm text-foreground">
-              {t('has_account_prompt')}
-            </Text>
-            <Link
-              className="font-pregular text-sm text-foreground underline"
-              href={'/sign-in'}
-            >
-              {t('has_account_link')}
-            </Link>
+          <View style={styles.linkContainer}>
+            <Text style={styles.prompt}>{t('has_account_prompt')}</Text>
+            <Link href={'/sign-in'}>{t('has_account_link')}</Link>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  flex1: {
+    flex: 1
+  },
+  scrollView: {
+    flexGrow: 1,
+    padding: 24
+  },
+  titleContainer: {
+    marginBottom: 16
+  },
+  title: {
+    marginBottom: 8,
+    fontSize: 24,
+    lineHeight: 32,
+    fontFamily: 'Poppins-SemiBold'
+  },
+  inputContainer: {
+    marginBottom: 24,
+    rowGap: 16
+  },
+  buttonContainer: {
+    marginBottom: 16,
+    rowGap: 16
+  },
+  linkContainer: {
+    marginTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: 8
+  },
+  prompt: {
+    fontSize: 14
+  },
+  link: {
+    fontSize: 14,
+    textDecorationLine: 'underline'
+  }
+});
 
 export default SignUp;

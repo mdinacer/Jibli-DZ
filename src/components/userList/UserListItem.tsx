@@ -1,36 +1,38 @@
-import { Icons } from '@/constants';
-import { ListItemStatus, ListItem } from '@/models/ListItem';
-import { compareItems } from '@/utils/list-utils';
-import React, { useMemo } from 'react';
-import { View, ViewProps } from 'react-native';
-import { SvgProps } from 'react-native-svg';
 import Text from '@/components/Themed/Text';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemeType } from '@/constants/Colors';
-
-const itemStatusIcon: Record<ListItemStatus, (props: SvgProps) => JSX.Element> =
-  {
-    [ListItemStatus.PENDING]: Icons.CircleIcon,
-    [ListItemStatus.UNAVAILABLE]: Icons.UnavailableIcon,
-    [ListItemStatus.BOUGHT]: Icons.CheckIcon
-  };
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { ListItem, ListItemStatus } from '@/models/ListItem';
+import { compareItems } from '@/utils/list-utils';
+import React from 'react';
+import { StyleSheet, View, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
   item: ListItem;
 }
 
 const UserListItem: React.FC<Props> = ({ item, ...props }) => {
-  const { primary } = useThemeColor({}) as ThemeType;
-  const Icon = useMemo(() => itemStatusIcon[item.status], [item.status]);
+  const theme = useThemeColor({}) as ThemeType;
   return (
-    <View className="flex-row items-center space-x-2" {...props}>
-      <Icon color={primary} style={{ height: 20, width: 20 }} />
+    <View style={styles.container} {...props}>
+      <View
+        style={{
+          height: 6,
+          width: 6,
+          borderRadius: 9999,
+          backgroundColor:
+            item.status === ListItemStatus.PENDING
+              ? theme.mutedForeground
+              : item.status === ListItemStatus.BOUGHT
+                ? theme.green
+                : theme.red
+        }}
+      />
       <Text
         muted={item.status !== ListItemStatus.PENDING}
-        style={{
-          textDecorationLine:
-            item.status !== ListItemStatus.PENDING ? 'line-through' : 'none'
-        }}
+        style={[
+          styles.text,
+          item.status !== ListItemStatus.PENDING && styles.textStrikethrough
+        ]}
       >
         {item.name}
       </Text>
@@ -43,3 +45,24 @@ const isEqual = (prevProps: Props, nextProps: Props) => {
 };
 
 export default React.memo(UserListItem, isEqual);
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 8
+  },
+  icon: {
+    height: 20,
+    width: 20
+  },
+  text: {
+    textDecorationLine: 'none',
+    fontSize: 14,
+    lineHeight: 16
+  },
+  textStrikethrough: {
+    textDecorationLine: 'line-through'
+  }
+});

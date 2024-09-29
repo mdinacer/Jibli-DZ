@@ -1,7 +1,8 @@
-import AppButton from '@/components/AppButton';
 import { CardHeader, CardTitle } from '@/components/Card';
 import InputField from '@/components/fields/InputField';
 import ImageUpload from '@/components/fileAsset/ImageUpload';
+import { Button } from '@/components/Themed/Button';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
 import { FileAsset } from '@/models/FileAsset';
 import { ProfileCreateInput } from '@/models/Profile';
 import {
@@ -16,8 +17,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+  StyleSheet
+} from 'react-native';
 
 const InitialProfileScreen = () => {
   const { user } = useAuthStore();
@@ -71,36 +77,32 @@ const InitialProfileScreen = () => {
   );
 
   return (
-    <SafeAreaView
-      className="flex-1 bg-background"
-      edges={['top', 'left', 'right']}
-    >
+    <SafeAreaView edges={['top', 'left', 'right']}>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={styles.flexContainer}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView className="flex-1 px-4">
-          <View style={{ rowGap: 16 }}>
-            <CardHeader className="">
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <View style={styles.formContainer}>
+            <CardHeader>
               <CardTitle>Create Your Profile</CardTitle>
             </CardHeader>
 
             <Controller<OnboardingProfileData>
-              name={'picture'}
+              name="picture"
               control={control}
               render={({ field: { onChange, value } }) => (
-                <View className="aspect-square w-full rounded-lg">
+                <View style={styles.imageUploadContainer}>
                   <ImageUpload
                     fileUri={
                       (value as FileAsset)?.fileUrl || profile?.picture?.fileUrl
                     }
-                    onUploadComplete={(asset: FileAsset) => {
-                      onChange(asset);
-                    }}
+                    onUploadComplete={(asset: FileAsset) => onChange(asset)}
                   />
                 </View>
               )}
             />
+
             <InputField
               control={control}
               name="username"
@@ -108,38 +110,21 @@ const InitialProfileScreen = () => {
               id="onBoardingUsername"
             />
 
-            {/* <View className="rounded-md border-y border-border py-4">
-              <Text>Your List</Text>
-              <CheckBoxField
-                control={control}
-                name="createList"
-                label="Create List"
-              />
-
-              <InputField
-                readOnly={!createList}
-                control={control}
-                name="listName"
-                label="List Name"
-                id="onBoardingListName"
-              />
-            </View> */}
-
-            <View className="w-full gap-y-4 pt-10">
-              <AppButton
+            <View style={styles.buttonContainer}>
+              <Button
                 disabled={isSubmitting}
                 onPress={handleSubmit(handleOnSubmit)}
               >
                 {isSubmitting ? 'Saving...' : 'Create'}
-              </AppButton>
+              </Button>
 
-              <AppButton
+              <Button
                 disabled={isSubmitting}
                 variant="destructive"
                 onPress={() => AuthService.signOut()}
               >
-                Sing Out
-              </AppButton>
+                Sign Out
+              </Button>
             </View>
           </View>
         </ScrollView>
@@ -149,3 +134,38 @@ const InitialProfileScreen = () => {
 };
 
 export default InitialProfileScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F9FAFB' // Replace with theme background if available
+  },
+  flexContainer: {
+    flex: 1
+  },
+  scrollView: {
+    flexGrow: 1,
+    paddingHorizontal: 16
+  },
+  formContainer: {
+    rowGap: 16
+  },
+  imageUploadContainer: {
+    aspectRatio: 1, // Makes the view a square
+    width: '100%',
+    borderRadius: 8 // Rounded corners
+  },
+  listSection: {
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E5E7EB', // Border color
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    marginTop: 16
+  },
+  buttonContainer: {
+    width: '100%',
+    marginTop: 40,
+    gap: 16 // Space between buttons
+  }
+});

@@ -6,6 +6,7 @@ import PushNotificationsService from '@/services/PushNotificationsService';
 import { useListStore } from '@/stores/useListStore';
 import { router } from 'expo-router';
 import { useCallback, useMemo, useReducer, useState } from 'react';
+import * as Device from 'expo-device';
 
 export default function useSharedListEdit(listData: List) {
   const [state, dispatch] = useReducer(SharedListReducer, {
@@ -38,11 +39,13 @@ export default function useSharedListEdit(listData: List) {
       updateList(list.id, list);
       // TODO: Send notification to owner
       // TODO: Show success message
-      await PushNotificationsService.send({
-        userId: list.ownerId,
-        title: 'List updated',
-        body: 'Your list has been updated'
-      });
+      if (Device.isDevice) {
+        await PushNotificationsService.send({
+          userId: list.ownerId,
+          title: 'List updated',
+          body: 'Your list has been updated'
+        });
+      }
     } catch (error) {
       console.error(error);
     } finally {

@@ -89,7 +89,8 @@ const ProfilePictureUpdater: React.FC<Props> = ({ ...props }) => {
         overflow: 'hidden',
         borderWidth: 1,
         borderColor: theme.border,
-        backgroundColor: theme.background
+        backgroundColor: theme.background,
+        borderRadius: 16
       }}
     >
       <View>

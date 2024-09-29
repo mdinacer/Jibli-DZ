@@ -5,7 +5,7 @@ import { ThemeType } from '@/constants/Colors';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ListItem } from '@/models/ListItem';
 import React, { useCallback } from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
@@ -19,6 +19,7 @@ interface Props {
 
 const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
   const theme = useThemeColor({}) as ThemeType;
+
   const renderRightActions = useCallback(
     (
       progress: Animated.AnimatedInterpolation<string | number>,
@@ -26,21 +27,11 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
       swipeable: Swipeable
     ) => {
       return (
-        <View className="flex-row space-x-2 overflow-hidden rounded-l p-1">
-          <View className="h-full">
+        <View style={styles.actionsContainer}>
+          <View style={styles.iconButtonWrapper}>
             <IconButton
-              className="h-full w-full"
-              style={{
-                height: '100%',
-                width: 56,
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              iconStyles={{
-                height: 32,
-                width: 32,
-                color: theme.foreground
-              }}
+              style={styles.iconButton}
+              iconStyles={{ ...styles.icon, color: theme.foreground }}
               icon={Icons.PencilEditIcon}
               onPress={() => {
                 swipeable.close();
@@ -48,17 +39,11 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
               }}
             />
           </View>
-          <View className="h-full">
+          <View style={styles.iconButtonWrapper}>
             <IconButton
-              className="h-full w-full"
               icon={Icons.TrashIcon}
-              style={{
-                height: '100%',
-                width: 56,
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              iconStyles={{ height: 32, width: 32, color: theme.destructive }}
+              style={styles.iconButton}
+              iconStyles={{ ...styles.icon, color: theme.destructive }}
               onPress={() => {
                 swipeable.close();
                 onDelete();
@@ -78,7 +63,7 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
         rightThreshold={60}
         renderRightActions={renderRightActions}
       >
-        <View style={{ padding: 4 }}>
+        <View style={styles.itemContainer}>
           <ItemDisplay item={item} />
         </View>
       </Swipeable>
@@ -87,3 +72,28 @@ const UserItemDisplay: React.FC<Props> = ({ item, onDelete, onEdit }) => {
 };
 
 export default UserItemDisplay;
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    padding: 4
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    columnGap: 8,
+    overflow: 'hidden',
+    padding: 4
+  },
+  iconButtonWrapper: {
+    height: '100%'
+  },
+  iconButton: {
+    height: '100%',
+    width: 56,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon: {
+    height: 24,
+    width: 24
+  }
+});

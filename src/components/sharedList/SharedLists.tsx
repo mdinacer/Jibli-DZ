@@ -29,23 +29,19 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
   );
 
   return (
-    <View className="aspect-video min-h-[300px] w-full" style={{ rowGap: 16 }}>
+    <View style={styles.container}>
       <Text muted style={styles.sectionTitle}>
         {t('shared_list_many')}
       </Text>
       <FlatList
-        className="flex-1 pb-4"
-        contentContainerStyle={{
-          columnGap: 16,
-          paddingBottom: 16
-        }}
+        contentContainerStyle={styles.flatListContentContainer}
         data={lists}
         keyExtractor={(l) => l.id}
         renderItem={({ item }) => (
           <SharedListDisplay width={size} list={item} />
         )}
         ListEmptyComponent={
-          <View style={{ width: width - 16 * 2 }}>
+          <View style={styles.emptyStateContainer}>
             <EmptyState
               title={t('title', {
                 keyPrefix: 'shared_list_empty_state'
@@ -65,6 +61,26 @@ const SharedLists: React.FC<Props> = ({ ...props }) => {
 export default SharedLists;
 
 const styles = StyleSheet.create({
+  container: {
+    aspectRatio: 16 / 9,
+    minHeight: 300,
+    width: '100%',
+    rowGap: 16
+  },
+  flatListContentContainer: {
+    flex: 1,
+    columnGap: 16,
+    paddingBottom: 16
+  },
+  emptyStateContainer: {
+    width: Dimensions.get('window').width - 16 * 2
+  },
+  sectionTitle: {
+    marginTop: 20,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    lineHeight: 24
+  },
   contentContainer: {
     flexGrow: 1,
     paddingBottom: 60
@@ -94,11 +110,5 @@ const styles = StyleSheet.create({
   logo: {
     height: 40,
     width: 36
-  },
-  sectionTitle: {
-    marginTop: 20,
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
-    lineHeight: 24
   }
 });

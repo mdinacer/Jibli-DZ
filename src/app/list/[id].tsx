@@ -1,5 +1,6 @@
 import UserListEdit from '@/components/list/UserListEdit';
 import SharedListEdit from '@/components/sharedList/SharedListEdit';
+import Link from '@/components/Themed/Link';
 import SafeAreaView from '@/components/Themed/SafeAreaView';
 import useLoadLists from '@/hooks/useLoadLists';
 import { useLocalSearchParams } from 'expo-router';
@@ -12,19 +13,28 @@ const List = () => {
 
   const list = useMemo(() => lists.find((l) => l.id === id), [id, lists]);
 
-  if (!list) {
-    return (
-      <View>
-        <Text>List not found</Text>
-      </View>
-    );
-  }
   return (
     <SafeAreaView
-      className="relative"
-      //edges={['top', 'left', 'right', 'bottom']}
+
+    //edges={['top', 'left', 'right', 'bottom']}
     >
-      {list.isOwner ? <UserListEdit /> : <SharedListEdit listData={list} />}
+      {!list ? (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            rowGap: 8
+          }}
+        >
+          <Text>List not found</Text>
+          <Link href={'/home'}>Go back</Link>
+        </View>
+      ) : list.isOwner ? (
+        <UserListEdit />
+      ) : (
+        <SharedListEdit listData={list} />
+      )}
     </SafeAreaView>
   );
 };

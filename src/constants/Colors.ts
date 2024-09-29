@@ -21,6 +21,18 @@ export type ThemeType = {
   popoverForeground: string;
   card: string;
   cardForeground: string;
+  orange: string;
+  green: string;
+  red: string;
+};
+
+export const extraColors = {
+  orange: '#FBB03B',
+  darkOrange: '#9D5C0D',
+  green: '#00CDAC',
+  darkGreen: '#009245',
+  red: '#FCEE21',
+  darkRed: '#DD2476'
 };
 
 export default {
@@ -43,7 +55,10 @@ export default {
     popover: 'hsl(0 0% 100%)',
     popoverForeground: 'hsl(224 71.4% 4.1%)',
     card: 'hsl(0 0% 100%)',
-    cardForeground: 'hsl(224 71.4% 4.1%)'
+    cardForeground: 'hsl(224 71.4% 4.1%)',
+    orange: '#FBB03B',
+    green: '#41B3A2',
+    red: '#D04848'
   },
   dark: {
     border: 'hsl(215 27.9% 16.9%)',
@@ -64,7 +79,10 @@ export default {
     popover: 'hsl(224 71.4% 4.1%)',
     popoverForeground: 'hsl(210 20% 98%)',
     card: 'hsl(224 71.4% 4.1%)',
-    cardForeground: 'hsl(210 20% 98%)'
+    cardForeground: 'hsl(210 20% 98%)',
+    orange: '#9D5C0D',
+    green: '#0D7C66',
+    red: '#BF3131'
   }
 };
 
@@ -87,4 +105,63 @@ const gradientColors = [
 
 export const getGradient = (index: number) => {
   return gradientColors[index % gradientColors.length];
+};
+
+export const shadowStyles = {
+  shadowSm: {
+    shadowColor: 'rgba(0, 0, 0, 0.05)',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    elevation: 1 // for Android shadow support
+  },
+  shadow: {
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 3,
+    elevation: 2
+  },
+  shadowMd: {
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    elevation: 4
+  },
+  shadowLg: {
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 15,
+    elevation: 6
+  },
+  shadowXl: {
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 1,
+    shadowRadius: 25,
+    elevation: 10
+  },
+  shadow2Xl: {
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: { width: 0, height: 25 },
+    shadowOpacity: 1,
+    shadowRadius: 50,
+    elevation: 12
+  },
+  shadowInner: {
+    shadowColor: 'rgba(0, 0, 0, 0.05)',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    elevation: 0 // No elevation as it's an inset shadow
+  },
+  shadowNone: {
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0
+  }
 };

@@ -11,7 +11,7 @@ import collaboratorService from '@/services/collaborator-service';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { formatDistanceToNow } from 'date-fns';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Animated, Image, View } from 'react-native';
+import { Animated, Image, StyleSheet, View } from 'react-native';
 import {
   GestureHandlerRootView,
   Swipeable
@@ -58,15 +58,13 @@ const InvitationCard: React.FC<Props> = ({
       return (
         <>
           {isSent ? (
-            <View className="h-full px-4">
+            <View style={styles.iconContainer}>
               <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                style={styles.button}
+                iconStyles={{
+                  ...styles.icon,
+                  color: theme.destructive
                 }}
-                iconStyles={{ height: 32, width: 32, color: theme.destructive }}
                 icon={Icons.TrashIcon}
                 onPress={() => {
                   swipeable.close();
@@ -75,36 +73,17 @@ const InvitationCard: React.FC<Props> = ({
               />
             </View>
           ) : (
-            <View
-              style={{
-                flexDirection: 'row',
-                height: '100%',
-                alignItems: 'flex-end',
-                columnGap: 8,
-                paddingHorizontal: 16,
-                width: 'auto'
-              }}
-            >
+            <View style={styles.buttonsWrapper}>
               <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                iconStyles={{ height: 32, width: 32, color: '#16a34a' }}
+                style={styles.button}
+                iconStyles={{ ...styles.icon, color: '#16a34a' }}
                 icon={Icons.MailValidationIcon}
                 onPress={() => handleAcceptInvitation(swipeable)}
               />
               <IconButton
-                style={{
-                  height: '100%',
-                  width: 56,
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
+                style={styles.button}
                 icon={Icons.MailRemoveIcon}
-                iconStyles={{ height: 32, width: 32, color: theme.destructive }}
+                iconStyles={{ ...styles.icon, color: theme.destructive }}
                 onPress={() => {
                   swipeable.close();
                   onDecline('decline');
@@ -236,3 +215,28 @@ const InvitationCard: React.FC<Props> = ({
 };
 
 export default InvitationCard;
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    width: '100%',
+    paddingHorizontal: 16
+  },
+  button: {
+    height: '100%',
+    width: 56,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon: {
+    height: 32,
+    width: 32
+  },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    height: '100%',
+    alignItems: 'flex-end',
+    columnGap: 8,
+    paddingHorizontal: 16,
+    width: 'auto'
+  }
+});

@@ -32,13 +32,13 @@ const Index = () => {
                 <Text style={styles.usernameText}>{profile?.username}</Text>
               </View>
 
-              <View>
+              {/* <View>
                 <Image
                   source={Images.logoSmall}
                   resizeMode="contain"
                   style={styles.logo}
                 />
-              </View>
+              </View> */}
             </View>
             <UserListDisplay />
             <SharedLists horizontal />

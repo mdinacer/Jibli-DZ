@@ -128,19 +128,13 @@ const UserListDisplay: React.FC = () => {
                 height: 20,
                 width: 20
               }}
-              variant={'secondary'}
-              size="sm"
               onPress={() => router.push(`/list/${list.id}`)}
             />
             <IconButton
-              variant={'secondary'}
-              size="sm"
               onPress={handleListDeletePrompt}
               icon={Icons.TrashIcon}
             />
             <IconButton
-              variant={'secondary'}
-              size="sm"
               disabled={collaborators.length === 0}
               icon={Icons.ShareIcon}
               onPress={() => router.push('/listCollaborators')}

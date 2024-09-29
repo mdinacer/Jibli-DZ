@@ -1,21 +1,17 @@
-import * as React from 'react';
-import { Text, useColorScheme, View, StyleSheet } from 'react-native';
 import { ThemeProps } from '@/components/Themed/types';
+import { shadowStyles, ThemeType } from '@/constants/Colors';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { ThemeType } from '@/constants/Colors';
+import * as React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Card = React.forwardRef<
   View,
   React.ComponentPropsWithoutRef<typeof View> & ThemeProps
 >(({ lightColor, darkColor, style, ...props }, ref) => {
-  const colorScheme = useColorScheme();
   const theme = useThemeColor({
     light: lightColor,
     dark: darkColor
   }) as ThemeType;
-
-  const lightShadowColor = 'rgba(19, 23, 34, 0.1)';
-  const darkShadowColor = 'rgba(250, 250, 250, 0.1)';
 
   return (
     <View
@@ -25,9 +21,7 @@ const Card = React.forwardRef<
         styles.card,
         {
           backgroundColor: theme['card'],
-          borderColor: theme['border'],
-          shadowColor:
-            colorScheme === 'dark' ? darkShadowColor : lightShadowColor
+          borderColor: theme['border']
         },
         style
       ]}
@@ -109,11 +103,8 @@ CardFooter.displayName = 'CardFooter';
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    elevation: 1,
-    borderRadius: 8
+    borderRadius: 8,
+    ...shadowStyles.shadowSm
   },
   cardHeader: {
     flexDirection: 'column',
@@ -122,15 +113,15 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 18,
-    lineHeight: 28,
-    marginBottom: 6,
+    lineHeight: 24,
+    marginBottom: 0,
     letterSpacing: -0.4
   },
   cardDescription: {
     fontFamily: 'Poppins-Regular',
     fontSize: 14,
     lineHeight: 26,
-    marginBottom: 6
+    marginBottom: 0
   },
   cardContent: {
     paddingVertical: 24,
@@ -140,7 +131,9 @@ const styles = StyleSheet.create({
   cardFooter: {
     paddingVertical: 24,
     paddingHorizontal: 24,
-    paddingTop: 0
+    paddingTop: 0,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8
   }
 });
 

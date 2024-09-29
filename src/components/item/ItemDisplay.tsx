@@ -1,4 +1,4 @@
-import { ThemeType } from '@/constants/Colors';
+import { shadowStyles, ThemeType } from '@/constants/Colors';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ItemStatusStyles, ListItem, ListItemStatus } from '@/models/ListItem';
 import React, { useMemo } from 'react';
@@ -14,10 +14,6 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
   const { t } = useTranslation('common');
   const color = useMemo(() => ItemStatusStyles[item.status], [item.status]);
   const theme = useThemeColor({}) as ThemeType;
-  const colorScheme = useColorScheme();
-
-  const lightShadowColor = 'rgba(19, 23, 34, 0.1)';
-  const darkShadowColor = 'rgba(250, 250, 250, 0.1)';
 
   return (
     <View
@@ -27,11 +23,7 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
         borderRadius: 8,
         backgroundColor: color || theme.background,
         padding: 16,
-        shadowColor:
-          colorScheme === 'dark' ? darkShadowColor : lightShadowColor,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 1,
-        shadowRadius: 2
+        ...shadowStyles.shadowSm
       }}
     >
       <View style={{ flex: 1, rowGap: 8 }}>
@@ -41,7 +33,11 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
               flex: 1,
               fontFamily: 'Poppins-SemiBold',
               fontSize: 18,
-              lineHeight: 24
+              lineHeight: 24,
+              color:
+                item.status === ListItemStatus.PENDING
+                  ? theme.foreground
+                  : theme.background
             }}
           >
             {item.name}
@@ -53,12 +49,25 @@ const ItemDisplay: React.FC<Props> = ({ item }) => {
               style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 18,
-                lineHeight: 24
+                lineHeight: 24,
+                color:
+                  item.status === ListItemStatus.PENDING
+                    ? theme.foreground
+                    : theme.background
               }}
             >
               {item.quantity}
             </Text>
-            <Text>{t(item.unit, { keyPrefix: 'units' })}</Text>
+            <Text
+              style={{
+                color:
+                  item.status === ListItemStatus.PENDING
+                    ? theme.foreground
+                    : theme.background
+              }}
+            >
+              {t(item.unit, { keyPrefix: 'units' })}
+            </Text>
           </View>
         </View>
         <Text

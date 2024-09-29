@@ -214,7 +214,7 @@ export const mockListItems: ListItem[] = [
     name: 'Broccoli',
     quantity: 2,
     unit: ProductUnit.PIECE,
-    status: ListItemStatus.PENDING,
+    status: ListItemStatus.UNAVAILABLE,
     note: 'Add to stir-fry.',
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now()

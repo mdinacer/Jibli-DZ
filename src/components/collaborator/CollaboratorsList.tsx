@@ -1,7 +1,14 @@
 import { Collaborator } from '@/models/Collaborator';
 import { useCollaboratorStore } from '@/stores/useCollaboratorStore';
 import React, { useCallback, useMemo } from 'react';
-import { Alert, Dimensions, FlatList, FlatListProps, View } from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  FlatListProps,
+  StyleSheet,
+  View
+} from 'react-native';
 import CollaboratorCard from './CollaboratorCard';
 import EmptyState from '../EmptyState';
 import { useTranslation } from 'react-i18next';
@@ -55,21 +62,13 @@ const CollaboratorsList: React.FC<Props> = ({ ...props }) => {
     [handleRevoke, t]
   );
 
-  const size = useMemo(
-    () =>
-      collaborators.length > 0
-        ? (width - PADDING * 2) * 0.9
-        : width - PADDING * 2,
-    [collaborators.length, width]
-  );
+  const size = useMemo(() => width - PADDING * 2, [width]);
   return (
     <FlatList
       {...props}
-      className="py-4"
-      contentContainerStyle={{ gap: 16 }}
+      contentContainerStyle={styles.contentContainer}
       data={collaborators}
       keyExtractor={(c) => c.userId}
-      horizontal
       renderItem={({ item: collaborator }) => (
         <View style={{ width: size }}>
           <CollaboratorCard
@@ -79,7 +78,7 @@ const CollaboratorsList: React.FC<Props> = ({ ...props }) => {
         </View>
       )}
       ListEmptyComponent={
-        <View style={{ width: width - PADDING * 2 }}>
+        <View style={{ width: size }}>
           <EmptyState
             title={t('collaborators_empty_state.title')}
             description={t('collaborators_empty_state.description')}
@@ -91,3 +90,10 @@ const CollaboratorsList: React.FC<Props> = ({ ...props }) => {
 };
 
 export default CollaboratorsList;
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    gap: 16,
+    padding: 16
+  }
+});

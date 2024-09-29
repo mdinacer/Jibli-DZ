@@ -1,8 +1,9 @@
 import useUserListChangesTracker from '@/hooks/useUserListChangesTracker';
-import { Link } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Text from '@/components/Themed/Text';
+import Link from '@/components/Themed/Link';
 
 const ListModificationBanner = () => {
   const { list, listModified } = useUserListChangesTracker();
@@ -11,15 +12,32 @@ const ListModificationBanner = () => {
   return (
     <SafeAreaView
       edges={['bottom']}
-      className="border-t border-t-[#FFC470] bg-[#FFC470]"
+      style={{
+        borderTopColor: '#FFC470',
+        borderTopWidth: 1,
+        backgroundColor: '#FFC470'
+      }}
     >
-      <View className="w-full flex-row items-center justify-between px-4 py-2">
-        <Text className="font-pregular text-base">
-          You have unsaved changes
-        </Text>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: 16,
+          paddingVertical: 8
+        }}
+      >
+        <Text>You have unsaved changes</Text>
 
-        <View className="flex-row items-center space-x-3">
-          <Link to={`/list/${list.id}`}>View changes</Link>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: 12
+          }}
+        >
+          <Link href={`/list/${list.id}`}>View changes</Link>
         </View>
       </View>
     </SafeAreaView>

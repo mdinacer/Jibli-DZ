@@ -1,15 +1,17 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Link as ExpoLink, LinkProps } from 'expo-router';
 import React from 'react';
-import { ThemeProps } from './types';
+import { StyleSheet } from 'react-native';
+import { ThemeProps } from '@/components/Themed/types';
 
-type Props = LinkProps<string | object> & ThemeProps;
-const Link: React.FC<Props> = ({
+interface Props<T extends string | object> extends LinkProps<T>, ThemeProps {}
+
+const Link = <T extends string | object>({
   style,
   lightColor,
   darkColor,
   ...otherProps
-}) => {
+}: Props<T>) => {
   const color = useThemeColor(
     {
       light: lightColor,
@@ -22,13 +24,12 @@ const Link: React.FC<Props> = ({
     <ExpoLink
       {...otherProps}
       style={[
+        styles.link,
         {
+          color,
           fontFamily: 'Poppins-Regular',
           fontSize: 16,
-          lineHeight: 24,
-          color,
-          textDecorationLine: 'underline',
-          textDecorationColor: 'currentColor'
+          lineHeight: 24
         },
         style
       ]}
@@ -37,3 +38,13 @@ const Link: React.FC<Props> = ({
 };
 
 export default Link;
+
+const styles = StyleSheet.create({
+  link: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    lineHeight: 24,
+    textDecorationLine: 'underline',
+    textDecorationColor: 'currentColor'
+  }
+});

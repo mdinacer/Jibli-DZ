@@ -30,6 +30,7 @@ import { TrashIcon } from '@/assets/icons/TrashIcon';
 import { UnavailableIcon } from '@/assets/icons/UnavailableIcon';
 import { UserIcon } from '@/assets/icons/UserIcon';
 import { UserSquareIcon } from '@/assets/icons/UserSquareIcon';
+import { MailOpenIcon } from '@/assets/icons/MailOpenIcon';
 
 export default {
   AddCircleIcon,
@@ -63,5 +64,6 @@ export default {
   TrashIcon,
   UnavailableIcon,
   UserIcon,
-  UserSquareIcon
+  UserSquareIcon,
+  MailOpenIcon
 };

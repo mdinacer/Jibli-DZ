@@ -5,14 +5,11 @@ import { useTranslation } from 'react-i18next';
 import {
   I18nManager,
   ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import {
-  useSafeAreaFrame,
-  useSafeAreaInsets
-} from 'react-native-safe-area-context';
 
 const languages = [
   { lang: 'ar-DZ', name: 'Arabic' },
@@ -47,17 +44,10 @@ const LanguageSelector = () => {
     setRTL(lang);
   };
   return (
-    <View
-      className="h-8 w-full bg-pink-500"
-      style={{
-        flexGrow: 1,
-        position: 'absolute',
-        zIndex: 5
-      }}
-    >
+    <View style={styles.container}>
       <ScrollView
-        className="w-full"
         horizontal
+        style={{ width: '100%' }}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ flexDirection: 'row', paddingVertical: 10 }}
       >
@@ -80,3 +70,14 @@ const LanguageSelector = () => {
 };
 
 export default LanguageSelector;
+
+const styles = StyleSheet.create({
+  container: {
+    height: 32,
+    width: '100%',
+    backgroundColor: '#ec4899',
+    flexGrow: 1,
+    position: 'absolute',
+    zIndex: 5
+  }
+});

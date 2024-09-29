@@ -1,18 +1,19 @@
-import { View, Text, Platform } from 'react-native';
-import React, { useCallback } from 'react';
-import { useUserListStore } from '@/stores/useUserListStore';
-import { Redirect, router } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useProfileStore } from '@/stores/useProfileStore';
-import { useListStore } from '@/stores/useListStore';
+import InputField from '@/components/fields/InputField';
+import { Button } from '@/components/Themed/Button';
+import SafeAreaView from '@/components/Themed/SafeAreaView';
+import Text from '@/components/Themed/Text';
 import { ListCreateInput } from '@/models/List';
 import ListsService from '@/services/ListService';
-import InputField from '@/components/fields/InputField';
-import AppButton from '@/components/AppButton';
+import { useListStore } from '@/stores/useListStore';
+import { useProfileStore } from '@/stores/useProfileStore';
+import { useUserListStore } from '@/stores/useUserListStore';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Redirect, router } from 'expo-router';
+import React, { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { Platform, View } from 'react-native';
+import { z } from 'zod';
 
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -76,15 +77,24 @@ const Create = () => {
   }
   return (
     <SafeAreaView
-      className="flex-1"
       edges={
         Platform.OS === 'android'
           ? ['top', 'left', 'right', 'bottom']
           : ['bottom']
       }
     >
-      <View className="flex-1 justify-center p-6" style={{ rowGap: 24 }}>
-        <Text className="font-pbold text-2xl">{t('title')}</Text>
+      <View
+        style={{ rowGap: 24, flex: 1, justifyContent: 'center', padding: 24 }}
+      >
+        <Text
+          style={{
+            fontFamily: 'Poppins-Bold',
+            fontSize: 24,
+            lineHeight: 32
+          }}
+        >
+          {t('title')}
+        </Text>
         <View>
           <InputField
             name="name"
@@ -94,21 +104,19 @@ const Create = () => {
           />
         </View>
         <View style={{ rowGap: 12 }}>
-          <AppButton
-            className="w-full"
+          <Button
             onPress={handleSubmit(handleOnSubmit)}
             disabled={!isValid || isSubmitting}
           >
             {t('cta')}
-          </AppButton>
-          <AppButton
+          </Button>
+          <Button
             variant="outline"
-            className="w-full"
             onPress={() => router.back()}
             disabled={isSubmitting}
           >
             {t(isDirty ? 'cancel' : 'back')}
-          </AppButton>
+          </Button>
         </View>
       </View>
     </SafeAreaView>

@@ -2,43 +2,54 @@ import AuthProvider from '@/components/AuthProvider';
 import DataListeners from '@/components/DataListeners';
 import DataLoader from '@/components/DataLoader';
 import ListModificationBanner from '@/components/list/ListModificationBanner';
+import Text from '@/components/Themed/Text';
 import { Icons } from '@/constants';
 import { ThemeType } from '@/constants/Colors';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View, StyleSheet } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 interface TabIconProps {
-  icon: (props: SvgProps) => React.JSX.Element;
+  icon: (props: SvgProps) => JSX.Element;
   color: string;
   name: string;
   focused: boolean;
   size: number;
 }
-const TabIcon: React.FC<TabIconProps> = ({
-  icon: Icon,
-  focused,
-  color,
-  name,
-  size
-}) => {
-  return (
-    <View className="items-center justify-center space-y-1">
-      <Icon color={color} height={size} width={size} />
-      <Text
-        style={{ color }}
-        className={` ${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
-      >
-        {name}
-      </Text>
-    </View>
-  );
-};
 
-const TabsLayout = () => {
+const TabIcon: React.FC<TabIconProps> = memo(
+  ({ icon: Icon, color, name, focused, size }) => {
+    const { t } = useTranslation('common', { keyPrefix: 'tabs' });
+
+    return (
+      <View style={styles.iconContainer}>
+        <Icon color={color} height={size} width={size} />
+        {focused && (
+          <Text
+            style={[
+              styles.iconText,
+              {
+                color,
+                fontFamily: focused ? 'Poppins-SemiBold' : 'Poppins-Regular'
+              }
+            ]}
+          >
+            {t(name)}
+          </Text>
+        )}
+      </View>
+    );
+  }
+);
+
+TabIcon.displayName = 'TabIcon';
+
+const TabsLayout: React.FC = () => {
   const theme = useThemeColor({}) as ThemeType;
+
   return (
     <AuthProvider>
       <DataLoader />
@@ -48,11 +59,9 @@ const TabsLayout = () => {
           tabBarActiveTintColor: '#ec4899',
           tabBarInactiveTintColor: theme.mutedForeground,
           tabBarStyle: {
-            paddingTop: 16,
+            ...styles.tabBarStyle,
             backgroundColor: theme.muted,
-            borderTopWidth: 1,
-            borderTopColor: theme.border,
-            minHeight: 80
+            borderTopColor: theme.border
           }
         }}
       >
@@ -66,7 +75,7 @@ const TabsLayout = () => {
                 icon={Icons.HomeIcon}
                 color={color}
                 focused={focused}
-                name={'Home'}
+                name="home"
                 size={size}
               />
             )
@@ -74,16 +83,48 @@ const TabsLayout = () => {
         />
 
         <Tabs.Screen
-          name="collaborators"
+          name="lists"
           options={{
-            title: 'Collaborators',
+            title: 'Lists',
+            headerShown: false,
+            tabBarIcon: ({ color, focused, size }) => (
+              <TabIcon
+                icon={Icons.FilesIcon}
+                color={color}
+                focused={focused}
+                name="lists"
+                size={size}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="members"
+          options={{
+            title: 'Members',
             headerShown: false,
             tabBarIcon: ({ color, focused, size }) => (
               <TabIcon
                 icon={Icons.ShareKnowledgeIcon}
                 color={color}
                 focused={focused}
-                name={'Collaborators'}
+                name="members"
+                size={size}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="invitations"
+          options={{
+            title: 'Invitations',
+            headerShown: false,
+            tabBarIcon: ({ color, focused, size }) => (
+              <TabIcon
+                icon={Icons.MailOpenIcon}
+                color={color}
+                focused={focused}
+                name="invitations"
                 size={size}
               />
             )
@@ -99,7 +140,7 @@ const TabsLayout = () => {
                 icon={Icons.UserSquareIcon}
                 color={color}
                 focused={focused}
-                name={'Account'}
+                name="account"
                 size={size}
               />
             )
@@ -111,5 +152,22 @@ const TabsLayout = () => {
     </AuthProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    rowGap: 4
+  },
+  iconText: {
+    fontSize: 12,
+    lineHeight: 14
+  },
+  tabBarStyle: {
+    paddingTop: 0,
+    borderTopWidth: 1,
+    minHeight: 65
+  }
+});
 
 export default TabsLayout;

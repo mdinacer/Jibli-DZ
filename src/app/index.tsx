@@ -1,11 +1,10 @@
-import AppLink from '@/components/AppLink';
+import Link from '@/components/Themed/Link';
 import { Images } from '@/constants';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { Redirect } from 'expo-router';
 import React from 'react';
 import { ImageBackground, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 
 const Index = () => {
   const { user } = useAuthStore();
@@ -14,26 +13,31 @@ const Index = () => {
     return <Redirect href={'/home'} />;
   }
   return (
-    <ImageBackground className="flex-1 object-cover" source={Images.hero}>
+    <ImageBackground
+      resizeMode="cover"
+      style={{ flex: 1 }}
+      source={Images.hero3}
+    >
       <SafeAreaView style={{ flex: 1 }}>
-        <View className="flex-1 items-center justify-center">
-          <View className="w-full flex-row justify-evenly">
-            <AppLink
-              className="font-pbold text-xl capitalize text-white"
-              href={'/sign-in'}
-            >
-              Sign In
-            </AppLink>
-            <AppLink
-              className="font-pbold text-xl capitalize text-white"
-              href={'/sign-up'}
-            >
-              Sign Up
-            </AppLink>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <View
+            style={{
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly'
+            }}
+          >
+            <Link href={'/sign-in'}>Sign In</Link>
+            <Link href={'/sign-up'}>Sign Up</Link>
           </View>
         </View>
       </SafeAreaView>
-      <StatusBar style="light" />
     </ImageBackground>
   );
 };

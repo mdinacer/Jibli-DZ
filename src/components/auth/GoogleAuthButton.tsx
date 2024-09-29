@@ -1,24 +1,21 @@
 import firebaseServices from '@/config/firebaseConfig';
 import { Icons } from '@/constants';
+import { ThemeType } from '@/constants/Colors';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { router } from 'expo-router';
 import React, { useCallback } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View
-} from 'react-native';
-import AppButton from '../AppButton';
 import { useTranslation } from 'react-i18next';
-import { GoogleIcon } from '@/assets/icons/GoogleIcon';
+import { ButtonProps } from 'react-native';
+import { Button } from '../Themed/Button';
 
-interface Props extends TouchableOpacityProps {
+interface Props extends ButtonProps {
   onAuthenticated?: (user: FirebaseAuthTypes.User) => void;
 }
 
 const GoogleAuthButton: React.FC<Props> = ({ onAuthenticated, ...props }) => {
+  const theme = useThemeColor({}) as ThemeType;
   const { t } = useTranslation('common', { keyPrefix: 'google_auth' });
   const handleGoogleAuthentication = useCallback(async () => {
     try {
@@ -51,17 +48,19 @@ const GoogleAuthButton: React.FC<Props> = ({ onAuthenticated, ...props }) => {
   }, [onAuthenticated]);
 
   return (
-    <TouchableOpacity
-      className="flex-row items-center justify-center space-x-2 rounded-lg bg-destructive px-4 py-2"
+    <Button
+      variant="destructive"
+      icon={Icons.GoogleIcon}
+      iconStyles={{
+        height: 20,
+        width: 20,
+        color: theme.destructiveForeground
+      }}
       onPress={handleGoogleAuthentication}
+      {...props}
     >
-      <Icons.GoogleIcon className="h-5 w-5 text-destructive-foreground" />
-      <Text
-        className={`font-pmedium text-base capitalize text-destructive-foreground`}
-      >
-        {t('sign_in')}
-      </Text>
-    </TouchableOpacity>
+      {t('sign_in')}
+    </Button>
   );
 };
 

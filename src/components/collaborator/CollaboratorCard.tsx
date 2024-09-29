@@ -59,24 +59,24 @@ const CollaboratorCard: React.FC<Props> = ({ collaborator, onRevoke }) => {
             styles.textContainer,
             {
               backgroundColor: rgbBackground
-                ? `rgba(${rgbBackground},0.4)`
+                ? `rgba(0,0,0,0.4)`
                 : 'rgba(156 163 175 / 0.2)'
             }
           ]}
         >
           <Text style={styles.username}>{collaborator.username}</Text>
           <Text style={styles.email}>{collaborator.email}</Text>
+
+          <Button
+            size="sm"
+            style={styles.button}
+            variant="destructive"
+            onPress={() => onRevoke(collaborator)}
+          >
+            {t('collaborator_revoke')}
+          </Button>
         </View>
       </View>
-
-      <Button
-        size="sm"
-        style={styles.button}
-        variant="destructive"
-        onPress={() => onRevoke(collaborator)}
-      >
-        {t('collaborator_revoke')}
-      </Button>
     </View>
   );
 };
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'relative',
-    aspectRatio: 16 / 9,
+    aspectRatio: 16 / 12,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -117,17 +117,20 @@ const styles = StyleSheet.create({
     paddingVertical: 8
   },
   username: {
+    color: 'white',
     fontFamily: 'Poppins-SemiBold',
     fontSize: 18,
     lineHeight: 28,
     textTransform: 'capitalize'
   },
   email: {
+    color: 'white',
     fontFamily: 'Poppins-Regular',
     fontSize: 14,
-    lineHeight: 20
+    lineHeight: 20,
+    marginBottom: 8
   },
   button: {
-    borderRadius: 0
+    marginTop: 4
   }
 });
